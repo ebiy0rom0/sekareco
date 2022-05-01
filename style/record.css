@@ -1,0 +1,10 @@
+
+.my-record-wrapper {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+}
+
+.my-record-wrapper * {
+  display: flex;
+  align-items: center;
+}

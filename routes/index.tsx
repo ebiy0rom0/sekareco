@@ -1,4 +1,5 @@
-import { Head, Link } from "aleph/react";
+import { Head, Link } from "aleph/react"
+import { MyRecord } from "../components/myRecord.tsx";
 
 const linkIcon = (
   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -9,7 +10,7 @@ const linkIcon = (
   </svg>
 );
 
-export default function Index() {
+export default () => {
   return (
     <div className="page y-center">
       <Head>
@@ -44,6 +45,7 @@ export default function Index() {
           <button>Todos App Demo</button>
         </Link>
       </nav>
+      <MyRecord />
     </div>
   );
 }
