@@ -1,5 +1,6 @@
 import { Head } from "aleph/react"
 import { MyRecord } from "../components/myRecord.tsx"
+import { Filter } from "../components/filter.tsx"
 
 // @debug
 import { ClearStatus } from "../components/clear.tsx"
@@ -24,6 +25,9 @@ export default () => (
     <h1>
       <span>Player Results</span>
     </h1>
+    <div className="filter">
+      <Filter />
+    </div>
     { _musicList.map(m => (
         <MyRecord
           key={m.id.toString()}

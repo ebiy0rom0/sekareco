@@ -1,5 +1,6 @@
 @import url('./difficulty.css');
 @import url('./clear.css');
+@import url('./range.css');
 
 /* grid rayout */
 .my-record-container {
