@@ -7,25 +7,26 @@ export const DifficultyList = {
   MASTER: 4
 } as const
 
-type d = typeof DifficultyList[keyof typeof DifficultyList]
+type T = typeof DifficultyList[keyof typeof DifficultyList]
 
 const ClassSet = {
-  [DifficultyList.EASY]:   'difficulty-easy',
-  [DifficultyList.NORMAL]: 'difficulty-normal',
-  [DifficultyList.HARD]:   'difficulty-hard',
-  [DifficultyList.EXPERT]: 'difficulty-expert',
-  [DifficultyList.MASTER]: 'difficulty-master'
+  [DifficultyList.EASY]:   'd-easy',
+  [DifficultyList.NORMAL]: 'd-normal',
+  [DifficultyList.HARD]:   'd-hard',
+  [DifficultyList.EXPERT]: 'd-expert',
+  [DifficultyList.MASTER]: 'd-master'
  } as const
 
-const NameSet = (difficulty: d) => Object.entries(DifficultyList).filter(([_, v]) => v === difficulty)[0]
+const drawName = (difficulty: T) => Object.entries(DifficultyList).filter(([_, v]) => v === difficulty)[0][0]
 
 type Props = {
-  difficulty: d,
+  class?: string
+  difficulty: T
   level: number
 }
 
 export const Difficulty = (props: Props) => (
-  <div className={ ClassSet[props.difficulty] }>
-    { NameSet(props.difficulty) }:{ props.level }
+  <div className={ [props?.class, ClassSet[props.difficulty]].join(' ') }>
+    { drawName(props.difficulty) }{ props.level }
   </div>
 )
