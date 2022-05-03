@@ -1,5 +1,4 @@
 import { Head, Link } from "aleph/react"
-import { MyRecord } from "../components/myRecord.tsx";
 
 const linkIcon = (
   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -10,42 +9,39 @@ const linkIcon = (
   </svg>
 );
 
-export default () => {
-  return (
-    <div className="page y-center">
-      <Head>
-        <title>About Aleph.js</title>
-      </Head>
-      <p className="logo">
-        <img src="/assets/logo.svg" height="75" title="Aleph.js" />
-      </p>
-      <h1>
-        The Fullstack Framework in Deno.
-      </h1>
-      <p>
-        <strong>Aleph.js</strong> gives you the best developer experience for building web applications<br />{" "}
-        with modern toolings.
-      </p>
-      <div className="links">
-        <a href="https://alephjs.org/docs/get-started" target="_blank">
-          Get Started
-          {linkIcon}
-        </a>
-        <a href="https://alephjs.org/docs" target="_blank">
-          Docs
-          {linkIcon}
-        </a>
-        <a href="https://github.com/alephjs/aleph.js" target="_blank">
-          Github
-          {linkIcon}
-        </a>
-      </div>
-      <nav>
-        <Link to="/todos">
-          <button>Todos App Demo</button>
-        </Link>
-      </nav>
-      <MyRecord />
+export default () => (
+  <div className="page y-center">
+    <Head>
+      <title>About Aleph.js</title>
+    </Head>
+    <p className="logo">
+      <img src="/assets/logo.svg" height="75" title="Aleph.js" />
+    </p>
+    <h1>
+      The Fullstack Framework in Deno.
+    </h1>
+    <p>
+      <strong>Aleph.js</strong> gives you the best developer experience for building web applications<br />{" "}
+      with modern toolings.
+    </p>
+    <div className="links">
+      <a href="https://alephjs.org/docs/get-started" target="_blank">
+        Get Started
+        {linkIcon}
+      </a>
+      <a href="https://alephjs.org/docs" target="_blank">
+        Docs
+        {linkIcon}
+      </a>
+      <a href="https://github.com/alephjs/aleph.js" target="_blank">
+        Github
+        {linkIcon}
+      </a>
     </div>
-  );
-}
+    <nav>
+      <Link to="/records">
+        <button>Your Records</button>
+      </Link>
+    </nav>
+  </div>
+)
