@@ -1,10 +1,18 @@
+@import url('./difficulty.css');
+@import url('./clear.css');
 
-.my-record-wrapper {
+/* grid rayout */
+.my-record-container {
   display: grid;
+  grid-template-rows: 2fr;
   grid-template-columns: repeat(6, 1fr);
 }
 
-.my-record-wrapper * {
+.item-music {
+  grid-row: span 2;
+}
+
+.item-difficulty {
   display: flex;
   align-items: center;
 }
