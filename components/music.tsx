@@ -1,7 +1,14 @@
+import { DifficultyList } from './difficulty.tsx'
 
-export const Music = () => (
-  <div>
-    <img src="/assets/logo.svg" />
-    <p>title</p>
+type Props = {
+  class?: string
+  title: string
+  url: string
+}
+
+export const Music = (props: Props) => (
+  <div className={ props?.class }>
+    <img height='50' width='50' src={ props.url } />
+    <p>{ props.title }</p>
   </div>
 )
