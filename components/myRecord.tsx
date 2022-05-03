@@ -1,15 +1,34 @@
-import { Music } from "./music.tsx"
+import { Clear, ClearStatus } from "./clear.tsx"
 import { Difficulty, DifficultyList } from "./difficulty.tsx"
-import { Clear } from "./clear.tsx"
+import { Music } from "./music.tsx"
 
+type Props = {
+  title: string
+  url: string
+  result: typeof ClearStatus[keyof typeof ClearStatus][]
+  level: number[]
+}
 
-export const MyRecord = () => {
-  const clear      = Object.values(DifficultyList).map(v => <Clear key={v.toString()} />)
-  const difficulty = Object.values(DifficultyList).map(v => <Difficulty key={v.toString()} difficulty={v} level={1} />)
+export const MyRecord = (props: Props) => {
+  const difficulty = Object.values(DifficultyList).map(v => (
+    <Difficulty
+      key={v.toString()}
+      class="item-difficulty"
+      difficulty={ v }
+      level={ props.level[v] }
+    />
+  ))
+  const clear = Object.values(DifficultyList).map(v => (
+    <Clear
+      key={v.toString()}
+      class="item-clear"
+      status={ props.result[v] }
+    />
+  ))
 
   return (
-    <div className="my-record-wrapper">
-      <Music />
+    <div className="my-record-container">
+      <Music class="item-music" title={ props.title } url={ props.url } />
       { difficulty }
       { clear }
     </div>
