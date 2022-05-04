@@ -1,10 +1,3 @@
-import { DifficultyList } from './difficulty.tsx'
-
-type Props = {
-  class?: string
-  title: string
-  url: string
-}
 
 export const Music = (props: Props) => (
   <div className={ props?.class }>
@@ -12,3 +5,9 @@ export const Music = (props: Props) => (
     <p>{ props.title }</p>
   </div>
 )
+
+type Props = {
+  class?: string
+  title: string
+  url: string
+}

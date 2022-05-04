@@ -8,7 +8,7 @@ export const Checkbox = (props: Props) => (
   <label>
     { props.children }
     <input
-      type="checkbox"
+      type='checkbox'
       name={ props.group }
       value={ props.value }
     />
