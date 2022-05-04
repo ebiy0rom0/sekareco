@@ -1,19 +1,15 @@
 import { useState } from 'react'
 import { Range } from './range.tsx'
 import { Checkbox } from './checkbox.tsx'
-import { DifficultyList } from './difficulty.tsx'
-
-type Props = {
-
-}
+import { DifficultyList } from './../hooks/useMusic.tsx'
 
 export const Filter = (props: Props) => {
   const [ range, setRange ] = useState(0)
   return (
     <div>
       <Range
-        min={ 0 }
-        max={ 36 }
+        min={ props.levelLower }
+        max={ props.levelUpper }
         value={ range }
         onChange={ e => setRange(parseInt(e.target.value)) }
       >
@@ -24,7 +20,7 @@ export const Filter = (props: Props) => {
         { Object.entries(DifficultyList).map(([k, v]) =>
           <Checkbox
             key={ k.toString() }
-            group="difficulty"
+            group='difficulty'
             value={ v }
           >
             { k }
@@ -33,4 +29,9 @@ export const Filter = (props: Props) => {
       </label>
     </div>
   )
+}
+
+type Props = {
+  levelLower: number
+  levelUpper: number
 }
