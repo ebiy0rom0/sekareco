@@ -8,5 +8,8 @@ https://aleph-hello.deno.dev/
 - install deno
     - https://deno.land/
 
+- need denon for debug
+    - deno install -qAf --unstable https://deno.land/x/denon/denon.ts
+
 - execute
     - deno tasks dev
