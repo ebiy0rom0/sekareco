@@ -1,14 +1,14 @@
 import { apiHandler } from '../handler/apiHandler.ts'
 
 export const personRepository = {
-  login: async (personId: number) => {
+  login: async (personId: number, password: string) => {
     const json = await apiHandler.get(`person/${personId}/`).json()
     console.log(json)
   },
-  registPerson: async (personId: number, password: string, name: string) => {
+  registPerson: async (loginId: string, password: string, name: string) => {
     const json = await apiHandler.post('person/', {
       json: {
-        person_id: personId,
+        login_id: loginId,
         password: password,
         person_name: name
       }
