@@ -1,5 +1,7 @@
-import { Head, Link } from "aleph/react"
+import React from 'react'
+import { Head, Link } from 'aleph/react'
 import { apiFactory } from '../api/apiFactory.ts'
+import { useLog } from '../hooks/useLog.tsx'
 
 const linkIcon = (
   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -10,45 +12,51 @@ const linkIcon = (
   </svg>
 );
 
-export default () => (
-  <div className="page y-center">
-    <Head>
-      <title>About Aleph.js</title>
-    </Head>
-    <p className="logo">
-      <img src="/assets/logo.svg" height="75" title="Aleph.js" />
-    </p>
-    <h1>
-      The Fullstack Framework in Deno.
-    </h1>
-    <p>
-      <strong>Aleph.js</strong> gives you the best developer experience for building web applications<br />{" "}
-      with modern toolings.
-    </p>
-    <div className="links">
-      <a href="https://alephjs.org/docs/get-started" target="_blank">
-        Get Started
-        {linkIcon}
-      </a>
-      <a href="https://alephjs.org/docs" target="_blank">
-        Docs
-        {linkIcon}
-      </a>
-      <a href="https://github.com/alephjs/aleph.js" target="_blank">
-        Github
-        {linkIcon}
-      </a>
+const Index: React.FunctionComponent = () => {
+  const { setLog, renderLog } = useLog()
+  return (
+    <div className="page y-center">
+      <Head>
+        <title>About Aleph.js</title>
+      </Head>
+      <p className="logo">
+        <img src="/assets/logo.svg" height="75" title="Aleph.js" />
+      </p>
+      <h1>
+        The Fullstack Framework in Deno.
+      </h1>
+      <p>
+        <strong>Aleph.js</strong> gives you the best developer experience for building web applications<br />{" "}
+        with modern toolings.
+      </p>
+      <div className="links">
+        <a href="https://alephjs.org/docs/get-started" target="_blank">
+          Get Started
+          {linkIcon}
+        </a>
+        <a href="https://alephjs.org/docs" target="_blank">
+          Docs
+          {linkIcon}
+        </a>
+        <a href="https://github.com/alephjs/aleph.js" target="_blank">
+          Github
+          {linkIcon}
+        </a>
+      </div>
+      <nav>
+        <button onClick={async () => setLog(await apiFactory.get('music').getMusicList())}>get music</button>
+        <button onClick={async () => setLog(await apiFactory.get('person').login(1, 'hoge'))}>person login</button>
+        <button onClick={async () => setLog(await apiFactory.get('person').registPerson('hoge', 'hoge0123', 'huga'))}>regist person</button>
+        <button onClick={async () => setLog(await apiFactory.get('person').modifyPersonStatus(1, 'piyo', 'hoge3210'))}>modify person</button>
+        <button onClick={async () => setLog(await apiFactory.get('record').getMyRecord(1))}>get record</button>
+        <button onClick={async () => setLog(await apiFactory.get('record').registRecord(1, 1, [0]))}>regist record</button>
+        <Link to="/records">
+          <button onClick={() => console.log('no entry')}>Your Records</button>
+        </Link>
+      </nav>
+      { renderLog() }
     </div>
-    <nav>
-      <button onClick={() => apiFactory.get('music').getMusicList()}>get music</button>
-      <button onClick={() => apiFactory.get('person').login(1, 'hoge')}>person login</button>
-      <button onClick={() => apiFactory.get('person').registPerson('hoge', 'hoge0123', 'huga')}>regist person</button>
-      <button onClick={() => apiFactory.get('person').modifyPersonStatus(1, 'piyo', 'hoge3210')}>modify person</button>
-      <button onClick={() => apiFactory.get('record').getMyRecord(1)}>get record</button>
-      <button onClick={() => apiFactory.get('record').registRecord(1, 1, [0])}>regist record</button>
-      <Link to="/records">
-        <button onClick={() => console.log('no entry')}>Your Records</button>
-      </Link>
-    </nav>
-  </div>
-)
+  )
+}
+
+export default Index

@@ -35,8 +35,8 @@ export const useMusic = () => {
     difficultyFilter,
     setLevelUpper,
     setLevelLower,
-    levelUpper: getLevelUpper(),
-    levelLower: getLevelLower(),
+    levelUpper: getLevelUpper,
+    levelLower: getLevelLower,
     getFilteredMusicList
   }
 }
