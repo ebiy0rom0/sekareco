@@ -1,3 +1,4 @@
+import React from 'react'
 
 type Props = JSX.IntrinsicElements['input'] & {
   children: string | number

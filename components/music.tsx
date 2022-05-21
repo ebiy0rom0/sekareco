@@ -1,3 +1,4 @@
+import React from 'react'
 
 export const Music = (props: Props) => (
   <div className={ props?.class }>

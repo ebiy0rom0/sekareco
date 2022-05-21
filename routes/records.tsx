@@ -1,3 +1,4 @@
+import React from 'react'
 import { Head } from 'aleph/react'
 import { MyRecord } from '../components/myRecord.tsx'
 import { Filter } from '../components/filter.tsx'

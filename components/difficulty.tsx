@@ -1,3 +1,4 @@
+import React from 'react'
 import { DifficultyList } from '../hooks/useMusic.tsx'
 
 export const Difficulty = (props: Props) => (

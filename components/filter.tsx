@@ -1,3 +1,4 @@
+import React from 'react'
 import { useState } from 'react'
 import { Range } from './range.tsx'
 import { Checkbox } from './checkbox.tsx'

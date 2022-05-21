@@ -1,3 +1,4 @@
+import React from 'react'
 import { Clear, ClearStatus } from './clear.tsx'
 import { Difficulty } from './difficulty.tsx'
 import { Music } from './music.tsx'
