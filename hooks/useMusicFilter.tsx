@@ -13,24 +13,24 @@ export const useMusicFilter = () => {
     setLevelLower(levelLower())
   }, [musicList()])
 
-    // setter wrap
-    const changeUpperFilter = (val: number) => {
-      // rounding to upper level
-      const newVal = val > levelUpper() ? levelUpper() : val < levelLowerFilter ? levelLowerFilter : val
-      setLevelUpper(newVal)
-    }
-    const changeLowerFilter = (val: number) => {
-      // rounding to lower level
-      const newVal = val < levelLower() ? levelLower() : val > levelUpperFilter ? levelUpperFilter : val
-      setLevelLower(newVal)
-    }
+  // setter wrap
+  const changeUpperFilter = (val: number) => {
+    // rounding to upper level
+    const newVal = val > levelUpper() ? levelUpper() : val < levelLowerFilter ? levelLowerFilter : val
+    setLevelUpper(newVal)
+  }
+  const changeLowerFilter = (val: number) => {
+    // rounding to lower level
+    const newVal = val < levelLower() ? levelLower() : val > levelUpperFilter ? levelUpperFilter : val
+    setLevelLower(newVal)
+  }
 
-    // check within filter range
-    const isLevelWithinRange = (level: number) => levelLowerFilter <= level && level <= levelUpperFilter
-    // check filtering target
-    const isFilteringMusic = (level: number[]) => level.some(l => isLevelWithinRange(l))
-    // level filter
-    const getFilteredMusicList = () => musicList().filter(m => isFilteringMusic(m.level))
+  // check within filter range
+  const isLevelWithinRange = (level: number) => levelLowerFilter <= level && level <= levelUpperFilter
+  // check filtering target
+  const isFilteringMusic = (level: number[]) => level.some(l => isLevelWithinRange(l))
+  // level filter
+  const getFilteredMusicList = () => musicList().filter(m => isFilteringMusic(m.level))
 
   return {
     diffFilter: () => difficultyFilter,
