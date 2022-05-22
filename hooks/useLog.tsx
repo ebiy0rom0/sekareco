@@ -5,15 +5,13 @@ export const useLog = () => {
   const [ logList, setLogList ] = useState<string[]>([])
 
   const setLog = (log: string) => {
-    console.log(log)
-
     const cp = [...logList, JSON.stringify(log)]
     return setLogList(cp)
   }
 
   const renderLog = () => (
-    <ol>
-      { logList.map((log, i) => (<li key={i.toString()}>{ log }</li>)) }
+    <ol className="log">
+      { logList.reverse().map((log, i) => (<li key={i.toString()}>{ log }</li>)) }
     </ol>
   )
 

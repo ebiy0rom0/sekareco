@@ -1,0 +1,12 @@
+.log {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  max-height: 155px;
+  border: 1px solid;
+  overflow: auto;
+}
+
+ol {
+  list-style-type: none;
+}
