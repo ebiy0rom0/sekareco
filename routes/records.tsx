@@ -3,18 +3,21 @@ import { Head } from 'aleph/react'
 import { MyRecord } from '../components/myRecord.tsx'
 import { Filter } from '../components/filter.tsx'
 import { useMusic } from '../hooks/useMusic.tsx'
+import { useMusicFilter } from '../hooks/useMusicFilter.tsx'
 import { useRecord } from '../hooks/useRecord.tsx'
 
 export default () => {
   const {
     levelUpper,
-    upperFilter,
-    setLevelUpper,
     levelLower,
-    lowerFilter,
-    setLevelLower,
-    getFilteredMusicList
   } = useMusic()
+  const {
+    upperFilter,
+    changeUpperFilter,
+    lowerFilter,
+    changeLowerFilter,
+    getFilteredMusicList
+  } = useMusicFilter()
   const { getMusicRecord } = useRecord(1)
 
   return (
@@ -30,13 +33,13 @@ export default () => {
           levelLower={ levelLower() }
           levelUpper={ levelUpper() }
           value={ lowerFilter() }
-          setter={ setLevelLower }
+          setter={ changeLowerFilter }
         />
         <Filter
           levelLower={ levelLower() }
           levelUpper={ levelUpper() }
           value={ upperFilter() }
-          setter={ setLevelUpper }
+          setter={ changeUpperFilter }
         />
       </div>
       { getFilteredMusicList().map(m => (

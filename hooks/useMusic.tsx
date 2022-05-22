@@ -2,9 +2,6 @@ import { useState, useEffect } from 'react'
 
 export const useMusic = () => {
   const [ musicList, setMusicList ] = useState<Music[]>([])
-  const [ levelUpperFilter, setLevelUpper ] = useState(0)
-  const [ levelLowerFilter, setLevelLower ] = useState(0)
-  const [ difficultyFilter ] = useState<T[]>(Object.values(DifficultyList))
 
   // TODO: fetch
   useEffect(() => setMusicList([
@@ -13,36 +10,17 @@ export const useMusic = () => {
     { id: 3, title: 'Flyer!',    url: '/assets/logo.svg', level: [9, 12, 18, 24, 29] }
   ]), [])
 
-  useEffect(() => {
-    setLevelUpper(getLevelUpper())
-    setLevelLower(getLevelLower())
-  }, [musicList])
-
   // all music level array
   const getAllLevel = () => Array<number>(0).concat(...musicList.map(m => m.level))
+
   // exist level min & max
   const getLevelUpper = () => Math.max(0, ...getAllLevel())
   const getLevelLower = () => Math.min(100, ...getAllLevel())
 
-  // setter wrap
-  const changeUpper = (val: number) => setLevelUpper(val)
-
-  // check within filter range
-  const isLevelWithinRange = (level: number) => levelLowerFilter <= level && level <= levelUpperFilter
-  // check filtering target
-  const isFilteringMusic = (level: number[]) => level.some(l => isLevelWithinRange(l))
-  // level filter
-  const getFilteredMusicList = () => musicList.filter(m => isFilteringMusic(m.level))
-
   return {
-    difficultyFilter,
-    setLevelUpper,
-    upperFilter: () => levelUpperFilter,
-    setLevelLower,
-    lowerFilter: () => levelLowerFilter,
     levelUpper: getLevelUpper,
     levelLower: getLevelLower,
-    getFilteredMusicList
+    musicList: () => musicList
   }
 }
 
@@ -61,4 +39,3 @@ export const DifficultyList = {
   MASTER: 4
 } as const
 
-type T = typeof DifficultyList[keyof typeof DifficultyList]

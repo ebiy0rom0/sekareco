@@ -35,5 +35,5 @@ type Props = {
   levelLower: number
   levelUpper: number
   value: number
-  setter: React.Dispatch<React.SetStateAction<number>>
+  setter: (n: number) => void
 }
