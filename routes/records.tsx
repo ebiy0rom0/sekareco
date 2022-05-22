@@ -6,7 +6,15 @@ import { useMusic } from '../hooks/useMusic.tsx'
 import { useRecord } from '../hooks/useRecord.tsx'
 
 export default () => {
-  const { levelUpper, levelLower, getFilteredMusicList } = useMusic()
+  const {
+    levelUpper,
+    upperFilter,
+    setLevelUpper,
+    levelLower,
+    lowerFilter,
+    setLevelLower,
+    getFilteredMusicList
+  } = useMusic()
   const { getMusicRecord } = useRecord(1)
 
   return (
@@ -21,6 +29,14 @@ export default () => {
         <Filter
           levelLower={ levelLower() }
           levelUpper={ levelUpper() }
+          value={ lowerFilter() }
+          setter={ setLevelLower }
+        />
+        <Filter
+          levelLower={ levelLower() }
+          levelUpper={ levelUpper() }
+          value={ upperFilter() }
+          setter={ setLevelUpper }
         />
       </div>
       { getFilteredMusicList().map(m => (

@@ -5,17 +5,16 @@ import { Checkbox } from './checkbox.tsx'
 import { DifficultyList } from './../hooks/useMusic.tsx'
 
 export const Filter = (props: Props) => {
-  const [ range, setRange ] = useState(0)
   return (
     <div>
       <Range
         min={ props.levelLower }
         max={ props.levelUpper }
-        value={ range }
-        onChange={ e => setRange(parseInt(e.target.value)) }
+        value={ props.value }
+        onChange={ e => props.setter(parseInt((e.target as HTMLInputElement).value)) }
       >
         レベル
-      </Range><br />
+      </Range>{ props.value }<br />
       <label>
         難易度
         { Object.entries(DifficultyList).map(([k, v]) =>
@@ -35,4 +34,6 @@ export const Filter = (props: Props) => {
 type Props = {
   levelLower: number
   levelUpper: number
+  value: number
+  setter: React.Dispatch<React.SetStateAction<number>>
 }

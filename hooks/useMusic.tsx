@@ -24,6 +24,9 @@ export const useMusic = () => {
   const getLevelUpper = () => Math.max(0, ...getAllLevel())
   const getLevelLower = () => Math.min(100, ...getAllLevel())
 
+  // setter wrap
+  const changeUpper = (val: number) => setLevelUpper(val)
+
   // check within filter range
   const isLevelWithinRange = (level: number) => levelLowerFilter <= level && level <= levelUpperFilter
   // check filtering target
@@ -34,7 +37,9 @@ export const useMusic = () => {
   return {
     difficultyFilter,
     setLevelUpper,
+    upperFilter: () => levelUpperFilter,
     setLevelLower,
+    lowerFilter: () => levelLowerFilter,
     levelUpper: getLevelUpper,
     levelLower: getLevelLower,
     getFilteredMusicList
