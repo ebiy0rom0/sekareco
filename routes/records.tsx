@@ -19,8 +19,8 @@ export default () => {
       </h1>
       <div className='filter'>
         <Filter
-          levelLower={ levelLower }
-          levelUpper={ levelUpper }
+          levelLower={ levelLower() }
+          levelUpper={ levelUpper() }
         />
       </div>
       { getFilteredMusicList().map(m => (
