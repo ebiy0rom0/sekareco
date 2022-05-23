@@ -1,45 +1,52 @@
 import { useState, useEffect } from 'react'
 import { useMusic, DifficultyList } from './useMusic.tsx'
+import { useRange } from './useRange.tsx'
 
 export const useMusicFilter = () => {
-  const [ levelUpperFilter, setLevelUpper ] = useState(0)
-  const [ levelLowerFilter, setLevelLower ] = useState(0)
-  const [ difficultyFilter ] = useState<T[]>(Object.values(DifficultyList))
-
+  const [ targetDifficulty, setTargetDifficulty ] = useState<number>(DifficultyList.MASTER)
   const { levelUpper, levelLower, musicList } = useMusic()
+  const {
+    range: lowerFilter,
+    changeRange: changeLower
+  } = useRange(levelLower(targetDifficulty))
+
+  const {
+    range: upperFilter,
+    changeRange: changeUpper
+  } = useRange(levelUpper(targetDifficulty))
 
   useEffect(() => {
-    setLevelUpper(levelUpper())
-    setLevelLower(levelLower())
-  }, [musicList()])
+    changeLowerFilter(levelLower(targetDifficulty))
+    changeUpperFilter(levelUpper(targetDifficulty))
+  }, [musicList(), targetDifficulty])
 
   // setter wrap
-  const changeUpperFilter = (val: number) => {
-    // rounding to upper level
-    const newVal = val > levelUpper() ? levelUpper() : val < levelLowerFilter ? levelLowerFilter : val
-    setLevelUpper(newVal)
+  const changeTargetDifficulty = (val: number) => {
+    // select "master", if out of range
+    const newVal = Object.values(DifficultyList).some(d => d == val) ? val : DifficultyList.MASTER
+    setTargetDifficulty(newVal)
   }
-  const changeLowerFilter = (val: number) => {
-    // rounding to lower level
-    const newVal = val < levelLower() ? levelLower() : val > levelUpperFilter ? levelUpperFilter : val
-    setLevelLower(newVal)
-  }
+  const changeLowerFilter = (val: number) => changeLower(val, levelLower(targetDifficulty), upperFilter())
+  const changeUpperFilter = (val: number) => changeUpper(val, lowerFilter(), levelUpper(targetDifficulty))
 
   // check within filter range
-  const isLevelWithinRange = (level: number) => levelLowerFilter <= level && level <= levelUpperFilter
+  const isLevelWithinRange = (level: number) => lowerFilter() <= level && level <= upperFilter()
+
   // check filtering target
   const isFilteringMusic = (level: number[]) => level.some(l => isLevelWithinRange(l))
+
   // level filter
-  const getFilteredMusicList = () => musicList().filter(m => isFilteringMusic(m.level))
+  const getFilteredMusicList = (difficulty: number) =>
+    musicList().filter(m => isFilteringMusic(m.level.filter((_, index) => index == difficulty)))
 
   return {
-    diffFilter: () => difficultyFilter,
+    changeTargetDifficulty,
+    targetDifficulty: () => targetDifficulty,
+    lowerFilter,
+    upperFilter,
     changeUpperFilter,
-    upperFilter: () => levelUpperFilter,
     changeLowerFilter,
-    lowerFilter: () => levelLowerFilter,
     getFilteredMusicList
-
   }
 }
 

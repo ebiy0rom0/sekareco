@@ -11,11 +11,12 @@ export const useMusic = () => {
   ]), [])
 
   // all music level array
-  const getAllLevel = () => Array<number>(0).concat(...musicList.map(m => m.level))
+  const getLevelListByDifficulty = (difficulty: number) =>
+      Array<number>(0).concat(...musicList.map(m => m.level[difficulty]))
 
   // exist level min & max
-  const getLevelUpper = () => Math.max(0, ...getAllLevel())
-  const getLevelLower = () => Math.min(100, ...getAllLevel())
+  const getLevelUpper = (difficulty: number) => Math.max(0, ...getLevelListByDifficulty(difficulty))
+  const getLevelLower = (difficulty: number) => Math.min(100, ...getLevelListByDifficulty(difficulty))
 
   return {
     levelUpper: getLevelUpper,

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Head } from 'aleph/react'
 import { MyRecord } from '../components/myRecord.tsx'
-import { Filter } from '../components/filter.tsx'
+import { MusicFilter } from '../components/musicFilter.tsx'
 import { useMusic } from '../hooks/useMusic.tsx'
 import { useMusicFilter } from '../hooks/useMusicFilter.tsx'
 import { useRecord } from '../hooks/useRecord.tsx'
@@ -11,13 +11,17 @@ export default () => {
     levelUpper,
     levelLower,
   } = useMusic()
+
   const {
-    upperFilter,
-    changeUpperFilter,
+    changeTargetDifficulty,
+    targetDifficulty,
     lowerFilter,
+    upperFilter,
     changeLowerFilter,
+    changeUpperFilter,
     getFilteredMusicList
   } = useMusicFilter()
+
   const { getMusicRecord } = useRecord(1)
 
   return (
@@ -29,20 +33,24 @@ export default () => {
         <span>Player Results</span>
       </h1>
       <div className='filter'>
-        <Filter
-          levelLower={ levelLower() }
-          levelUpper={ levelUpper() }
-          value={ lowerFilter() }
-          setter={ changeLowerFilter }
-        />
-        <Filter
-          levelLower={ levelLower() }
-          levelUpper={ levelUpper() }
-          value={ upperFilter() }
-          setter={ changeUpperFilter }
+        <MusicFilter
+          levelLower={ levelLower(targetDifficulty()) }
+          levelUpper={ levelUpper(targetDifficulty()) }
+          target={{
+            value:  targetDifficulty(),
+            setter: changeTargetDifficulty
+          }}
+          lower={{
+            value:  lowerFilter(),
+            setter: changeLowerFilter
+          }}
+          upper={{
+            value: upperFilter(),
+            setter: changeUpperFilter
+          }}
         />
       </div>
-      { getFilteredMusicList().map(m => (
+      { getFilteredMusicList(targetDifficulty()).map(m => (
         <MyRecord
           key={m.id.toString()}
           title={ m.title }
@@ -50,7 +58,7 @@ export default () => {
           result={ getMusicRecord(m.id) }
           level={ m.level }
         />
-      ))}
+      )) }
     </div>
   )
 }
