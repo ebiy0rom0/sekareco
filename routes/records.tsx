@@ -6,17 +6,17 @@ import { useMusic } from '../hooks/useMusic.tsx'
 import { useMusicFilter } from '../hooks/useMusicFilter.tsx'
 import { useRecord } from '../hooks/useRecord.tsx'
 
-export default () => {
+const Records: React.FunctionComponent = () => {
   const {
     levelUpper,
     levelLower,
   } = useMusic()
 
   const {
-    changeTargetDifficulty,
-    targetDifficulty,
+    difficulty,
     lowerFilter,
     upperFilter,
+    changeDifficulty,
     changeLowerFilter,
     changeUpperFilter,
     getFilteredMusicList
@@ -34,11 +34,11 @@ export default () => {
       </h1>
       <div className='filter'>
         <MusicFilter
-          levelLower={ levelLower(targetDifficulty()) }
-          levelUpper={ levelUpper(targetDifficulty()) }
+          levelLower={ levelLower(difficulty()) }
+          levelUpper={ levelUpper(difficulty()) }
           target={{
-            value:  targetDifficulty(),
-            setter: changeTargetDifficulty
+            value:  difficulty(),
+            setter: changeDifficulty
           }}
           lower={{
             value:  lowerFilter(),
@@ -50,7 +50,7 @@ export default () => {
           }}
         />
       </div>
-      { getFilteredMusicList(targetDifficulty()).map(m => (
+      { getFilteredMusicList().map(m => (
         <MyRecord
           key={m.id.toString()}
           title={ m.title }
@@ -62,3 +62,5 @@ export default () => {
     </div>
   )
 }
+
+export default Records

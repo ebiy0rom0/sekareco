@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react'
+import { useState } from 'react'
 
 export const useRange = (init: number) => {
   const [ range, setRange ] = useState<number>(init)
