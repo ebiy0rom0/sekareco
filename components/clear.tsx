@@ -1,25 +1,19 @@
-import React from 'react'
-
-export const ClearStatus = {
-  NOPLAY:     0,
-  CLEAR:      1,
-  FULLCOMBO:  2,
-  ALLPERFECT: 3
-} as const
-
-type T = typeof ClearStatus[keyof typeof ClearStatus]
-
-const classSet = {
-  [ClearStatus.NOPLAY]:     'c-noplay',
-  [ClearStatus.CLEAR]:      'c-clear',
-  [ClearStatus.FULLCOMBO]:  'c-fc',
-  [ClearStatus.ALLPERFECT]: 'c-ap'
-}
-type Props = {
-  class?: string
-  status: T
-}
+import { ClearStatusList, ClearStatusValues } from '../hooks/useRecord.tsx'
 
 export const Clear = (props: Props) => (
-  <p className={ props?.class }>{ props.status }</p>
+  <p className={ [props?.class, classSet[props.status]].join(' ') }>
+    { props.status }
+  </p>
 )
+
+type Props = {
+  class?: string
+  status: ClearStatusValues
+}
+
+const classSet = {
+  [ClearStatusList.NOPLAY]:      'c-noplay',
+  [ClearStatusList.CLEAR]:       'c-clear',
+  [ClearStatusList.FULL_COMBO]:  'c-fc',
+  [ClearStatusList.ALL_PERFECT]: 'c-ap'
+}

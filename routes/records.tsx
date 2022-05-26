@@ -1,17 +1,20 @@
-import React from 'react'
 import { Head } from 'aleph/react'
 import { MyRecord } from '../components/myRecord.tsx'
 import { MusicFilter } from '../components/musicFilter.tsx'
+import { RecordFilter } from '../components/recordFilter.tsx'
 import { useMusic } from '../hooks/useMusic.tsx'
-import { useMusicFilter } from '../hooks/useMusicFilter.tsx'
 import { useRecord } from '../hooks/useRecord.tsx'
+import { useMusicFilter } from '../hooks/useMusicFilter.tsx'
+import { useRecordFilter } from '../hooks/useRecordFilter.tsx'
 
 const Records: React.FunctionComponent = () => {
   const {
     levelUpper,
     levelLower,
+    musicList,
   } = useMusic()
 
+  const { getMusicRecord } = useRecord(1)
   const {
     difficulty,
     lowerFilter,
@@ -20,9 +23,12 @@ const Records: React.FunctionComponent = () => {
     changeLowerFilter,
     changeUpperFilter,
     getFilteredMusicList
-  } = useMusicFilter()
-
-  const { getMusicRecord } = useRecord(1)
+  } = useMusicFilter(musicList())
+  const {
+    difficulty: recordDifficulty,
+    changeDifficulty: changeRecordDifficulty,
+    isFiltered,
+  } = useRecordFilter()
 
   return (
     <div className='page todos-app'>
@@ -49,6 +55,10 @@ const Records: React.FunctionComponent = () => {
             setter: changeUpperFilter
           }}
         />
+        <RecordFilter
+          setter={ changeRecordDifficulty }
+          isChecked={ isFiltered }
+        />
       </div>
       { getFilteredMusicList().map(m => (
         <MyRecord
@@ -56,6 +66,7 @@ const Records: React.FunctionComponent = () => {
           title={ m.title }
           url={ m.url }
           result={ getMusicRecord(m.id) }
+          filter={ recordDifficulty() }
           level={ m.level }
         />
       )) }

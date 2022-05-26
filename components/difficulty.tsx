@@ -1,5 +1,4 @@
-import React from 'react'
-import { DifficultyList } from '../hooks/useMusic.tsx'
+import { DifficultyList, DifficultyValues } from './../hooks/useMusic.tsx'
 
 export const Difficulty = (props: Props) => (
   <div className={ [props?.class, ClassSet[props.difficulty]].join(' ') }>
@@ -8,11 +7,11 @@ export const Difficulty = (props: Props) => (
 )
 
 // draw html
-const drawName = (difficulty: T) => Object.entries(DifficultyList).filter(([_, v]) => v === difficulty)[0][0]
+const drawName = (difficulty: DifficultyValues) => Object.entries(DifficultyList).filter(([_, v]) => v === difficulty)[0][0]
 
 type Props = {
   class?: string
-  difficulty: T
+  difficulty: DifficultyValues
   level: number
 }
 
@@ -23,5 +22,3 @@ const ClassSet = {
   [DifficultyList.EXPERT]: 'd-expert',
   [DifficultyList.MASTER]: 'd-master'
 } as const
-
-type T = typeof DifficultyList[keyof typeof DifficultyList]
