@@ -1,15 +1,13 @@
-import React from 'react'
-
-type Props = JSX.IntrinsicElements['input'] & { children: string }
 
 export const Range = (props: Props) => {
-  const { children, ...inputProps } = props
+  const { children, setter, ...inputProps } = props
   return (
     <label className='range-wrap'>
       { children }
       <input
         type='range'
         list='marks'
+        onChange={ e => setter(e.target.value) }
         { ...inputProps }
       />
       <datalist id='marks'>
@@ -17,4 +15,9 @@ export const Range = (props: Props) => {
       </datalist>
     </label>
   )
+}
+
+type Props = JSX.IntrinsicElements['input'] & {
+  children: string
+  setter: (input: string) => void
 }

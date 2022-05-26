@@ -1,5 +1,6 @@
 import { useState } from 'react'
 
+// custom hook
 export const useRange = (init: number) => {
   const [ range, setRange ] = useState<number>(init)
 

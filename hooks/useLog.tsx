@@ -1,6 +1,6 @@
-import React from 'react'
 import { useState } from 'react'
 
+// custom hook
 export const useLog = () => {
   const [ logList, setLogList ] = useState<string[]>([])
 

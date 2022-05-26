@@ -1,4 +1,3 @@
-import React from 'react'
 import { Head, Link } from 'aleph/react'
 import { apiFactory } from '../api/apiFactory.ts'
 import { useLog } from '../hooks/useLog.tsx'
