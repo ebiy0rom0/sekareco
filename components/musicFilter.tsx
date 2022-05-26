@@ -1,7 +1,6 @@
-import React from 'react'
+import { DifficultyList } from './../hooks/useMusic.tsx'
 import { Range } from './range.tsx'
 import { Selectbox } from './selectbox.tsx'
-import { DifficultyList } from './../hooks/useMusic.tsx'
 
 export const MusicFilter = (props: Props) => {
   return (
@@ -18,7 +17,7 @@ export const MusicFilter = (props: Props) => {
         min={ props.levelLower }
         max={ props.levelUpper }
         value={ props.lower.value }
-        onChange={ e => props.lower.setter(parseInt((e.target as HTMLInputElement).value)) }
+        setter={ props.lower.setter }
       >
         レベル下限
       </Range>{ props.lower.value }<br />
@@ -26,7 +25,7 @@ export const MusicFilter = (props: Props) => {
         min={ props.levelLower }
         max={ props.levelUpper }
         value={ props.upper.value }
-        onChange={ e => props.upper.setter(parseInt((e.target as HTMLInputElement).value)) }
+        setter={ props.upper.setter }
       >
         レベル上限
       </Range>{ props.upper.value }
@@ -39,14 +38,14 @@ type Props = {
   levelUpper: number
   target: {
     value: number
-    setter: (n: number) => void
+    setter: (n: string) => void
   }
   lower: {
     value: number
-    setter: (n: number) => void
+    setter: (n: string) => void
   }
   upper: {
     value: number
-    setter: (n: number) => void
+    setter: (n: string) => void
   }
 }
