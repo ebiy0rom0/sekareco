@@ -1,7 +1,9 @@
+/// <reference types="./../types/index.d.ts" />
 import { useState, useEffect } from 'react'
 
+// custom hook
 export const useMusic = () => {
-  const [ musicList, setMusicList ] = useState<Music[]>([])
+  const [ musicList, setMusicList ] = useState<M_Music.Music[]>([])
 
   // TODO: fetch
   useEffect(() => setMusicList([
@@ -24,18 +26,12 @@ export const useMusic = () => {
   }
 }
 
-type Music = {
-  id: number
-  title: string
-  url: string
-  level: number[]
-}
-
 export const DifficultyList = {
-  EASY:   0,
+  EASY: 0,
   NORMAL: 1,
-  HARD:   2,
+  HARD: 2,
   EXPERT: 3,
   MASTER: 4
 } as const
 
+export type DifficultyValues = typeof DifficultyList[keyof typeof DifficultyList]

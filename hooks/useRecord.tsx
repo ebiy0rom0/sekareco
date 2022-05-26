@@ -1,15 +1,9 @@
-import { useState, useEffect } from 'react'
-import { ClearStatus } from '../components/clear.tsx'
+/// <reference types="./../types/index.d.ts" />
+import { useState, useEffect, useCallback } from 'react'
 
-type Record = {
-  [n: number]: typeof ClearStatus[keyof typeof ClearStatus][]
-}
-
-// @debug
-const [n, c, f, a] = Object.values(ClearStatus)
-
+// custom hook
 export const useRecord = (personId: number) => {
-  const [ recordList, setRecordList ] = useState<Record>({})
+  const [ recordList, setRecordList ] = useState<P_Record.Record>({})
 
   useEffect(() =>
     // TODO: fetch
@@ -20,7 +14,19 @@ export const useRecord = (personId: number) => {
     }
   ), [])
 
-  const getMusicRecord = (musicId: number) => recordList[musicId] ?? []
+  const getMusicRecord = useCallback((musicId: number) => recordList[musicId] ?? [], [])
 
   return { getMusicRecord }
 }
+
+export const ClearStatusList = {
+  NOPLAY: 0,
+  CLEAR:  1,
+  FULL_COMBO: 2,
+  ALL_PERFECT: 3
+} as const
+
+export type ClearStatusValues = typeof ClearStatusList[keyof typeof ClearStatusList]
+
+// @debug
+const [n, c, f, a] = Object.values(ClearStatusList)
