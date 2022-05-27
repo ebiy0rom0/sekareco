@@ -1,23 +1,28 @@
 import { useState } from 'react'
-import { DifficultyList, DifficultyValues } from './useMusic.tsx'
 
 // custom hook
-export const useRecordFilter = () => {
-  const [ difficulty, setDifficulty ] = useState<DifficultyValues[]>(Object.values(DifficultyList))
+export const useRecordFilter = <T extends {[s: string]: number}, U extends T[keyof T]>(filteredList: T) => {
+  const [ whiteList, setWhiteList ] = useState<U[]>(Object.values(filteredList) as U[])
 
   // setter wrap
   // for use input element
-  const changeDifficulty = (checked: string) => {
-    const checkedNum = parseInt(checked)
-    const newFilter = isFiltered(checkedNum) ? difficulty.filter(d => d !== checkedNum) : [...difficulty, checkedNum]
-    setDifficulty(newFilter.sort() as DifficultyValues[])
+  const changeWhiteList = (check: string) => {
+    const checkNum = rounding(parseInt(check))
+    const newFilter = isFiltered(checkNum) ? whiteList.filter(d => d !== checkNum) : [...whiteList, checkNum]
+    setWhiteList(newFilter.sort() as U[])
   }
+
+  // rounding within list value range
+  const rounding = (val: number) => val < min() ? min() : val > max() ? max() : val
+  const min = () => Math.min(...Object.values(filteredList))
+  const max = () => Math.max(...Object.values(filteredList))
+
   // check already filterd
-  const isFiltered = (test: number) => difficulty.some(d => d == test)
+  const isFiltered = (checkVal: number) => whiteList.some(d => d === checkVal)
 
   return {
-    difficulty: () => difficulty,
-    changeDifficulty,
+    whiteList: () => whiteList,
+    changeWhiteList,
     isFiltered
   }
 }

@@ -1,3 +1,4 @@
+import { DifficultyList } from './../hooks/useMusic.tsx'
 import { Head } from 'aleph/react'
 import { MyRecord } from '../components/myRecord.tsx'
 import { MusicFilter } from '../components/musicFilter.tsx'
@@ -25,10 +26,10 @@ const Records: React.FunctionComponent = () => {
     getFilteredMusicList
   } = useMusicFilter(musicList())
   const {
-    difficulty: recordDifficulty,
-    changeDifficulty: changeRecordDifficulty,
+    whiteList: recordDifficulty,
+    changeWhiteList: changeRecordDifficulty,
     isFiltered,
-  } = useRecordFilter()
+  } = useRecordFilter(DifficultyList)
 
   return (
     <div className='page todos-app'>
