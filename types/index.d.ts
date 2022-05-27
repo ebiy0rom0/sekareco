@@ -12,7 +12,7 @@ declare namespace M_Music {
 }
 
 declare namespace P_Record {
-  type Record = {
-    [n: number]: number[]
+  type Record<T> = {
+    [n: number]: T[]
   }
 }

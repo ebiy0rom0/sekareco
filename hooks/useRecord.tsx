@@ -3,7 +3,7 @@ import { useState, useEffect, useCallback } from 'react'
 
 // custom hook
 export const useRecord = (personId: number) => {
-  const [ recordList, setRecordList ] = useState<P_Record.Record>({})
+  const [ recordList, setRecordList ] = useState<P_Record.Record<ClearStatusValues>>({})
 
   useEffect(() =>
     // TODO: fetch
