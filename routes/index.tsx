@@ -21,7 +21,7 @@ const Index: React.FunctionComponent = () => {
       <p className="logo">
         <img src="/assets/logo.svg" height="75" title="Aleph.js" />
       </p>
-      <h1>
+      <h1 className="ml-3">
         The Fullstack Framework in Deno.
       </h1>
       <p>

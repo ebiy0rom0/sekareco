@@ -1,13 +1,17 @@
 import { Router } from "aleph/react";
 import { serve } from "aleph/server";
+import presetWind from '@unocss/preset-wind.ts'
 import { renderToReadableStream } from "react-dom/server";
 
 serve({
-  config: {
-    routes: "./routes/**/*.{tsx,ts}",
+  routes: "./routes/**/*.{tsx,ts}",
+  build: {
+    unocss: {
+      presets: [presetWind()]
+    },
   },
   ssr: {
-    suspense: true,
+    dataDefer: false,
     render: (ctx) => renderToReadableStream(<Router ssrContext={ctx} />, ctx),
   },
 });
