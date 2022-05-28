@@ -7,7 +7,7 @@
       "deno.ns"
     ],
     "types": [
-      "https://deno.land/x/aleph@1.0.0-alpha.24/types.d.ts",
+      "https://deno.land/x/aleph@1.0.0-alpha.60/types.d.ts",
       "./types/index.d.ts"
     ],
     "jsx": "react-jsx",
@@ -15,9 +15,9 @@
   },
   "importMap": "./import_map.json",
   "tasks": {
-    "dev": "denon run -A https://deno.land/x/aleph@1.0.0-alpha.24/cli.ts dev",
-    "start": "deno run -A https://deno.land/x/aleph@1.0.0-alpha.24/cli.ts start",
-    "build": "deno run -A https://deno.land/x/aleph@1.0.0-alpha.24/cli.ts build"
+    "dev": "denon run -A https://deno.land/x/aleph@1.0.0-alpha.60/cli.ts dev",
+    "start": "deno run -A https://deno.land/x/aleph@1.0.0-alpha.60/cli.ts start",
+    "build": "deno run -A https://deno.land/x/aleph@1.0.0-alpha.60/cli.ts build"
   },
   "fmt": {},
   "lint": {}
