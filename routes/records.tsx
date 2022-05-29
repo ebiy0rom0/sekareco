@@ -8,7 +8,7 @@ import { useRecord } from '../hooks/useRecord.tsx'
 import { useMusicFilter } from '../hooks/useMusicFilter.tsx'
 import { useRecordFilter } from '../hooks/useRecordFilter.tsx'
 
-const Records: React.FunctionComponent = () => {
+const Records: React.FC = () => {
   const {
     levelUpper,
     levelLower,
@@ -32,46 +32,50 @@ const Records: React.FunctionComponent = () => {
   } = useRecordFilter(DifficultyList)
 
   return (
-    <div className='page todos-app'>
+    <>
       <Head>
         <title>Todos App by Aleph.js</title>
       </Head>
-      <h1>
-        <span>Player Results</span>
-      </h1>
-      <div className='filter'>
-        <MusicFilter
-          levelLower={ levelLower(difficulty()) }
-          levelUpper={ levelUpper(difficulty()) }
-          target={{
-            value:  difficulty(),
-            setter: changeDifficulty
-          }}
-          lower={{
-            value:  lowerFilter(),
-            setter: changeLowerFilter
-          }}
-          upper={{
-            value: upperFilter(),
-            setter: changeUpperFilter
-          }}
-        />
-        <RecordFilter
-          setter={ changeRecordDifficulty }
-          isChecked={ isFiltered }
-        />
+      <div className="list flex-col">
+        <h1 className="list__head">
+          <span>Player Results</span>
+        </h1>
+        <div className='list__filter basis-1/4'>
+          <MusicFilter
+            levelLower={ levelLower(difficulty()) }
+            levelUpper={ levelUpper(difficulty()) }
+            target={{
+              value:  difficulty(),
+              setter: changeDifficulty
+            }}
+            lower={{
+              value:  lowerFilter(),
+              setter: changeLowerFilter
+            }}
+            upper={{
+              value: upperFilter(),
+              setter: changeUpperFilter
+            }}
+          />
+          <RecordFilter
+            setter={ changeRecordDifficulty }
+            isChecked={ isFiltered }
+          />
+        </div>
+        <div className="list__items basis-1/4">
+          { getFilteredMusicList().map(m => (
+            <MyRecord
+              key={m.id.toString()}
+              title={ m.title }
+              url={ m.url }
+              result={ getMusicRecord(m.id) }
+              filter={ recordDifficulty() }
+              level={ m.level }
+            />
+          )) }
+        </div>
       </div>
-      { getFilteredMusicList().map(m => (
-        <MyRecord
-          key={m.id.toString()}
-          title={ m.title }
-          url={ m.url }
-          result={ getMusicRecord(m.id) }
-          filter={ recordDifficulty() }
-          level={ m.level }
-        />
-      )) }
-    </div>
+    </>
   )
 }
 

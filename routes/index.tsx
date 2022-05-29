@@ -11,10 +11,10 @@ const linkIcon = (
   </svg>
 );
 
-const Index: React.FunctionComponent = () => {
+const Index: React.FC = () => {
   const { setLog, renderLog } = useLog()
   return (
-    <div className="page y-center">
+    <div className="flex flex-row">
       <Head>
         <title>About Aleph.js</title>
       </Head>
