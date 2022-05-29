@@ -6,9 +6,9 @@ export const useRecordFilter = <T extends {[s: string]: number}, U extends T[key
 
   // setter wrap
   // for use input element
-  const changeWhiteList = (check: string) => {
-    const checkNum = rounding(parseInt(check))
-    const newFilter = isFiltered(checkNum) ? whiteList.filter(d => d !== checkNum) : [...whiteList, checkNum]
+  const changeWhiteList = (input: string) => {
+    const inputNum = rounding(parseInt(input))
+    const newFilter = isFiltered(inputNum) ? whiteList.filter(d => d !== inputNum) : [...whiteList, inputNum]
     setWhiteList(newFilter.sort() as U[])
   }
 

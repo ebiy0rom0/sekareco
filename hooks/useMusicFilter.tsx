@@ -17,10 +17,10 @@ export const useMusicFilter = (musicList: M_Music.Music[]) => {
   } = useRange(0)
 
   // setter wrap
-  const changeDifficulty = (val: string) => {
-    const cast = parseInt(val)
+  const changeDifficulty = (input: string) => {
+    const inputNum = parseInt(input)
     // select "master", if out of range
-    const newVal = Object.values(DifficultyList).some(d => d === cast) ? cast : DifficultyList.MASTER
+    const newVal = Object.values(DifficultyList).some(d => d === inputNum) ? inputNum : DifficultyList.MASTER
     setDifficulty(newVal)
   }
   const changeLowerFilter = (val: string) => changeLower(parseInt(val), levelLower(difficulty), upperFilter())
