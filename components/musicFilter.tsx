@@ -4,7 +4,7 @@ import { Selectbox } from './selectbox.tsx'
 
 export const MusicFilter = (props: Props) => {
   return (
-    <>
+    <div className="flex-col">
       <Selectbox
         group='range-diff'
         options={ DifficultyList }
@@ -29,7 +29,7 @@ export const MusicFilter = (props: Props) => {
       >
         レベル上限
       </Range>{ props.upper.value }
-    </>
+    </div>
   )
 }
 

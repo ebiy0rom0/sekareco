@@ -5,23 +5,27 @@ import { Difficulty } from './difficulty.tsx'
 import { Music } from './music.tsx'
 
 export const MyRecord = (props: Props) => (
-  <div className='my-record-container'>
-    <Music class='item-music' title={ props.title } url={ props.url } />
-    { Object.values(props.filter).map(v => (
-      <Difficulty
-        key={ v.toString() }
-        class='item-difficulty'
-        difficulty={ v }
-        level={ props.level[v] }
-      />
-    )) }
-    { Object.values(props.filter).map(v => (
-      <Clear
-        key={ v.toString() }
-        class='item-clear'
-        status={ props.result[v] ?? ClearStatusList.NOPLAY }
-      />
-    )) }
+  <div className='music flex'>
+    <Music class='music__master' title={ props.title } url={ props.url } />
+    <div className="music__record flex-col">
+      <div className="difficulty grid grid-cols-6">
+        { Object.values(props.filter).map(v => (
+          <Difficulty
+            key={ v.toString() }
+            difficulty={ v }
+            level={ props.level[v] }
+          />
+        )) }
+      </div>
+      <div className="record grid grid-cols-6 justify-items-center">
+        { Object.values(props.filter).map(v => (
+          <Clear
+            key={ v.toString() }
+            status={ props.result[v] ?? ClearStatusList.NOPLAY }
+          />
+        )) }
+      </div>
+    </div>
   </div>
 )
 

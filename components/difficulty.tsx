@@ -16,9 +16,9 @@ type Props = {
 }
 
 const ClassSet = {
-  [DifficultyList.EASY]:   'd-easy',
-  [DifficultyList.NORMAL]: 'd-normal',
-  [DifficultyList.HARD]:   'd-hard',
-  [DifficultyList.EXPERT]: 'd-expert',
-  [DifficultyList.MASTER]: 'd-master'
+  [DifficultyList.EASY]:   'difficulty__easy',
+  [DifficultyList.NORMAL]: 'difficulty__normal',
+  [DifficultyList.HARD]:   'difficulty__hard',
+  [DifficultyList.EXPERT]: 'difficulty__expert',
+  [DifficultyList.MASTER]: 'difficulty__master'
 } as const
