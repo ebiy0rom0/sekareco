@@ -8,7 +8,7 @@ export const MyRecord = (props: Props) => (
   <div className='music flex'>
     <Music class='music__master' title={ props.title } url={ props.url } />
     <div className="music__record flex-col">
-      <div className="difficulty grid grid-cols-6">
+      <div className="difficulty grid grid-cols-6 gap-x-5">
         { Object.values(props.filter).map(v => (
           <Difficulty
             key={ v.toString() }
@@ -17,7 +17,7 @@ export const MyRecord = (props: Props) => (
           />
         )) }
       </div>
-      <div className="record grid grid-cols-6 justify-items-center">
+      <div className="record grid grid-cols-6 gap-x-5 mt-4 justify-items-center">
         { Object.values(props.filter).map(v => (
           <Clear
             key={ v.toString() }

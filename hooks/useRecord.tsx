@@ -14,7 +14,7 @@ export const useRecord = (personId: number) => {
     }
   ), [])
 
-  const getMusicRecord = useCallback((musicId: number) => recordList[musicId] ?? [], [])
+  const getMusicRecord = useCallback((musicId: number) => recordList[musicId] ?? [], [recordList])
 
   return { getMusicRecord }
 }
