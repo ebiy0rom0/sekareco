@@ -12,4 +12,7 @@ https://aleph-hello.deno.dev/
     - deno install -qAf --unstable https://deno.land/x/denon/denon.ts
 
 - execute
-    - deno tasks dev
+    - deno task dev
+
+- tips
+    - aleph.js use port 6060
