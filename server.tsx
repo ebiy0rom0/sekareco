@@ -1,7 +1,7 @@
-import { Router } from "aleph/react";
-import { serve } from "aleph/server";
+import { App } from "aleph/react"
+import { serve } from "aleph/server"
 import presetWind from '@unocss/preset-wind.ts'
-import { renderToReadableStream } from "react-dom/server";
+import { renderToReadableStream } from "react-dom/server"
 
 serve({
   routes: "./routes/**/*.{tsx,ts}",
@@ -12,6 +12,6 @@ serve({
   },
   ssr: {
     dataDefer: false,
-    render: (ctx) => renderToReadableStream(<Router ssrContext={ctx} />, ctx),
+    render: (ctx) => renderToReadableStream(<App ssrContext={ctx} />, ctx),
   },
 });
