@@ -1,4 +1,4 @@
-import { DifficultyList } from "./../hooks/useMusic.tsx"
+import { DifficultyList, DifficultyValues } from "./../hooks/useMusic.tsx"
 import { Head } from "aleph/react"
 import { MyRecord } from "../components/myRecord.tsx"
 import { MusicFilter } from "../components/musicFilter.tsx"
@@ -15,7 +15,11 @@ const Records: React.FC = () => {
     musicList,
   } = useMusic()
 
-  const { getMusicRecord } = useRecord(1)
+  const {
+    getMusicRecord,
+    increment,
+    decrement
+  } = useRecord(1)
   const {
     difficulty,
     lowerFilter,
@@ -71,6 +75,8 @@ const Records: React.FC = () => {
               result={ getMusicRecord(m.id) }
               filter={ recordDifficulty() }
               level={ m.level }
+              increament={ (status: DifficultyValues) => increment(m.id, status) }
+              decreament={ (status: DifficultyValues) => decrement(m.id, status) }
             />
           )) }
         </div>

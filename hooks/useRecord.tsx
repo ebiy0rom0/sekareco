@@ -1,5 +1,6 @@
 /// <reference types="./../types/index.d.ts" />
 import { useState, useEffect, useCallback } from "react"
+import { DifficultyValues } from './useMusic.tsx'
 
 // custom hook
 export const useRecord = (personId: number) => {
@@ -41,7 +42,30 @@ export const useRecord = (personId: number) => {
 
   const getMusicRecord = useCallback((musicId: number) => recordList[musicId] ?? [], [recordList])
 
-  return { getMusicRecord }
+  const increment = (musicId: number, difficulty: DifficultyValues) => {
+    const cp = { ...recordList }
+    cp[musicId][difficulty] = next(cp[musicId][difficulty]) as ClearStatusValues
+    setRecordList(cp)
+  }
+  const decrement = (musicId: number, difficulty: DifficultyValues) => {
+    const cp = { ...recordList }
+    cp[musicId][difficulty] = prev(cp[musicId][difficulty]) as ClearStatusValues
+    setRecordList(cp)
+  }
+
+  const getIndex = (status: number) => {
+    const keyList = Object.keys(ClearStatusList)
+    const findKey = Object.entries(ClearStatusList).find(([_, v]) => v === status)?.[0]
+    return keyList.findIndex(k => k === findKey)
+  }
+  const next = (status: number) => (Object.keys(ClearStatusList).length + getIndex(status) + 1) % Object.keys(ClearStatusList).length
+  const prev = (status: number) => (Object.keys(ClearStatusList).length + getIndex(status) - 1) % Object.keys(ClearStatusList).length
+
+  return {
+    getMusicRecord,
+    increment,
+    decrement
+  }
 }
 
 export const ClearStatusList = {

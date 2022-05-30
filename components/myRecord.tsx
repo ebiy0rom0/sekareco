@@ -1,5 +1,6 @@
 import { DifficultyValues } from "./../hooks/useMusic.tsx"
 import { ClearStatusList, ClearStatusValues } from "../hooks/useRecord.tsx"
+import { Toggle } from './toggle.tsx'
 import { Clear } from "./clear.tsx"
 import { Difficulty } from "./difficulty.tsx"
 import { Music } from "./music.tsx"
@@ -22,10 +23,15 @@ export const MyRecord = (props: Props) => (
         </div>
         <div className="record grid grid-cols-5 gap-x-5 mt-2 justify-items-center">
           { Object.values(props.filter).map(v => (
-            <Clear
-              key={ v.toString() }
-              status={ props.result[v] ?? ClearStatusList.NOPLAY }
-            />
+            <Toggle
+              increment={ () => props.increament(v as ClearStatusValues) }
+              decrement={ () => props.decreament(v as ClearStatusValues) }
+            >
+              <Clear
+                key={ v.toString() }
+                status={ props.result[v] ?? ClearStatusList.NOPLAY }
+              />
+            </Toggle>
           )) }
         </div>
       </td>
@@ -39,4 +45,6 @@ export const MyRecord = (props: Props) => (
     result: ClearStatusValues[]
     filter: DifficultyValues[]
     level: number[]
+    increament: (c: ClearStatusValues) => void
+    decreament: (c: ClearStatusValues) => void
   }
