@@ -3,7 +3,7 @@ export const Checkbox = (props: Props) => (
   <label>
     { props.children }
     <input
-      type='checkbox'
+      type="checkbox"
       name={ props.group }
       value={ props.value }
       checked={ props.isChecked }
@@ -12,7 +12,7 @@ export const Checkbox = (props: Props) => (
   </label>
 )
 
-type Props = JSX.IntrinsicElements['input'] & {
+type Props = JSX.IntrinsicElements["input"] & {
   children: string | number
   group: string
   isChecked: boolean

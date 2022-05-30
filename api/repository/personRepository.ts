@@ -1,4 +1,4 @@
-import { apiHandler } from '../handler/apiHandler.ts'
+import { apiHandler } from "../handler/apiHandler.ts"
 
 export const personRepository = {
   login: async (personId: number, password: string) => {
@@ -8,7 +8,7 @@ export const personRepository = {
     return json
   },
   registPerson: async (loginId: string, password: string, name: string) => {
-    const json = await apiHandler.post('person/', {
+    const json = await apiHandler.post("person/", {
       json: {
         login_id: loginId,
         password: password,

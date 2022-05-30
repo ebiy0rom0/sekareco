@@ -1,4 +1,4 @@
-import { apiHandler } from '../handler/apiHandler.ts'
+import { apiHandler } from "../handler/apiHandler.ts"
 
 export const recordRepository = {
   getMyRecord: async (personId: number) => {

@@ -1,5 +1,5 @@
 /// <reference types="./../types/index.d.ts" />
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback } from "react"
 
 // custom hook
 export const useRecord = (personId: number) => {
@@ -8,9 +8,34 @@ export const useRecord = (personId: number) => {
   useEffect(() =>
     // TODO: fetch
     setRecordList({
-      1: [a,a,a,a,c],
-      2: [a,a,f,f,c],
-      3: [n,n,f,f,c]
+       1: [a,a,f,f,f],
+       2: [n,n,f,a,f],
+       3: [a,a,f,f,f],
+       4: [a,a,f,f,f],
+       5: [a,a,a,a,a],
+       6: [a,a,f,f,f],
+       7: [n,a,a,f,f],
+       8: [a,a,a,a,a],
+       9: [a,a,a,f,f],
+      10: [a,a,f,f,f],
+      11: [n,n,f,a,f],
+      12: [n,a,f,f,f],
+      13: [a,a,a,a,f],
+      14: [a,a,a,a,f],
+      15: [a,a,a,a,f],
+      16: [a,a,f,f,f],
+      17: [a,a,f,f,f],
+      18: [a,a,a,a,f],
+      19: [a,a,f,f,c],
+      20: [n,a,n,f,f],
+      21: [a,a,f,f,f],
+      22: [a,a,f,f,f],
+      23: [a,a,a,a,f],
+      24: [a,a,a,a,c],
+      25: [a,a,f,f,c],
+      26: [n,a,f,f,c],
+      27: [a,a,a,f,c],
+      28: [a,a,f,f,c],
     }
   ), [])
 

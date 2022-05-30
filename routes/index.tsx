@@ -1,6 +1,6 @@
-import { Head, Link } from 'aleph/react'
-import { apiFactory } from '../api/apiFactory.ts'
-import { useLog } from '../hooks/useLog.tsx'
+import { Head, Link } from "aleph/react"
+import { apiFactory } from "../api/apiFactory.ts"
+import { useLog } from "../hooks/useLog.tsx"
 
 const linkIcon = (
   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -43,14 +43,14 @@ const Index: React.FC = () => {
         </a>
       </div>
       <nav>
-        <button onClick={async () => setLog(await apiFactory.get('music').getMusicList())}>get music</button>
-        <button onClick={async () => setLog(await apiFactory.get('person').login(1, 'hoge'))}>person login</button>
-        <button onClick={async () => setLog(await apiFactory.get('person').registPerson('hoge', 'hoge0123', 'huga'))}>regist person</button>
-        <button onClick={async () => setLog(await apiFactory.get('person').modifyPersonStatus(1, 'piyo', 'hoge3210'))}>modify person</button>
-        <button onClick={async () => setLog(await apiFactory.get('record').getMyRecord(1))}>get record</button>
-        <button onClick={async () => setLog(await apiFactory.get('record').registRecord(1, 1, [0]))}>regist record</button>
+        <button onClick={async () => setLog(await apiFactory.get("music").getMusicList())}>get music</button>
+        <button onClick={async () => setLog(await apiFactory.get("person").login(1, "hoge"))}>person login</button>
+        <button onClick={async () => setLog(await apiFactory.get("person").registPerson("hoge", "hoge0123", "huga"))}>regist person</button>
+        <button onClick={async () => setLog(await apiFactory.get("person").modifyPersonStatus(1, "piyo", "hoge3210"))}>modify person</button>
+        <button onClick={async () => setLog(await apiFactory.get("record").getMyRecord(1))}>get record</button>
+        <button onClick={async () => setLog(await apiFactory.get("record").registRecord(1, 1, [0]))}>regist record</button>
         <Link to="/records">
-          <button onClick={() => console.log('no entry')}>Your Records</button>
+          <button onClick={() => console.log("no entry")}>Your Records</button>
         </Link>
       </nav>
       { renderLog() }

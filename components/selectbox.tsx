@@ -19,7 +19,7 @@ export const Selectbox = (props: Props) => (
   </label>
 )
 
-type Props = JSX.IntrinsicElements['input'] & {
+type Props = JSX.IntrinsicElements["input"] & {
   children: string | number
   group: string
   options: {[s: string] : string | number}

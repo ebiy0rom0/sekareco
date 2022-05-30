@@ -1,12 +1,12 @@
-import { DifficultyList } from './../hooks/useMusic.tsx'
-import { Head } from 'aleph/react'
-import { MyRecord } from '../components/myRecord.tsx'
-import { MusicFilter } from '../components/musicFilter.tsx'
-import { RecordFilter } from '../components/recordFilter.tsx'
-import { useMusic } from '../hooks/useMusic.tsx'
-import { useRecord } from '../hooks/useRecord.tsx'
-import { useMusicFilter } from '../hooks/useMusicFilter.tsx'
-import { useRecordFilter } from '../hooks/useRecordFilter.tsx'
+import { DifficultyList } from "./../hooks/useMusic.tsx"
+import { Head } from "aleph/react"
+import { MyRecord } from "../components/myRecord.tsx"
+import { MusicFilter } from "../components/musicFilter.tsx"
+import { RecordFilter } from "../components/recordFilter.tsx"
+import { useMusic } from "../hooks/useMusic.tsx"
+import { useRecord } from "../hooks/useRecord.tsx"
+import { useMusicFilter } from "../hooks/useMusicFilter.tsx"
+import { useRecordFilter } from "../hooks/useRecordFilter.tsx"
 
 const Records: React.FC = () => {
   const {
@@ -40,7 +40,7 @@ const Records: React.FC = () => {
         <h1 className="list__head">
           <span>Player Results</span>
         </h1>
-        <div className='list__filter basis-1/4'>
+        <div className="list__filter">
           <MusicFilter
             levelLower={ levelLower(difficulty()) }
             levelUpper={ levelUpper(difficulty()) }
@@ -62,7 +62,7 @@ const Records: React.FC = () => {
             isChecked={ isFiltered }
           />
         </div>
-        <div className="list__items basis-1/4">
+        <div className="list__items mt-10">
           { getFilteredMusicList().map(m => (
             <MyRecord
               key={m.id.toString()}

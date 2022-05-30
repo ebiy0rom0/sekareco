@@ -1,5 +1,5 @@
-import { DifficultyList } from './../hooks/useMusic.tsx'
-import { Checkbox } from './checkbox.tsx'
+import { DifficultyList } from "./../hooks/useMusic.tsx"
+import { Checkbox } from "./checkbox.tsx"
 
 export const RecordFilter = (props: Props) => {
   return (
@@ -8,7 +8,7 @@ export const RecordFilter = (props: Props) => {
       { Object.entries(DifficultyList).map(([k, v]) =>
         <Checkbox
           key={ k.toString() }
-          group='difficulty'
+          group="difficulty"
           value={ v }
           setter={ props.setter }
           isChecked={ props.isChecked(v) }

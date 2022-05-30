@@ -1,11 +1,11 @@
-import React from 'react'
+import React from "react"
 
 export const Navigation = React.memo((props: Props) => (
-  <div className={ ["nav bg-gray-400", props?.test].join(' ') }>
-    <h1 className="nav__title">side nav</h1>
+  <div className={ ["nav", props?.className].join(" ") }>
+    <h3 className="nav__title">機能 一覧</h3>
   </div>
 ))
 
 type Props = {
-  test?: string
+  className?: string
 }

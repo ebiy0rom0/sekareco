@@ -1,6 +1,6 @@
 import { App } from "aleph/react"
 import { serve } from "aleph/server"
-import presetWind from '@unocss/preset-wind.ts'
+import presetWind from "@unocss/preset-wind.ts"
 import { renderToReadableStream } from "react-dom/server"
 
 serve({
