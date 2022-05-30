@@ -1,10 +1,11 @@
+import React from "react"
 import { ClearStatusList, ClearStatusValues } from "../hooks/useRecord.tsx"
 
-export const Clear = (props: Props) => (
+export const Clear = React.memo((props: Props) => (
   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
     <polygon points="0,10 10,0 20,10 10,20" className={ ["stroke-3 stroke-slate-900", fillSet[props.status]].join(" ") } />
   </svg>
-)
+))
 
 type Props = {
   class?: string

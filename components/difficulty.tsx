@@ -1,6 +1,7 @@
+import React from "react"
 import { DifficultyList, DifficultyValues } from "./../hooks/useMusic.tsx"
 
-export const Difficulty = (props: Props) => (
+export const Difficulty = React.memo((props: Props) => (
   <svg xmlns="http://www.w3.org/2000/svg" width="110" height="20" viewBox="0 0 110 20">
     <polygon points="10,10 90,10 100,20 20,20" className="stroke-2 stroke-slate-500 fill-slate-500" fillOpacity="0.9" />
     <polygon points="0,5 70,5 80,15 10,15" className={ ["stroke-1 stroke-slate-400", colorSet[props.difficulty]].join(" ") } fillOpacity="0.9" />
@@ -11,7 +12,7 @@ export const Difficulty = (props: Props) => (
       { props.level }
     </text>
   </svg>
-)
+))
 
 // draw html
 const drawName = (difficulty: DifficultyValues) => Object.entries(DifficultyList).filter(([_, v]) => v === difficulty)[0][0]
