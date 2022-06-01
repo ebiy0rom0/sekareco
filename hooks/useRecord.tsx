@@ -58,8 +58,9 @@ export const useRecord = (personId: number) => {
     const findKey = Object.entries(ClearStatusList).find(([_, v]) => v === status)?.[0]
     return keyList.findIndex(k => k === findKey)
   }
-  const next = (status: number) => (Object.keys(ClearStatusList).length + getIndex(status) + 1) % Object.keys(ClearStatusList).length
-  const prev = (status: number) => (Object.keys(ClearStatusList).length + getIndex(status) - 1) % Object.keys(ClearStatusList).length
+  const length = Object.keys(ClearStatusList).length
+  const next = (status: number) => (length + getIndex(status) + 1) % length
+  const prev = (status: number) => (length + getIndex(status) - 1) % length
 
   return {
     getMusicRecord,

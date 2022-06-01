@@ -10,7 +10,7 @@ export const MyRecord = (props: Props) => {
   const [ isHover, setHover ] = useState(false)
   return (
     <div className="flex border-b bg-slate-700/80 border-slate-500 hover:bg-slate-600/80 mt-1.5">
-      <div className="music__master flex-none w-40 border-r">
+      <div className="music__master flex-none w-68 border-r">
         <Music title={ props.title } url={ props.url } />
       </div>
       <div className="music__record w-auto flex flex-col py-2 px-3">
@@ -30,6 +30,7 @@ export const MyRecord = (props: Props) => {
         >
           { Object.values(props.filter).map(v => isHover ? (
             <Toggle
+              key={ v.toString() }
               increment={ () => props.increment(v as ClearStatusValues) }
               decrement={ () => props.decrement(v as ClearStatusValues) }
             >
