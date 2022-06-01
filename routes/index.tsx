@@ -1,4 +1,4 @@
-import { Head, Link } from "aleph/react"
+import { Link } from "aleph/react"
 import { apiFactory } from "../api/apiFactory.ts"
 import { useLog } from "../hooks/useLog.tsx"
 
@@ -15,9 +15,6 @@ const Index: React.FC = () => {
   const { setLog, renderLog } = useLog()
   return (
     <div className="flex flex-row">
-      <Head>
-        <title>About Aleph.js</title>
-      </Head>
       <p className="logo">
         <img src="/assets/logo.svg" height="75" title="Aleph.js" />
       </p>

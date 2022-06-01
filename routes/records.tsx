@@ -1,5 +1,4 @@
 import { DifficultyList, DifficultyValues } from "./../hooks/useMusic.tsx"
-import { Head } from "aleph/react"
 import { MyRecord } from "../components/myRecord.tsx"
 import { MusicFilter } from "../components/musicFilter.tsx"
 import { RecordFilter } from "../components/recordFilter.tsx"
@@ -37,13 +36,10 @@ const Records: React.FC = () => {
 
   return (
     <>
-      <Head>
-        <title>Todos App by Aleph.js</title>
-      </Head>
       <div className="list flex-col">
-        <h1 className="list__head">
-          <span>Player Results</span>
-        </h1>
+        <h2 className="list__head">
+          <span>Player Records</span>
+        </h2>
         <div className="list__filter">
           <MusicFilter
             levelLower={ levelLower(difficulty()) }
@@ -66,18 +62,18 @@ const Records: React.FC = () => {
             isChecked={ isFiltered }
           />
         </div>
-        <div className="list__items mt-10">
+        <div className="list__items w-fit mt-4">
           { getFilteredMusicList().map(m => (
-            <MyRecord
-              key={m.id.toString()}
-              title={ m.title }
-              url={ m.url }
-              result={ getMusicRecord(m.id) }
-              filter={ recordDifficulty() }
-              level={ m.level }
-              increament={ (status: DifficultyValues) => increment(m.id, status) }
-              decreament={ (status: DifficultyValues) => decrement(m.id, status) }
-            />
+              <MyRecord
+                key={m.id.toString()}
+                title={ m.title }
+                url={ m.url }
+                result={ getMusicRecord(m.id) }
+                filter={ recordDifficulty() }
+                level={ m.level }
+                increment={ (status: DifficultyValues) => increment(m.id, status) }
+                decrement={ (status: DifficultyValues) => decrement(m.id, status) }
+              />
           )) }
         </div>
       </div>

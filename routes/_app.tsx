@@ -1,10 +1,14 @@
+import { Head } from "aleph/react"
 import { Header } from "../components/header.tsx"
 import { Navigation } from "../components/navigation.tsx"
 
 const App: React.FC<Props> = props => {
   return (
-    <div className="w-screen h-screen bg-scroll bg-slate-800 text-slate-400">
-      <div className="sticky top-0 w-full flex-none border-b-2 border-slate-400/20">
+    <div className="w-screen h-screen bg-slate-800 text-slate-400">
+      <Head>
+        <title>プロセカの記録帳</title>
+      </Head>
+      <div className="sticky top-0 w-full flex-none border-b border-slate-500/40">
         <div className="max-w-7xl py-3 mx-auto">
           <Header />
         </div>

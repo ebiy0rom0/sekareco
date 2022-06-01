@@ -1,3 +1,4 @@
+import { useState } from "react"
 import { DifficultyValues } from "./../hooks/useMusic.tsx"
 import { ClearStatusList, ClearStatusValues } from "../hooks/useRecord.tsx"
 import { Toggle } from './toggle.tsx'
@@ -5,14 +6,15 @@ import { Clear } from "./clear.tsx"
 import { Difficulty } from "./difficulty.tsx"
 import { Music } from "./music.tsx"
 
-export const MyRecord = (props: Props) => (
-  <table className="music table-fixed">
-    <tr className="bg-slate-700/80 border-slate-500 hover:bg-slate-600/80">
-      <td className="music__master w-32 border-b">
+export const MyRecord = (props: Props) => {
+  const [ isHover, setHover ] = useState(false)
+  return (
+    <div className="flex border-b bg-slate-700/80 border-slate-500 hover:bg-slate-600/80 mt-1.5">
+      <div className="music__master flex-none w-40 border-r">
         <Music title={ props.title } url={ props.url } />
-      </td>
-      <td className="music__record w-auto border-b">
-        <div className="difficulty grid grid-cols-5 gap-x-5">
+      </div>
+      <div className="music__record w-auto flex flex-col py-2 px-3">
+        <div className="difficulty grid grid-cols-5 gap-x-6">
           { Object.values(props.filter).map(v => (
             <Difficulty
               key={ v.toString() }
@@ -21,23 +23,32 @@ export const MyRecord = (props: Props) => (
             />
           )) }
         </div>
-        <div className="record grid grid-cols-5 gap-x-5 mt-2 justify-items-center">
-          { Object.values(props.filter).map(v => (
+        <div
+          className="record grid grid-cols-5 gap-x-6 mt-1 justify-items-center"
+          onMouseEnter={ () => setHover(true) }
+          onMouseLeave={ () => setHover(false) }
+        >
+          { Object.values(props.filter).map(v => isHover ? (
             <Toggle
-              increment={ () => props.increament(v as ClearStatusValues) }
-              decrement={ () => props.decreament(v as ClearStatusValues) }
+              increment={ () => props.increment(v as ClearStatusValues) }
+              decrement={ () => props.decrement(v as ClearStatusValues) }
             >
               <Clear
                 key={ v.toString() }
                 status={ props.result[v] ?? ClearStatusList.NOPLAY }
               />
             </Toggle>
-          )) }
+          ) : (
+            <Clear
+              key={ v.toString() }
+              status={ props.result[v] ?? ClearStatusList.NOPLAY }
+            />
+          ))}
         </div>
-      </td>
-    </tr>
-  </table>
-)
+      </div>
+    </div>
+  )
+}
 
   type Props = {
     title: string
@@ -45,6 +56,6 @@ export const MyRecord = (props: Props) => (
     result: ClearStatusValues[]
     filter: DifficultyValues[]
     level: number[]
-    increament: (c: ClearStatusValues) => void
-    decreament: (c: ClearStatusValues) => void
+    increment: (c: ClearStatusValues) => void
+    decrement: (c: ClearStatusValues) => void
   }
