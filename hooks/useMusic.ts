@@ -35,7 +35,7 @@ export const useMusic = () => {
     { id: 26, title: "オルダーエゴ",          url: "/assets/jacket_026.png", level: [8, 12, 17, 26, 31] },
     { id: 27, title: "ドクター＝ファンクビート", url: "/assets/jacket_027.png", level: [8, 13, 19, 27, 32] },
     { id: 28, title: "チルドレンレコード",      url: "/assets/jacket_028.png", level: [9, 14, 19, 27, 32] },
-    { id: 999, title: "みっくみくにしてあげる♪【してやんよ】", url: "/assets/logo.svg", level: [1, 2, 3, 4, 5] },
+    { id: 999, title: "みっくみくにしてあげる♪【してやんよ】", url: "/assets/logo.svg", level: [7, 12, 17, 24, 28] },
   ]), [])
 
   // all music level array

@@ -1,4 +1,4 @@
-import { DifficultyList } from "./../hooks/useMusic.tsx"
+import { DifficultyList } from "./../hooks/useMusic.ts"
 import { Checkbox } from "./checkbox.tsx"
 
 export const RecordFilter = (props: Props) => {

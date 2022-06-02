@@ -1,7 +1,7 @@
 import { useState } from "react"
-import { DifficultyValues } from "./../hooks/useMusic.tsx"
-import { ClearStatusList, ClearStatusValues } from "../hooks/useRecord.tsx"
-import { Toggle } from './toggle.tsx'
+import { DifficultyValues } from "./../hooks/useMusic.ts"
+import { ClearStatusList, ClearStatusValues } from "../hooks/useRecord.ts"
+import { Toggle } from "./toggle.tsx"
 import { Clear } from "./clear.tsx"
 import { Difficulty } from "./difficulty.tsx"
 import { Music } from "./music.tsx"

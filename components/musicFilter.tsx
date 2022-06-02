@@ -1,4 +1,4 @@
-import { DifficultyList } from "./../hooks/useMusic.tsx"
+import { DifficultyList } from "./../hooks/useMusic.ts"
 import { Range } from "./range.tsx"
 import { Selectbox } from "./selectbox.tsx"
 

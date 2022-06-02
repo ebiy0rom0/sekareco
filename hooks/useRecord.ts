@@ -1,6 +1,6 @@
 /// <reference types="./../types/index.d.ts" />
 import { useState, useEffect, useCallback } from "react"
-import { DifficultyValues } from './useMusic.tsx'
+import { DifficultyValues } from "./useMusic.ts"
 
 // custom hook
 export const useRecord = (personId: number) => {

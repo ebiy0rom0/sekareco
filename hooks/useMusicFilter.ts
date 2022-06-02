@@ -1,7 +1,7 @@
 /// <reference types="./../types/index.d.ts" />
 import { useState, useEffect } from "react"
-import { useMusic, DifficultyList } from "./useMusic.tsx"
-import { useRange } from "./useRange.tsx"
+import { useMusic, DifficultyList } from "./useMusic.ts"
+import { useRange } from "./useRange.ts"
 
 // custom hook
 export const useMusicFilter = (musicList: M_Music.Music[]) => {
