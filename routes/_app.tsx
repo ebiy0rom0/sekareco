@@ -1,10 +1,11 @@
 import { Head } from "aleph/react"
 import { Header } from "../components/header.tsx"
+import { Footer } from "../components/footer.tsx"
 import { Navigation } from "../components/navigation.tsx"
 
 const App: React.FC<Props> = props => {
   return (
-    <div className="bg-slate-800 text-slate-400">
+    <div className="min-h-screen bg-slate-800 text-slate-400">
       <Head>
         <title>プロセカの記録帳</title>
       </Head>
@@ -14,16 +15,19 @@ const App: React.FC<Props> = props => {
         </div>
       </div>
       <div className="max-w-[100em] mx-auto py-8">
-        <Navigation className="w-[13em] fixed justify-items-center border-r-2 border-slate-400/20 ml-5" />
+        <Navigation className="w-[13em] h-full fixed justify-items-center border-r-2 border-slate-400/20 ml-5" />
         <div className="ml-5 pl-[13em] grid w-auto justify-center">
           { props.children }
+          <div className="w-full border-t mx-10 my-3 mx-auto">
+            <Footer />
+          </div>
         </div>
       </div>
     </div>
-  );
+  )
 }
 type Props = {
-    children: React.ReactNode
+  children: React.ReactNode
 }
 
 export default App
