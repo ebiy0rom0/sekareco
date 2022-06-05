@@ -3,7 +3,7 @@ import { Checkbox } from "./checkbox.tsx"
 
 export const RecordFilter = (props: Props) => {
   return (
-    <label>
+    <>
       難易度
       { Object.entries(DifficultyList).map(([k, v]) =>
         <Checkbox
@@ -16,7 +16,7 @@ export const RecordFilter = (props: Props) => {
           { k }
         </Checkbox>
       )}
-    </label>
+    </>
   )
 }
 

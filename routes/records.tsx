@@ -35,49 +35,47 @@ const Records: React.FC = () => {
   } = useRecordFilter(DifficultyList)
 
   return (
-    <>
-      <div className="list flex-col">
-        <h2 className="list__head">
-          <span>Player Records</span>
-        </h2>
-        <div className="list__filter">
-          <MusicFilter
-            levelLower={ levelLower(difficulty()) }
-            levelUpper={ levelUpper(difficulty()) }
-            target={{
-              value:  difficulty(),
-              setter: changeDifficulty
-            }}
-            lower={{
-              value:  lowerFilter(),
-              setter: changeLowerFilter
-            }}
-            upper={{
-              value: upperFilter(),
-              setter: changeUpperFilter
-            }}
-          />
-          <RecordFilter
-            setter={ changeRecordDifficulty }
-            isChecked={ isFiltered }
-          />
-        </div>
-        <div className="list__items w-fit mt-4">
-          { getFilteredMusicList().map(m => (
-            <MyRecord
-              key={m.id.toString()}
-              title={ m.title }
-              url={ m.url }
-              result={ getMusicRecord(m.id) }
-              filter={ recordDifficulty() }
-              level={ m.level }
-              increment={ (status: DifficultyValues) => increment(m.id, status) }
-              decrement={ (status: DifficultyValues) => decrement(m.id, status) }
-            />
-          )) }
-        </div>
+    <div className="list flex-col">
+      <h2 className="list__head">
+        <span>Player Records</span>
+      </h2>
+      <div className="list__filter">
+        <MusicFilter
+          levelLower={ levelLower(difficulty()) }
+          levelUpper={ levelUpper(difficulty()) }
+          target={{
+            value:  difficulty(),
+            setter: changeDifficulty
+          }}
+          lower={{
+            value:  lowerFilter(),
+            setter: changeLowerFilter
+          }}
+          upper={{
+            value: upperFilter(),
+            setter: changeUpperFilter
+          }}
+        />
+        <RecordFilter
+          setter={ changeRecordDifficulty }
+          isChecked={ isFiltered }
+        />
       </div>
-    </>
+      <div className="list__items w-fit mt-4">
+        { getFilteredMusicList().map(m => (
+          <MyRecord
+            key={m.id.toString()}
+            title={ m.title }
+            url={ m.url }
+            result={ getMusicRecord(m.id) }
+            filter={ recordDifficulty() }
+            level={ m.level }
+            increment={ (status: DifficultyValues) => increment(m.id, status) }
+            decrement={ (status: DifficultyValues) => decrement(m.id, status) }
+          />
+        )) }
+      </div>
+    </div>
   )
 }
 
