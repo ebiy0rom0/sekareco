@@ -1,7 +1,7 @@
 import { Head } from "aleph/react"
-import { Header } from "../components/header.tsx"
-import { Footer } from "../components/footer.tsx"
-import { Navigation } from "../components/navigation.tsx"
+import { Header } from "../components/Header.tsx"
+import { Footer } from "../components/Footer.tsx"
+import { Navigation } from "../components/Navigation.tsx"
 
 const App: React.FC<Props> = props => {
   return (
