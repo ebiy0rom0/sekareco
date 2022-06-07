@@ -1,56 +1,35 @@
 /// <reference types="./../types/index.d.ts" />
-import { useState, useEffect, useCallback } from "react"
+import { useEffect, useCallback } from "react"
 import { DifficultyValues } from "./useMusic.ts"
+import { apiFactory } from "../api/apiFactory.ts"
+import { useSessionStorage } from "./../utils/useSessionStorage.ts"
 
 // custom hook
 export const useRecord = (personId: number) => {
-  const [ recordList, setRecordList ] = useState<P_Record.Record<ClearStatusValues>>({})
+  const repositoryKey = "record"
+  const [ recordList, setRecordList ] = useSessionStorage<P_Record.Record<ClearStatusValues>>(repositoryKey, {})
 
-  useEffect(() =>
-    // TODO: fetch
-    setRecordList({
-       1: [a,a,f,f,f],
-       2: [n,n,f,a,f],
-       3: [a,a,f,f,f],
-       4: [a,a,f,f,f],
-       5: [a,a,a,a,a],
-       6: [a,a,f,f,f],
-       7: [n,a,a,f,f],
-       8: [a,a,a,a,a],
-       9: [a,a,a,f,f],
-      10: [a,a,f,f,f],
-      11: [n,n,f,a,f],
-      12: [n,a,f,f,f],
-      13: [a,a,a,a,f],
-      14: [a,a,a,a,f],
-      15: [a,a,a,a,f],
-      16: [a,a,f,f,f],
-      17: [a,a,f,f,f],
-      18: [a,a,a,a,f],
-      19: [a,a,f,f,c],
-      20: [n,a,n,f,f],
-      21: [a,a,f,f,f],
-      22: [a,a,f,f,f],
-      23: [a,a,a,a,f],
-      24: [a,a,a,a,c],
-      25: [a,a,f,f,c],
-      26: [n,a,f,f,c],
-      27: [a,a,a,f,c],
-      28: [a,a,f,f,c],
-    }
-  ), [])
+  useEffect(() => {
+    if (Object.keys(recordList()).length > 0) return
 
-  const getMusicRecord = useCallback((musicId: number) => recordList[musicId] ?? [], [recordList])
+    // do fetch the only first time in same session
+    (async () => {
+      const fetchList = await apiFactory.get(repositoryKey).getMyRecord(personId)
+      setRecordList(fetchList)
+    })()
+  }, [])
+
+  const getMusicRecord = useCallback((musicId: number) => recordList()[musicId] ?? [], [recordList])
 
   const increment = (musicId: number, difficulty: DifficultyValues) => {
-    const cp = { ...recordList }
-    cp[musicId][difficulty] = next(cp[musicId][difficulty]) as ClearStatusValues
-    setRecordList(cp)
+    const copyList = { ...recordList() }
+    copyList[musicId][difficulty] = next(copyList[musicId][difficulty])
+    setRecordList(copyList)
   }
   const decrement = (musicId: number, difficulty: DifficultyValues) => {
-    const cp = { ...recordList }
-    cp[musicId][difficulty] = prev(cp[musicId][difficulty]) as ClearStatusValues
-    setRecordList(cp)
+    const copyList = { ...recordList() }
+    copyList[musicId][difficulty] = prev(copyList[musicId][difficulty])
+    setRecordList(copyList)
   }
 
   const getIndex = (status: number) => {
@@ -59,8 +38,8 @@ export const useRecord = (personId: number) => {
     return keyList.findIndex(k => k === findKey)
   }
   const length = Object.keys(ClearStatusList).length
-  const next = (status: number) => (length + getIndex(status) + 1) % length
-  const prev = (status: number) => (length + getIndex(status) - 1) % length
+  const next = (status: number) => (length + getIndex(status) + 1) % length as ClearStatusValues
+  const prev = (status: number) => (length + getIndex(status) - 1) % length as ClearStatusValues
 
   return {
     getMusicRecord,
@@ -77,6 +56,3 @@ export const ClearStatusList = {
 } as const
 
 export type ClearStatusValues = typeof ClearStatusList[keyof typeof ClearStatusList]
-
-// @debug
-const [n, c, f, a] = Object.values(ClearStatusList)
