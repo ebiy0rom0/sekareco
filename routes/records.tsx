@@ -27,7 +27,7 @@ const Records: React.FC = () => {
     changeLowerFilter,
     changeUpperFilter,
     getFilteredMusicList
-  } = useMusicFilter(musicList())
+  } = useMusicFilter(musicList(), levelLower, levelUpper)
   const {
     whiteList: recordDifficulty,
     changeWhiteList: changeRecordDifficulty,
