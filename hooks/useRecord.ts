@@ -1,56 +1,55 @@
 /// <reference types="./../types/index.d.ts" />
 import { useState, useEffect, useCallback } from "react"
 import { DifficultyValues } from "./useMusic.ts"
+import { apiFactory } from "../api/apiFactory.ts"
+import { useObject } from "../utils/useObject.ts"
+import { useDelayCallback } from "./useDelayCallback.ts"
 
 // custom hook
 export const useRecord = (personId: number) => {
   const [ recordList, setRecordList ] = useState<P_Record.Record<ClearStatusValues>>({})
+  const [ compareList, setCompareList ] = useState<typeof recordList>({})
+  const { diff } = useObject(recordList, compareList)
 
-  useEffect(() =>
-    // TODO: fetch
-    setRecordList({
-       1: [a,a,f,f,f],
-       2: [n,n,f,a,f],
-       3: [a,a,f,f,f],
-       4: [a,a,f,f,f],
-       5: [a,a,a,a,a],
-       6: [a,a,f,f,f],
-       7: [n,a,a,f,f],
-       8: [a,a,a,a,a],
-       9: [a,a,a,f,f],
-      10: [a,a,f,f,f],
-      11: [n,n,f,a,f],
-      12: [n,a,f,f,f],
-      13: [a,a,a,a,f],
-      14: [a,a,a,a,f],
-      15: [a,a,a,a,f],
-      16: [a,a,f,f,f],
-      17: [a,a,f,f,f],
-      18: [a,a,a,a,f],
-      19: [a,a,f,f,c],
-      20: [n,a,n,f,f],
-      21: [a,a,f,f,f],
-      22: [a,a,f,f,f],
-      23: [a,a,a,a,f],
-      24: [a,a,a,a,c],
-      25: [a,a,f,f,c],
-      26: [n,a,f,f,c],
-      27: [a,a,a,f,c],
-      28: [a,a,f,f,c],
-    }
-  ), [])
+  const changeCompareList = (musicId: number, status: ClearStatusValues[]) => {
+    const copyList = { ...compareList }
+    copyList[musicId] = status
+    setCompareList(copyList)
+  }
+  // auto saving 30 sec after at first record update
+  const { start, stop } = useDelayCallback(DELAY_AUTO_SAVE, () => {alert('auto save')})
 
+  // const callback = async () => {
+  //   const result = await apiFactory.get("record").registRecord(personId, 1, [])
+  //   changeCompareList(1, result)
+  // }
+  // const { start, stop } = useDelayCallback(DELAY_AUTO_SAVE, (async () => await callback()))
+
+  // [first time]
+  useEffect(() => {
+    (async () => {
+      const list = await apiFactory.get("record").getMyRecord(personId)
+      setRecordList(list)
+      setCompareList(list)
+    })()
+  }, [])
+
+  // auto saving
+  useEffect(() => diff() ? start() : stop(), [diff])
+
+  // select one music record
   const getMusicRecord = useCallback((musicId: number) => recordList[musicId] ?? [], [recordList])
 
+  //
   const increment = (musicId: number, difficulty: DifficultyValues) => {
-    const cp = { ...recordList }
-    cp[musicId][difficulty] = next(cp[musicId][difficulty]) as ClearStatusValues
-    setRecordList(cp)
+    const copyList = { ...recordList }
+    copyList[musicId][difficulty] = next(copyList[musicId][difficulty]) as ClearStatusValues
+    setRecordList(copyList)
   }
   const decrement = (musicId: number, difficulty: DifficultyValues) => {
-    const cp = { ...recordList }
-    cp[musicId][difficulty] = prev(cp[musicId][difficulty]) as ClearStatusValues
-    setRecordList(cp)
+    const copyList = { ...recordList }
+    copyList[musicId][difficulty] = prev(copyList[musicId][difficulty]) as ClearStatusValues
+    setRecordList(copyList)
   }
 
   const getIndex = (status: number) => {
@@ -68,6 +67,8 @@ export const useRecord = (personId: number) => {
     decrement
   }
 }
+
+const DELAY_AUTO_SAVE = 10 * 1000
 
 export const ClearStatusList = {
   NOPLAY: 0,
