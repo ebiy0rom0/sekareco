@@ -1,6 +1,6 @@
 import { DifficultyList } from "./../hooks/useMusic.ts"
-import { Range } from "./range.tsx"
-import { Selectbox } from "./selectbox.tsx"
+import { Range } from "./Range.tsx"
+import { Selectbox } from "./Selectbox.tsx"
 
 export const MusicFilter = (props: Props) => {
   return (

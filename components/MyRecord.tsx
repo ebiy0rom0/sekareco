@@ -1,9 +1,9 @@
 import { useState } from "react"
 import { DifficultyValues } from "./../hooks/useMusic.ts"
 import { ClearStatusList, ClearStatusValues } from "../hooks/useRecord.ts"
-import { Toggle } from "./toggle.tsx"
-import { Clear } from "./clear.tsx"
-import { Difficulty } from "./difficulty.tsx"
+import { Toggle } from "./Toggle.tsx"
+import { Clear } from "./Clear.tsx"
+import { Difficulty } from "./Difficulty.tsx"
 import { Music } from "./music.tsx"
 
 export const MyRecord = (props: Props) => {
