@@ -1,6 +1,6 @@
 /// <reference types="./../types/index.d.ts" />
 import { useState, useEffect, useCallback } from "react"
-import { DifficultyValues } from "./useMusic.ts"
+import { DifficultyList, DifficultyValues } from "./useMusic.ts"
 import { apiFactory } from "../api/apiFactory.ts"
 import { useObjectCompare } from "../utils/useObjectCompare.ts"
 import { useDelayCallback } from "./useDelayCallback.ts"
@@ -43,11 +43,17 @@ export const useRecord = (personId: number) => {
   //
   const increment = (musicId: number, difficulty: DifficultyValues) => {
     const copyList = { ...recordList }
+    if (copyList[musicId] === undefined) {
+      copyList[musicId] = new Array(Object.keys(DifficultyList).length).fill(ClearStatusList.NOPLAY)
+    }
     copyList[musicId][difficulty] = next(copyList[musicId][difficulty]) as ClearStatusValues
     setRecordList(copyList)
   }
   const decrement = (musicId: number, difficulty: DifficultyValues) => {
     const copyList = { ...recordList }
+    if (copyList[musicId] === undefined) {
+      copyList[musicId] = new Array(Object.keys(DifficultyList).length).fill(ClearStatusList.NOPLAY)
+    }
     copyList[musicId][difficulty] = prev(copyList[musicId][difficulty]) as ClearStatusValues
     setRecordList(copyList)
   }
