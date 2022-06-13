@@ -2,14 +2,14 @@
 import { useState, useEffect, useCallback } from "react"
 import { DifficultyValues } from "./useMusic.ts"
 import { apiFactory } from "../api/apiFactory.ts"
-import { useObject } from "../utils/useObject.ts"
+import { useObjectCompare } from "../utils/useObjectCompare.ts"
 import { useDelayCallback } from "./useDelayCallback.ts"
 
 // custom hook
 export const useRecord = (personId: number) => {
   const [ recordList, setRecordList ] = useState<P_Record.Record<ClearStatusValues>>({})
   const [ compareList, setCompareList ] = useState<typeof recordList>({})
-  const { diff } = useObject(recordList, compareList)
+  const { difference } = useObjectCompare(recordList, compareList)
 
   const changeCompareList = (musicId: number, status: ClearStatusValues[]) => {
     const copyList = { ...compareList }
@@ -19,11 +19,11 @@ export const useRecord = (personId: number) => {
   // auto saving 30 sec after at first record update
   const { start, stop } = useDelayCallback(DELAY_AUTO_SAVE, () => {alert('auto save')})
 
-  // const callback = async () => {
+  // const autoSaving = async () => {
   //   const result = await apiFactory.get("record").registRecord(personId, 1, [])
   //   changeCompareList(1, result)
   // }
-  // const { start, stop } = useDelayCallback(DELAY_AUTO_SAVE, (async () => await callback()))
+  // const { start, stop } = useDelayCallback(DELAY_AUTO_SAVE, (async () => await autoSaving()))
 
   // [first time]
   useEffect(() => {
@@ -35,7 +35,7 @@ export const useRecord = (personId: number) => {
   }, [])
 
   // auto saving
-  useEffect(() => diff() ? start() : stop(), [diff])
+  useEffect(() => difference() ? start() : stop(), [difference])
 
   // select one music record
   const getMusicRecord = useCallback((musicId: number) => recordList[musicId] ?? [], [recordList])
