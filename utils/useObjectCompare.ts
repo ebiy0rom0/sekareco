@@ -20,11 +20,11 @@ export const useObjectCompare = (obj1: Record<string, unknown>, obj2: Record<str
       } else if (typeof val === "object") {
         // case: object
         return compare(val as Record<string, unknown>, obj2[key] as Record<string, unknown>)
-
-      } else {
-        // case: primitive
-        return val === obj2[key]
       }
+
+      // case: primitive
+      return val === obj2[key]
+
     }).some(b => !b)  // if even once difference return `true`
   }
 
