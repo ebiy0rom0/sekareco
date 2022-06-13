@@ -1,13 +1,19 @@
 import { useState } from "react"
-import { DifficultyValues } from "./../hooks/useMusic.ts"
+import { DifficultyList, DifficultyValues } from "./../hooks/useMusic.ts"
 import { ClearStatusList, ClearStatusValues } from "../hooks/useRecord.ts"
 import { Toggle } from "./Toggle.tsx"
 import { Clear } from "./Clear.tsx"
 import { Difficulty } from "./Difficulty.tsx"
-import { Music } from "./music.tsx"
+import { Music } from "./Music.tsx"
 
 export const MyRecord = (props: Props) => {
-  const [ isHover, setHover ] = useState(false)
+  const [ isHovers, setHovers ] = useState(new Array<boolean>(Object.keys(DifficultyList).length).fill(false))
+  const changeMyHoverState = (difficulty: DifficultyValues, isHover: boolean) => {
+    const copyHovers = [...isHovers]
+    copyHovers[difficulty] = isHover
+    setHovers(copyHovers)
+  }
+
   return (
     <div className="flex border-b bg-slate-700/80 border-slate-500 hover:bg-slate-600/80 mt-1.5">
       <div className="music__master flex-none w-68 border-r">
@@ -25,25 +31,27 @@ export const MyRecord = (props: Props) => {
         </div>
         <div
           className="record grid grid-cols-5 gap-x-6 mt-1 justify-items-center"
-          onMouseEnter={ () => setHover(true) }
-          onMouseLeave={ () => setHover(false) }
         >
-          { Object.values(props.filter).map(v => isHover ? (
-            <Toggle
-              key={ v.toString() }
-              increment={ () => props.increment(v as ClearStatusValues) }
-              decrement={ () => props.decrement(v as ClearStatusValues) }
-            >
+          { Object.values(props.filter).map(v => isHovers[v] ? (
+            <div onMouseLeave={ () => changeMyHoverState(v, false) }>
+              <Toggle
+                key={ v.toString() }
+                increment={ () => props.increment(v as ClearStatusValues) }
+                decrement={ () => props.decrement(v as ClearStatusValues) }
+                >
+                <Clear
+                  key={ v.toString() }
+                  status={ props.result[v] ?? ClearStatusList.NOPLAY }
+                />
+              </Toggle>
+            </div>
+          ) : (
+            <div className="w-full text-center" onMouseEnter={ () => changeMyHoverState(v, true) }>
               <Clear
                 key={ v.toString() }
                 status={ props.result[v] ?? ClearStatusList.NOPLAY }
               />
-            </Toggle>
-          ) : (
-            <Clear
-              key={ v.toString() }
-              status={ props.result[v] ?? ClearStatusList.NOPLAY }
-            />
+            </div>
           ))}
         </div>
       </div>
