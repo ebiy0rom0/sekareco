@@ -2,8 +2,11 @@ import { Head } from "aleph/react"
 import { Header } from "../components/Header.tsx"
 import { Footer } from "../components/Footer.tsx"
 import { Navigation } from "../components/Navigation.tsx"
+import { useLogin } from "./../hooks/useLogin.ts"
 
 const App: React.FC<Props> = props => {
+  const { isLogin } = useLogin()
+
   return (
     <div className="min-h-screen bg-slate-800 text-slate-400">
       <Head>
@@ -15,7 +18,7 @@ const App: React.FC<Props> = props => {
         </div>
       </div>
       <div className="max-w-[100em] mx-auto py-8">
-        <Navigation className="w-[13em] h-full fixed justify-items-center border-r-2 border-slate-400/20 ml-5" />
+        { isLogin() && <Navigation className="w-[13em] h-full fixed justify-items-center border-r-2 border-slate-400/20 ml-5" /> }
         <div className="ml-5 pl-[13em] grid w-auto justify-center">
           { props.children }
           <div className="w-full border-t mx-10 my-3 mx-auto">
