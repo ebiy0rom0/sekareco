@@ -1,5 +1,8 @@
 import { Link } from "aleph/react"
+import { Input } from "../components/Input.tsx"
 import { apiFactory } from "../api/apiFactory.ts"
+import { useInput } from "../hooks/useInput.ts"
+import { Tab } from "../components/Tab.tsx"
 import { useLog } from "../hooks/useLog.tsx"
 import { useDelayCallback } from "../hooks/useDelayCallback.ts"
 
@@ -15,11 +18,16 @@ const linkIcon = (
 const Index: React.FC = () => {
   const { setLog, renderLog } = useLog()
   const { start, stop } = useDelayCallback(10000, () => alert("test"))
+  const { value: loginID, handle: handleLoginID } = useInput()
   return (
     <div className="flex flex-row">
-      <p className="logo">
-        <img src="/assets/logo.svg" height="75" title="Aleph.js" />
-      </p>
+      <Tab tabs={
+        [
+          {title: "sign in", key:"sign-in", content: (<>sign in</>)},
+          {title: "sign up", key:"sign-up", content: (<>sign up</>)},
+        ]
+      } />
+      <Input labelName="login ID" type="text" onChange={ handleLoginID } />
       <h1 className="ml-3">
         The Fullstack Framework in Deno.
       </h1>
