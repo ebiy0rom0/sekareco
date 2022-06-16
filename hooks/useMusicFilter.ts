@@ -1,6 +1,6 @@
 /// <reference types="./../types/index.d.ts" />
 import { useState, useEffect } from "react"
-import { useMusic, DifficultyList } from "./useMusic.ts"
+import { DifficultyList } from "./useMusic.ts"
 import { useRange } from "./useRange.ts"
 
 // custom hook
