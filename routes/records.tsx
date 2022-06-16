@@ -1,3 +1,4 @@
+import React from "react"
 import { DifficultyList, DifficultyValues } from "./../hooks/useMusic.ts"
 import { MyRecord } from "../components/MyRecord.tsx"
 import { MusicFilter } from "../components/MusicFilter.tsx"
