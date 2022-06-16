@@ -1,8 +1,10 @@
 import { Link } from "aleph/react"
 import { Input } from "../components/Input.tsx"
+import { SignInForm } from "../components/SignInForm.tsx"
+import { SignUpForm } from "../components/SignUpForm.tsx"
+import { Tab } from "../components/Tab.tsx"
 import { apiFactory } from "../api/apiFactory.ts"
 import { useInput } from "../hooks/useInput.ts"
-import { Tab } from "../components/Tab.tsx"
 import { useLog } from "../hooks/useLog.tsx"
 import { useDelayCallback } from "../hooks/useDelayCallback.ts"
 
@@ -18,50 +20,40 @@ const linkIcon = (
 const Index: React.FC = () => {
   const { setLog, renderLog } = useLog()
   const { start, stop } = useDelayCallback(10000, () => alert("test"))
-  const { value: loginID, handle: handleLoginID } = useInput()
+  const [ loginID, handleLoginID ] = useInput("")
   return (
     <div className="flex flex-row">
-      <Tab tabs={
-        [
-          {title: "sign in", key:"sign-in", content: (<>sign in</>)},
-          {title: "sign up", key:"sign-up", content: (<>sign up</>)},
-        ]
-      } />
-      <Input labelName="login ID" type="text" onChange={ handleLoginID } />
-      <h1 className="ml-3">
-        The Fullstack Framework in Deno.
-      </h1>
-      <p>
-        <strong>Aleph.js</strong> gives you the best developer experience for building web applications<br />{" "}
-        with modern toolings.
-      </p>
-      <div className="links">
-        <a href="https://alephjs.org/docs/get-started" target="_blank">
-          Get Started
-          {linkIcon}
-        </a>
-        <a href="https://alephjs.org/docs" target="_blank">
-          Docs
-          {linkIcon}
-        </a>
-        <a href="https://github.com/alephjs/aleph.js" target="_blank">
-          Github
-          {linkIcon}
-        </a>
+      <div className="w-2/6">
+        <Input labelName="login ID" type="text" onChange={ handleLoginID } />
+        <h1 className="ml-3">
+          The Fullstack Framework in Deno.
+        </h1>
+        <p>
+          <strong>Aleph.js</strong> gives you the best developer experience for building web applications<br />{" "}
+          with modern toolings.
+        </p>
+        <nav>
+          <button onClick={async () => setLog(await apiFactory.get("music").getMusicList())}>get music</button>
+          <button onClick={async () => setLog(await apiFactory.get("person").login(1, "hoge"))}>person login</button>
+          <button onClick={async () => setLog(await apiFactory.get("person").registPerson("hoge", "hoge0123", "huga"))}>regist person</button>
+          <button onClick={async () => setLog(await apiFactory.get("person").modifyPersonStatus(1, "piyo", "hoge3210"))}>modify person</button>
+          <button onClick={async () => setLog(await apiFactory.get("record").getMyRecord(1))}>get record</button>
+          <button onClick={async () => setLog(await apiFactory.get("record").registRecord(1, 1, [0]))}>regist record</button>
+          <button onClick={() => start()}>delay test start</button>
+          <button onClick={() => stop()}>delay test stop</button>
+          <Link to="/records">
+            <button onClick={() => console.log("no entry")}>Your Records</button>
+          </Link>
+        </nav>
       </div>
-      <nav>
-        <button onClick={async () => setLog(await apiFactory.get("music").getMusicList())}>get music</button>
-        <button onClick={async () => setLog(await apiFactory.get("person").login(1, "hoge"))}>person login</button>
-        <button onClick={async () => setLog(await apiFactory.get("person").registPerson("hoge", "hoge0123", "huga"))}>regist person</button>
-        <button onClick={async () => setLog(await apiFactory.get("person").modifyPersonStatus(1, "piyo", "hoge3210"))}>modify person</button>
-        <button onClick={async () => setLog(await apiFactory.get("record").getMyRecord(1))}>get record</button>
-        <button onClick={async () => setLog(await apiFactory.get("record").registRecord(1, 1, [0]))}>regist record</button>
-        <button onClick={() => start()}>delay test start</button>
-        <button onClick={() => stop()}>delay test stop</button>
-        <Link to="/records">
-          <button onClick={() => console.log("no entry")}>Your Records</button>
-        </Link>
-      </nav>
+      <div className="border-5 p-7 m-5 rounded-2xl w-full">
+        <Tab tabs={
+          [
+            {title: "sign in", key:"sign-in", content: (<SignInForm />)},
+            {title: "sign up", key:"sign-up", content: (<SignUpForm />)},
+          ]
+        } />
+      </div>
       { renderLog() }
     </div>
   )

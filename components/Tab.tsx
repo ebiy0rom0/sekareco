@@ -8,15 +8,22 @@ export const Tab = React.memo((props: Props) => {
 
   return (
     <>
-      { props.tabs.map(tab => (
-        <div
-          className="tab__title"
-          onClick={ (_: React.MouseEvent<HTMLDivElement>) => setSelectKey(tab.key) }
-        >
-          { tab.title }
-        </div>
-      )) }
-      <div className="tab__content">
+      <nav className="tab flex flex-row gap-x-5">
+        { props.tabs.map(tab => (
+          <div className="grow">
+            <a
+              className={
+                (tab.key === selectKey ? "border-blue-600 text-blue-600 " : "") +
+                "tab__title w-full py-3 inline-block border-b-4 bg-slate-800 text-slate-400 text-2xl text-center hover:text-slate-300"
+              }
+              onClick={ (_: React.MouseEvent<HTMLAnchorElement>) => setSelectKey(tab.key) }
+            >
+              { tab.title }
+            </a>
+          </div>
+        )) }
+      </nav>
+      <div className="tab__content grow mt-5">
         { selectTab()?.content }
       </div>
     </>
