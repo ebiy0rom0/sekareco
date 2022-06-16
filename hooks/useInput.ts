@@ -1,12 +1,12 @@
 import React, { useState } from "react"
 
-export const useInput = () => {
-  const [ value, setValue ] = useState<string>("")
+export const useInput = (defaultValue: string) => {
+  const [ value, setValue ] = useState<string>(defaultValue)
 
   const handle = (e: React.ChangeEvent<HTMLInputElement>) => setValue(e.target.value)
 
-  return {
-    value: () => value,
+  return [
+    () => value,
     handle
-  }
+  ]
 }
