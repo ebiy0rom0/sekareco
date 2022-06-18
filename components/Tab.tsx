@@ -10,7 +10,7 @@ export const Tab = React.memo((props: Props) => {
     <>
       <nav className="tab flex flex-row gap-x-5">
         { props.tabs.map(tab => (
-          <div className="grow">
+          <div className="grow" key={ tab.key }>
             <a
               className={
                 (tab.key === selectKey ? "border-blue-600 text-blue-600 " : "") +
@@ -23,7 +23,7 @@ export const Tab = React.memo((props: Props) => {
           </div>
         )) }
       </nav>
-      <div className="tab__content grow mt-5">
+      <div className="tab__content grow mt-2 p-5">
         { selectTab()?.content }
       </div>
     </>
