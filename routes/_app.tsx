@@ -18,10 +18,26 @@ const App: React.FC<Props> = props => {
         </div>
       </div>
       <div className="max-w-[100em] mx-auto py-8">
-        { isLogin() && <Navigation className="w-[13em] h-full fixed justify-items-center border-r-2 border-slate-400/20 ml-5" /> }
-        <div className="ml-5 pl-[13em] grid w-auto justify-center">
+        <Navigation
+          className="
+            fixed
+            box-border
+            w-[13em]
+            min-h-screen
+            px-6 py-5
+            justify-center
+            border-r-2 border-slate-400/20
+          "
+        />
+        <div className="ml-5 pl-[13em] flex flex-col items-center">
           { props.children }
-          <div className="w-full border-t mx-10 my-3 mx-auto">
+          <div
+            className="
+              border-t border-slate-300/20
+              mt-10 pt-15 pb-7
+              w-full
+            "
+          >
             <Footer />
           </div>
         </div>
