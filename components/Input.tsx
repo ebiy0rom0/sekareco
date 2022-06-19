@@ -5,12 +5,28 @@ export const Input = (props: Props) => (
     <strong>{ props.labelName }</strong>
     <input
       id={ props.id }
-      className="block box-border mt-2 py-2 px-3 w-full rounded-lg border-slate-200 focus:outline-sky-500/80"
+      className="
+        block box-border
+        text-lg
+        w-full
+        mt-1 py-1 px-3
+        rounded-lg shadow-sm
+        bg-slate-800
+        border border-slate-400
+        focus:outline-none
+        focus:bg-slate-700
+        focus:border-sky-500
+        focus:ring-1 focus:ring-sky-300/90
+        peer
+      "
       type={ props.type }
       value={ props?.value }
       onChange={ props.onChange }
       placeholder={ props?.placeholder }
     />
+    <p className="mt-2 invisible peer-required:visible text-red-500">
+      { props?.invalidText }
+    </p>
   </label>
 )
 
@@ -22,4 +38,5 @@ type Props = {
   className?: string
   value?: string
   placeholder?: string
+  invalidText?: string
 }

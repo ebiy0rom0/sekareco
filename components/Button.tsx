@@ -1,7 +1,15 @@
 
 export const Button = (props: Props) => (
   <button
-    className={ ["py-3 px-4 border-none rounded font-bold", props?.className].join(" ") }
+    className={ [
+      "text-lg",
+      "font-bold",
+      "py-2",
+      "px-4",
+      "border-none",
+      "rounded",
+      props?.className
+    ].join(" ") }
     onClick={ props?.onClick }
   >
     { props.children }
