@@ -36,7 +36,7 @@ const Records: React.FC = () => {
   } = useRecordFilter(DifficultyList)
 
   return (
-    <div className="list flex-col">
+    <div className="list flex flex-col w-3/4">
       <h2 className="list__head">
         <span>Player Records</span>
       </h2>
@@ -62,7 +62,7 @@ const Records: React.FC = () => {
           isChecked={ isFiltered }
         />
       </div>
-      <div className="list__items w-fit mt-4">
+      <div className="list__items mt-4">
         { getFilteredMusicList().map(m => (
           <MyRecord
             key={m.id.toString()}
