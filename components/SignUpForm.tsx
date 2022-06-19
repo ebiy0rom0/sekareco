@@ -14,7 +14,6 @@ export const SignUpForm = () => {
         labelName="login ID"
         type="text"
         onChange={ setLoginID }
-        placeholder="please input"
       />
       <Input
         id="password"

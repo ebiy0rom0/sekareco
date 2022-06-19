@@ -14,7 +14,6 @@ export const SignInForm = () => {
         labelName="login ID"
         type="text"
         onChange={ setLoginID }
-        placeholder="please input"
       />
       <Input
         id="password"
@@ -22,6 +21,7 @@ export const SignInForm = () => {
         type="password"
         onChange={ setPassword }
       />
+      <p className="text-right m-0">Forgot password?</p>
       <Link to="/records" className="mt-3">
         <Button
           className="
@@ -29,6 +29,9 @@ export const SignInForm = () => {
             text-white-200
             bg-blue-600
             hover:bg-blue-700
+            active:bg-blue-800
+            focus:ring-2
+            focus:ring-blue-500
           "
         >
           sign in
