@@ -8,11 +8,13 @@ export const Input = (props: Props) => (
       className="
         block box-border
         text-lg
+        text-slate-300/80
         w-full
         mt-1 py-1 px-3
         rounded-lg shadow-sm
         bg-slate-800
-        border border-slate-400
+        placeholder-gray-200/40
+        border border-slate-500
         focus:outline-none
         focus:bg-slate-700
         focus:border-sky-500
