@@ -8,13 +8,24 @@ export const Tab = React.memo((props: Props) => {
 
   return (
     <>
-      <nav className="tab flex flex-row gap-x-5">
+      <nav className="tab flex flex-row gap-x-5 pb-5 px-5 border-b-3">
         { props.tabs.map(tab => (
           <div className="grow" key={ tab.key }>
             <a
-              className={
-                (tab.key === selectKey ? "border-blue-600 text-blue-600 " : "") +
-                "tab__title w-full py-3 inline-block border-b-4 bg-slate-800 text-slate-400 text-2xl text-center hover:text-slate-300"
+              className={ [
+                (tab.key === selectKey ? "text-violet-500" : "text-slate-400"),
+                (tab.key === selectKey ? "hover:text-violet-400" : "hover:text-slate-300"),
+                (tab.key === selectKey && "border-b-2"),
+                (tab.key === selectKey ? "border-violet-500" : "border-slate-400"),
+                "tab__title",
+                "inline-block",
+                "text-center",
+                "text-2xl",
+                "font-bold",
+                "w-full",
+                "py-2",
+                "bg-slate-800"
+              ].join(" ")
               }
               onClick={ (_: React.MouseEvent<HTMLAnchorElement>) => setSelectKey(tab.key) }
             >
@@ -23,7 +34,7 @@ export const Tab = React.memo((props: Props) => {
           </div>
         )) }
       </nav>
-      <div className="tab__content grow mt-2 p-5">
+      <div className="tab__content grow mt-7 p-5">
         { selectTab()?.content }
       </div>
     </>
