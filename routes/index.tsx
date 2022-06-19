@@ -2,17 +2,15 @@ import { Link } from "aleph/react"
 import { SignInForm } from "../components/SignInForm.tsx"
 import { SignUpForm } from "../components/SignUpForm.tsx"
 import { Tab } from "../components/Tab.tsx"
-import { apiFactory } from "../api/apiFactory.ts"
-import { useInput } from "../hooks/useInput.ts"
+import { GithubIcon } from "../components/GithubIcon.tsx"
 import { useLog } from "../hooks/useLog.tsx"
-import { useDelayCallback } from "../hooks/useDelayCallback.ts"
 
 const Index: React.FC = () => {
   const { setLog, renderLog } = useLog()
 
   return (
-    <div className="flex flex-row min-h-[75vh] w-4/5 justify-center place-items-center">
-      <div className="flex-1">
+    <div className="flex min-h-[83vh] w-4/5 justify-evenly place-items-center">
+      <div>
         <div className="flex gap-x-4">
           { "プロセカの".split("").map(s => (
             <h1><span className="text-6xl">{ s }</span></h1>
@@ -26,8 +24,12 @@ const Index: React.FC = () => {
         <p>
           記録残せるよ
         </p>
+        <img className="bg-slate-400 w-[384px] h-[256px] rounded-lg" />
+        <div className="flex flex-row-reverse mt-5">
+          <GithubIcon />
+        </div>
       </div>
-      <div className="border-4 p-6 m-5 rounded-2xl flex-1 bg-slate-800/90">
+      <div className="border-4 p-7 m-5 rounded-2xl min-w-[23.0rem] bg-slate-800/90">
         <Tab tabs={
           [
             {title: "sign in", key:"sign-in", content: (<SignInForm />)},
