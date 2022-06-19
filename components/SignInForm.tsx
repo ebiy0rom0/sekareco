@@ -11,9 +11,10 @@ export const SignInForm = () => {
     <div className="flex flex-col gap-y-7">
       <Input
         id="loginId"
-        labelName="login id"
+        labelName="login ID"
         type="text"
         onChange={ setLoginID }
+        placeholder="please input"
       />
       <Input
         id="password"
@@ -21,8 +22,17 @@ export const SignInForm = () => {
         type="password"
         onChange={ setPassword }
       />
-      <Link to="/records">
-        <Button className="text-white-200 bg-blue-600 hover:bg-blue-400">sign in</Button>
+      <Link to="/records" className="mt-3">
+        <Button
+          className="
+            w-full
+            text-white-200
+            bg-blue-600
+            hover:bg-blue-700
+          "
+        >
+          sign in
+        </Button>
       </Link>
     </div>
   )
