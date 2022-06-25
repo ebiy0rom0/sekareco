@@ -9,16 +9,16 @@ const Index: React.FC = () => {
   const { setLog, renderLog } = useLog()
 
   return (
-    <div className="flex min-h-[83vh] w-4/5 justify-evenly place-items-center">
+    <div className="flex min-h-[83vh] w-4/5 justify-around place-items-center">
       <div>
         <div className="flex gap-x-4">
-          { "プロセカの".split("").map(s => (
-            <h1><span className="text-6xl">{ s }</span></h1>
+          { "プロセカの".split("").map((s, i) => (
+            <h1><span className={ "text-6xl" + (i == 0 ? " text-cyan-400" : " text-slate-300") }>{ s }</span></h1>
           )) }
         </div>
-        <div className="flex gap-x-4">
-          { "記録帳".split("").map(s => (
-            <h1><span className="text-6xl">{ s }</span></h1>
+        <div className="flex gap-x-4 flex-row-reverse pr-10">
+          { "記録帳".split("").reverse().map((s, i) => (
+            <h1><span className={ "text-6xl" + (i == 2 ? " text-pink-500/90" : " text-slate-300") }>{ s }</span></h1>
           )) }
         </div>
         <p>
@@ -29,7 +29,7 @@ const Index: React.FC = () => {
           <GithubIcon />
         </div>
       </div>
-      <div className="border-4 p-7 m-5 rounded-2xl min-w-[23.0rem] bg-slate-800/90">
+      <div className="p-7 m-5 rounded-2xl min-w-[23.0rem]">
         <Tab tabs={
           [
             {title: "sign in", key:"sign-in", content: (<SignInForm />)},
