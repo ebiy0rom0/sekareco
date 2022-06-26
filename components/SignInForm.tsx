@@ -8,7 +8,7 @@ export const SignInForm = () => {
   const [ _password, setPassword ] = useInput("")
 
   return (
-    <div className="flex flex-col gap-y-7">
+    <form className="flex flex-col gap-y-7">
       <Input
         id="loginId"
         labelName="login ID"
@@ -37,6 +37,6 @@ export const SignInForm = () => {
           sign in
         </Button>
       </Link>
-    </div>
+    </form>
   )
 }
