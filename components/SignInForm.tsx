@@ -2,10 +2,11 @@ import { Link } from "aleph/react"
 import { Button } from "../components/Button.tsx"
 import { useInput } from "../hooks/useInput.ts"
 import { Input } from "./Input.tsx"
+import { apiFactory } from "../api/apiFactory.ts"
 
 export const SignInForm = () => {
-  const [ _loginID, setLoginID ] = useInput("")
-  const [ _password, setPassword ] = useInput("")
+  const [ loginID, setLoginID ] = useInput("")
+  const [ password, setPassword ] = useInput("")
 
   return (
     <form className="flex flex-col gap-y-7">
@@ -22,20 +23,8 @@ export const SignInForm = () => {
         onChange={ setPassword }
       />
       <p className="text-right m-0">Forgot password?</p>
-      <Link to="/records" className="mt-3">
-        <Button
-          className="
-            w-full
-            text-white-200
-            bg-blue-600
-            hover:bg-blue-700
-            active:bg-blue-800
-            focus:ring-2
-            focus:ring-blue-500
-          "
-        >
-          sign in
-        </Button>
+      <Link to="/records" className="mt-3" onClick={ async () => await apiFactory.get("person").login(loginID(), password()) }>
+        {'sign in'}
       </Link>
     </form>
   )

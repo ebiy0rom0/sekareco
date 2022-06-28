@@ -1,11 +1,12 @@
 import { useInput } from "../hooks/useInput.ts"
-import { Link } from "aleph/react"
 import { Input } from "./Input.tsx"
 import { Button } from "../components/Button.tsx"
+import { apiFactory } from "../api/apiFactory.ts"
 
 export const SignUpForm = () => {
-  const [ _loginID, setLoginID ] = useInput("")
-  const [ _password, setPassword ] = useInput("")
+  const [ loginID, setLoginID ] = useInput("")
+  const [ password, setPassword ] = useInput("")
+  const [ personName, setPersonName ] = useInput("")
 
   return (
     <div className="flex flex-col gap-y-7">
@@ -16,23 +17,28 @@ export const SignUpForm = () => {
         onChange={ setLoginID }
       />
       <Input
+        id="name"
+        labelName="person name"
+        type="text"
+        onChange={ setPersonName }
+      />
+      <Input
         id="password"
         labelName="password"
         type="password"
         onChange={ setPassword }
       />
-      <Link to="/records" className="mt-3">
-        <Button
-          className="
-            w-full
-            text-white-200
-            bg-blue-600
-            hover:bg-blue-700
-          "
-        >
-          sign up
-        </Button>
-      </Link>
+      <Button
+        className="
+          w-full
+          text-white-200
+          bg-blue-600
+          hover:bg-blue-700
+        "
+        onClick={ async () => await apiFactory.get("person").registPerson(loginID(), password(), personName()) }
+      >
+        sign up
+      </Button>
     </div>
   )
 }
