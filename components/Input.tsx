@@ -6,7 +6,6 @@ export const Input = (props: Props) => (
     { ({ darkMode }) => (
       <label htmlFor={ props.id } className={ props?.className }>
         <strong>{ props.labelName }</strong>
-        <p>{ String(darkMode) }</p>
         <input
           id={ props.id }
           className={ [
@@ -28,7 +27,7 @@ export const Input = (props: Props) => (
           type={ props.type }
           value={ props?.value }
           onChange={ props.onChange }
-          placeholder={ String(darkMode) }
+          placeholder={ props?.placeholder }
         />
         <p className="mt-2 invisible peer-required:visible text-red-500">
           { props?.invalidText }
