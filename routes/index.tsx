@@ -41,12 +41,7 @@ const Index: React.FC = () => {
             </div>
           </div>
           <div className="p-7 m-5 rounded-2xl min-w-[23.0rem]">
-            <Tab tabs={
-              [
-                {title: "sign in", key:"sign-in", content: (<SignInForm />)},
-                {title: "sign up", key:"sign-up", content: (<SignUpForm />)},
-              ]
-            } />
+            <SignUpForm />
           </div>
           { renderLog() }
         </div>

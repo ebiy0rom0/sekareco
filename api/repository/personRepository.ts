@@ -1,10 +1,10 @@
 import { apiHandler } from "../handler/apiHandler.ts"
 
 export const personRepository = {
-  login: async (personId: number, password: string) => {
+  login: async (loginID: string, password: string) => {
     const json = await apiHandler.post(`person/auth/`, {
       json: {
-        person_id: personId,
+        person_id: loginID,
         password: password
       }
     }).json<string>()
@@ -12,10 +12,10 @@ export const personRepository = {
 
     return json
   },
-  registPerson: async (loginId: string, password: string, name: string) => {
+  registPerson: async (loginID: string, name: string, password: string) => {
     const json = await apiHandler.post("person/", {
       json: {
-        login_id: loginId,
+        login_id: loginID,
         password: password,
         person_name: name
       }
@@ -24,8 +24,8 @@ export const personRepository = {
 
     return json
   },
-  modifyPersonStatus: async (personId: number, name?: string, password?: string) => {
-    const json = await apiHandler.put(`person/${personId}/`, {
+  modifyPersonStatus: async (personID: number, name?: string, password?: string) => {
+    const json = await apiHandler.put(`person/${personID}/`, {
       json: {
         person_name: name,
         password: password
