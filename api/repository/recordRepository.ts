@@ -1,10 +1,12 @@
 /// <reference types="./../../types/index.d.ts" />
 import { ClearStatusValues } from "./../../hooks/useRecord.ts"
-import { apiHandler } from "../handler/apiHandler.ts"
+import { authedHandler } from "../handler/apiHandler.ts"
 
 export const recordRepository = {
   getMyRecord: async (personId: number) => {
-    const json = await apiHandler.get(`record/${personId}/`)
+    if (authedHandler === undefined) return
+
+    const json = await authedHandler.get(`record/${personId}/`)
       .json<P_Record.Record<ClearStatusValues>>()
       .catch<P_Record.Record<ClearStatusValues>>(e => {
         // TODO: display common error view
@@ -16,7 +18,9 @@ export const recordRepository = {
   },
 
   registRecord: async (personId: number, musicId: number, record: number[]) => {
-    const json = await apiHandler.post(`record/${personId}/${musicId}/`, {
+    if (authedHandler === undefined) return
+
+    const json = await authedHandler.post(`record/${personId}/${musicId}/`, {
       json: {
         record: record[0]
       }
