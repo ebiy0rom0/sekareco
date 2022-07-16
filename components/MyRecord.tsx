@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { DifficultyList, DifficultyValues } from "./../hooks/useMusic.ts"
 import { ClearStatusList, ClearStatusValues } from "../hooks/useRecord.ts"
-import { Toggle } from "./Toggle.tsx"
+import { Barrel } from "./Barrel.tsx"
 import { Clear } from "./Clear.tsx"
 import { Difficulty } from "./Difficulty.tsx"
 import { Music } from "./Music.tsx"
@@ -34,7 +34,7 @@ export const MyRecord = (props: Props) => {
         >
           { Object.values(props.filter).map(v => isHovers[v] ? (
             <div onMouseLeave={ () => changeMyHoverState(v, false) }>
-              <Toggle
+              <Barrel
                 key={ v.toString() }
                 increment={ () => props.increment(v as ClearStatusValues) }
                 decrement={ () => props.decrement(v as ClearStatusValues) }
@@ -43,7 +43,7 @@ export const MyRecord = (props: Props) => {
                   key={ v.toString() }
                   status={ props.result[v] ?? ClearStatusList.NOPLAY }
                 />
-              </Toggle>
+              </Barrel>
             </div>
           ) : (
             <div className="w-full text-center" onMouseEnter={ () => changeMyHoverState(v, true) }>
