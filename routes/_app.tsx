@@ -17,7 +17,7 @@ const MyApp: React.FC<Props> = props => {
             <Head>
               <title>プロセカの記録帳</title>
             </Head>
-            <div className={ (darkMode ? "bg-slate-800 text-slate-400" : "bg-slate-200 text-slate-800") + " min-h-screen" }>
+            <div className={ (darkMode ? "bg-slate-800 text-slate-400" : "bg-slate-100 text-slate-800") + " min-h-screen" }>
               { true ? (
                 <div className="max-w-[100em] mx-auto py-8 flex flex-col items-center">
                   { props.children }
