@@ -13,15 +13,15 @@ export const Input = (props: Props) => (
             "text-lg",
             "text-slate-300/80",
             "w-full",
-            "mt-1 py-1 px-3",
-            "rounded-lg shadow-sm",
+            "mt-2 py-1 px-3",
+            "rounded-lg shadow-sm border-none",
             darkMode ? "bg-slate-800" : "bg-slate-300",
             "placeholder-gray-900/40",
-            darkMode ? "border border-slate-500" : "border border-slate-100",
+            darkMode ? "ring-1 ring-slate-500" : "ring-1 ring-slate-400",
             "focus:outline-none",
-            darkMode ? "focus:bg-slate-700" : "focus:bg-slate-200",
-            "focus:border-sky-500",
-            "focus:ring-1 focus:ring-sky-300/90",
+            darkMode ? "focus:bg-slate-800/90" : "focus:bg-slate-200",
+            "focus:caret-sky-500",
+            "focus:ring-3 focus:ring-sky-500",
             "peer"
           ].join(" ") }
           type={ props.type }
