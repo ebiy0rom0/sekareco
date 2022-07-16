@@ -1,7 +1,10 @@
+import styles from "./../style/app.css"
 
 export const Toggle = (props: Props) => (
-  <div className={ "grid gap-x-3 w-[40px] h-[25px] bg-red-300 rounded-full " + (props.mode ? "justify-items-start" : "justify-items-end") } onClick={ props.role }>
-    <div className="rounded-full bg-slate-700 w-[25px]">
+  <div className={ "grid gap-x-3 w-[45px] h-[25px] bg-red-300 rounded-full " + (props.mode ? "justify-items-start" : "justify-items-end") } onClick={ props.role }>
+    <div
+      className={ "grid place-items-center rounded-full bg-slate-700 w-[25px] scale-110 ring-2 " + (props.mode ? "bg-white toggle-on" : "bg-slate-900 toggle-off") }
+    >
       <Styles style={ props.style } mode={ props.mode } />
     </div>
   </div>
@@ -28,9 +31,11 @@ const DefaultButton = (props: {mode: boolean}) => (
 )
 
 const DisplayModeButton = (props: {mode: boolean}) => (
-  <>
-    { props.mode ? "" : "" }
-  </>
+  <img
+    src={ props.mode ? "/assets/m_light.svg" : "/assets/m_dark.svg" }
+    height="17"
+    className={ props.mode ? "" : "invert" }
+  />
 )
 
 type Props = {

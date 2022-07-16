@@ -2,3 +2,35 @@
 html, body, #root, #root>div {
   margin: 0;
 }
+
+@keyframes toggle-on {
+  0% {
+    transform: translateX(25px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
+}
+
+@keyframes toggle-off {
+  0% {
+    transform: translateX(-25px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
+}
+
+.toggle-on {
+  animation-name: toggle-on;
+  animation-duration: .5s;
+  animation-timing-function: ease;
+  animation-iteration-count: 1;
+}
+
+.toggle-off {
+  animation-name: toggle-off;
+  animation-duration: .5s;
+  animation-timing-function: ease;
+  animation-iteration-count: 1;
+}
