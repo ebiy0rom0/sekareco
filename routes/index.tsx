@@ -1,12 +1,15 @@
+import { useState } from "react"
 import { ThemeCtx } from "../hooks/useTheme.tsx"
 import { SignInForm } from "../components/SignInForm.tsx"
 import { SignUpForm } from "../components/SignUpForm.tsx"
 import { Tab } from "../components/Tab.tsx"
+import { Toggle, ToggleStyle } from "../components/Toggle.tsx"
 import { GithubIcon } from "../components/GithubIcon.tsx"
 import { useLog } from "../hooks/useLog.tsx"
 
 const Index: React.FC = () => {
   const { setLog, renderLog } = useLog()
+  const [ mode, setMode ] = useState<boolean>(true)
 
   return (
     <ThemeCtx.Consumer>
@@ -31,13 +34,10 @@ const Index: React.FC = () => {
                 </h1>
               )) }
             </div>
-            <p>
-              記録残せるよ
-              <button onClick={ () => switchMode() }>{ darkMode ? 'light' : 'dark' }</button>
-            </p>
             <img className="bg-slate-400 w-[384px] h-[256px] rounded-lg" />
-            <div className="flex flex-row-reverse mt-5">
+            <div className="flex flex-row-reverse mt-5 gap-x-5">
               <GithubIcon />
+              <Toggle mode={!darkMode} style={ToggleStyle.STYLE_DP_MODE } role={ switchMode } />
             </div>
           </div>
           <div className="p-7 m-5 rounded-2xl min-w-[23.0rem]">

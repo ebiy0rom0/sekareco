@@ -1,18 +1,45 @@
 
 export const Toggle = (props: Props) => (
-  <div className="flex gap-x-3">
-    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" onClick={ () => props.decrement() }>
-      <polyline points="10,0 0,10 10,20 10,15 5,10 10,5" className="fill-pink-500/50" />
-    </svg>
-    { props.children }
-    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" onClick={ () => props.increment() }>
-      <polyline points="10,0 20,10 10,20 10,15 15,10 10,5" className="fill-pink-500/50" />
-    </svg>
+  <div className={ "grid gap-x-3 w-[40px] h-[25px] bg-red-300 rounded-full " + (props.mode ? "justify-items-start" : "justify-items-end") } onClick={ props.role }>
+    <div className="rounded-full bg-slate-700 w-[25px]">
+      <Styles style={ props.style } mode={ props.mode } />
+    </div>
   </div>
 )
 
-type Props = {
-  children: React.ReactNode
-  increment: () => void
-  decrement: () => void
+const test: React.FC<Animation> = () => (
+  <></>
+)
+
+const Styles = (props: {
+  style: typeof ToggleStyle[keyof typeof ToggleStyle]
+  mode: boolean
+}) => {
+  switch (props.style) {
+    case ToggleStyle.STYLE_NONE:
+      return (<DefaultButton mode={ props.mode } />)
+    case ToggleStyle.STYLE_DP_MODE:
+        return  (<DisplayModeButton mode={ props.mode } />)
+  }
 }
+
+const DefaultButton = (props: {mode: boolean}) => (
+  <>{ props.mode ? "true" : "false" }</>
+)
+
+const DisplayModeButton = (props: {mode: boolean}) => (
+  <>
+    { props.mode ? "" : "" }
+  </>
+)
+
+type Props = {
+  style: typeof ToggleStyle[keyof typeof ToggleStyle]
+  mode: boolean
+  role: () => void
+}
+
+export const ToggleStyle = {
+  STYLE_NONE: 1,
+  STYLE_DP_MODE: 2,
+} as const
