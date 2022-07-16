@@ -1,4 +1,8 @@
 
+body {
+  font-family: 'メイリオ', Meiryo,'Meiryo UI','ヒラギノ角ゴシック','Hiragino Sans','Hiragino Kaku Gothic ProN','ヒラギノ角ゴ ProN W3','Yu Gothic UI','TsukuARdGothic-Regular',YuGothic,'Yu Gothic','Helvetica','Helvetica Neue',sans-serif;
+}
+
 html, body, #root, #root>div {
   margin: 0;
 }
