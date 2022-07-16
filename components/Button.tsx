@@ -7,10 +7,11 @@ export const Button = (props: Props) => (
       "py-2",
       "px-4",
       "border-none",
-      "rounded",
-      props?.className
+      "rounded-lg",
+      props?.className,
     ].join(" ") }
     onClick={ props?.onClick }
+    disabled={ props.wait }
   >
     { props.children }
   </button>
@@ -18,6 +19,7 @@ export const Button = (props: Props) => (
 
 type Props = {
   className?: string
-  children: string
+  children: string | React.ReactNode
   onClick?: () => void
+  wait: boolean
 }
