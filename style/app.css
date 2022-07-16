@@ -23,14 +23,14 @@ html, body, #root, #root>div {
 
 .toggle-on {
   animation-name: toggle-on;
-  animation-duration: .5s;
+  animation-duration: .3s;
   animation-timing-function: ease;
   animation-iteration-count: 1;
 }
 
 .toggle-off {
   animation-name: toggle-off;
-  animation-duration: .5s;
+  animation-duration: .3s;
   animation-timing-function: ease;
   animation-iteration-count: 1;
 }
