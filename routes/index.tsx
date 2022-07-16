@@ -37,7 +37,7 @@ const Index: React.FC = () => {
             <img className="bg-slate-400 w-[384px] h-[256px] rounded-lg" />
             <div className="flex flex-row-reverse mt-5 gap-x-9">
               <GithubIcon />
-              <Toggle mode={!darkMode} style={ToggleStyle.STYLE_DP_MODE } role={ switchMode } />
+              <Toggle mode={!darkMode} style={ToggleStyle.THEME } role={ switchMode } />
             </div>
           </div>
           <div className="p-7 m-5 rounded-2xl min-w-[23.0rem]">
