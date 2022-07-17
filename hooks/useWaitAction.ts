@@ -1,16 +1,26 @@
-import { useState } from "react"
+import { useState, useMemo } from "react"
 
-export const useWaitAction = (fn: () => Promise<void>) => {
+export const useWaitAction = <T extends unknown>(fn: () => T) => {
   const [ waiting, setWait ] = useState(false)
 
-  const functionWrapper = async () => {
+  const promiseFunctionWrapper = async (): Promise<T> => {
     setWait(true)
-    await fn()
+    const res = await fn()
     setWait(false)
+    return res
   }
+
+  const functionWrapper = (): T => {
+    setWait(true)
+    const res = fn()
+    setWait(false)
+    return res
+  }
+
+  const isPromise = useMemo<boolean>((): boolean => fn instanceof Promise || typeof (fn() as Promise<T>)?.then === "function", [])
 
   return {
     waiting: () => waiting,
-    fn: functionWrapper
+    fn: isPromise ? promiseFunctionWrapper : functionWrapper
   }
 }
