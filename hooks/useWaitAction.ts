@@ -3,7 +3,7 @@ import { useState, useMemo } from "react"
 export const useWaitAction = <T extends unknown>(fn: () => T) => {
   const [ waiting, setWait ] = useState(false)
 
-  const promiseFunctionWrapper = async (): Promise<T> => {
+  const promiseFunctionWrapper = async (): Promise<Awaited<T>> => {
     setWait(true)
     const res = await fn()
     setWait(false)
@@ -17,10 +17,10 @@ export const useWaitAction = <T extends unknown>(fn: () => T) => {
     return res
   }
 
-  const isPromise = useMemo<boolean>((): boolean => fn instanceof Promise || typeof (fn() as Promise<T>)?.then === "function", [])
+  const isAsync = useMemo<boolean>((): boolean => fn.constructor.name === "AsyncFunction", [])
 
   return {
     waiting: () => waiting,
-    fn: isPromise ? promiseFunctionWrapper : functionWrapper
+    fn: isAsync ? promiseFunctionWrapper : functionWrapper
   }
 }
