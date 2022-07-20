@@ -1,21 +1,22 @@
+import React, { useMemo } from "react"
 import { useInput } from "../hooks/useInput.ts"
 import { useWaitAction } from "../hooks/useWaitAction.ts"
 import { Input } from "./Input.tsx"
 import { Button } from "../components/Button.tsx"
 import { apiFactory } from "../api/apiFactory.ts"
 
-export const SignUpForm = () => {
+export const SignUpForm = React.memo(() => {
   const [ loginID, setLoginID ] = useInput("")
   const [ password, setPassword ] = useInput("")
   const [ personName, setPersonName ] = useInput("")
 
   const {
     waiting,
-    fn: waitTimeout
-  } = useWaitAction(() => new Promise(resolve => setTimeout(resolve, 1000)))
+    fn: waitRegistPerson
+  } = useWaitAction(async () => await apiFactory.get("person").registPerson(loginID(), password(), personName()))
 
   return (
-    <div className="flex flex-col gap-y-7">
+    <form className="flex flex-col gap-y-7">
       <Input
         id="loginId"
         labelName="ログインID"
@@ -49,9 +50,8 @@ export const SignUpForm = () => {
           disabled:cursor-not-allowed
           disabled:opacity-85
         "
-        onClick={ waitTimeout }
+        onClick={ waitRegistPerson as () => Promise<void> }
         wait={ waiting() }
-        // onClick={ async () => await apiFactory.get("person").registPerson(loginID(), password(), personName()) }
       >
          { waiting() ? (
           <>
@@ -63,6 +63,6 @@ export const SignUpForm = () => {
           </>
          ) : "sign up"  }
       </Button>
-    </div>
+    </form>
   )
-}
+})
