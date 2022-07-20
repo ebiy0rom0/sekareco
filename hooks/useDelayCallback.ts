@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react"
 
-export const useDelayCallback = (delay: number, callback: () => void) => {
+export const useDelayCallback = (delay: number, callback: () => void, loop?: boolean) => {
   const [ trigger, setTrigger ] = useState(false)
   const [ id, setId ] = useState(0)
 
@@ -22,6 +22,7 @@ export const useDelayCallback = (delay: number, callback: () => void) => {
       clearTimeout(id)
       setId(0)
     }
+    if (loop && !trigger) start()
   }, [trigger])
 
   return { start, stop }
