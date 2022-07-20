@@ -25,6 +25,28 @@ html, body, #root, #root>div {
   }
 }
 
+@keyframes fade {
+  0% {
+    opacity: 20%;
+    transform: translateX(-20px);
+  }
+  40% {
+    opacity: 100%;
+  }
+  50% {
+    opacity: 100%;
+    transform: translateX(-10px);
+  }
+  60% {
+    opacity: 100%;
+  }
+  100% {
+    opacity: 20%;
+    transform: translateX(0px);
+  }
+}
+
+
 .toggle-on {
   animation-name: toggle-on;
   animation-duration: .3s;
@@ -36,5 +58,12 @@ html, body, #root, #root>div {
   animation-name: toggle-off;
   animation-duration: .3s;
   animation-timing-function: ease;
+  animation-iteration-count: 1;
+}
+
+.fade {
+  animation-name: fade;
+  animation-duration: 3s;
+  animation-timing-function: linear;
   animation-iteration-count: 1;
 }

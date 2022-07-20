@@ -29,4 +29,3 @@ type Theme = {
   darkMode: boolean
   switchMode: () => void
 }
-
