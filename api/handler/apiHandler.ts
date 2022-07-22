@@ -1,25 +1,40 @@
 import ky from "https://cdn.skypack.dev/ky?dts"
 
-export const apiHandler = ky.create({
+// use with not authentication api
+const apiHandler = ky.create({
   prefixUrl: "http://localhost:8000/",
   hooks: {
     beforeRequest: [
       request => {
+        console.log(request.url)
         request.headers.set("Content-Type", "application/json")
       }
     ],
     afterResponse: [
-      async (_request, _options, response) => {
-        if (response.status === 503) {
-          const body = await response.json() as {'error': string}
-          console.log(body.error)
+      (_request, _options, response) => {
+        console.log(response)
+
+        switch (response.status) {
+        case 503:
+          console.log("code: 503")
+          break
+        case 404:
+          console.log("code: 404")
+          break
         }
+      }
+    ],
+    beforeError: [
+      error => {
+        console.log(error)
+        return error
       }
     ]
   }
 })
 
-export let authedHandler: typeof apiHandler | undefined = undefined
+// use with need an authentication api
+let authedHandler: typeof apiHandler | undefined = undefined
 
 export const setAuth = (token: string) => {
   authedHandler = apiHandler.extend({
@@ -34,3 +49,5 @@ export const setAuth = (token: string) => {
 }
 
 export const resetAuth = () => authedHandler = undefined
+
+export const getApiHandler = () => authedHandler ?? apiHandler

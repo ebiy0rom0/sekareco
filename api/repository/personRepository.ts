@@ -1,38 +1,40 @@
-import { apiHandler } from "../handler/apiHandler.ts"
+import { getApiHandler } from "../handler/apiHandler.ts"
 
 export const personRepository = {
   login: async (loginID: string, password: string) => {
-    const json = await apiHandler.post("signin", {
+    const json = await getApiHandler().post("signin", {
       json: {
-        person_id: loginID,
+        login_id: loginID,
         password: password
       }
-    }).json<string>()
-    console.log(json)
+    }).json<string>().catch(e => console.log(e))
 
+    console.log(json)
     return json
   },
+
   registPerson: async (loginID: string, name: string, password: string) => {
-    const json = await apiHandler.post("signup", {
+    const json = await getApiHandler().post("signup", {
       json: {
         login_id: loginID,
         password: password,
         person_name: name
       }
-    }).catch(e => console.log(e))
+    }).json<string>().catch(e => console.log(e))
 
     console.log(json)
     return json
   },
+
   modifyPersonStatus: async (personID: number, name?: string, password?: string) => {
-    const json = await apiHandler.put(`person/${personID}/`, {
+    const json = await getApiHandler().put(`person/${personID}/`, {
       json: {
         person_name: name,
         password: password
       }
-    }).json<string>()
-    console.log(json)
+    }).json<string>().catch(e => console.log(e))
 
+    console.log(json)
     return json
   }
 }
