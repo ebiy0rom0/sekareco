@@ -16,19 +16,23 @@ export const useRecord = (personId: number) => {
     copyList[musicId] = status
     setCompareList(copyList)
   }
-  // auto saving 30 sec after at first record update
-  const { start, stop } = useDelayCallback(DELAY_AUTO_SAVE, () => {alert('auto save')})
 
-  // const autoSaving = async () => {
-  //   const result = await apiFactory.get("record").registRecord(personId, 1, [])
-  //   changeCompareList(1, result)
-  // }
-  // const { start, stop } = useDelayCallback(DELAY_AUTO_SAVE, (async () => await autoSaving()))
+  // auto saving 30 sec after at first record update
+  const autoSaving = async () => {
+    const result = await apiFactory.get("record").registRecord(personId, 1, [])
+    changeCompareList(1, result)
+  }
+  const { start, stop } = useDelayCallback(DELAY_AUTO_SAVE, (async () => await autoSaving()))
 
   // [first time]
   useEffect(() => {
+    // transaction data fetch only client side
+    if (typeof window === "undefined") return
+
     (async () => {
       const list = await apiFactory.get("record").getMyRecord(personId)
+      if (list === undefined) return
+
       setRecordList(list)
       setCompareList(list)
     })()
