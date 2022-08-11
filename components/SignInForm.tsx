@@ -1,15 +1,34 @@
-import { Link } from "aleph/react"
+import { redirect } from "aleph/framework/core/redirect.ts"
 import { Button } from "../components/Button.tsx"
 import { useInput } from "../hooks/useInput.ts"
+import { useAlert } from "../hooks/useAlert.tsx"
+import { useLogin } from "../hooks/useLogin.ts"
 import { Input } from "./Input.tsx"
 import { apiFactory } from "../api/apiFactory.ts"
 
 export const SignInForm = () => {
   const [ loginID, setLoginID ] = useInput("")
   const [ password, setPassword ] = useInput("")
+  const { setMessage, renderAlert } = useAlert()
+  const { isLogin, tryLogin } = useLogin()
+
+  const loginApi = async (e: React.FormEvent) => {
+    e.preventDefault()
+
+    // login api exec only client side
+    if (typeof window === "undefined") return
+
+    await tryLogin(loginID(), password())
+    if (isLogin()) {
+      redirect("/records")
+    } else {
+      setMessage("login failed. invalid loginID or password.")
+    }
+  }
 
   return (
-    <form className="flex flex-col gap-y-7">
+    <form className="flex flex-col gap-y-7" onSubmit={ e => loginApi(e) }>
+      { renderAlert() }
       <Input
         id="loginId"
         labelName="login ID"
@@ -23,7 +42,6 @@ export const SignInForm = () => {
         onChange={ setPassword }
       />
       <p className="text-right m-0 -mt-6">Forgot password?</p>
-      <Link to="/records" className="mt-5" onClick={ async () => await apiFactory.get("person").login(loginID(), password()) }>
         <Button
           className="
             w-full
@@ -38,7 +56,6 @@ export const SignInForm = () => {
         >
           {'sign in'}
         </Button>
-      </Link>
     </form>
   )
 }
