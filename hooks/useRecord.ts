@@ -68,8 +68,8 @@ export const useRecord = (personId: number) => {
     return keyList.findIndex(k => k === findKey)
   }
   const length = Object.keys(ClearStatusList).length
-  const next = (status: number) => (length + getIndex(status) + 1) % length
-  const prev = (status: number) => (length + getIndex(status) - 1) % length
+  const next = (status: number) => (length + getIndex(status) + 1) % length as ClearStatusValues
+  const prev = (status: number) => (length + getIndex(status) - 1) % length as ClearStatusValues
 
   return {
     getMusicRecord,
@@ -88,6 +88,3 @@ export const ClearStatusList = {
 } as const
 
 export type ClearStatusValues = typeof ClearStatusList[keyof typeof ClearStatusList]
-
-// @debug
-const [n, c, f, a] = Object.values(ClearStatusList)

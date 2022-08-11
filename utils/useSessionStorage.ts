@@ -4,13 +4,16 @@ export const useSessionStorage = <T>(
   key: string,
   defaultValue: T
 ): [() => T, React.Dispatch<React.SetStateAction<T>>] => {
-  const [ serializer, parser ] = [ JSON.stringify, JSON.parse ]
+  const [ storage, serializer, parser ] = [ window?.sessionStorage, JSON.stringify, JSON.parse ]
+
+  // check support to session storage
+  const isSupportSessionStorage = () => typeof storage !== "undefined"
 
   const [ storedValue, setValue ] = useState<T>(() => {
-    if (!supportedSessionStorage()) return defaultValue
+    if (!isSupportSessionStorage()) return defaultValue
 
     try {
-      const item = window.sessionStorage.getItem(key)
+      const item = storage.getItem(key)
       return item ? parser(item) : defaultValue
 
     } catch (_) {
@@ -19,17 +22,14 @@ export const useSessionStorage = <T>(
     return defaultValue
   })
 
-  // check support to session storage
-  const supportedSessionStorage = () => typeof window.sessionStorage !== "undefined"
-
   useEffect(() => {
-    if (!supportedSessionStorage()) return
+    if (!isSupportSessionStorage()) return
 
     try {
       if (storedValue) {
-        window.sessionStorage.setItem(key, serializer(storedValue))
+        storage.setItem(key, serializer(storedValue))
       } else {
-        window.sessionStorage.removeItem(key)
+        storage.removeItem(key)
       }
     } catch (_) {
       console.log("failed operate session storage")

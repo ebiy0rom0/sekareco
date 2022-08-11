@@ -25,3 +25,6 @@ export const recordRepository = {
     return json
   }
 }
+
+// @debug
+const [n, c, f, a] = Object.values(ClearStatusList)

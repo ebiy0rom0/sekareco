@@ -4,7 +4,8 @@ import { apiFactory } from "../api/apiFactory.ts"
 
 // custom hook
 export const useMusic = () => {
-  const [ musicList, setMusicList ] = useState<M_Music.Music[]>([])
+  const repositoryKey = "music"
+  const [ musicList, setMusicList ] = useSessionStorage<M_Music.Music[]>(repositoryKey, [])
 
   useEffect(() => {
     // master data fetch only server side
@@ -17,7 +18,7 @@ export const useMusic = () => {
   }, [])
 
   // all music level array
-  const getLevelListByDifficulty = (difficulty: number) => [...musicList.map(m => m.level[difficulty])]
+  const getLevelListByDifficulty = (difficulty: number) => [...musicList().map(m => m.level[difficulty])]
 
   // exist level min & max
   const getLevelUpper = (difficulty: number) => Math.max(  0, ...getLevelListByDifficulty(difficulty))
@@ -26,7 +27,7 @@ export const useMusic = () => {
   return {
     levelUpper: getLevelUpper,
     levelLower: getLevelLower,
-    musicList: () => musicList
+    musicList
   }
 }
 
