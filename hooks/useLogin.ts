@@ -1,15 +1,17 @@
 import { apiFactory } from "../api/apiFactory.ts"
 
+// persistence
+let token: string
+
 export const useLogin = () => {
-  const login = (personId: number, password: string) => {
-    const token = apiFactory.get("person").login(personId, password)
-    console.log(token)
+  const tryLogin = async (loginId: string, password: string) => {
+    token = await apiFactory.get("person").login(loginId, password)
   }
 
-  const isLogin = () => false
+  const isLogin = () => token.length > 0
 
   return {
-    login,
+    tryLogin,
     isLogin
   }
 }
