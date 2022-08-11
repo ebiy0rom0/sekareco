@@ -18,20 +18,7 @@ const MyApp: React.FC<Props> = props => {
               <title>プロセカの記録帳</title>
             </Head>
             <div className={ (darkMode ? "bg-slate-800 text-slate-400" : "bg-slate-100 text-slate-800") + " min-h-screen" }>
-              { true ? (
-                <div className="max-w-[100em] mx-auto py-8 flex flex-col items-center">
-                  { props.children }
-                  <div
-                    className="
-                      border-t border-slate-300/20
-                      mt-10 pt-15 pb-6
-                      w-4/5
-                    "
-                  >
-                    <Footer />
-                  </div>
-                </div>
-              ) : (
+              { isLogin() ? (
                 <>
                   <div className="sticky top-0 w-full flex-none border-b border-slate-500/40">
                     <div className="max-w-[100em] px-10 py-3 mx-auto">
@@ -64,6 +51,19 @@ const MyApp: React.FC<Props> = props => {
                     </div>
                   </div>
                 </>
+              ) : (
+                <div className="max-w-[100em] mx-auto py-8 flex flex-col items-center">
+                  { props.children }
+                  <div
+                    className="
+                      border-t border-slate-300/20
+                      mt-10 pt-15 pb-6
+                      w-4/5
+                    "
+                  >
+                    <Footer />
+                  </div>
+                </div>
               )}
             </div>
           </>
