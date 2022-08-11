@@ -1,12 +1,15 @@
 /// <reference types="./../types/index.d.ts" />
 import { useState, useEffect } from "react"
-import { useMusic, DifficultyList } from "./useMusic.ts"
+import { DifficultyList } from "./useMusic.ts"
 import { useRange } from "./useRange.ts"
 
 // custom hook
-export const useMusicFilter = (musicList: M_Music.Music[]) => {
+export const useMusicFilter = (
+  musicList: M_Music.Music[],
+  levelLower: (n: number) => number,
+  levelUpper: (n: number) => number
+) => {
   const [ difficulty, setDifficulty ] = useState<number>(DifficultyList.MASTER)
-  const { levelUpper, levelLower } = useMusic()
   const {
     range: lowerFilter,
     changeRange: changeLower

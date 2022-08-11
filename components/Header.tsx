@@ -1,13 +1,18 @@
 import React from "react"
+import { GithubIcon } from "./GithubIcon.tsx"
+import { ThemeCtx } from "../hooks/useTheme.tsx"
+import { Toggle, ToggleStyle } from "./Toggle.tsx"
 
 export const Header = React.memo(() => (
-  <div className="header flex items-center">
-    <h3 className="header__title m-0">プロセカの記録帳</h3>
-    <div className="ml-auto">
-      <a href="https://github.com/ebiy0rom0/sekareco">
-        <span className="sr-only">Link to GitHub</span>
-        <img src="/assets/github.svg" height="24" title="GitHub" className="invert hover:opacity-80" />
-      </a>
-    </div>
-  </div>
+  <ThemeCtx.Consumer>
+    { ({ darkMode, switchMode }) => (
+      <div className="header flex items-center">
+        <h3 className="header__title m-0">プロセカの記録帳</h3>
+        <div className="flex items-end gap-x-10 ml-auto">
+          <Toggle mode={ !darkMode } style={ ToggleStyle.THEME } role={ switchMode } />
+          <GithubIcon />
+        </div>
+      </div>
+    )}
+  </ThemeCtx.Consumer>
 ))

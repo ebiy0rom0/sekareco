@@ -1,21 +1,19 @@
 /// <reference types="./../types/index.d.ts" />
-import { useEffect } from "react"
+import { useState, useEffect } from "react"
 import { apiFactory } from "../api/apiFactory.ts"
-import { useSessionStorage } from "../utils/useSessionStorage.ts"
 
 // custom hook
 export const useMusic = () => {
   const repositoryKey = "music"
   const [ musicList, setMusicList ] = useSessionStorage<M_Music.Music[]>(repositoryKey, [])
 
-  // TODO: fetch
   useEffect(() => {
-    if (musicList().length > 0) return
+    // master data fetch only server side
+    if (typeof window !== "undefined") return
 
-    // do fetch the only first time in same session
     (async () => {
-      const fetchList = await apiFactory.get(repositoryKey).getMusicList()
-      setMusicList(fetchList)
+      const list = await apiFactory.get("music").getMusicList()
+      setMusicList(list)
     })()
   }, [])
 

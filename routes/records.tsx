@@ -1,13 +1,23 @@
+import React from "react"
+import { redirect } from "aleph/framework/core/redirect.ts"
 import { DifficultyList, DifficultyValues } from "./../hooks/useMusic.ts"
 import { MyRecord } from "../components/MyRecord.tsx"
 import { MusicFilter } from "../components/MusicFilter.tsx"
 import { RecordFilter } from "../components/RecordFilter.tsx"
 import { useMusic } from "../hooks/useMusic.ts"
 import { useRecord } from "../hooks/useRecord.ts"
+import { useLogin } from "../hooks/useLogin.ts"
 import { useMusicFilter } from "../hooks/useMusicFilter.ts"
 import { useRecordFilter } from "../hooks/useRecordFilter.ts"
 
 const Records: React.FC = () => {
+  const { isLogin } = useLogin()
+
+  if (!isLogin()) {
+    alert("session timeout")
+    redirect("/", true)
+  }
+
   const {
     levelUpper,
     levelLower,
@@ -27,7 +37,7 @@ const Records: React.FC = () => {
     changeLowerFilter,
     changeUpperFilter,
     getFilteredMusicList
-  } = useMusicFilter(musicList())
+  } = useMusicFilter(musicList(), levelLower, levelUpper)
   const {
     whiteList: recordDifficulty,
     changeWhiteList: changeRecordDifficulty,
@@ -35,7 +45,7 @@ const Records: React.FC = () => {
   } = useRecordFilter(DifficultyList)
 
   return (
-    <div className="list flex-col">
+    <div className="list flex flex-col w-3/4">
       <h2 className="list__head">
         <span>Player Records</span>
       </h2>
@@ -61,7 +71,7 @@ const Records: React.FC = () => {
           isChecked={ isFiltered }
         />
       </div>
-      <div className="list__items w-fit mt-4">
+      <div className="list__items mt-4">
         { getFilteredMusicList().map(m => (
           <MyRecord
             key={m.id.toString()}

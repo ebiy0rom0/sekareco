@@ -2,32 +2,78 @@ import { Head } from "aleph/react"
 import { Header } from "../components/Header.tsx"
 import { Footer } from "../components/Footer.tsx"
 import { Navigation } from "../components/Navigation.tsx"
+import { useTheme, ThemeCtx } from "./../hooks/useTheme.tsx"
+import { useLogin } from "./../hooks/useLogin.ts"
 
-const App: React.FC<Props> = props => {
+const MyApp: React.FC<Props> = props => {
+  const { isLogin } = useLogin()
+  const ThemeProvider = useTheme()
+
   return (
-    <div className="min-h-screen bg-slate-800 text-slate-400">
-      <Head>
-        <title>プロセカの記録帳</title>
-      </Head>
-      <div className="sticky top-0 w-full flex-none border-b border-slate-500/40">
-        <div className="max-w-[100em] px-10 py-3 mx-auto">
-          <Header />
-        </div>
-      </div>
-      <div className="max-w-[100em] mx-auto py-8">
-        <Navigation className="w-[13em] h-full fixed justify-items-center border-r-2 border-slate-400/20 ml-5" />
-        <div className="ml-5 pl-[13em] grid w-auto justify-center">
-          { props.children }
-          <div className="w-full border-t mx-10 my-3 mx-auto">
-            <Footer />
-          </div>
-        </div>
-      </div>
-    </div>
+    <ThemeProvider>
+      <ThemeCtx.Consumer>
+        { ({ darkMode }) => (
+          <>
+            <Head>
+              <title>プロセカの記録帳</title>
+            </Head>
+            <div className={ (darkMode ? "bg-slate-800 text-slate-400" : "bg-slate-100 text-slate-800") + " min-h-screen" }>
+              { isLogin() ? (
+                <>
+                  <div className="sticky top-0 w-full flex-none border-b border-slate-500/40">
+                    <div className="max-w-[100em] px-10 py-3 mx-auto">
+                      <Header />
+                    </div>
+                  </div>
+                  <div className="max-w-[100em] mx-auto py-8">
+                    <Navigation
+                      className="
+                        fixed
+                        box-border
+                        w-[13em]
+                        min-h-screen
+                        px-6 py-5
+                        justify-center
+                        border-r-2 border-slate-400/20
+                      "
+                    />
+                    <div className="ml-5 pl-[13em] flex flex-col items-center">
+                      { props.children }
+                      <div
+                        className="
+                          border-t border-slate-300/20
+                          mt-10 pt-15 pb-7
+                          w-4/5
+                        "
+                      >
+                        <Footer />
+                      </div>
+                    </div>
+                  </div>
+                </>
+              ) : (
+                <div className="max-w-[100em] mx-auto py-8 flex flex-col items-center">
+                  { props.children }
+                  <div
+                    className="
+                      border-t border-slate-300/20
+                      mt-10 pt-15 pb-6
+                      w-4/5
+                    "
+                  >
+                    <Footer />
+                  </div>
+                </div>
+              )}
+            </div>
+          </>
+        )}
+      </ThemeCtx.Consumer>
+    </ThemeProvider>
   )
 }
 type Props = {
   children: React.ReactNode
 }
 
-export default App
+export default MyApp

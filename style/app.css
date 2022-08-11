@@ -1,4 +1,69 @@
 
+body {
+  font-family: 'メイリオ', Meiryo,'Meiryo UI','ヒラギノ角ゴシック','Hiragino Sans','Hiragino Kaku Gothic ProN','ヒラギノ角ゴ ProN W3','Yu Gothic UI','TsukuARdGothic-Regular',YuGothic,'Yu Gothic','Helvetica','Helvetica Neue',sans-serif;
+}
+
 html, body, #root, #root>div {
   margin: 0;
+}
+
+@keyframes toggle-on {
+  0% {
+    transform: translateX(25px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
+}
+
+@keyframes toggle-off {
+  0% {
+    transform: translateX(-25px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
+}
+
+@keyframes fade {
+  0% {
+    opacity: 20%;
+    transform: translateX(-20px);
+  }
+  40% {
+    opacity: 100%;
+  }
+  50% {
+    opacity: 100%;
+    transform: translateX(-10px);
+  }
+  60% {
+    opacity: 100%;
+  }
+  100% {
+    opacity: 20%;
+    transform: translateX(0px);
+  }
+}
+
+
+.toggle-on {
+  animation-name: toggle-on;
+  animation-duration: .3s;
+  animation-timing-function: ease;
+  animation-iteration-count: 1;
+}
+
+.toggle-off {
+  animation-name: toggle-off;
+  animation-duration: .3s;
+  animation-timing-function: ease;
+  animation-iteration-count: 1;
+}
+
+.fade {
+  animation-name: fade;
+  animation-duration: 3s;
+  animation-timing-function: linear;
+  animation-iteration-count: 1;
 }

@@ -1,34 +1,64 @@
 /// <reference types="./../types/index.d.ts" />
-import { useEffect, useCallback } from "react"
-import { DifficultyValues } from "./useMusic.ts"
+import { useState, useEffect, useCallback } from "react"
+import { DifficultyList, DifficultyValues } from "./useMusic.ts"
 import { apiFactory } from "../api/apiFactory.ts"
-import { useSessionStorage } from "./../utils/useSessionStorage.ts"
+import { useObjectCompare } from "../utils/useObjectCompare.ts"
+import { useDelayCallback } from "./useDelayCallback.ts"
 
 // custom hook
 export const useRecord = (personId: number) => {
-  const repositoryKey = "record"
-  const [ recordList, setRecordList ] = useSessionStorage<P_Record.Record<ClearStatusValues>>(repositoryKey, {})
+  const [ recordList, setRecordList ] = useState<P_Record.Record<ClearStatusValues>>({})
+  const [ compareList, setCompareList ] = useState<typeof recordList>({})
+  const { difference } = useObjectCompare(recordList, compareList)
 
+  const changeCompareList = (musicId: number, status: ClearStatusValues[]) => {
+    const copyList = { ...compareList }
+    copyList[musicId] = status
+    setCompareList(copyList)
+  }
+
+  // auto saving 30 sec after at first record update
+  const autoSaving = async () => {
+    const result = await apiFactory.get("record").registRecord(personId, 1, [])
+    changeCompareList(1, result)
+  }
+  const { start, stop } = useDelayCallback(DELAY_AUTO_SAVE, (async () => await autoSaving()))
+
+  // [first time]
   useEffect(() => {
-    if (Object.keys(recordList()).length > 0) return
+    // transaction data fetch only client side
+    if (typeof window === "undefined") return
 
-    // do fetch the only first time in same session
     (async () => {
-      const fetchList = await apiFactory.get(repositoryKey).getMyRecord(personId)
-      setRecordList(fetchList)
+      const list = await apiFactory.get("record").getMyRecord(personId)
+      if (list === undefined) return
+
+      setRecordList(list)
+      setCompareList(list)
     })()
   }, [])
 
-  const getMusicRecord = useCallback((musicId: number) => recordList()[musicId] ?? [], [recordList])
+  // auto saving
+  useEffect(() => difference() ? start() : stop(), [difference])
 
+  // select one music record
+  const getMusicRecord = useCallback((musicId: number) => recordList[musicId] ?? [], [recordList])
+
+  //
   const increment = (musicId: number, difficulty: DifficultyValues) => {
-    const copyList = { ...recordList() }
-    copyList[musicId][difficulty] = next(copyList[musicId][difficulty])
+    const copyList = { ...recordList }
+    if (copyList[musicId] === undefined) {
+      copyList[musicId] = new Array(Object.keys(DifficultyList).length).fill(ClearStatusList.NOPLAY)
+    }
+    copyList[musicId][difficulty] = next(copyList[musicId][difficulty]) as ClearStatusValues
     setRecordList(copyList)
   }
   const decrement = (musicId: number, difficulty: DifficultyValues) => {
-    const copyList = { ...recordList() }
-    copyList[musicId][difficulty] = prev(copyList[musicId][difficulty])
+    const copyList = { ...recordList }
+    if (copyList[musicId] === undefined) {
+      copyList[musicId] = new Array(Object.keys(DifficultyList).length).fill(ClearStatusList.NOPLAY)
+    }
+    copyList[musicId][difficulty] = prev(copyList[musicId][difficulty]) as ClearStatusValues
     setRecordList(copyList)
   }
 
@@ -47,6 +77,8 @@ export const useRecord = (personId: number) => {
     decrement
   }
 }
+
+const DELAY_AUTO_SAVE = 10 * 1000
 
 export const ClearStatusList = {
   NOPLAY: 0,

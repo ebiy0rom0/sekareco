@@ -1,18 +1,46 @@
+import styles from "./../style/app.css"
 
 export const Toggle = (props: Props) => (
-  <div className="flex gap-x-3">
-    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" onClick={ () => props.decrement() }>
-      <polyline points="10,0 0,10 10,20 10,15 5,10 10,5" className="fill-pink-500/50" />
-    </svg>
-    { props.children }
-    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" onClick={ () => props.increment() }>
-      <polyline points="10,0 20,10 10,20 10,15 15,10 10,5" className="fill-pink-500/50" />
-    </svg>
+  <div className={ "grid gap-x-3 w-[45px] h-[25px] rounded-full " + (props.mode ? "justify-items-start bg-gray-300" : "justify-items-end bg-gray-600") } onClick={ props.role }>
+    <div
+      className={ "grid place-items-center rounded-full bg-slate-700 w-[25px] scale-110 ring-2 " + (props.mode ? "bg-white toggle-on" : "bg-slate-900 toggle-off") }
+    >
+      <Selector style={ props.style } mode={ props.mode } />
+    </div>
   </div>
 )
 
-type Props = {
-  children: React.ReactNode
-  increment: () => void
-  decrement: () => void
+const Default = () => (
+  <></>
+)
+
+const Theme = (props: {mode: boolean}) => (
+  <img
+    src={ props.mode ? "/assets/m_light.svg" : "/assets/m_dark.svg" }
+    height="17"
+    className={ props.mode ? "" : "invert" }
+  />
+)
+
+const Selector = (props: {
+  style: typeof ToggleStyle[keyof typeof ToggleStyle]
+  mode: boolean
+}) => {
+  switch (props.style) {
+    case ToggleStyle.DEFAULT:
+      return (<Default />)
+    case ToggleStyle.THEME:
+        return  (<Theme mode={ props.mode } />)
+  }
 }
+
+type Props = {
+  style: typeof ToggleStyle[keyof typeof ToggleStyle]
+  mode: boolean
+  role: () => void
+}
+
+export const ToggleStyle = {
+  DEFAULT: 1,
+  THEME: 2,
+} as const
