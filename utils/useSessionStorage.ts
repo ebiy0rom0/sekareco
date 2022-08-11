@@ -4,7 +4,7 @@ export const useSessionStorage = <T>(
   key: string,
   defaultValue: T
 ): [() => T, React.Dispatch<React.SetStateAction<T>>] => {
-  const [ storage, serializer, parser ] = [ window.sessionStorage, JSON.stringify, JSON.parse ]
+  const [ storage, serializer, parser ] = [ window?.sessionStorage, JSON.stringify, JSON.parse ]
 
   // check support to session storage
   const isSupportSessionStorage = () => typeof storage !== "undefined"
