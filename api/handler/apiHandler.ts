@@ -2,7 +2,7 @@ import ky from "https://cdn.skypack.dev/ky?dts"
 
 // use with not authentication api
 const apiHandler = ky.create({
-  prefixUrl: "http://localhost:8000/",
+  prefixUrl: "http://localhost:8000/api/v1/",
   hooks: {
     beforeRequest: [
       request => {
@@ -48,6 +48,8 @@ export const setAuth = (token: string) => {
   })
 }
 
+// revoke token and use unauthenticated handler
 export const resetAuth = () => authedHandler = undefined
 
+// priority is given to authenticated handlers
 export const getApiHandler = () => authedHandler ?? apiHandler

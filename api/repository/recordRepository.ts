@@ -4,7 +4,7 @@ import { getApiHandler } from "../handler/apiHandler.ts"
 
 export const recordRepository = {
   getMyRecord: async (personId: number) => {
-    const json = await getApiHandler().get(`record/${personId}/`)
+    const json = await getApiHandler().get(`records/${personId}/`)
       .json<P_Record.Record<ClearStatusValues>>()
       .catch<P_Record.Record<ClearStatusValues>>(e => {
         // TODO: display common error view
@@ -16,7 +16,7 @@ export const recordRepository = {
   },
 
   registRecord: async (personId: number, musicId: number, record: number[]) => {
-    const json = await getApiHandler().post(`record/${personId}/${musicId}/`, {
+    const json = await getApiHandler().post(`records/${personId}/${musicId}/`, {
       json: {
         record: record[0]
       }

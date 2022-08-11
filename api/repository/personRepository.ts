@@ -27,7 +27,7 @@ export const personRepository = {
   },
 
   modifyPersonStatus: async (personID: number, name?: string, password?: string) => {
-    const json = await getApiHandler().put(`person/${personID}/`, {
+    const json = await getApiHandler().put(`persons/${personID}/`, {
       json: {
         person_name: name,
         password: password
