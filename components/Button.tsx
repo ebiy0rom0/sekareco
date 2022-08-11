@@ -11,7 +11,7 @@ export const Button = (props: Props) => (
       props?.className,
     ].join(" ") }
     onClick={ props?.onClick }
-    disabled={ props.wait }
+    disabled={ props?.wait ?? false }
   >
     { props.children }
   </button>
@@ -20,6 +20,6 @@ export const Button = (props: Props) => (
 type Props = {
   className?: string
   children: string | React.ReactNode
-  onClick?: () => void
-  wait: boolean
+  onClick?: () => void | Promise<void>
+  wait?: boolean
 }
