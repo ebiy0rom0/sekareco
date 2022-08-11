@@ -5,10 +5,7 @@ const apiHandler = ky.create({
   prefixUrl: "http://localhost:8000/api/v1/",
   hooks: {
     beforeRequest: [
-      request => {
-        console.log(request.url)
-        request.headers.set("Content-Type", "application/json")
-      }
+      request => request.headers.set("Content-Type", "application/json")
     ],
     afterResponse: [
       (_request, _options, response) => {
@@ -36,13 +33,12 @@ const apiHandler = ky.create({
 // use with need an authentication api
 let authedHandler: typeof apiHandler | undefined = undefined
 
+// create a new handler with a Bearer token header
 export const setAuth = (token: string) => {
   authedHandler = apiHandler.extend({
     hooks: {
       beforeRequest: [
-        request => {
-          request.headers.set("Authorizetion", `Bearer ${token}`)
-        }
+        request => request.headers.set("Authorization", `Bearer ${token}`)
       ]
     }
   })
