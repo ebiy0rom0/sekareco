@@ -1,4 +1,4 @@
-import ky from "https://cdn.skypack.dev/ky?dts"
+import ky from "ky"
 
 // use with not authentication api
 const apiHandler = ky.create({
