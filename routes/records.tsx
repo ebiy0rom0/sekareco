@@ -74,14 +74,14 @@ const Records: React.FC = () => {
       <div className="list__items mt-4">
         { getFilteredMusicList().map(m => (
           <MyRecord
-            key={m.id.toString()}
-            title={ m.title }
-            url={ m.url }
-            result={ getMusicRecord(m.id) }
+            key={m.musicID.toString()}
+            title={ m.musicName }
+            url={ m.jacketUrl }
+            result={ getMusicRecord(m.musicID) }
             filter={ recordDifficulty() }
             level={ m.level }
-            increment={ (status: DifficultyValues) => increment(m.id, status) }
-            decrement={ (status: DifficultyValues) => decrement(m.id, status) }
+            increment={ (status: DifficultyValues) => increment(m.musicID, status) }
+            decrement={ (status: DifficultyValues) => decrement(m.musicID, status) }
           />
         )) }
       </div>
