@@ -4,9 +4,10 @@
 
 declare namespace M_Music {
   type Music = {
-    id: number
-    title: string
-    url: string
+    musicID: number
+    artistID: number
+    musicName: string
+    jacketUrl: string
     level: number[]
   }
 }
