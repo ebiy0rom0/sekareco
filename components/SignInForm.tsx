@@ -4,7 +4,6 @@ import { useInput } from "../hooks/useInput.ts"
 import { useAlert } from "../hooks/useAlert.tsx"
 import { useLogin } from "../hooks/useLogin.ts"
 import { Input } from "./Input.tsx"
-import { apiFactory } from "../api/apiFactory.ts"
 
 export const SignInForm = () => {
   const [ loginID, setLoginID ] = useInput("")
