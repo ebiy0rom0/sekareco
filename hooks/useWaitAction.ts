@@ -1,18 +1,18 @@
 import { useState, useMemo } from "react"
 
-export const useWaitAction = <T extends unknown>(fn: () => T) => {
+export const useWaitAction = <T extends unknown>(fn: (...arg: any[]) => T) => {
   const [ waiting, setWait ] = useState(false)
 
-  const promiseFunctionWrapper = async (): Promise<Awaited<T>> => {
+  const promiseFunctionWrapper = async (...arg: any[]): Promise<Awaited<T>> => {
     setWait(true)
-    const res = await fn()
+    const res = await fn(...arg)
     setWait(false)
     return res
   }
 
-  const functionWrapper = (): T => {
+  const functionWrapper = (...arg: any[]): T => {
     setWait(true)
-    const res = fn()
+    const res = fn(...arg)
     setWait(false)
     return res
   }
