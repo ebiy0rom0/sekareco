@@ -74,7 +74,7 @@ const Records: React.FC = () => {
       <div className="list__items mt-4">
         { getFilteredMusicList().map(m => (
           <MyRecord
-            key={m.musicID.toString()}
+            key={ m.musicID.toString() }
             title={ m.musicName }
             url={ m.jacketUrl }
             result={ getMusicRecord(m.musicID) }

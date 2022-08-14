@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react"
+import { useState, useEffect } from "react"
 
 export const useDelayCallback = (delay: number, callback: () => void, loop?: boolean) => {
   const [ trigger, setTrigger ] = useState(false)

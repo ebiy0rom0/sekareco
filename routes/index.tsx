@@ -6,10 +6,8 @@ import { Tab } from "../components/Tab.tsx"
 import { Toggle, ToggleStyle } from "../components/Toggle.tsx"
 import { GithubIcon } from "../components/GithubIcon.tsx"
 import { useDelayCallback } from "../hooks/useDelayCallback.ts"
-import { useLog } from "../hooks/useLog.tsx"
 
 const Index: React.FC = () => {
-  const { setLog, renderLog } = useLog()
   const list = [
     'jacket_001.png',
     'jacket_002.png',
@@ -66,7 +64,6 @@ const Index: React.FC = () => {
           <div className="p-7 m-5 rounded-2xl min-w-[23.0rem]">
             <SignInForm />
           </div>
-          { renderLog() }
         </div>
       )}
     </ThemeCtx.Consumer>
