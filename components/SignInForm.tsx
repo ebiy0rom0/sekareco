@@ -3,30 +3,36 @@ import { Button } from "../components/Button.tsx"
 import { useInput } from "../hooks/useInput.ts"
 import { useAlert } from "../hooks/useAlert.tsx"
 import { useLogin } from "../hooks/useLogin.ts"
+import { useWaitAction } from "../hooks/useWaitAction.ts"
 import { Input } from "./Input.tsx"
 
 export const SignInForm = () => {
   const [ loginID, setLoginID ] = useInput("")
   const [ password, setPassword ] = useInput("")
   const { setMessage, renderAlert } = useAlert()
-  const { isLogin, tryLogin } = useLogin()
+  const { tryLogin } = useLogin()
 
-  const loginApi = async (e: React.FormEvent) => {
+  const {
+    waiting,
+    fn: waitSignIn
+  } = useWaitAction(async (e: React.FormEvent) => {
     e.preventDefault()
 
     // login api exec only client side
     if (typeof window === "undefined") return
 
-    await tryLogin(loginID(), password())
-    if (isLogin()) {
+    // wait for prevent consecutive at click
+    await new Promise(resolve => setTimeout(resolve, 1000))
+
+    if (await tryLogin(loginID(), password())) {
       redirect("/records")
     } else {
       setMessage("login failed. invalid loginID or password.")
     }
-  }
+  })
 
   return (
-    <form className="flex flex-col gap-y-7" onSubmit={ e => loginApi(e) }>
+    <form className="flex flex-col gap-y-7" onSubmit={ async e => await waitSignIn(e) }>
       { renderAlert() }
       <Input
         id="loginId"
@@ -52,8 +58,9 @@ export const SignInForm = () => {
             disabled:cursor-not-allowed
             disabled:opacity-85
           "
+          wait={ waiting() }
         >
-          {'sign in'}
+          { waiting() ? "please wait..." : "sign up" }
         </Button>
     </form>
   )
