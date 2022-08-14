@@ -33,24 +33,24 @@ export const MyRecord = (props: Props) => {
           className="record grid grid-cols-5 gap-x-6 mt-1 justify-items-center"
         >
           { Object.values(props.filter).map(v => isHovers[v] ? (
-            <div onMouseLeave={ () => changeMyHoverState(v, false) }>
+            <div
+              key={ v.toString() }
+              onMouseLeave={ () => changeMyHoverState(v, false) }
+            >
               <Barrel
-                key={ v.toString() }
                 increment={ () => props.increment(v as ClearStatusValues) }
                 decrement={ () => props.decrement(v as ClearStatusValues) }
-                >
-                <Clear
-                  key={ v.toString() }
-                  status={ props.result[v] ?? ClearStatusList.NOPLAY }
-                />
+              >
+                <Clear status={ props.result[v] ?? ClearStatusList.NOPLAY } />
               </Barrel>
             </div>
           ) : (
-            <div className="w-full text-center" onMouseEnter={ () => changeMyHoverState(v, true) }>
-              <Clear
-                key={ v.toString() }
-                status={ props.result[v] ?? ClearStatusList.NOPLAY }
-              />
+            <div
+              key={ v.toString() }
+              className="w-full text-center"
+              onMouseEnter={ () => changeMyHoverState(v, true) }
+            >
+              <Clear status={ props.result[v] ?? ClearStatusList.NOPLAY } />
             </div>
           ))}
         </div>
