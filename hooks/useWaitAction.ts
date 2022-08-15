@@ -1,16 +1,17 @@
 import { useState, useMemo } from "react"
 
-export const useWaitAction = <T extends unknown>(fn: (...arg: any[]) => T) => {
+// deno-lint-ignore no-explicit-any
+export const useWaitAction = <T extends unknown, U extends any[]>(fn: (...arg: U) => T) => {
   const [ waiting, setWait ] = useState(false)
 
-  const promiseFunctionWrapper = async (...arg: any[]): Promise<Awaited<T>> => {
+  const promiseFunctionWrapper = async (...arg: U): Promise<Awaited<T>> => {
     setWait(true)
     const res = await fn(...arg)
     setWait(false)
     return res
   }
 
-  const functionWrapper = (...arg: any[]): T => {
+  const functionWrapper = (...arg: U): T => {
     setWait(true)
     const res = fn(...arg)
     setWait(false)
