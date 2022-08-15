@@ -1,3 +1,5 @@
+import { useState, useEffect } from "react"
+import { useRouter } from "aleph/react"
 import { Head } from "aleph/react"
 import { Header } from "../components/Header.tsx"
 import { Footer } from "../components/Footer.tsx"
@@ -6,7 +8,13 @@ import { useTheme, ThemeCtx } from "./../hooks/useTheme.tsx"
 import { useLogin } from "./../hooks/useLogin.ts"
 
 const MyApp: React.FC<Props> = props => {
-  const { isLogin } = useLogin()
+  // when screen transitions, update login status
+  const [ reloadKey, setReloadKey ] = useState(0)
+  useEffect(() => {
+    setReloadKey(reloadKey + 1)
+  }, [useRouter().url])
+
+  const { isLogin } = useLogin(reloadKey)
   const ThemeProvider = useTheme()
 
   return (
@@ -18,7 +26,7 @@ const MyApp: React.FC<Props> = props => {
               <title>プロセカの記録帳</title>
             </Head>
             <div className={ (darkMode ? "bg-slate-800 text-slate-400" : "bg-slate-100 text-slate-800") + " min-h-screen" }>
-              { isLogin() ? (
+              { isLogin ? (
                 <>
                   <div className="sticky top-0 w-full flex-none border-b border-slate-500/40">
                     <div className="max-w-[100em] px-10 py-3 mx-auto">
