@@ -6,18 +6,10 @@ import { MusicFilter } from "../components/MusicFilter.tsx"
 import { RecordFilter } from "../components/RecordFilter.tsx"
 import { useMusic } from "../hooks/useMusic.ts"
 import { useRecord } from "../hooks/useRecord.ts"
-import { useLogin } from "../hooks/useLogin.ts"
 import { useMusicFilter } from "../hooks/useMusicFilter.ts"
 import { useRecordFilter } from "../hooks/useRecordFilter.ts"
 
 const Records: React.FC = () => {
-  const { isLogin } = useLogin()
-
-  if (!isLogin()) {
-    alert("session timeout")
-    redirect("/", true)
-  }
-
   const {
     levelUpper,
     levelLower,
