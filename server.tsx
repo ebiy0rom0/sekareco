@@ -5,6 +5,7 @@ import { renderToReadableStream } from "react-dom/server"
 
 serve({
   routes: "./routes/**/*.{tsx,ts}",
+  port: 3678,
   build: {
     unocss: {
       presets: [presetWind()]
