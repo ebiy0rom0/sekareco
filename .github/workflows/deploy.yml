@@ -23,4 +23,5 @@ jobs:
         uses: denoland/deployctl@v1
         with:
           project: "ebiy0rom0-sekareco-develop"
-          entrypoint: "./dist/main.tsx" # TODO: update entrypoint
+          entrypoint: main.tsx
+          root: dist
