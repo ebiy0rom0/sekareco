@@ -47,5 +47,5 @@ export const setAuth = (token: string) => {
 // revoke token and use unauthenticated handler
 export const resetAuth = () => authedHandler = undefined
 
-// priority is given to authenticated handlers
+// priority is given to authenticated handler
 export const getApiHandler = () => authedHandler ?? apiHandler
