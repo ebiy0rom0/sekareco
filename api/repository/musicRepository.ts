@@ -2,13 +2,12 @@
 import { getApiHandler } from "../handler/apiHandler.ts"
 
 export const musicRepository = {
+  // when successfully get, returns music master data
   getMusicList: async () => {
-    const json = await getApiHandler().get("musics")
-      .json<M_Music.Music[]>()
-      .catch<M_Music.Music[]>(e => {
-        console.log("failed to get music master: " + e)
-        return []
-      })
+    const json = await getApiHandler()
+        .get("musics")
+        .json<M_Music.Music[]>()
+        .catch<M_Music.Music[]>(_ => [])
 
     return json
   }
