@@ -1,0 +1,16 @@
+# build contents directory
+dist/
+
+# various setup file directory
+# example: .github/ .vscode/
+.*/
+
+# various ignore file
+# example: .gitignore .dockerignore
+.*ignore
+
+# Dockerfile not required
+Dockerfile
+
+README.md
+LICENSE
