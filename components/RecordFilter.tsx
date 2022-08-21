@@ -1,11 +1,11 @@
-import { DifficultyList } from "./../hooks/useMusic.ts"
+import { difficulty } from "./../types/index.ts"
 import { Checkbox } from "./Checkbox.tsx"
 
 export const RecordFilter = (props: Props) => {
   return (
     <>
       難易度：
-      { Object.entries(DifficultyList).map(([k, v]) =>
+      { Object.entries(difficulty).map(([k, v]) =>
         <Checkbox
           key={ k.toString() }
           name="difficulty"

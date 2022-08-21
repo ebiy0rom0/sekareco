@@ -1,17 +1,17 @@
 /// <reference types="./../types/index.d.ts" />
 import { useState, useEffect, useCallback } from "react"
-import { DifficultyList, DifficultyValues } from "./useMusic.ts"
+import { difficulty, Difficulty, clearStatus, ClearStatus } from "../types/index.ts"
 import { apiFactory } from "../api/apiFactory.ts"
 import { useObjectCompare } from "../utils/useObjectCompare.ts"
 import { useDelayCallback } from "./useDelayCallback.ts"
 
 // custom hook
 export const useRecord = (personId: number) => {
-  const [ recordList, setRecordList ] = useState<P_Record.Record<ClearStatusValues>>({})
+  const [ recordList, setRecordList ] = useState<P_Record.Record<ClearStatus>>({})
   const [ compareList, setCompareList ] = useState<typeof recordList>({})
   const { difference } = useObjectCompare(recordList, compareList)
 
-  const changeCompareList = (musicId: number, status: ClearStatusValues[]) => {
+  const changeCompareList = (musicId: number, status: ClearStatus[]) => {
     const copyList = { ...compareList }
     copyList[musicId] = status
     setCompareList(copyList)
@@ -19,8 +19,8 @@ export const useRecord = (personId: number) => {
 
   // auto saving 30 sec after at first record update
   const autoSaving = async () => {
-    const result = await apiFactory.get("record").registRecord(personId, 1, [])
-    changeCompareList(1, result)
+    await apiFactory.get("record").registRecord(personId, 1, [])
+    changeCompareList(1, [])
   }
   const { start, stop } = useDelayCallback(DELAY_AUTO_SAVE, (async () => await autoSaving()))
 
@@ -31,7 +31,7 @@ export const useRecord = (personId: number) => {
 
     (async () => {
       const list = await apiFactory.get("record").getMyRecord(personId)
-      if (list === undefined) return
+      if (typeof list === "undefined") return
 
       setRecordList(list)
       setCompareList(list)
@@ -45,31 +45,31 @@ export const useRecord = (personId: number) => {
   const getMusicRecord = useCallback((musicId: number) => recordList[musicId] ?? [], [recordList])
 
   //
-  const increment = (musicId: number, difficulty: DifficultyValues) => {
+  const increment = (musicId: number, diff: Difficulty) => {
     const copyList = { ...recordList }
     if (copyList[musicId] === undefined) {
-      copyList[musicId] = new Array(Object.keys(DifficultyList).length).fill(ClearStatusList.NOPLAY)
+      copyList[musicId] = Array(Object.keys(difficulty).length).fill(clearStatus.NOPLAY)
     }
-    copyList[musicId][difficulty] = next(copyList[musicId][difficulty]) as ClearStatusValues
+    copyList[musicId][diff] = next(copyList[musicId][diff]) as ClearStatus
     setRecordList(copyList)
   }
-  const decrement = (musicId: number, difficulty: DifficultyValues) => {
+  const decrement = (musicId: number, diff: Difficulty) => {
     const copyList = { ...recordList }
     if (copyList[musicId] === undefined) {
-      copyList[musicId] = new Array(Object.keys(DifficultyList).length).fill(ClearStatusList.NOPLAY)
+      copyList[musicId] = new Array(Object.keys(difficulty).length).fill(clearStatus.NOPLAY)
     }
-    copyList[musicId][difficulty] = prev(copyList[musicId][difficulty]) as ClearStatusValues
+    copyList[musicId][diff] = prev(copyList[musicId][diff]) as ClearStatus
     setRecordList(copyList)
   }
 
   const getIndex = (status: number) => {
-    const keyList = Object.keys(ClearStatusList)
-    const findKey = Object.entries(ClearStatusList).find(([_, v]) => v === status)?.[0]
+    const keyList = Object.keys(clearStatus)
+    const findKey = Object.entries(clearStatus).find(([_, v]) => v === status)?.[0]
     return keyList.findIndex(k => k === findKey)
   }
-  const length = Object.keys(ClearStatusList).length
-  const next = (status: number) => (length + getIndex(status) + 1) % length as ClearStatusValues
-  const prev = (status: number) => (length + getIndex(status) - 1) % length as ClearStatusValues
+  const length = Object.keys(clearStatus).length
+  const next = (status: number) => (length + getIndex(status) + 1) % length as ClearStatus
+  const prev = (status: number) => (length + getIndex(status) - 1) % length as ClearStatus
 
   return {
     getMusicRecord,
@@ -80,11 +80,3 @@ export const useRecord = (personId: number) => {
 
 const DELAY_AUTO_SAVE = 10 * 1000
 
-export const ClearStatusList = {
-  NOPLAY: 0,
-  CLEAR:  1,
-  FULL_COMBO: 2,
-  ALL_PERFECT: 3
-} as const
-
-export type ClearStatusValues = typeof ClearStatusList[keyof typeof ClearStatusList]

@@ -1,6 +1,5 @@
 import React from "react"
-import { redirect } from "aleph/framework/core/redirect.ts"
-import { DifficultyList, DifficultyValues } from "./../hooks/useMusic.ts"
+import { difficulty, Difficulty } from "./../types/index.ts"
 import { MyRecord } from "../components/MyRecord.tsx"
 import { MusicFilter } from "../components/MusicFilter.tsx"
 import { RecordFilter } from "../components/RecordFilter.tsx"
@@ -13,7 +12,7 @@ const Records: React.FC = () => {
   const {
     levelUpper,
     levelLower,
-    musicList,
+    music,
   } = useMusic()
 
   const {
@@ -22,19 +21,19 @@ const Records: React.FC = () => {
     decrement
   } = useRecord(1)
   const {
-    difficulty,
+    filterDifficulty,
     lowerFilter,
     upperFilter,
     changeDifficulty,
     changeLowerFilter,
     changeUpperFilter,
-    getFilteredMusicList
-  } = useMusicFilter(musicList(), levelLower, levelUpper)
+    getFilteredMusic
+  } = useMusicFilter(music(), levelLower, levelUpper)
   const {
     whiteList: recordDifficulty,
     changeWhiteList: changeRecordDifficulty,
     isFiltered,
-  } = useRecordFilter(DifficultyList)
+  } = useRecordFilter(difficulty)
 
   return (
     <div className="list flex flex-col w-3/4">
@@ -43,10 +42,10 @@ const Records: React.FC = () => {
       </h2>
       <div className="list__filter">
         <MusicFilter
-          levelLower={ levelLower(difficulty()) }
-          levelUpper={ levelUpper(difficulty()) }
+          levelLower={ levelLower(filterDifficulty()) }
+          levelUpper={ levelUpper(filterDifficulty()) }
           target={{
-            value:  difficulty(),
+            value:  filterDifficulty(),
             setter: changeDifficulty
           }}
           lower={{
@@ -64,7 +63,7 @@ const Records: React.FC = () => {
         />
       </div>
       <div className="list__items mt-4">
-        { getFilteredMusicList().map(m => (
+        { getFilteredMusic().map(m => (
           <MyRecord
             key={ m.musicID.toString() }
             title={ m.musicName }
@@ -72,8 +71,8 @@ const Records: React.FC = () => {
             result={ getMusicRecord(m.musicID) }
             filter={ recordDifficulty() }
             level={ m.level }
-            increment={ (status: DifficultyValues) => increment(m.musicID, status) }
-            decrement={ (status: DifficultyValues) => decrement(m.musicID, status) }
+            increment={ (status: Difficulty) => increment(m.musicID, status) }
+            decrement={ (status: Difficulty) => decrement(m.musicID, status) }
           />
         )) }
       </div>

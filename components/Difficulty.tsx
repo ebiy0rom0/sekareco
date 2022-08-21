@@ -1,5 +1,5 @@
 import React from "react"
-import { DifficultyList, DifficultyValues } from "./../hooks/useMusic.ts"
+import { difficulty, Difficulty as Type } from "./../types/index.ts"
 
 export const Difficulty = React.memo((props: Props) => (
   <svg xmlns="http://www.w3.org/2000/svg" width="100" height="20" viewBox="0 0 100 20">
@@ -15,18 +15,18 @@ export const Difficulty = React.memo((props: Props) => (
 ))
 
 // draw html
-const drawName = (difficulty: DifficultyValues) => Object.entries(DifficultyList).filter(([_, v]) => v === difficulty)[0][0]
+const drawName = (diff: Type) => Object.entries(difficulty).filter(([_, v]) => v === diff)[0][0]
 
 type Props = {
   class?: string
-  difficulty: DifficultyValues
+  difficulty: Type
   level: number
 }
 
 const colorSet = {
-  [DifficultyList.EASY]:   "fill-green-400",
-  [DifficultyList.NORMAL]: "fill-cyan-500",
-  [DifficultyList.HARD]:   "fill-yellow-500",
-  [DifficultyList.EXPERT]: "fill-red-600",
-  [DifficultyList.MASTER]: "fill-purple-500"
+  [difficulty.EASY]:   "fill-green-400",
+  [difficulty.NORMAL]: "fill-cyan-500",
+  [difficulty.HARD]:   "fill-yellow-500",
+  [difficulty.EXPERT]: "fill-red-600",
+  [difficulty.MASTER]: "fill-purple-500"
 } as const

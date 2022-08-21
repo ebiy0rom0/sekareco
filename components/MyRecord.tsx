@@ -1,14 +1,13 @@
 import { useState } from "react"
-import { DifficultyList, DifficultyValues } from "./../hooks/useMusic.ts"
-import { ClearStatusList, ClearStatusValues } from "../hooks/useRecord.ts"
+import { difficulty, Difficulty, clearStatus, ClearStatus } from "./../types/index.ts"
 import { Barrel } from "./Barrel.tsx"
 import { Clear } from "./Clear.tsx"
-import { Difficulty } from "./Difficulty.tsx"
+import { Difficulty as DiffComponent } from "./Difficulty.tsx"
 import { Music } from "./Music.tsx"
 
 export const MyRecord = (props: Props) => {
-  const [ isHovers, setHovers ] = useState(new Array<boolean>(Object.keys(DifficultyList).length).fill(false))
-  const changeMyHoverState = (difficulty: DifficultyValues, isHover: boolean) => {
+  const [ isHovers, setHovers ] = useState(new Array<boolean>(Object.keys(difficulty).length).fill(false))
+  const changeMyHoverState = (difficulty: Difficulty, isHover: boolean) => {
     const copyHovers = [...isHovers]
     copyHovers[difficulty] = isHover
     setHovers(copyHovers)
@@ -22,7 +21,7 @@ export const MyRecord = (props: Props) => {
       <div className="music__record w-auto flex flex-col py-2 px-3">
         <div className="difficulty grid grid-cols-5 gap-x-6">
           { Object.values(props.filter).map(v => (
-            <Difficulty
+            <DiffComponent
               key={ v.toString() }
               difficulty={ v }
               level={ props.level[v] }
@@ -38,10 +37,10 @@ export const MyRecord = (props: Props) => {
               onMouseLeave={ () => changeMyHoverState(v, false) }
             >
               <Barrel
-                increment={ () => props.increment(v as ClearStatusValues) }
-                decrement={ () => props.decrement(v as ClearStatusValues) }
+                increment={ () => props.increment(v as ClearStatus) }
+                decrement={ () => props.decrement(v as ClearStatus) }
               >
-                <Clear status={ props.result[v] ?? ClearStatusList.NOPLAY } />
+                <Clear status={ props.result[v] ?? clearStatus.NOPLAY } />
               </Barrel>
             </div>
           ) : (
@@ -50,7 +49,7 @@ export const MyRecord = (props: Props) => {
               className="w-full text-center"
               onMouseEnter={ () => changeMyHoverState(v, true) }
             >
-              <Clear status={ props.result[v] ?? ClearStatusList.NOPLAY } />
+              <Clear status={ props.result[v] ?? clearStatus.NOPLAY } />
             </div>
           ))}
         </div>
@@ -62,9 +61,9 @@ export const MyRecord = (props: Props) => {
   type Props = {
     title: string
     url: string
-    result: ClearStatusValues[]
-    filter: DifficultyValues[]
+    result: ClearStatus[]
+    filter: Difficulty[]
     level: number[]
-    increment: (c: ClearStatusValues) => void
-    decrement: (c: ClearStatusValues) => void
+    increment: (c: ClearStatus) => void
+    decrement: (c: ClearStatus) => void
   }

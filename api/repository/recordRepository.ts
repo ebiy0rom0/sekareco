@@ -1,5 +1,5 @@
 /// <reference types="./../../types/index.d.ts" />
-import { ClearStatusValues } from "./../../hooks/useRecord.ts"
+import { ClearStatus } from "./../../types/index.ts"
 import { getApiHandler } from "../handler/apiHandler.ts"
 
 export const recordRepository = {
@@ -7,8 +7,8 @@ export const recordRepository = {
   getMyRecord: async (personId: number) => {
     const json = await getApiHandler()
         .get(`records/${personId}`)
-        .json<P_Record.Record<ClearStatusValues[]>>()
-        .catch<P_Record.Record<ClearStatusValues[]>>(_ => [])
+        .json<P_Record.Record<ClearStatus>>()
+        .catch<P_Record.Record<ClearStatus>>(_ => [])
 
     return json
   },

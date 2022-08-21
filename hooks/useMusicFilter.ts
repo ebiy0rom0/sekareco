@@ -1,15 +1,14 @@
 /// <reference types="./../types/index.d.ts" />
 import { useState, useEffect } from "react"
-import { DifficultyList } from "./useMusic.ts"
+import { difficulty, Difficulty } from "../types/index.ts"
 import { useRange } from "./useRange.ts"
 
-// custom hook
 export const useMusicFilter = (
-  musicList: M_Music.Music[],
+  music: M_Music.Music[],
   levelLower: (n: number) => number,
   levelUpper: (n: number) => number
 ) => {
-  const [ difficulty, setDifficulty ] = useState<number>(DifficultyList.MASTER)
+  const [ filterDifficulty, setFilterDifficulty ] = useState<Difficulty>(difficulty.MASTER)
   const {
     range: lowerFilter,
     changeRange: changeLower
@@ -23,30 +22,30 @@ export const useMusicFilter = (
   const changeDifficulty = (input: string) => {
     const inputNum = parseInt(input)
     // select "master", if out of range
-    const newVal = Object.values(DifficultyList).some(d => d === inputNum) ? inputNum : DifficultyList.MASTER
-    setDifficulty(newVal)
+    const newVal = Object.values(difficulty).some(d => d === inputNum) ? (inputNum as Difficulty) : difficulty.MASTER
+    setFilterDifficulty(newVal)
   }
-  const changeLowerFilter = (val: string) => changeLower(parseInt(val), levelLower(difficulty), upperFilter())
-  const changeUpperFilter = (val: string) => changeUpper(parseInt(val), lowerFilter(), levelUpper(difficulty))
+  const changeLowerFilter = (val: string) => changeLower(parseInt(val), levelLower(filterDifficulty), upperFilter())
+  const changeUpperFilter = (val: string) => changeUpper(parseInt(val), lowerFilter(), levelUpper(filterDifficulty))
 
   // check within filter range
   const isLevelWithinRange = (level: number) => lowerFilter() <= level && level <= upperFilter()
 
   // level filter
-  const getFilteredMusicList = () => musicList.filter(m => isLevelWithinRange(m.level[difficulty]))
+  const getFilteredMusic = () => music.filter(m => isLevelWithinRange(m.level[filterDifficulty]))
 
   useEffect(() => {
-    changeLower(levelLower(difficulty), levelLower(difficulty), levelUpper(difficulty))
-    changeUpper(levelUpper(difficulty), levelLower(difficulty), levelUpper(difficulty))
-  }, [musicList, difficulty])
+    changeLower(levelLower(filterDifficulty), levelLower(filterDifficulty), levelUpper(filterDifficulty))
+    changeUpper(levelUpper(filterDifficulty), levelLower(filterDifficulty), levelUpper(filterDifficulty))
+  }, [music, filterDifficulty])
 
   return {
-    difficulty: () => difficulty,
+    filterDifficulty: () => filterDifficulty,
     lowerFilter,
     upperFilter,
     changeDifficulty,
     changeUpperFilter,
     changeLowerFilter,
-    getFilteredMusicList
+    getFilteredMusic
   }
 }

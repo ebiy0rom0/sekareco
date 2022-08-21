@@ -1,4 +1,4 @@
-import { DifficultyList } from "./../hooks/useMusic.ts"
+import { difficulty } from "./../types/index.ts"
 import { Range } from "./Range.tsx"
 import { Selectbox } from "./Selectbox.tsx"
 
@@ -7,7 +7,7 @@ export const MusicFilter = (props: Props) => {
     <div className="flex-col">
       <Selectbox
         group="range-diff"
-        options={ DifficultyList }
+        options={ difficulty }
         value={ props.target.value }
         setter={ props.target.setter }
       >
