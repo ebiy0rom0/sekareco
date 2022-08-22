@@ -1,5 +1,5 @@
 import React from "react"
-import { ClearStatusList, ClearStatusValues } from "../hooks/useRecord.ts"
+import { clearStatus, ClearStatus } from "../types/index.ts"
 
 export const Clear = React.memo((props: Props) => (
   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
@@ -9,12 +9,12 @@ export const Clear = React.memo((props: Props) => (
 
 type Props = {
   class?: string
-  status: ClearStatusValues
+  status: ClearStatus
 }
 
 const fillSet = {
-  [ClearStatusList.NOPLAY]:      "fill-slate-900",
-  [ClearStatusList.CLEAR]:       "fill-yellow-300",
-  [ClearStatusList.FULL_COMBO]:  "fill-fuchsia-300",
-  [ClearStatusList.ALL_PERFECT]: "fill-blue-400"
+  [clearStatus.NOPLAY]:      "fill-slate-900",
+  [clearStatus.CLEAR]:       "fill-yellow-300",
+  [clearStatus.FULL_COMBO]:  "fill-fuchsia-300",
+  [clearStatus.ALL_PERFECT]: "fill-blue-400"
 }
