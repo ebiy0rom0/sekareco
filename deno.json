@@ -15,9 +15,9 @@
   },
   "importMap": "./import_map.json",
   "tasks": {
-    "dev": "denon run -A https://deno.land/x/aleph@1.0.0-alpha.60/cli.ts dev",
-    "start": "deno run -A https://deno.land/x/aleph@1.0.0-alpha.60/cli.ts start",
-    "build": "deno run -A https://deno.land/x/aleph@1.0.0-alpha.60/cli.ts build"
+    "dev": "denon run --allow-net=:8080 -A https://deno.land/x/aleph@1.0.0-alpha.60/cli.ts dev",
+    "start": "deno run --allow-net=:8080 -A https://deno.land/x/aleph@1.0.0-alpha.60/cli.ts start",
+    "build": "deno run --allow-net=:8080 -A https://deno.land/x/aleph@1.0.0-alpha.60/cli.ts build"
   },
   "fmt": {},
   "lint": {}
