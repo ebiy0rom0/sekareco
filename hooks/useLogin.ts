@@ -7,7 +7,7 @@ export const useLogin = (reloadKey = 0) => {
   const key = "token"
   const [ token, setToken ] = useSessionStorage(key, "", reloadKey)
   const [ isLogin, setLogin ] = useState<boolean>(false)
-console.log("use login")
+
   const tryLogin = async (loginId: string, password: string) => {
     const newToken = await apiFactory.get("person").login(loginId, password)
     if (newToken.length > 0) {
@@ -23,10 +23,6 @@ console.log("use login")
     setLogin(token.length > 0)
   }, [token])
 
-  if (isLogin) {
-    console.log("set auth")
-    setAuth(token)
-  }
   return {
     token,
     tryLogin,
