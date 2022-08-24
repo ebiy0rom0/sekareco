@@ -1,11 +1,11 @@
 {
-    "version": "0.2.0",
-    "configurations": [{
-      "name": "Deno",
-      "type": "node-terminal",
-      "command": "deno task dev",
-      "request": "launch",
-      "port": 8080,
-      "program": "${workspaceFolder}/main.tsx"
-    }]
-  }
+  "version": "0.2.0",
+  "configurations": [{
+    "name": "Deno",
+    "type": "node-terminal",
+    "command": "deno task dev",
+    "request": "launch",
+    "port": 8080,
+    "program": "${workspaceFolder}/main.tsx"
+  }]
+}
