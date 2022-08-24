@@ -1,18 +1,23 @@
-# React App
+# Sekareco
 
-A React demo application powered by Aleph.js in Deno, deploy to [Deno Deploy](https://deno.com/deploy):
+This project is React application powered by [Aleph.js](https://github.com/alephjs/aleph.js).
 
-https://aleph-hello.deno.dev/
-
-### how to installation
+## how to installation
 - install deno
     - https://deno.land/
 
 - need denon for debug
     - deno install -qAf --unstable https://deno.land/x/denon/denon.ts
 
-- execute
-    - deno task dev
-
 - tips
     - aleph.js use port 6060
+
+
+
+## Available Scripts
+### `deno task dev`
+Start the application in development mode.
+
+### `deno task start`
+Start the application in production mode.
+
