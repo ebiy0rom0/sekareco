@@ -17,8 +17,43 @@
   "tasks": {
     "dev": "denon run --allow-net=:8080 -A https://deno.land/x/aleph@1.0.0-alpha.60/cli.ts dev",
     "start": "deno run --allow-net=:8080 -A https://deno.land/x/aleph@1.0.0-alpha.60/cli.ts start",
-    "build": "deno run --allow-net=:8080 -A https://deno.land/x/aleph@1.0.0-alpha.60/cli.ts build"
+    "build": "deno run --allow-net=:8080 -A https://deno.land/x/aleph@1.0.0-alpha.60/cli.ts build",
+    "lint": "deno lint",
+    "fmt": "deno fmt"
   },
-  "fmt": {},
-  "lint": {}
+  "fmt": {
+    "files": {
+      "exclude": [
+        ".vscode/",
+        "deno.json",
+        "import_map.json"
+      ]
+    }
+  },
+  "lint": {
+    "files": {
+      "exclude": ["dist/"]
+    },
+    "rules": {
+      "tags": ["recommended"],
+      "include": [
+        "ban-types",
+        "ban-unused-ignore",
+        "no-dupe-keys",
+        "no-empty",
+        "no-empty-pattern",
+        "no-explicit-any",
+        "no-invalid-triple-slash-reference",
+        "no-namespace",
+        "no-redeclare",
+        "no-unreachable",
+        "no-unsafe-negation",
+        "no-unused-vars",
+        "no-var",
+        "prefer-const",
+        "require-await",
+        "valid-typeof"
+      ]
+    }
+  }
 }
