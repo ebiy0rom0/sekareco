@@ -1,0 +1,15 @@
+name: Linting
+
+on: [push]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Setup Deno
+      uses: denoland/setup-deno@v1.1.0
+    
+    - name: Linting
+      run: deno task lint
