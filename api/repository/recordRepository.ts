@@ -8,9 +8,9 @@ export const recordRepository = {
     const json = await getApiHandler()
         .get(`records/${personId}`)
         .json<P_Record.Record<ClearStatus>>()
-        .catch<P_Record.Record<ClearStatus>>(_ => [])
+        .catch<P_Record.Record<ClearStatus>>(_ => ({}))
 
-    return json
+    return json ?? {}
   },
 
   // when successfully regist, returns status 201 and not returns response body
