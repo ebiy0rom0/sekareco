@@ -32,7 +32,7 @@ const Index: React.FC = () => {
   return (
     <ThemeCtx.Consumer>
       { ({ darkMode, switchMode }) => (
-        <div className="flex min-h-[83vh] w-4/5 justify-around place-items-center">
+        <>
           <div>
             <div className="flex gap-x-4">
               { "プロセカの".split("").map((s, i) => (
@@ -63,7 +63,7 @@ const Index: React.FC = () => {
           <div className="p-7 m-5 rounded-2xl min-w-[23.0rem]">
             <SignInForm />
           </div>
-        </div>
+        </>
       )}
     </ThemeCtx.Consumer>
   )
