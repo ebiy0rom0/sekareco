@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react"
-import { ThemeCtx } from "~/hooks/useTheme.tsx"
-import { SignInForm } from "~/components/organisms/SignInForm.tsx"
-import { SignUpForm } from "~/components/organisms/SignUpForm.tsx"
 import { Toggle, ToggleStyle } from "~/components/atoms/Toggle.tsx"
 import { GithubIcon } from "~/components/atoms/GithubIcon.tsx"
-import { useDelayCallback } from "../hooks/useDelayCallback.ts"
+import { SignInForm } from "~/components/organisms/SignInForm.tsx"
+import { SignUpForm } from "~/components/organisms/SignUpForm.tsx"
+import { ThemeCtx } from "~/hooks/useTheme.tsx"
+import { useDelayCallback } from "~/hooks/useDelayCallback.ts"
+import { useModal } from "~/hooks/useModal.tsx"
 
 const Index: React.FC = () => {
   const list = [
@@ -28,6 +29,8 @@ const Index: React.FC = () => {
   const [ my, setMy ] = useState(list[0])
   const { start } = useDelayCallback(3000, () => setMy(list[Math.floor(Math.random() * list.length)]), true)
   useEffect(() => start(), [])
+
+  const { render, open } = useModal()
 
   return (
     <ThemeCtx.Consumer>
@@ -60,9 +63,23 @@ const Index: React.FC = () => {
               <Toggle mode={ !darkMode } style={ ToggleStyle.THEME } role={ switchMode } />
             </div>
           </div>
-          <div className="p-7 m-5 rounded-2xl min-w-[23.0rem]">
+          <div className="grid p-7 ml-[10em] mr-5 rounded-2xl min-w-[23.0rem]">
             <SignInForm />
+            <button 
+              type="button" 
+              className="
+                mt-7 
+                border-none 
+                bg-transparent 
+                text-lg text-slate-400 
+                justify-self-end
+              " 
+              onClick={ open }
+            >
+              click here to sign up.
+            </button>
           </div>
+          { render(<div className="min-w-[23.0rem]"><SignUpForm /></div>) }
         </>
       )}
     </ThemeCtx.Consumer>

@@ -1,6 +1,7 @@
 
 export const Button = (props: Props) => (
   <button
+    type="button"
     className={ [
       "text-lg",
       "font-bold",

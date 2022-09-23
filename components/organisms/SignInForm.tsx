@@ -61,7 +61,7 @@ export const SignInForm = () => {
           "
           wait={ waiting() }
         >
-          { waiting() ? "please wait..." : "sign up" }
+          { waiting() ? "please wait..." : "sign in" }
         </Button>
     </form>
   )
