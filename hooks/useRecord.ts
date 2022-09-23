@@ -3,7 +3,7 @@ import { useState, useEffect, useCallback } from "react"
 import { difficulty, Difficulty, clearStatus, ClearStatus } from "../types/index.ts"
 import { apiFactory } from "../api/apiFactory.ts"
 import { useObjectCompare } from "../utils/useObjectCompare.ts"
-import { useDelayCallback } from "./useDelayCallback.ts"
+import { useDelayCallback } from "~/utils/useDelayCallback.ts"
 
 // custom hook
 export const useRecord = (personId: number) => {

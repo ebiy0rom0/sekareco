@@ -4,7 +4,7 @@ import { GithubIcon } from "~/components/atoms/GithubIcon.tsx"
 import { SignInForm } from "~/components/organisms/SignInForm.tsx"
 import { SignUpForm } from "~/components/organisms/SignUpForm.tsx"
 import { ThemeCtx } from "~/hooks/useTheme.tsx"
-import { useDelayCallback } from "~/hooks/useDelayCallback.ts"
+import { useDelayCallback } from "~/utils/useDelayCallback.ts"
 import { useModal } from "~/hooks/useModal.tsx"
 
 const Index: React.FC = () => {
@@ -65,15 +65,15 @@ const Index: React.FC = () => {
           </div>
           <div className="grid p-7 ml-[10em] mr-5 rounded-2xl min-w-[23.0rem]">
             <SignInForm />
-            <button 
-              type="button" 
+            <button
+              type="button"
               className="
-                mt-7 
-                border-none 
-                bg-transparent 
-                text-lg text-slate-400 
+                mt-7
+                border-none
+                bg-transparent
+                text-lg text-slate-400
                 justify-self-end
-              " 
+              "
               onClick={ open }
             >
               click here to sign up.
