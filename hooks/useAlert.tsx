@@ -4,7 +4,7 @@ export const useAlert = (type: alertType = AlertBgType.ALERT_RED) => {
   const [ message, setMessage ] = useState<string>("")
 
   const renderAlert = () => (message.length > 0) ? (
-    <div className={ "w-full py-5 ps-5 rounded-lg text-slate-100 font-bold " + Alert[type] }>
+    <div className={ "box-border w-full py-5 px-5 rounded-lg text-slate-100 font-bold " + Alert[type] }>
       { message }
     </div>
   ) : <></>
