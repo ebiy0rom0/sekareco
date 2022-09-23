@@ -1,6 +1,6 @@
 import React, { useMemo } from "react"
 import { useInput } from "~/hooks/useInput.ts"
-import { useWaitAction } from "~/hooks/useWaitAction.ts"
+import { useWaitAction } from "~/utils/useWaitAction.ts"
 import { Input } from "~/components/atoms/Input.tsx"
 import { Button } from "~/components/atoms/Button.tsx"
 import { apiFactory } from "~/api/apiFactory.ts"
@@ -16,29 +16,30 @@ export const SignUpForm = React.memo(() => {
   } = useWaitAction(async () => await apiFactory.get("person").registPerson(loginID(), password(), personName()))
 
   return (
-    <form className="flex flex-col gap-y-7">
+    <form className="flex flex-col gap-y-7" onSubmit={() => alert("submit")}>
       <Input
-        id="loginId"
+        id="up-loginId"
         labelName="ログインID"
         type="text"
         value={ loginID() }
         onChange={ setLoginID }
       />
       <Input
-        id="name"
+        id="up-name"
         labelName="ユーザー名"
         type="text"
         value={ personName() }
         onChange={ setPersonName }
       />
       <Input
-        id="password"
+        id="up-password"
         labelName="パスワード"
         type="password"
         value={ password() }
         onChange={ setPassword }
       />
       <Button
+        type="submit"
         className="
           w-full
           mt-5

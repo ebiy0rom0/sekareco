@@ -1,7 +1,7 @@
 
 export const Button = (props: Props) => (
   <button
-    type="button"
+    type={ props?.type ?? "button" }
     className={ [
       "text-lg",
       "font-bold",
@@ -25,6 +25,7 @@ export const Button = (props: Props) => (
 )
 
 type Props = {
+  type?: React.ButtonHTMLAttributes<HTMLButtonElement>["type"]
   className?: string
   children: string | React.ReactNode
   onClick?: () => void | Promise<void>

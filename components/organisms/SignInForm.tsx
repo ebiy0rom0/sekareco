@@ -4,12 +4,12 @@ import { Input } from "~/components/atoms/Input.tsx"
 import { useInput } from "~/hooks/useInput.ts"
 import { useAlert } from "~/hooks/useAlert.tsx"
 import { useLogin } from "~/hooks/useLogin.ts"
-import { useWaitAction } from "~/hooks/useWaitAction.ts"
+import { useWaitAction } from "~/utils/useWaitAction.ts"
 
 export const SignInForm = () => {
   const [ loginID, setLoginID ] = useInput("")
   const [ password, setPassword ] = useInput("")
-  const { setMessage, renderAlert } = useAlert()
+  const { renderAlert } = useAlert()
   const { tryLogin } = useLogin()
 
   const {
@@ -17,7 +17,6 @@ export const SignInForm = () => {
     fn: waitSignIn
   } = useWaitAction(async (e: React.FormEvent) => {
     e.preventDefault()
-
     // login api exec only client side
     if (typeof window === "undefined") return
 
@@ -49,6 +48,7 @@ export const SignInForm = () => {
       />
       <p className="text-right m-0 -mt-6">Forgot password?</p>
         <Button
+          type="submit"
           className="
             w-full
             text-white-200
@@ -59,6 +59,7 @@ export const SignInForm = () => {
             disabled:cursor-not-allowed
             disabled:opacity-85
           "
+          onClick={ ()=>alert("sign in") }
           wait={ waiting() }
         >
           { waiting() ? "please wait..." : "sign in" }
