@@ -1,5 +1,5 @@
 import React from "react"
-import { difficulty, Difficulty as Type } from "./../types/index.ts"
+import { difficulty, Difficulty as Type } from "~/types/index.ts"
 
 export const Difficulty = React.memo((props: Props) => (
   <svg xmlns="http://www.w3.org/2000/svg" width="100" height="20" viewBox="0 0 100 20">

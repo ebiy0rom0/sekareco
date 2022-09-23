@@ -1,5 +1,5 @@
-import { difficulty } from "./../types/index.ts"
-import { Checkbox } from "./Checkbox.tsx"
+import { difficulty } from "~/types/index.ts"
+import { Checkbox } from "~/components/atoms/Checkbox.tsx"
 
 export const RecordFilter = (props: Props) => {
   return (

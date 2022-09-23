@@ -1,12 +1,12 @@
 import React from "react"
-import { difficulty, Difficulty } from "./../types/index.ts"
-import { MyRecord } from "../components/MyRecord.tsx"
-import { MusicFilter } from "../components/MusicFilter.tsx"
-import { RecordFilter } from "../components/RecordFilter.tsx"
-import { useMusic } from "../hooks/useMusic.ts"
-import { useRecord } from "../hooks/useRecord.ts"
-import { useMusicFilter } from "../hooks/useMusicFilter.ts"
-import { useRecordFilter } from "../hooks/useRecordFilter.ts"
+import { difficulty, Difficulty } from "~/types/index.ts"
+import { MyRecord } from "~/components/molecules/MyRecord.tsx"
+import { MusicFilter } from "~/components/organisms/MusicFilter.tsx"
+import { RecordFilter } from "~/components/organisms/RecordFilter.tsx"
+import { useMusic } from "~/hooks/useMusic.ts"
+import { useRecord } from "~/hooks/useRecord.ts"
+import { useMusicFilter } from "~/hooks/useMusicFilter.ts"
+import { useRecordFilter } from "~/hooks/useRecordFilter.ts"
 
 const Records: React.FC = () => {
   const {

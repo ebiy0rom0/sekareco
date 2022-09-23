@@ -1,9 +1,9 @@
 import React, { useMemo } from "react"
-import { useInput } from "../hooks/useInput.ts"
-import { useWaitAction } from "../hooks/useWaitAction.ts"
-import { Input } from "./Input.tsx"
-import { Button } from "../components/Button.tsx"
-import { apiFactory } from "../api/apiFactory.ts"
+import { useInput } from "~/hooks/useInput.ts"
+import { useWaitAction } from "~/hooks/useWaitAction.ts"
+import { Input } from "~/components/atoms/Input.tsx"
+import { Button } from "~/components/atoms/Button.tsx"
+import { apiFactory } from "~/api/apiFactory.ts"
 
 export const SignUpForm = React.memo(() => {
   const [ loginID, setLoginID ] = useInput("")

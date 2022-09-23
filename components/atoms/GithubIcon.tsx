@@ -1,5 +1,5 @@
 
-import { ThemeCtx } from "../hooks/useTheme.tsx"
+import { ThemeCtx } from "~/hooks/useTheme.tsx"
 
 export const GithubIcon = () => (
   <ThemeCtx.Consumer>

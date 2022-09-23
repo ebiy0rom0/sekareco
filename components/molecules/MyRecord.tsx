@@ -1,9 +1,9 @@
 import { useState } from "react"
-import { difficulty, Difficulty, clearStatus, ClearStatus } from "./../types/index.ts"
-import { Barrel } from "./Barrel.tsx"
-import { Clear } from "./Clear.tsx"
-import { Difficulty as DiffComponent } from "./Difficulty.tsx"
-import { Music } from "./Music.tsx"
+import { difficulty, Difficulty, clearStatus, ClearStatus } from "~/types/index.ts"
+import { Barrel } from "~/components/atoms/Barrel.tsx"
+import { Clear } from "~/components/atoms/Clear.tsx"
+import { Difficulty as DiffComponent } from "~/components/atoms/Difficulty.tsx"
+import { Music } from "~/components/atoms/Music.tsx"
 
 export const MyRecord = (props: Props) => {
   const [ isHovers, setHovers ] = useState(new Array<boolean>(Object.keys(difficulty).length).fill(false))

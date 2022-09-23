@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react"
-import { ThemeCtx } from "../hooks/useTheme.tsx"
-import { SignInForm } from "../components/SignInForm.tsx"
-import { SignUpForm } from "../components/SignUpForm.tsx"
-import { Toggle, ToggleStyle } from "../components/Toggle.tsx"
-import { GithubIcon } from "../components/GithubIcon.tsx"
+import { ThemeCtx } from "~/hooks/useTheme.tsx"
+import { SignInForm } from "~/components/organisms/SignInForm.tsx"
+import { SignUpForm } from "~/components/organisms/SignUpForm.tsx"
+import { Toggle, ToggleStyle } from "~/components/atoms/Toggle.tsx"
+import { GithubIcon } from "~/components/atoms/GithubIcon.tsx"
 import { useDelayCallback } from "../hooks/useDelayCallback.ts"
 
 const Index: React.FC = () => {

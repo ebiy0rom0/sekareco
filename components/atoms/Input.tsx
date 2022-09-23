@@ -1,5 +1,5 @@
 import React from "react"
-import { ThemeCtx } from "../hooks/useTheme.tsx"
+import { ThemeCtx } from "~/hooks/useTheme.tsx"
 
 export const Input = (props: Props) => (
   <ThemeCtx.Consumer>

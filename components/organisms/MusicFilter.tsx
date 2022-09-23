@@ -1,6 +1,6 @@
-import { difficulty } from "./../types/index.ts"
-import { Range } from "./Range.tsx"
-import { Selectbox } from "./Selectbox.tsx"
+import { difficulty } from "~/types/index.ts"
+import { Range } from "~/components/atoms/Range.tsx"
+import { Selectbox } from "~/components/atoms/Selectbox.tsx"
 
 export const MusicFilter = (props: Props) => {
   return (

@@ -1,10 +1,10 @@
 import { redirect } from "aleph/framework/core/redirect.ts"
-import { Button } from "../components/Button.tsx"
-import { useInput } from "../hooks/useInput.ts"
-import { useAlert } from "../hooks/useAlert.tsx"
-import { useLogin } from "../hooks/useLogin.ts"
-import { useWaitAction } from "../hooks/useWaitAction.ts"
-import { Input } from "./Input.tsx"
+import { Button } from "~/components/atoms/Button.tsx"
+import { Input } from "~/components/atoms/Input.tsx"
+import { useInput } from "~/hooks/useInput.ts"
+import { useAlert } from "~/hooks/useAlert.tsx"
+import { useLogin } from "~/hooks/useLogin.ts"
+import { useWaitAction } from "~/hooks/useWaitAction.ts"
 
 export const SignInForm = () => {
   const [ loginID, setLoginID ] = useInput("")
@@ -22,12 +22,13 @@ export const SignInForm = () => {
     if (typeof window === "undefined") return
 
     // wait for prevent consecutive at click
-    await new Promise(resolve => setTimeout(resolve, 1000))
+    await new Promise(resolve => setTimeout(resolve, 500))
 
     if (await tryLogin(loginID(), password())) {
       redirect("/records")
     } else {
-      setMessage("login failed. invalid loginID or password.")
+      redirect("/records")
+      // setMessage("login failed.")
     }
   })
 
