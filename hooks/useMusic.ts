@@ -1,6 +1,6 @@
-/// <reference types="./../types/index.d.ts" />
+/// <reference types="~/types/index.d.ts" />
 import { useState, useEffect } from "react"
-import { apiFactory } from "../api/apiFactory.ts"
+import { apiFactory } from "~/api/apiFactory.ts"
 
 // custom hook
 export const useMusic = () => {

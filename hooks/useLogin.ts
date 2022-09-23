@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
-import { apiFactory } from "../api/apiFactory.ts"
-import { setAuth } from "../api/handler/apiHandler.ts"
-import { useSessionStorage } from "../utils/useSessionStorage.ts"
+import { apiFactory } from "~/api/apiFactory.ts"
+import { setAuth } from "~/api/handler/apiHandler.ts"
+import { useSessionStorage } from "~/utils/useSessionStorage.ts"
 
 export const useLogin = (reloadKey = 0) => {
   const key = "token"

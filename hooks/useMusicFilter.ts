@@ -1,7 +1,7 @@
-/// <reference types="./../types/index.d.ts" />
+/// <reference types="~/types/index.d.ts" />
 import { useState, useEffect } from "react"
-import { difficulty, Difficulty } from "../types/index.ts"
-import { useRange } from "./useRange.ts"
+import { difficulty, Difficulty } from "~/types/index.ts"
+import { useRange } from "~/hooks/useRange.ts"
 
 export const useMusicFilter = (
   music: M_Music.Music[],
