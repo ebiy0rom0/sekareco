@@ -6,7 +6,7 @@ export const ThemeCtx = createContext<Theme>({
 })
 
 export const useTheme = () => {
-  const [ dark, setDark ] = useState(true)
+  const [ dark, setDark ] = useState(false)
   const context: Theme = {
     darkMode: dark,
     switchMode: () => setDark(!dark)
