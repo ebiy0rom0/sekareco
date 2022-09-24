@@ -25,10 +25,10 @@ const MyApp: React.FC<Props> = props => {
             <Head>
               <title>プロセカの記録帳</title>
             </Head>
-            <div className={ `relative ${darkMode ? "bg-slate-800 text-slate-400" : "bg-slate-100 text-slate-800"} overflow-hidden` }>
+            <div className={ `${darkMode ? "bg-slate-800 text-slate-400" : "bg-slate-100 text-slate-800"}` }>
               { !isLogin ? (
                 <>
-                  <div className="sticky top-0 w-full flex-none border-b border-slate-500/40">
+                  <div className="sticky top-0 z-20 w-full flex-none border-b border-slate-500/40 backdrop-blur-md">
                     <div className="max-w-[100em] px-10 py-3 mx-auto">
                       <Header />
                     </div>
