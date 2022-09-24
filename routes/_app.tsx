@@ -25,7 +25,7 @@ const MyApp: React.FC<Props> = props => {
             <Head>
               <title>プロセカの記録帳</title>
             </Head>
-            <div className={ (darkMode ? "bg-slate-800 text-slate-400" : "bg-slate-100 text-slate-800") }>
+            <div className={ `relative ${darkMode ? "bg-slate-800 text-slate-400" : "bg-slate-100 text-slate-800"} overflow-hidden` }>
               { !isLogin ? (
                 <>
                   <div className="sticky top-0 w-full flex-none border-b border-slate-500/40">
@@ -64,8 +64,8 @@ const MyApp: React.FC<Props> = props => {
                   </div>
                 </>
               ) : (
-                <div className="max-w-[100em] mx-auto w-4/5 py-8 flex flex-col items-center">
-                  <div className="flex min-h-[80vh] justify-around place-items-center">
+                <div className="flex flex-col max-w-[100em] mx-auto w-4/5 py-8 items-center">
+                  <div className="flex min-h-[77vh] justify-around place-items-center">
                     { props.children }
                   </div>
                   <div

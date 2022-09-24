@@ -18,8 +18,8 @@ export const MyRecord = (props: Props) => {
       <div className="music__master flex-none w-68 border-r">
         <Music title={ props.title } url={ props.url } />
       </div>
-      <div className="music__record w-auto flex flex-col py-2 px-3">
-        <div className="difficulty grid grid-cols-5 gap-x-6">
+      <div className="music__record w-full flex flex-col py-2 px-3">
+        <div className="difficulty grid grid-cols-5 justify-items-center">
           { Object.values(props.filter).map(v => (
             <DiffComponent
               key={ v.toString() }
@@ -29,7 +29,7 @@ export const MyRecord = (props: Props) => {
           )) }
         </div>
         <div
-          className="record grid grid-cols-5 gap-x-6 mt-1 justify-items-center"
+          className="record grid grid-cols-5 mt-1 justify-items-center"
         >
           { Object.values(props.filter).map(v => isHovers[v] ? (
             <div
@@ -46,7 +46,7 @@ export const MyRecord = (props: Props) => {
           ) : (
             <div
               key={ v.toString() }
-              className="w-full text-center"
+              className="text-center h-[20px]"
               onMouseEnter={ () => changeMyHoverState(v, true) }
             >
               <Clear status={ props.result[v] ?? clearStatus.NOPLAY } />

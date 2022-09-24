@@ -36,7 +36,7 @@ const Records: React.FC = () => {
   } = useRecordFilter(difficulty)
 
   return (
-    <div className="list flex flex-col w-3/4">
+    <div className="list flex flex-col">
       <h2 className="list__head">
         <span>Player Records</span>
       </h2>
