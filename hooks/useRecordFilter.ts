@@ -17,7 +17,7 @@ export const useRecordFilter = <T extends {[s: string]: number}, U extends T[key
   const min = () => Math.min(...Object.values(filteredList))
   const max = () => Math.max(...Object.values(filteredList))
 
-  // check already filterd
+  // check already filtered
   const isFiltered = (checkVal: number) => whiteList.some(d => d === checkVal)
 
   return {

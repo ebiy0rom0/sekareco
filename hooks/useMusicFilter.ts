@@ -5,8 +5,8 @@ import { useRange } from "~/hooks/useRange.ts"
 
 export const useMusicFilter = (
   music: M_Music.Music[],
-  levelLower: (n: number) => number,
-  levelUpper: (n: number) => number
+  levelLower: (n: Difficulty) => number,
+  levelUpper: (n: Difficulty) => number
 ) => {
   const [ filterDifficulty, setFilterDifficulty ] = useState<Difficulty>(difficulty.MASTER)
   const {
