@@ -1,4 +1,3 @@
-import React from "react"
 import { difficulty, Difficulty } from "~/types/index.ts"
 import { MyRecord } from "~/components/molecules/MyRecord.tsx"
 import { MusicFilter } from "~/components/organisms/MusicFilter.tsx"
@@ -10,7 +9,7 @@ import { useRecordFilter } from "~/hooks/useRecordFilter.ts"
 
 const Records: React.FC = () => {
   return (
-    <div className="list flex flex-col w-3/4">
+    <div className="list flex flex-col">
       <h2 className="list__head">
         <span>Profile</span>
       </h2>

@@ -4,20 +4,21 @@
       "dom",
       "dom.iterable",
       "dom.asynciterable",
+      "dom.extras",
       "deno.ns"
     ],
     "types": [
-      "https://deno.land/x/aleph@1.0.0-alpha.60/types.d.ts",
+      "https://deno.land/x/aleph@1.0.0-beta.16/types.d.ts",
       "./types/index.d.ts"
     ],
     "jsx": "react-jsx",
-    "jsxImportSource": "https://esm.sh/react@18.0.0"
+    "jsxImportSource": "https://esm.sh/react@18.2.0"
   },
-  "importMap": "./import_map.json",
+  "importMap": "import_map.json",
   "tasks": {
-    "dev": "denon run --allow-net=:8080 -A https://deno.land/x/aleph@1.0.0-alpha.60/cli.ts dev",
-    "start": "deno run --allow-net=:8080 -A https://deno.land/x/aleph@1.0.0-alpha.60/cli.ts start",
-    "build": "deno run --allow-net=:8080 -A https://deno.land/x/aleph@1.0.0-alpha.60/cli.ts build",
+    "dev": "deno run -A dev.ts",
+    "start": "deno run -A server.ts",
+    "opt": "deno run -A server.ts --optimize",
     "lint": "deno lint",
     "fmt": "deno fmt"
   },

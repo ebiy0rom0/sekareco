@@ -1,4 +1,4 @@
-import { redirect } from "aleph/framework/core/redirect.ts"
+import { redirect } from "aleph/runtime/core/redirect.ts"
 import { Button } from "~/components/atoms/Button.tsx"
 import { Input } from "~/components/atoms/Input.tsx"
 import { useInput } from "~/hooks/useInput.ts"
@@ -59,7 +59,6 @@ export const SignInForm = () => {
             disabled:cursor-not-allowed
             disabled:opacity-85
           "
-          onClick={ ()=>alert("sign in") }
           wait={ waiting() }
         >
           { waiting() ? "please wait..." : "sign in" }
