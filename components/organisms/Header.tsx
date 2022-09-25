@@ -8,18 +8,16 @@ export const Header = React.memo(() => (
   <ThemeCtx.Consumer>
     {({ darkMode, switchMode }) => (
       <div className="header flex items-center">
-        <h3 className="header__title m-0">プロセカの記録帳</h3>
-        <div className="flex items-center gap-x-10 ml-auto">
+        <span className="header__title m-0 text-lg font-bold">プロセカの記録帳</span>
+        <div className="flex items-center gap-x-5 ml-auto">
+          <GithubIcon />
           <Toggle
             mode={!darkMode}
             style={ToggleStyle.THEME}
             role={switchMode}
           />
-          <div className="pt-2">
-            <GithubIcon />
-          </div>
           <Button
-            className="bg-rose-600 text-slate-100 text-base"
+            className="bg-rose-600 text-slate-100 text-sm py-1 px-2"
             onClick={() => alert("wip")}
           >
             sign out

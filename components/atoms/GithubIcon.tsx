@@ -7,10 +7,10 @@ export const GithubIcon = (props: Props) => (
         <span className="sr-only">Link to GitHub</span>
         <img
           src="/assets/github.svg"
-          height={props?.size ?? 30}
-          width={props?.size ?? 30}
+          height={props?.size ?? 25}
+          width={props?.size ?? 25}
           title="GitHub"
-          className={"hover:opacity-80 fill-blue-500" +
+          className={"hover:opacity-70" +
             (darkMode ? " invert" : "")}
         />
       </a>

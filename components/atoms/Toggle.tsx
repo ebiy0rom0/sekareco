@@ -2,13 +2,13 @@
 
 export const Toggle = (props: Props) => (
   <div
-    className={"grid gap-x-3 w-[55px] h-[30px] rounded-full " + (props.mode
+    className={"grid gap-x-3 w-[50px] h-[25px] rounded-full " + (props.mode
       ? "justify-items-start bg-gray-300"
       : "justify-items-end bg-gray-600")}
     onClick={props.role}
   >
     <div
-      className={"grid place-items-center rounded-full bg-slate-700 w-[30px] scale-110 ring-1 " +
+      className={"grid place-items-center rounded-full bg-slate-700 w-[25px] scale-120 ring-1 " +
         (props.mode ? "bg-white toggle-on" : "bg-slate-900 toggle-off")}
     >
       <Selector style={props.style} mode={props.mode} />
@@ -21,8 +21,8 @@ const Default = () => <></>;
 const Theme = (props: { mode: boolean }) => (
   <img
     src={props.mode ? "/assets/m_light.svg" : "/assets/m_dark.svg"}
-    height="20"
-    width="20"
+    height="18"
+    width="18"
     className={props.mode ? "" : "invert"}
   />
 );
