@@ -6,10 +6,10 @@ export const Music = React.memo((props: Props) => (
       {props.title}
     </label>
     <img
-      height="53"
-      width="53"
+      height="60"
+      width="60"
       src={props.url}
-      className="inline-block"
+      className="inline-block rounded-l"
       onError={(e) =>
         (e.target as HTMLImageElement).src = "/assets/logo.svg"}
     />

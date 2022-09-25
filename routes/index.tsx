@@ -17,32 +17,30 @@ const Index: React.FC = () => {
           <div className="grid gap-y-5">
             <div className="flex gap-x-5">
               {"プロセカの".split("").map((s, i) => (
-                <h1 key={i.toString()}>
-                  <span
-                    className={"text-6xl font-bold" + (i == 0
-                      ? " text-cyan-400"
-                      : darkMode
-                      ? " text-slate-300"
-                      : " text-slate-600")}
-                  >
-                    {s}
-                  </span>
-                </h1>
+                <span
+                  key={i.toString()}
+                  className={"text-6xl font-bold" + (i == 0
+                    ? " text-cyan-400"
+                    : darkMode
+                    ? " text-slate-300"
+                    : " text-slate-600")}
+                >
+                  {s}
+                </span>
               ))}
             </div>
             <div className="flex gap-x-5 flex-row-reverse mt-5">
               {"記録帳".split("").reverse().map((s, i) => (
-                <h1 key={i.toString()}>
-                  <span
-                    className={"text-6xl font-bold" + (i == 2
-                      ? " text-pink-500/90"
-                      : darkMode
-                      ? " text-slate-300"
-                      : " text-slate-600")}
-                  >
-                    {s}
-                  </span>
-                </h1>
+                <span
+                  key={i.toString()}
+                  className={"text-6xl font-bold" + (i == 2
+                    ? " text-pink-500/90"
+                    : darkMode
+                    ? " text-slate-300"
+                    : " text-slate-600")}
+                >
+                  {s}
+                </span>
               ))}
             </div>
             <div className="flex items-center overflow-hidden bg-slate-400 w-[384px] h-[256px] rounded-lg">

@@ -62,7 +62,7 @@ const Records: React.FC = () => {
           isChecked={isFiltered}
         />
       </div>
-      <div className="list__items mt-4">
+      <div className="list__items grid gap-y-3">
         {getFilteredMusic().map((m) => (
           <MyRecord
             key={m.musicID.toString()}
