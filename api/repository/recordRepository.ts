@@ -1,6 +1,6 @@
-/// <reference types="./../../types/index.d.ts" />
-import { ClearStatus } from "./../../types/index.ts"
-import { getApiHandler } from "../handler/apiHandler.ts"
+/// <reference types="~/types/index.d.ts" />
+import { ClearStatus } from "~/types/index.ts"
+import { getApiHandler } from "~/api/handler/apiHandler.ts"
 
 export const recordRepository = {
   // when successfully get, returns score and clear status by parameter person's

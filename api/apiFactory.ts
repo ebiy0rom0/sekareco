@@ -1,6 +1,6 @@
-import { musicRepository } from "./repository/musicRepository.ts"
-import { personRepository } from "./repository/personRepository.ts"
-import { recordRepository } from "./repository/recordRepository.ts"
+import { musicRepository } from "~/api/repository/musicRepository.ts"
+import { personRepository } from "~/api/repository/personRepository.ts"
+import { recordRepository } from "~/api/repository/recordRepository.ts"
 
 type Repositories = {
   music:  typeof musicRepository,
