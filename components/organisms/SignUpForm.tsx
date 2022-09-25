@@ -52,7 +52,7 @@ export const SignUpForm = React.memo(() => {
         className="
           w-full
           mt-5
-          text-white-200
+          text-slate-100
           bg-blue-600
           enabled:hover:bg-blue-500
           enabled:active:bg-blue-700

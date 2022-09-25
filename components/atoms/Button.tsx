@@ -1,15 +1,14 @@
 export const Button = (props: Props) => (
   <button
     type={props?.type ?? "button"}
-    className={[
-      "text-lg",
-      "font-bold",
-      "py-2",
-      "px-4",
-      "border-none",
-      "rounded-lg",
-      props?.className,
-    ].join(" ")}
+    className={`
+      inline-flex items-center justify-center
+      text-lg font-bold
+      py-2 px-4
+      border-none
+      rounded-lg
+      ${props?.className}
+    `}
     onClick={props?.onClick}
     disabled={props?.wait ?? false}
   >

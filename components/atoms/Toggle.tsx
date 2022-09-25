@@ -22,6 +22,7 @@ const Theme = (props: { mode: boolean }) => (
   <img
     src={props.mode ? "/assets/m_light.svg" : "/assets/m_dark.svg"}
     height="20"
+    width="20"
     className={props.mode ? "" : "invert"}
   />
 );

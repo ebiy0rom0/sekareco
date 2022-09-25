@@ -24,9 +24,9 @@ export const SignInForm = () => {
     await new Promise((resolve) => setTimeout(resolve, 500));
 
     if (await tryLogin(loginID(), password())) {
-      redirect("/records");
+      // redirect("/records");
     } else {
-      redirect("/records");
+      // redirect("/records");
       // setMessage("login failed.")
     }
   });
@@ -34,7 +34,7 @@ export const SignInForm = () => {
   return (
     <form
       className="flex flex-col gap-y-7"
-      onSubmit={async (e) => await waitSignIn(e)}
+      onSubmit={async e => await waitSignIn(e)}
     >
       {renderAlert()}
       <Input
@@ -54,7 +54,7 @@ export const SignInForm = () => {
         type="submit"
         className="
             w-full
-            text-white-200
+            text-slate-100
             bg-blue-600
             enabled:hover:bg-blue-500
             enabled:active:bg-blue-700

@@ -32,7 +32,7 @@ const MyApp: React.FC<Props> = (props) => {
                   : "bg-slate-100 text-slate-800"
               }`}
             >
-              {!isLogin
+              {isLogin
                 ? (
                   <>
                     <div className="sticky top-0 z-20 w-full flex-none border-b border-slate-500/40 backdrop-blur-md">

@@ -8,6 +8,7 @@ export const GithubIcon = (props: Props) => (
         <img
           src="/assets/github.svg"
           height={props?.size ?? 30}
+          width={props?.size ?? 30}
           title="GitHub"
           className={"hover:opacity-80 fill-blue-500" +
             (darkMode ? " invert" : "")}

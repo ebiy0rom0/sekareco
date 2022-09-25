@@ -19,7 +19,7 @@ export const Header = React.memo(() => (
             <GithubIcon />
           </div>
           <Button
-            className="bg-rose-600 text-white-200 text-base"
+            className="bg-rose-600 text-slate-100 text-base"
             onClick={() => alert("wip")}
           >
             sign out
