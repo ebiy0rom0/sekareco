@@ -27,7 +27,8 @@
       "exclude": [
         ".vscode/",
         "deno.json",
-        "import_map.json"
+        "import_map.json",
+        "README.md"
       ]
     }
   },

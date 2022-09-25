@@ -1,45 +1,49 @@
-import { getApiHandler } from "../handler/apiHandler.ts"
+import { getApiHandler } from "~/api/handler/apiHandler.ts";
 
 export const personRepository = {
-  // when successfully sign in, returns access token
   login: async (loginID: string, password: string) => {
+    // when successfully sign in, returns access token
     const json = await getApiHandler()
-        .post("signin", {
-          json: {
-            login_id: loginID,
-            password: password
-          }
-        })
-        .json<string>()
-        .catch<string>(_ => "")
+      .post("signin", {
+        json: {
+          login_id: loginID,
+          password: password,
+        },
+      })
+      .json<string>()
+      .catch<string>((_) => "");
 
-    return json
+    return json;
   },
 
-  // when successfully regist, returns status 201 and not returns response body
   registPerson: async (loginID: string, name: string, password: string) => {
+    // when successfully regist, returns status 201 and not returns response body
     await getApiHandler()
-        .post("signup", {
-          json: {
-            login_id: loginID,
-            password: password,
-            person_name: name
-          }
-        })
-        .json()
-        .catch()
+      .post("signup", {
+        json: {
+          login_id: loginID,
+          password: password,
+          person_name: name,
+        },
+      })
+      .json()
+      .catch();
   },
 
-  // when successfully modify, returns status 201 and not returns response body
-  modifyPersonStatus: async (personID: number, name?: string, password?: string) => {
+  modifyPersonStatus: async (
+    personID: number,
+    name?: string,
+    password?: string,
+  ) => {
+    // when successfully modify, returns status 201 and not returns response body
     await getApiHandler()
-        .put(`persons/${personID}`, {
-          json: {
-            person_name: name,
-            password: password
-          }
-        })
-        .json()
-        .catch()
-  }
-}
+      .put(`persons/${personID}`, {
+        json: {
+          person_name: name,
+          password: password,
+        },
+      })
+      .json()
+      .catch();
+  },
+};

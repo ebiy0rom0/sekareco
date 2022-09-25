@@ -1,14 +1,14 @@
 /// <reference types="~/types/index.d.ts" />
-import { getApiHandler } from "~/api/handler/apiHandler.ts"
+import { getApiHandler } from "~/api/handler/apiHandler.ts";
 
 export const musicRepository = {
-  // when successfully get, returns music master data
   getMusicList: async () => {
+    // when successfully get, returns music master data
     const json = await getApiHandler()
-        .get("musics")
-        .json<M_Music.Music[]>()
-        .catch<M_Music.Music[]>(_ => [])
+      .get("musics")
+      .json<M_Music.Music[]>()
+      .catch<M_Music.Music[]>((_) => []);
 
-    return json
-  }
-}
+    return json;
+  },
+};

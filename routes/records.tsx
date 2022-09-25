@@ -1,25 +1,25 @@
-import React from "react"
-import { difficulty, Difficulty } from "~/types/index.ts"
-import { MyRecord } from "~/components/molecules/MyRecord.tsx"
-import { MusicFilter } from "~/components/organisms/MusicFilter.tsx"
-import { RecordFilter } from "~/components/organisms/RecordFilter.tsx"
-import { useMusic } from "~/hooks/useMusic.ts"
-import { useRecord } from "~/hooks/useRecord.ts"
-import { useMusicFilter } from "~/hooks/useMusicFilter.ts"
-import { useRecordFilter } from "~/hooks/useRecordFilter.ts"
+import React from "react";
+import { Difficulty, difficulty } from "~/types/index.ts";
+import { MyRecord } from "~/components/molecules/MyRecord.tsx";
+import { MusicFilter } from "~/components/organisms/MusicFilter.tsx";
+import { RecordFilter } from "~/components/organisms/RecordFilter.tsx";
+import { useMusic } from "~/hooks/useMusic.ts";
+import { useRecord } from "~/hooks/useRecord.ts";
+import { useMusicFilter } from "~/hooks/useMusicFilter.ts";
+import { useRecordFilter } from "~/hooks/useRecordFilter.ts";
 
 const Records: React.FC = () => {
   const {
     levelUpper,
     levelLower,
     music,
-  } = useMusic()
+  } = useMusic();
 
   const {
     getMusicRecord,
     increment,
-    decrement
-  } = useRecord(1)
+    decrement,
+  } = useRecord(1);
   const {
     filterDifficulty,
     lowerFilter,
@@ -27,13 +27,13 @@ const Records: React.FC = () => {
     changeDifficulty,
     changeLowerFilter,
     changeUpperFilter,
-    getFilteredMusic
-  } = useMusicFilter(music(), levelLower, levelUpper)
+    getFilteredMusic,
+  } = useMusicFilter(music(), levelLower, levelUpper);
   const {
     whiteList: recordDifficulty,
     changeWhiteList: changeRecordDifficulty,
     isFiltered,
-  } = useRecordFilter(difficulty)
+  } = useRecordFilter(difficulty);
 
   return (
     <div className="list flex flex-col">
@@ -42,42 +42,42 @@ const Records: React.FC = () => {
       </h2>
       <div className="list__filter">
         <MusicFilter
-          levelLower={ levelLower(filterDifficulty()) }
-          levelUpper={ levelUpper(filterDifficulty()) }
+          levelLower={levelLower(filterDifficulty())}
+          levelUpper={levelUpper(filterDifficulty())}
           target={{
-            value:  filterDifficulty(),
-            setter: changeDifficulty
+            value: filterDifficulty(),
+            setter: changeDifficulty,
           }}
           lower={{
-            value:  lowerFilter(),
-            setter: changeLowerFilter
+            value: lowerFilter(),
+            setter: changeLowerFilter,
           }}
           upper={{
             value: upperFilter(),
-            setter: changeUpperFilter
+            setter: changeUpperFilter,
           }}
         />
         <RecordFilter
-          setter={ changeRecordDifficulty }
-          isChecked={ isFiltered }
+          setter={changeRecordDifficulty}
+          isChecked={isFiltered}
         />
       </div>
       <div className="list__items mt-4">
-        { getFilteredMusic().map(m => (
+        {getFilteredMusic().map((m) => (
           <MyRecord
-            key={ m.musicID.toString() }
-            title={ m.musicName }
-            url={ m.jacketUrl }
-            result={ getMusicRecord(m.musicID) }
-            filter={ recordDifficulty() }
-            level={ m.level }
-            increment={ (status: Difficulty) => increment(m.musicID, status) }
-            decrement={ (status: Difficulty) => decrement(m.musicID, status) }
+            key={m.musicID.toString()}
+            title={m.musicName}
+            url={m.jacketUrl}
+            result={getMusicRecord(m.musicID)}
+            filter={recordDifficulty()}
+            level={m.level}
+            increment={(status: Difficulty) => increment(m.musicID, status)}
+            decrement={(status: Difficulty) => decrement(m.musicID, status)}
           />
-        )) }
+        ))}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Records
+export default Records;

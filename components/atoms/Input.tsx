@@ -1,14 +1,14 @@
-import React from "react"
-import { ThemeCtx } from "~/hooks/useTheme.tsx"
+import React from "react";
+import { ThemeCtx } from "~/hooks/useTheme.tsx";
 
 export const Input = (props: Props) => (
   <ThemeCtx.Consumer>
-    { ({ darkMode }) => (
-      <label htmlFor={ props.id } className={ props?.className }>
-        <strong className="ms-1">{ props.labelName }</strong>
+    {({ darkMode }) => (
+      <label htmlFor={props.id} className={props?.className}>
+        <strong className="ms-1">{props.labelName}</strong>
         <input
-          id={ props.id }
-          className={ [
+          id={props.id}
+          className={[
             "block box-border",
             "text-lg tracking-widest",
             darkMode ? "text-slate-300/80" : "text-slate-700/80",
@@ -21,28 +21,28 @@ export const Input = (props: Props) => (
             darkMode ? "focus:bg-slate-600/90" : "focus:bg-slate-200/90",
             "focus:caret-sky-500",
             "focus:ring-2 focus:ring-sky-700",
-            "peer"
-          ].join(" ") }
-          type={ props.type }
-          value={ props?.value }
-          onChange={ props.onChange }
-          placeholder={ props?.placeholder }
+            "peer",
+          ].join(" ")}
+          type={props.type}
+          value={props?.value}
+          onChange={props.onChange}
+          placeholder={props?.placeholder}
         />
         <p className="mt-2 invisible peer-required:visible text-red-500">
-          { props?.invalidText }
+          {props?.invalidText}
         </p>
       </label>
     )}
   </ThemeCtx.Consumer>
-)
+);
 
 type Props = {
-  id: string
-  labelName: string
-  type: "text" | "password"
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
-  className?: string
-  value?: string
-  placeholder?: string
-  invalidText?: string
-}
+  id: string;
+  labelName: string;
+  type: "text" | "password";
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  className?: string;
+  value?: string;
+  placeholder?: string;
+  invalidText?: string;
+};

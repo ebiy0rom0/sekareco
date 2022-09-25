@@ -1,42 +1,51 @@
-import React, { useMemo } from "react"
-import { useInput } from "~/hooks/useInput.ts"
-import { useWaitAction } from "~/utils/useWaitAction.ts"
-import { Input } from "~/components/atoms/Input.tsx"
-import { Button } from "~/components/atoms/Button.tsx"
-import { apiFactory } from "~/api/apiFactory.ts"
+import React, { useMemo } from "react";
+import { useInput } from "~/hooks/useInput.ts";
+import { useWaitAction } from "~/utils/useWaitAction.ts";
+import { Input } from "~/components/atoms/Input.tsx";
+import { Button } from "~/components/atoms/Button.tsx";
+import { apiFactory } from "~/api/apiFactory.ts";
 
 export const SignUpForm = React.memo(() => {
-  const [ loginID, setLoginID ] = useInput("")
-  const [ password, setPassword ] = useInput("")
-  const [ personName, setPersonName ] = useInput("")
+  const [loginID, setLoginID] = useInput("");
+  const [password, setPassword] = useInput("");
+  const [personName, setPersonName] = useInput("");
 
   const {
     waiting,
-    fn: waitRegistPerson
-  } = useWaitAction(async () => await apiFactory.get("person").registPerson(loginID(), password(), personName()))
+    fn: waitRegistPerson,
+  } = useWaitAction(async () =>
+    await apiFactory.get("person").registPerson(
+      loginID(),
+      password(),
+      personName(),
+    )
+  );
 
   return (
-    <form className="flex flex-col gap-y-7" onSubmit={() => alert("submit")}>
+    <form
+      className="flex flex-col gap-y-7"
+      onSubmit={() => alert("submit")}
+    >
       <Input
         id="up-loginId"
         labelName="ログインID"
         type="text"
-        value={ loginID() }
-        onChange={ setLoginID }
+        value={loginID()}
+        onChange={setLoginID}
       />
       <Input
         id="up-name"
         labelName="ユーザー名"
         type="text"
-        value={ personName() }
-        onChange={ setPersonName }
+        value={personName()}
+        onChange={setPersonName}
       />
       <Input
         id="up-password"
         labelName="パスワード"
         type="password"
-        value={ password() }
-        onChange={ setPassword }
+        value={password()}
+        onChange={setPassword}
       />
       <Button
         type="submit"
@@ -51,11 +60,11 @@ export const SignUpForm = React.memo(() => {
           disabled:cursor-not-allowed
           disabled:opacity-85
         "
-        onClick={ waitRegistPerson as () => Promise<void> }
-        wait={ waiting() }
+        onClick={waitRegistPerson as () => Promise<void>}
+        wait={waiting()}
       >
-        { waiting() ? "please wait..." : "sign up" }
+        {waiting() ? "please wait..." : "sign up"}
       </Button>
     </form>
-  )
-})
+  );
+});
