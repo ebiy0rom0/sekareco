@@ -1,38 +1,36 @@
-import { useState, useRef, useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ThemeCtx } from "~/hooks/useTheme.tsx";
-import {
-  ClearStatus,
-  clearStatus,
-  Difficulty,
-} from "~/types/index.ts";
+import { ClearStatus, clearStatus, Difficulty } from "~/types/index.ts";
 import { Clear } from "~/components/atoms/Clear.tsx";
 import { Difficulty as DiffComponent } from "~/components/atoms/Difficulty.tsx";
 import { Music } from "~/components/atoms/Music.tsx";
 
 export const MyRecord = (props: Props) => {
-  const [view, setView] = useState(false)
-  const recordRef = useRef<HTMLDivElement>(null)
+  const [view, setView] = useState(false);
+  const recordRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      const clientRect = recordRef.current?.getBoundingClientRect()
+      const clientRect = recordRef.current?.getBoundingClientRect();
 
       if (typeof clientRect === "undefined") return;
 
-      const check = view ? clientRect.top <= (window.innerHeight * 1.05) : clientRect.top <= (window.innerHeight * 0.95)
-      setView(check)
+      const check = view
+        ? clientRect.top <= (window.innerHeight * 1.05)
+        : clientRect.top <= (window.innerHeight * 0.95);
+      setView(check);
     }, 100);
     return () => clearInterval(interval);
-  }, [])
+  }, []);
 
   return (
     <ThemeCtx.Consumer>
       {({ darkMode }) => (
         <div
-          ref={ recordRef }
+          ref={recordRef}
           className={`
             flex rounded
-            ${ view ? "opacity-100" : "opacity-0 -translate-y-6" }
+            ${view ? "opacity-100" : "opacity-0 -translate-y-6"}
             transition duration-700 ease-out
             ${
             darkMode
@@ -71,7 +69,7 @@ export const MyRecord = (props: Props) => {
         </div>
       )}
     </ThemeCtx.Consumer>
-  )
+  );
 };
 
 type Props = {

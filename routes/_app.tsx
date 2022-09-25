@@ -35,13 +35,18 @@ const MyApp: React.FC<Props> = (props) => {
               {isLogin
                 ? (
                   <>
-                    <div className={`sticky top-0 z-20 w-full flex-none border-b ${darkMode ? "border-slate-200/20" : "border-slate-400/30"} backdrop-blur-md`}>
+                    <div
+                      className={`sticky top-0 z-20 w-full flex-none border-b ${
+                        darkMode ? "border-slate-200/20" : "border-slate-400/30"
+                      } backdrop-blur-md`}
+                    >
                       <div className="max-w-[100em] px-10 py-2 mx-auto">
                         <Header />
                       </div>
                     </div>
                     <div className="max-w-[90em] mx-auto py-8">
-                      <div className={`
+                      <div
+                        className={`
                         fixed
                         box-border
                         right-[max(0px,calc(50%-45rem))]
@@ -49,18 +54,29 @@ const MyApp: React.FC<Props> = (props) => {
                         min-h-screen
                         pl-10 py-5
                         justify-center
-                        border-l ${darkMode ? "border-slate-200/20" : "border-slate-400/30"}
-                      `}>
+                        border-l ${
+                          darkMode
+                            ? "border-slate-200/20"
+                            : "border-slate-400/30"
+                        }
+                      `}
+                      >
                         <Navigation />
                       </div>
                       <div className="mr-[20em] px-5 items-center">
                         <div className="mx-5">
                           {props.children}
                         </div>
-                        <div className={`
-                          border-t ${darkMode ? "border-slate-200/20" : "border-slate-400/30"}
+                        <div
+                          className={`
+                          border-t ${
+                            darkMode
+                              ? "border-slate-200/20"
+                              : "border-slate-400/30"
+                          }
                           mt-10 pt-15 pb-7
-                        `}>
+                        `}
+                        >
                           <Footer />
                         </div>
                       </div>
@@ -72,11 +88,15 @@ const MyApp: React.FC<Props> = (props) => {
                     <div className="flex min-h-[77vh] justify-around place-items-center">
                       {props.children}
                     </div>
-                    <div className={`
-                      border-t ${darkMode ? "border-slate-200/20" : "border-slate-400/30"}
+                    <div
+                      className={`
+                      border-t ${
+                        darkMode ? "border-slate-200/20" : "border-slate-400/30"
+                      }
                       mt-6 pt-15 pb-10
                       min-w-full
-                    `}>
+                    `}
+                    >
                       <Footer />
                     </div>
                   </div>
