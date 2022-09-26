@@ -1,6 +1,6 @@
 import React from "react";
 import { Difficulty, difficulty } from "~/types/index.ts";
-import { MyRecord } from "~/components/molecules/MyRecord.tsx";
+import { Record } from "~/components/organisms/Record.tsx";
 import { MusicFilter } from "~/components/organisms/MusicFilter.tsx";
 import { RecordFilter } from "~/components/organisms/RecordFilter.tsx";
 import { useMusic } from "~/hooks/useMusic.ts";
@@ -37,10 +37,8 @@ const Records: React.FC = () => {
 
   return (
     <div className="list flex flex-col">
-      <h2 className="list__head">
-        <span>Player Records</span>
-      </h2>
-      <div className="list__filter">
+      <span className="text-2xl font-semibold">Player Records</span>
+      <div className="list__filter my-4">
         <MusicFilter
           levelLower={levelLower(filterDifficulty())}
           levelUpper={levelUpper(filterDifficulty())}
@@ -64,7 +62,7 @@ const Records: React.FC = () => {
       </div>
       <div className="list__items grid gap-y-3">
         {getFilteredMusic().map((m) => (
-          <MyRecord
+          <Record
             key={m.musicID.toString()}
             title={m.musicName}
             url={m.jacketUrl}
