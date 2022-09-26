@@ -5,7 +5,7 @@ import { Clear } from "~/components/atoms/Clear.tsx";
 import { Difficulty as DiffComponent } from "~/components/atoms/Difficulty.tsx";
 import { Music } from "~/components/atoms/Music.tsx";
 
-export const MyRecord = (props: Props) => {
+export const Record = (props: Props) => {
   const [view, setView] = useState(false);
   const recordRef = useRef<HTMLDivElement>(null);
 
