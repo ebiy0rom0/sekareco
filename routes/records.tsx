@@ -1,5 +1,6 @@
 import React from "react";
 import { Difficulty, difficulty } from "~/types/index.ts";
+import { Hamburger } from "~/components/atoms/Hamburger.tsx";
 import { Record } from "~/components/organisms/Record.tsx";
 import { MusicFilter } from "~/components/organisms/MusicFilter.tsx";
 import { RecordFilter } from "~/components/organisms/RecordFilter.tsx";
@@ -9,6 +10,7 @@ import { useMusicFilter } from "~/hooks/useMusicFilter.ts";
 import { useRecordFilter } from "~/hooks/useRecordFilter.ts";
 
 const Records: React.FC = () => {
+  const locate = Deno.env.get("test")
   const {
     levelUpper,
     levelLower,
@@ -37,28 +39,30 @@ const Records: React.FC = () => {
 
   return (
     <div className="list flex flex-col">
-      <span className="text-2xl font-semibold">Player Records</span>
-      <div className="list__filter my-4">
-        <MusicFilter
-          levelLower={levelLower(filterDifficulty())}
-          levelUpper={levelUpper(filterDifficulty())}
-          target={{
-            value: filterDifficulty(),
-            setter: changeDifficulty,
-          }}
-          lower={{
-            value: lowerFilter(),
-            setter: changeLowerFilter,
-          }}
-          upper={{
-            value: upperFilter(),
-            setter: changeUpperFilter,
-          }}
-        />
-        <RecordFilter
-          setter={changeRecordDifficulty}
-          isChecked={isFiltered}
-        />
+      <span className="text-2xl font-semibold"id={locate}>Player Records</span>
+      <div className="grid py-5 justify-items-end">
+        <Hamburger size={12}>
+          <MusicFilter
+            levelLower={levelLower(filterDifficulty())}
+            levelUpper={levelUpper(filterDifficulty())}
+            target={{
+              value: filterDifficulty(),
+              setter: changeDifficulty,
+            }}
+            lower={{
+              value: lowerFilter(),
+              setter: changeLowerFilter,
+            }}
+            upper={{
+              value: upperFilter(),
+              setter: changeUpperFilter,
+            }}
+          />
+          <RecordFilter
+            setter={changeRecordDifficulty}
+            isChecked={isFiltered}
+          />
+        </Hamburger>
       </div>
       <div className="list__items grid gap-y-3">
         {getFilteredMusic().map((m) => (
