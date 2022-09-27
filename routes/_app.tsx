@@ -32,7 +32,7 @@ const MyApp: React.FC<Props> = (props) => {
                   : "bg-slate-100 text-slate-800"
               }`}
             >
-              {isLogin
+              {!isLogin
                 ? (
                   <>
                     <div
@@ -40,17 +40,17 @@ const MyApp: React.FC<Props> = (props) => {
                         darkMode ? "border-slate-200/20" : "border-slate-400/30"
                       } backdrop-blur-md`}
                     >
-                      <div className="max-w-[100em] px-10 py-2 mx-auto">
+                      <div className="max-w-[110rem] px-10 py-2 mx-auto">
                         <Header />
                       </div>
                     </div>
-                    <div className="max-w-[90em] mx-auto py-8">
+                    <div className="max-w-[100rem] mx-auto py-8">
                       <div
                         className={`
                         fixed
                         box-border
-                        right-[max(0px,calc(50%-45rem))]
-                        w-[17em]
+                        right-[max(0px,calc(50%-50rem))]
+                        w-[17rem]
                         min-h-screen
                         pl-10 py-5
                         justify-center
@@ -63,7 +63,7 @@ const MyApp: React.FC<Props> = (props) => {
                       >
                         <Navigation />
                       </div>
-                      <div className="mr-[20em] px-5 items-center">
+                      <div className="mr-[20rem] px-5 items-center">
                         <div className="mx-5">
                           {props.children}
                         </div>
