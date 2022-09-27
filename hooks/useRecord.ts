@@ -53,12 +53,12 @@ export const useRecord = (personId: number) => {
 
   // select one music record
   const getStatus = useCallback(
-    (musicId: number) => recordList[musicId] ? recordList[musicId]["status"] : [],
+    (musicId: number) => recordList[musicId] ? recordList[musicId].status : [],
     [recordList],
   );
   // select one music record
   const getScore = useCallback(
-    (musicId: number) => recordList[musicId] ? recordList[musicId]["score"] : [],
+    (musicId: number) => recordList[musicId] ? recordList[musicId].score : [],
     [recordList],
   );
 
