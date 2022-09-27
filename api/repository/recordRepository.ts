@@ -11,6 +11,7 @@ export const recordRepository = {
     //   .catch<P_Record.Record<ClearStatus>>(() => ({}));
 
     // return json ?? {};
+    if (personId === 0) return
     return await testdata
   },
 

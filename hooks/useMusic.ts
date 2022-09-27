@@ -1,5 +1,5 @@
 /// <reference types="~/types/index.d.ts" />
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { apiFactory } from "~/api/apiFactory.ts";
 
 // custom hook
