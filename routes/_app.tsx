@@ -1,20 +1,12 @@
-import { useEffect, useState } from "react";
 import { useRouter } from "aleph/react";
 import { Head } from "aleph/react";
 import { Header } from "~/components/organisms/Header.tsx";
 import { Footer } from "~/components/organisms/Footer.tsx";
 import { Navigation } from "~/components/organisms/Navigation.tsx";
 import { ThemeCtx, useTheme } from "~/hooks/useTheme.tsx";
-import { useLogin } from "~/hooks/useLogin.ts";
 
 const MyApp: React.FC<Props> = (props) => {
-  // when screen transitions, update login status
-  const [reloadKey, setReloadKey] = useState(0);
-  useEffect(() => {
-    setReloadKey(reloadKey + 1);
-  }, [useRouter().url]);
-
-  const { isLogin } = useLogin(reloadKey);
+  const router = useRouter();
   const ThemeProvider = useTheme();
 
   return (
@@ -32,7 +24,7 @@ const MyApp: React.FC<Props> = (props) => {
                   : "bg-slate-100 text-slate-800"
               }`}
             >
-              {!isLogin
+              {router.url.pathname !== "/"
                 ? (
                   <>
                     <div
