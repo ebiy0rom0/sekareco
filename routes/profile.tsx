@@ -1,5 +1,5 @@
 import { Difficulty, difficulty } from "~/types/index.ts";
-import { MyRecord } from "~/components/molecules/MyRecord.tsx";
+import { Record } from "~/components/organisms/Record.tsx";
 import { MusicFilter } from "~/components/organisms/MusicFilter.tsx";
 import { RecordFilter } from "~/components/organisms/RecordFilter.tsx";
 import { useMusic } from "~/hooks/useMusic.ts";
