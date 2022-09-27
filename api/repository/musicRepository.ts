@@ -1,5 +1,5 @@
 /// <reference types="~/types/index.d.ts" />
-import { getApiHandler } from "~/api/handler/apiHandler.ts";
+// import { getApiHandler } from "~/api/handler/apiHandler.ts";
 
 export const musicRepository = {
   getMusicList: async () => {
@@ -51,13 +51,29 @@ const testdata = [
   {
     musicID: 5,
     artistID: 4,
+    musicName: "街",
+    jacketUrl: "/assets/jacket_xxx.png",
+    level: [6, 12, 16, 23, 27],
+    notes: [206, 288, 422, 668, 769],
+  },
+  {
+    musicID: 6,
+    artistID: 4,
+    musicName: "虚ろを扇ぐ",
+    jacketUrl: "/assets/jacket_xxx.png",
+    level: [5, 11, 17, 23, 27],
+    notes: [320, 455, 677, 908, 1112],
+  },
+  {
+    musicID: 7,
+    artistID: 4,
     musicName: "群青讃歌",
     jacketUrl: "/assets/jacket_005.png",
     level: [7, 13, 17, 24, 27],
     notes: [199, 344, 475, 711, 833],
   },
   {
-    musicID: 6,
+    musicID: 8,
     artistID: 4,
     musicName: "drop pop candy",
     jacketUrl: "/assets/jacket_006.png",
@@ -65,7 +81,7 @@ const testdata = [
     notes: [156, 322, 546, 773, 902],
   },
   {
-    musicID: 7,
+    musicID: 9,
     artistID: 4,
     musicName: "威風堂々",
     jacketUrl: "/assets/jacket_007.png",
@@ -73,7 +89,7 @@ const testdata = [
     notes: [188, 326, 604, 975, 1166],
   },
   {
-    musicID: 8,
+    musicID: 10,
     artistID: 4,
     musicName: "トラフィック・ジャム",
     jacketUrl: "/assets/jacket_008.png",
@@ -81,7 +97,7 @@ const testdata = [
     notes: [177, 371, 638, 896, 1089],
   },
   {
-    musicID: 9,
+    musicID: 11,
     artistID: 4,
     musicName: "ガランド",
     jacketUrl: "/assets/jacket_009.png",
@@ -89,7 +105,15 @@ const testdata = [
     notes: [157, 279, 404, 761, 943],
   },
   {
-    musicID: 10,
+    musicID: 12,
+    artistID: 4,
+    musicName: "阿吽のビーツ",
+    jacketUrl: "/assets/jacket_xxx.png",
+    level: [6, 13, 18, 23, 28],
+    notes: [203, 365, 588, 802, 918],
+  },
+  {
+    musicID: 13,
     artistID: 4,
     musicName: "Forward",
     jacketUrl: "/assets/jacket_010.png",
@@ -97,7 +121,7 @@ const testdata = [
     notes: [205, 350, 557, 659, 805],
   },
   {
-    musicID: 11,
+    musicID: 14,
     artistID: 4,
     musicName: "Beat Eater",
     jacketUrl: "/assets/jacket_011.png",
@@ -105,7 +129,7 @@ const testdata = [
     notes: [118, 251, 481, 772, 798],
   },
   {
-    musicID: 12,
+    musicID: 15,
     artistID: 4,
     musicName: "ミライ",
     jacketUrl: "/assets/jacket_012.png",
@@ -113,7 +137,7 @@ const testdata = [
     notes: [184, 419, 662, 1017, 1281],
   },
   {
-    musicID: 13,
+    musicID: 16,
     artistID: 4,
     musicName: "踊",
     jacketUrl: "/assets/jacket_013.png",
@@ -121,7 +145,7 @@ const testdata = [
     notes: [242, 409, 640, 882, 1083],
   },
   {
-    musicID: 14,
+    musicID: 17,
     artistID: 4,
     musicName: "雨とペトラ",
     jacketUrl: "/assets/jacket_014.png",
@@ -129,7 +153,7 @@ const testdata = [
     notes: [260, 489, 733, 976, 1206],
   },
   {
-    musicID: 15,
+    musicID: 18,
     artistID: 4,
     musicName: "PaⅢ.SENSATION",
     jacketUrl: "/assets/jacket_015.png",
@@ -137,7 +161,15 @@ const testdata = [
     notes: [323, 394, 758, 1032, 1244],
   },
   {
-    musicID: 16,
+    musicID: 19,
+    artistID: 4,
+    musicName: "YY",
+    jacketUrl: "/assets/jacket_xxx.png",
+    level: [7, 12, 17, 25, 29],
+    notes: [197, 349, 792, 976, 1175],
+  },
+  {
+    musicID: 20,
     artistID: 4,
     musicName: "夜に駆ける",
     jacketUrl: "/assets/jacket_016.png",
@@ -145,7 +177,7 @@ const testdata = [
     notes: [182, 357, 594, 932, 1140],
   },
   {
-    musicID: 17,
+    musicID: 21,
     artistID: 4,
     musicName: "Ready Steady",
     jacketUrl: "/assets/jacket_017.png",
@@ -153,7 +185,7 @@ const testdata = [
     notes: [96, 238, 403, 564, 667],
   },
   {
-    musicID: 18,
+    musicID: 22,
     artistID: 4,
     musicName: "シネマ",
     jacketUrl: "/assets/jacket_018.png",
@@ -161,7 +193,7 @@ const testdata = [
     notes: [105, 254, 465, 616, 800],
   },
   {
-    musicID: 19,
+    musicID: 23,
     artistID: 4,
     musicName: "Flyer!",
     jacketUrl: "/assets/jacket_019.png",
@@ -169,7 +201,7 @@ const testdata = [
     notes: [157, 279, 404, 659, 1083],
   },
   {
-    musicID: 20,
+    musicID: 24,
     artistID: 4,
     musicName: "月光",
     jacketUrl: "/assets/jacket_020.png",
@@ -177,7 +209,7 @@ const testdata = [
     notes: [261, 408, 598, 861, 805],
   },
   {
-    musicID: 21,
+    musicID: 25,
     artistID: 4,
     musicName: "劣等上等",
     jacketUrl: "/assets/jacket_021.png",
@@ -185,7 +217,7 @@ const testdata = [
     notes: [148, 371, 520, 825, 952],
   },
   {
-    musicID: 22,
+    musicID: 26,
     artistID: 4,
     musicName: "夜咄ディセイブ",
     jacketUrl: "/assets/jacket_022.png",
@@ -193,7 +225,7 @@ const testdata = [
     notes: [184, 424, 851, 1165, 1311],
   },
   {
-    musicID: 23,
+    musicID: 27,
     artistID: 4,
     musicName: "悪魔の踊り方",
     jacketUrl: "/assets/jacket_023.png",
@@ -201,7 +233,7 @@ const testdata = [
     notes: [147, 290, 588, 792, 938],
   },
   {
-    musicID: 25,
+    musicID: 28,
     artistID: 4,
     musicName: "RAD DOGS",
     jacketUrl: "/assets/jacket_025.png",
@@ -209,7 +241,15 @@ const testdata = [
     notes: [204, 418, 743, 1067, 1197],
   },
   {
-    musicID: 26,
+    musicID: 29,
+    artistID: 4,
+    musicName: "Awake Now",
+    jacketUrl: "/assets/jacket_xxx.png",
+    level: [6, 12, 18, 24, 30],
+    notes: [204, 280, 519, 723, 884],
+  },
+  {
+    musicID: 30,
     artistID: 4,
     musicName: "オルダーエゴ",
     jacketUrl: "/assets/jacket_026.png",
@@ -217,7 +257,7 @@ const testdata = [
     notes: [301, 545, 787, 1175, 1557],
   },
   {
-    musicID: 27,
+    musicID: 31,
     artistID: 4,
     musicName: "ドクター＝ファンクビート",
     jacketUrl: "/assets/jacket_027.png",
@@ -225,7 +265,7 @@ const testdata = [
     notes: [160, 436, 677, 984, 1198],
   },
   {
-    musicID: 28,
+    musicID: 32,
     artistID: 4,
     musicName: "チルドレンレコード",
     jacketUrl: "/assets/jacket_028.png",
