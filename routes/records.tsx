@@ -10,7 +10,6 @@ import { useMusicFilter } from "~/hooks/useMusicFilter.ts";
 import { useRecordFilter } from "~/hooks/useRecordFilter.ts";
 
 const Records: React.FC = () => {
-  const locate = Deno.env.get("test")
   const {
     levelUpper,
     levelLower,
@@ -18,7 +17,8 @@ const Records: React.FC = () => {
   } = useMusic();
 
   const {
-    getMusicRecord,
+    getStatus,
+    getScore,
     increment,
     decrement,
   } = useRecord(1);
@@ -39,9 +39,9 @@ const Records: React.FC = () => {
 
   return (
     <div className="list flex flex-col">
-      <span className="text-2xl font-semibold"id={locate}>Player Records</span>
+      <span className="text-2xl font-semibold">Player Records</span>
       <div className="grid py-5 justify-items-end">
-        <Hamburger size={12}>
+        <Hamburger size={8}>
           <MusicFilter
             levelLower={levelLower(filterDifficulty())}
             levelUpper={levelUpper(filterDifficulty())}
@@ -70,9 +70,11 @@ const Records: React.FC = () => {
             key={m.musicID.toString()}
             title={m.musicName}
             url={m.jacketUrl}
-            result={getMusicRecord(m.musicID)}
+            result={getStatus(m.musicID)}
+            score={getScore(m.musicID)}
             filter={recordDifficulty()}
             level={m.level}
+            notes={m.notes}
             increment={(status: Difficulty) => increment(m.musicID, status)}
             decrement={(status: Difficulty) => decrement(m.musicID, status)}
           />

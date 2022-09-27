@@ -9,11 +9,15 @@ declare namespace M_Music {
     musicName: string;
     jacketUrl: string;
     level: number[];
+    notes: number[];
   };
 }
 
 declare namespace P_Record {
   type Record<T> = {
-    [n: number]: T[];
+    [n: number]: {
+      "status": T[]
+      "score": number[]
+    };
   };
 }

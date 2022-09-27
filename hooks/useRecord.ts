@@ -1,11 +1,11 @@
-/// <reference types="./../types/index.d.ts" />
+/// <reference types="~/types/index.d.ts" />
 import { useCallback, useEffect, useState } from "react";
 import {
   ClearStatus,
   clearStatus,
   Difficulty,
   difficulty,
-} from "../types/index.ts";
+} from "~/types/index.ts";
 import { apiFactory } from "../api/apiFactory.ts";
 import { useObjectCompare } from "../utils/useObjectCompare.ts";
 import { useDelayCallback } from "~/utils/useDelayCallback.ts";
@@ -20,7 +20,7 @@ export const useRecord = (personId: number) => {
 
   const changeCompareList = (musicId: number, status: ClearStatus[]) => {
     const copyList = { ...compareList };
-    copyList[musicId] = status;
+    copyList[musicId]["status"] = status;
     setCompareList(copyList);
   };
 
@@ -52,8 +52,13 @@ export const useRecord = (personId: number) => {
   useEffect(() => difference() ? start() : stop(), [difference]);
 
   // select one music record
-  const getMusicRecord = useCallback(
-    (musicId: number) => recordList[musicId] ?? [],
+  const getStatus = useCallback(
+    (musicId: number) => recordList[musicId] ? recordList[musicId]["status"] : [],
+    [recordList],
+  );
+  // select one music record
+  const getScore = useCallback(
+    (musicId: number) => recordList[musicId] ? recordList[musicId]["score"] : [],
     [recordList],
   );
 
@@ -61,21 +66,21 @@ export const useRecord = (personId: number) => {
   const increment = (musicId: number, diff: Difficulty) => {
     const copyList = { ...recordList };
     if (copyList[musicId] === undefined) {
-      copyList[musicId] = Array(Object.keys(difficulty).length).fill(
+      copyList[musicId]["status"] = Array(Object.keys(difficulty).length).fill(
         clearStatus.NOPLAY,
       );
     }
-    copyList[musicId][diff] = next(copyList[musicId][diff]) as ClearStatus;
+    copyList[musicId]["status"][diff] = next(copyList[musicId]["status"][diff]) as ClearStatus;
     setRecordList(copyList);
   };
   const decrement = (musicId: number, diff: Difficulty) => {
     const copyList = { ...recordList };
     if (copyList[musicId] === undefined) {
-      copyList[musicId] = new Array(Object.keys(difficulty).length).fill(
+      copyList[musicId]["status"] = new Array(Object.keys(difficulty).length).fill(
         clearStatus.NOPLAY,
       );
     }
-    copyList[musicId][diff] = prev(copyList[musicId][diff]) as ClearStatus;
+    copyList[musicId]["status"][diff] = prev(copyList[musicId]["status"][diff]) as ClearStatus;
     setRecordList(copyList);
   };
 
@@ -92,7 +97,8 @@ export const useRecord = (personId: number) => {
     (length + getIndex(status) - 1) % length as ClearStatus;
 
   return {
-    getMusicRecord,
+    getStatus,
+    getScore,
     increment,
     decrement,
   };

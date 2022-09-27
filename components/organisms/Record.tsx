@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { ThemeCtx } from "~/hooks/useTheme.tsx";
 import { ClearStatus, clearStatus, Difficulty } from "~/types/index.ts";
 import { Clear } from "~/components/atoms/Clear.tsx";
+import { Score } from "~/components/atoms/Score.tsx";
 import { Difficulty as DiffComponent } from "~/components/atoms/Difficulty.tsx";
 import { Music } from "~/components/atoms/Music.tsx";
 
@@ -46,7 +47,7 @@ export const Record = (props: Props) => {
             <Music title={props.title} url={props.url} />
           </div>
           <div className="music__record w-full flex flex-col py-2 px-3">
-            <div className="difficulty grid grid-cols-5 justify-items-center">
+            <div className="difficulty grid grid-flow-col justify-items-center">
               {Object.values(props.filter).map((v) => (
                 <DiffComponent
                   key={v.toString()}
@@ -55,13 +56,14 @@ export const Record = (props: Props) => {
                 />
               ))}
             </div>
-            <div className="record grid grid-cols-5 mt-1 justify-items-center">
-              {Object.values(props.filter).map((v) => (
+            <div className="record grid grid-flow-col mt-1 justify-items-center">
+              {Object.values(props.filter).map((v, i) => (
                 <div
                   key={v.toString()}
-                  className="text-center h-[20px]"
+                  className="h-[20px] min-w-fit flex justify-center gap-2"
                 >
                   <Clear status={props.result[v] ?? clearStatus.NOPLAY} />
+                  <Score score={324} notes={props.notes[i]} />
                 </div>
               ))}
             </div>
@@ -76,8 +78,10 @@ type Props = {
   title: string;
   url: string;
   result: ClearStatus[];
+  score: number[];
   filter: Difficulty[];
   level: number[];
+  notes: number[];
   increment: (c: ClearStatus) => void;
   decrement: (c: ClearStatus) => void;
 };
