@@ -30,7 +30,7 @@ export const Record = (props: Props) => {
         <div
           ref={recordRef}
           className={`
-          divide-x-3 divide-slate-900
+            divide-x-3
             flex rounded items-center
             ${view ? "opacity-100" : "opacity-0 -translate-y-6"}
             transition duration-700 ease-out
@@ -38,32 +38,36 @@ export const Record = (props: Props) => {
             darkMode
               ? "bg-slate-700/80 \
               hover:bg-slate-600/80 \
-              shadow-slate-400/30 shadow-lg"
+              shadow-slate-400/30 shadow-lg divide-stone-200/10"
               : "bg-slate-300/60 \
               hover:bg-slate-400/40 \
-              shadow-lg"
+              shadow-lg divide-zinc-300/60"
           }`}
         >
           <div className="music__master w-[18rem]">
             <Music title={props.title} url={props.url} />
           </div>
           <div className="music__record w-full h-full grid content-evenly">
-            <div className="difficulty grid grid-flow-col auto-cols-fr ml-4">
+            <div className="difficulty grid grid-cols-5 auto-cols-fr justify-items-center">
               {Object.values(props.filter).map((v) => (
-                <DiffComponent
-                  key={v.toString()}
-                  difficulty={v}
-                  level={props.level[v]}
-                />
+                <div className="-ml-15">
+                  <DiffComponent
+                    key={v.toString()}
+                    difficulty={v}
+                    level={props.level[v]}
+                  />
+                </div>
               ))}
             </div>
-            <div className="record grid grid-flow-col auto-cols-fr">
+            <div className="record grid grid-cols-5 auto-cols-fr">
               {Object.values(props.filter).map((v) => (
                 <div
                   key={v.toString()}
-                  className="h-[20px] min-w-fit grid grid-flow-col gap-2"
+                  className="h-[20px] min-w-fit grid grid-flow-col -ml-4 justify-center gap-3"
                 >
-                  <Score score={props.score[v]} notes={props.notes[v]} />
+                  <div className="w-30">
+                    <Score score={props.score[v]} notes={props.notes[v]} />
+                  </div>
                   <Clear status={props.result[v] ?? clearStatus.NOPLAY} />
                 </div>
               ))}
