@@ -41,7 +41,7 @@ const Records: React.FC = () => {
     <div className="list flex flex-col">
       <span className="text-2xl font-semibold">Player Records</span>
       <div className="grid py-5 justify-items-end">
-        <Hamburger size={8}>
+        <Hamburger width="w-12" height="h-12">
           <MusicFilter
             levelLower={levelLower(filterDifficulty())}
             levelUpper={levelUpper(filterDifficulty())}
