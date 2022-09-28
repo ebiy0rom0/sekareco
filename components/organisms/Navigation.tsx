@@ -10,19 +10,19 @@ export const Navigation = React.memo(() => {
       {({ darkMode }) => (
         <>
           <span className="nav__title text-xl font-bold">機能 一覧</span>
-          <ul className={`list-none grid gap-y-2 text-base ml-2 mt-4 py-3 border-l ${darkMode ? "border-slate-700" : ""}`}>
+          <ul className={`list-none grid gap-y-2 text-base ml-2 mt-4 py-3 border-l-2 ${darkMode ? "border-slate-700" : "border-slate-200"}`}>
             {[
               ["プロフィール", "/profile"],
               ["記録帳", "/records"],
               ["vs. フレンド", "/versus"],
             ].map(([title, url]) => (
               <li
-                className={`indent-5 -ml-px py-1 border-l ${
+                className={`indent-5 -ml-2px py-1 border-l-2 ${
                   router.url.pathname === url
                     ? darkMode ? "text-sky-400 border-sky-400" : "text-sky-500 border-sky-500"
                     : darkMode
-                    ? "hover:border-slate-700 hover:opacity-70"
-                    : ""
+                    ? "border-slate-700 hover:border-slate-300/80 hover:text-slate-300/90"
+                    : "border-slate-200 hover:border-slate-500 hover:opacity-70"
                 }`}
                 key={url}
               >
