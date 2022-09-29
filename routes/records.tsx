@@ -39,9 +39,9 @@ const Records: React.FC = () => {
 
   return (
     <div className="list flex flex-col">
-      <span className="text-2xl font-semibold">Player Records</span>
-      <div className="grid py-5 justify-items-end">
-        <Hamburger width="w-12" height="h-12">
+      <span className="text-2xl font-semibold">記録帳</span>
+      <div className="grid grid-cols-1 xl:grid-cols-5 gap-x-15 py-5">
+        <form className="col-auto">
           <MusicFilter
             levelLower={levelLower(filterDifficulty())}
             levelUpper={levelUpper(filterDifficulty())}
@@ -62,23 +62,23 @@ const Records: React.FC = () => {
             setter={changeRecordDifficulty}
             isChecked={isFiltered}
           />
-        </Hamburger>
-      </div>
-      <div className="list__items grid gap-y-3">
-        {getFilteredMusic().map((m) => (
-          <Record
-            key={m.musicID.toString()}
-            title={m.musicName}
-            url={m.jacketUrl}
-            result={getStatus(m.musicID)}
-            score={getScore(m.musicID)}
-            filter={recordDifficulty()}
-            level={m.level}
-            notes={m.notes}
-            increment={(status: Difficulty) => increment(m.musicID, status)}
-            decrement={(status: Difficulty) => decrement(m.musicID, status)}
-          />
-        ))}
+        </form>
+        <div className="list__items w-full xl:col-span-4 place-self-start grid gap-y-3">
+          {getFilteredMusic().map((m) => (
+            <Record
+              key={m.musicID.toString()}
+              title={m.musicName}
+              url={m.jacketUrl}
+              result={getStatus(m.musicID)}
+              score={getScore(m.musicID)}
+              filter={recordDifficulty()}
+              level={m.level}
+              notes={m.notes}
+              increment={(status: Difficulty) => increment(m.musicID, status)}
+              decrement={(status: Difficulty) => decrement(m.musicID, status)}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );

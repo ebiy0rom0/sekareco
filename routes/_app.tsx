@@ -42,10 +42,12 @@ const MyApp: React.FC<Props> = (props) => {
                         fixed
                         box-border
                         right-[max(0px,calc(50%-50rem))]
-                        w-[17rem]
+                        w-[15rem]
                         min-h-screen
                         pl-10 py-5
                         justify-center
+                        hidden
+                        2xl:block
                         border-l ${
                           darkMode
                             ? "border-slate-200/20"
@@ -55,7 +57,7 @@ const MyApp: React.FC<Props> = (props) => {
                       >
                         <Navigation />
                       </div>
-                      <div className="mr-[20rem] px-5 items-center">
+                      <div className="2xl:mr-[15rem] 2xl:px-5 px-10 items-center">
                         <div className="mx-5">
                           {props.children}
                         </div>
