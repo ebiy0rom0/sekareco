@@ -5,7 +5,7 @@ export const Score = React.memo((props: Props) => {
   const score = props.score ?? 0
 
   return (
-    <div className="font-semibold tracking-wide flex flex-row gap-1">
+    <div className="font-semibold tracking-wide flex flex-row gap-1 text-[0.95em]">
       <span
         className={`w-full text-end ${
           score < max

@@ -47,7 +47,7 @@ export const Record = (props: Props) => {
           <div className="music__master w-[18rem]">
             <Music title={props.title} url={props.url} />
           </div>
-          <div className="music__record w-full h-full grid content-evenly">
+          <div className="music__record w-full h-full grid content-evenly px-2">
             <div className="difficulty grid grid-cols-5 auto-cols-fr justify-items-center">
               {Object.values(props.filter).map((v) => (
                 <div className="-ml-15">
@@ -63,9 +63,9 @@ export const Record = (props: Props) => {
               {Object.values(props.filter).map((v) => (
                 <div
                   key={v.toString()}
-                  className="h-[20px] min-w-fit grid grid-flow-col -ml-4 justify-center gap-3"
+                  className="h-[20px] min-w-fit grid grid-flow-col -ml-4 justify-center gap-1"
                 >
-                  <div className="w-30">
+                  <div className="w-28">
                     <Score score={props.score[v]} notes={props.notes[v]} />
                   </div>
                   <Clear status={props.result[v] ?? clearStatus.NOPLAY} />
