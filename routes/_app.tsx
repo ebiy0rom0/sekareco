@@ -29,7 +29,7 @@ const MyApp: React.FC<Props> = (props) => {
                   <>
                     <div
                       className={`sticky top-0 z-20 w-full flex-none border-b ${
-                        darkMode ? "border-slate-200/20" : "border-slate-400/30"
+                        darkMode ? "border-slate-200/40" : "border-slate-400/30"
                       } backdrop-blur-md`}
                     >
                       <div className="max-w-[110rem] px-10 py-2 mx-auto">
@@ -50,7 +50,7 @@ const MyApp: React.FC<Props> = (props) => {
                         2xl:block
                         border-l ${
                           darkMode
-                            ? "border-slate-200/20"
+                            ? "border-slate-200/40"
                             : "border-slate-400/30"
                         }
                       `}
@@ -65,7 +65,7 @@ const MyApp: React.FC<Props> = (props) => {
                           className={`
                           border-t ${
                             darkMode
-                              ? "border-slate-200/20"
+                              ? "border-slate-200/40"
                               : "border-slate-400/30"
                           }
                           mt-10 pt-15 pb-7
@@ -85,7 +85,7 @@ const MyApp: React.FC<Props> = (props) => {
                     <div
                       className={`
                       border-t ${
-                        darkMode ? "border-slate-200/20" : "border-slate-400/30"
+                        darkMode ? "border-slate-200/40" : "border-slate-400/30"
                       }
                       mt-6 pt-15 pb-10
                       min-w-full
