@@ -4,6 +4,7 @@ import { useModal } from "~/hooks/useModal.tsx";
 import { Record } from "~/components/organisms/Record.tsx";
 import { MusicFilter } from "~/components/organisms/MusicFilter.tsx";
 import { RecordFilter } from "~/components/organisms/RecordFilter.tsx";
+import { RecordEditor } from "~/components/organisms/RecordEditor.tsx";
 import { useMusic } from "~/hooks/useMusic.ts";
 import { useRecord } from "~/hooks/useRecord.ts";
 import { useMusicFilter } from "~/hooks/useMusicFilter.ts";
@@ -25,6 +26,12 @@ const Records: React.FC = () => {
   } = useRecordFilter(difficulty);
 
   const { render: modal, open } = useModal()
+
+  const editorOpen = (music: M_Music.Music) => {
+    alert(music.musicID)
+    open()
+  }
+
 
   return (
     <ThemeCtx.Consumer>
@@ -63,23 +70,25 @@ const Records: React.FC = () => {
               </form>
               <div className="w-full xl:col-span-4 place-self-start grid gap-y-3">
                 {getFilteredMusic().map((m) => (
-                  <Record
-                    key={m.musicID.toString()}
-                    title={m.musicName}
-                    url={m.jacketUrl}
-                    result={getStatus(m.musicID)}
-                    score={getScore(m.musicID)}
-                    filter={recordDifficulty()}
-                    level={m.level}
-                    notes={m.notes}
-                    increment={(status: Difficulty) => increment(m.musicID, status)}
-                    decrement={(status: Difficulty) => decrement(m.musicID, status)}
-                  />
+                  <a onClick={() => editorOpen(m)}>
+                    <Record
+                      key={m.musicID.toString()}
+                      title={m.musicName}
+                      url={m.jacketUrl}
+                      result={getStatus(m.musicID)}
+                      score={getScore(m.musicID)}
+                      filter={recordDifficulty()}
+                      level={m.level}
+                      notes={m.notes}
+                      increment={(status: Difficulty) => increment(m.musicID, status)}
+                      decrement={(status: Difficulty) => decrement(m.musicID, status)}
+                    />
+                  </a>
                 ))}
               </div>
             </div>
           </div>
-          {modal((<div>hoge</div>))}
+          {modal(<RecordEditor />)}
         </>
       )}
     </ThemeCtx.Consumer>
