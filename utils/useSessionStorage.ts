@@ -5,30 +5,26 @@ export const useSessionStorage = <T>(
   defaultValue: T,
   reloadKey = 0,
 ): [T, React.Dispatch<React.SetStateAction<T>>] => {
-  const [storage, serializer, parser] = [
-    window?.sessionStorage,
+  const [serializer, parser] = [
     JSON.stringify,
     JSON.parse,
   ];
 
-  // server side useless
-  // check support to session storage
-  const availableStorage = () => typeof storage !== "undefined";
-
-  const [storedValue, setValue] = useState<T>(() => {
-    if (!availableStorage()) return defaultValue;
+  const [storedValue, setValue] = useState<T>(defaultValue)
+  useEffect(() => {
+    const storage = window.sessionStorage
     try {
       const item = storage.getItem(key);
-      return item ? parser(item) : defaultValue;
+      setValue(item ? parser(item) : defaultValue);
     } catch (_) {
       console.log(errorMsg);
     }
-  });
+  }, []);
 
   // reload hook
   // when changed reload key, get storage again by key
   useEffect(() => {
-    if (!availableStorage()) return;
+    const storage = window.sessionStorage
     try {
       const item = storage.getItem(key);
       setValue(item ? parser(item) : storedValue);
@@ -38,9 +34,9 @@ export const useSessionStorage = <T>(
   }, [reloadKey]);
 
   useEffect(() => {
-    if (!availableStorage()) return;
+    const storage = window.sessionStorage
     try {
-      if (storedValue) {
+      if (typeof storedValue === "boolean" || storedValue) {
         storage.setItem(key, serializer(storedValue));
       } else {
         // when updated value empty, remove by storage
