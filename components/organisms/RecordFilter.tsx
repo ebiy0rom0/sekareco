@@ -16,7 +16,7 @@ export const RecordFilter = (props: Props) => {
                   <Checkbox
                     key={k.toString()}
                     id={`filter-difficulty-${k}`}
-                    setter={props.setter}
+                    handler={props.handler}
                     value={v}
                     checked={props.isChecked(v)}
                   >
@@ -33,6 +33,6 @@ export const RecordFilter = (props: Props) => {
 };
 
 type Props = {
-  setter: (n: string) => void;
+  handler: (n: string) => void;
   isChecked: (n: number) => boolean;
 };
