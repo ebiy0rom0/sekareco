@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { Difficulty, difficulty } from "~/types/index.ts";
 import Icon, { ICON_SORT, ICON_FILTER } from "~/components/atoms/Icon.tsx";
+import { Checkbox } from "~/components/atoms/Checkbox.tsx";
 import { Record } from "~/components/organisms/Record.tsx";
 import { MusicFilter } from "~/components/organisms/MusicFilter.tsx";
 import { RecordFilter } from "~/components/organisms/RecordFilter.tsx";
@@ -32,7 +33,7 @@ const Records: React.FC = () => {
     alert(music.musicID)
     open()
   }
-
+  const [diff, setDiff] = useState(false)
 
   return (
     <ThemeConsumer>
@@ -41,6 +42,7 @@ const Records: React.FC = () => {
           <div className={`flex justify-between pb-4 pt-4 border-b ${darkMode ? "border-gray-700" : "border-gray-200"}`}>
             <span className="text-3xl font-semibold tracking-widest first-letter:text-4xl">記録帳</span>
             <div className="flex items-end gap-x-8 mr-4">
+              <div className="flex font-semibold"><Checkbox id="diffToggle" checked={diff} handler={(_: string) => setDiff(!diff)} value={"1"}>-MAX</Checkbox></div>
               <div className="flex font-semibold gap-x-1">sort <Icon icon={ICON_SORT} /></div>
               <div className="flex font-semibold lg:hidden">filter<Icon icon={ICON_FILTER} /></div>
             </div>
@@ -65,7 +67,7 @@ const Records: React.FC = () => {
                   }}
                 />
                 <RecordFilter
-                  setter={changeRecordDifficulty}
+                  handler={changeRecordDifficulty}
                   isChecked={isFiltered}
                 />
               </form>
@@ -75,6 +77,7 @@ const Records: React.FC = () => {
                     <Record
                       title={m.musicName}
                       url={m.jacketUrl}
+                      diff={diff}
                       result={getStatus(m.musicID)}
                       score={getScore(m.musicID)}
                       filter={recordDifficulty()}

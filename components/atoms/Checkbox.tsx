@@ -1,4 +1,6 @@
-export const Checkbox = (props: Props) => (
+import React from "react";
+
+export const Checkbox = <T extends string | number,>(props: Props<T>) => (
   <div className="flex items-center">
     <input
       id={props.id}
@@ -6,16 +8,16 @@ export const Checkbox = (props: Props) => (
       className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-red-300"
       value={props.value}
       checked={props.checked}
-      onChange={(e) => props.setter(e.target.value)}
+      onChange={(e) => props.handler(e.target.value)}
     />
     <label htmlFor={props.id} className="ml-3 text-sm">{props.children}</label>
   </div>
 );
 
-type Props = {
+type Props<T> = {
   id: string;
   children: string | number;
-  value: any;
+  value: T;
   checked: boolean;
-  setter: (d: string) => void;
+  handler: (d: string) => void;
 };

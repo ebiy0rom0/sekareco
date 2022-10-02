@@ -13,7 +13,7 @@ export const Score = React.memo((props: Props) => {
             : "text-emerald-500"
         }`}
       >
-        {props?.diff ? score : `${score - max}`}
+        {props?.diff ? `${score - max}` : score}
       </span>
       <span>/</span>
       <span className="w-full text-end -ml-3">{props.notes * 3}</span>
