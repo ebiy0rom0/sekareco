@@ -4,6 +4,7 @@ export const ThemeCtx = createContext<Theme>({
   darkMode: false,
   switchMode: () => undefined,
 });
+export const ThemeConsumer = ThemeCtx.Consumer;
 
 export const useTheme = () => {
   const [dark, setDark] = useState(false);
@@ -22,7 +23,7 @@ export const useTheme = () => {
 };
 
 type Props = {
-  children: React.ReactChild;
+  children: React.ReactNode;
 };
 
 type Theme = {
