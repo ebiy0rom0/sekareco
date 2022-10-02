@@ -1,6 +1,6 @@
 import React from "react";
 import { Difficulty, difficulty } from "~/types/index.ts";
-import { useModal } from "~/hooks/useModal.tsx";
+import Icon, { ICON_SORT, ICON_FILTER } from "~/components/atoms/Icon.tsx";
 import { Record } from "~/components/organisms/Record.tsx";
 import { MusicFilter } from "~/components/organisms/MusicFilter.tsx";
 import { RecordFilter } from "~/components/organisms/RecordFilter.tsx";
@@ -9,7 +9,8 @@ import { useMusic } from "~/hooks/useMusic.ts";
 import { useRecord } from "~/hooks/useRecord.ts";
 import { useMusicFilter } from "~/hooks/useMusicFilter.ts";
 import { useRecordFilter } from "~/hooks/useRecordFilter.ts";
-import { ThemeCtx } from "~/hooks/useTheme.tsx";
+import { useModal } from "~/hooks/useModal.tsx";
+import { ThemeConsumer } from "~/hooks/useTheme.tsx";
 
 const Records: React.FC = () => {
   const { levelUpper, levelLower, music } = useMusic();
@@ -34,14 +35,14 @@ const Records: React.FC = () => {
 
 
   return (
-    <ThemeCtx.Consumer>
+    <ThemeConsumer>
       {({ darkMode }) => (
         <>
           <div className={`flex justify-between pb-4 pt-4 border-b ${darkMode ? "border-gray-700" : "border-gray-200"}`}>
             <span className="text-3xl font-semibold tracking-widest first-letter:text-4xl">記録帳</span>
             <div className="flex items-end gap-x-8 mr-4">
-              <div className="">sort 👇</div>
-              <div className="block lg:hidden">filter</div>
+              <div className="flex font-semibold gap-x-1">sort <Icon icon={ICON_SORT} /></div>
+              <div className="flex font-semibold lg:hidden">filter<Icon icon={ICON_FILTER} /></div>
             </div>
           </div>
           <div className="flex flex-col">
@@ -68,11 +69,10 @@ const Records: React.FC = () => {
                   isChecked={isFiltered}
                 />
               </form>
-              <div className="w-full xl:col-span-4 place-self-start grid gap-y-3">
+              <div className="w-full xl:col-span-4 place-self-start grid grid-cols-1 md:grid-cols-2 lg:grid-cols-none gap-y-3 gap-x-5">
                 {getFilteredMusic().map((m) => (
-                  <a onClick={() => editorOpen(m)}>
+                  <a key={m.musicID.toString()} onClick={() => editorOpen(m)}>
                     <Record
-                      key={m.musicID.toString()}
                       title={m.musicName}
                       url={m.jacketUrl}
                       result={getStatus(m.musicID)}
@@ -91,7 +91,7 @@ const Records: React.FC = () => {
           {modal(<RecordEditor />)}
         </>
       )}
-    </ThemeCtx.Consumer>
+    </ThemeConsumer>
   );
 };
 

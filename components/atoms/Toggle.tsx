@@ -1,4 +1,4 @@
-// import styles from "~/style/app.css"
+import Icon, {ICON_SUN, ICON_MOON} from "~/components/atoms/Icon.tsx";
 
 export const Toggle = (props: Props) => (
   <div
@@ -16,15 +16,10 @@ export const Toggle = (props: Props) => (
   </div>
 );
 
-const Default = () => <></>;
+const Default = () => (<></>);
 
 const Theme = (props: { mode: boolean }) => (
-  <img
-    src={props.mode ? "/assets/m_light.svg" : "/assets/m_dark.svg"}
-    height="18"
-    width="18"
-    className={props.mode ? "" : "invert"}
-  />
+  <Icon icon={props.mode ? ICON_SUN : ICON_MOON} size={18} />
 );
 
 const Selector = (props: {

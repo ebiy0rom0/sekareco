@@ -10,18 +10,15 @@ export const RecordFilter = (props: Props) => {
         <>
           <div className={`py-6 border-b ${darkMode ? "border-gray-700" : "border-gray-200"}`}>
             <Disclosure>
-              <div className="flex justify-between">
-                <span className="font-semibold tracking-widest">難易度</span>
-                <span className="font-semibold tracking-widest">+</span>
-              </div>
+              <span className="font-semibold tracking-widest">難易度</span>
               <div className="space-y-4 pt-6">
                 {Object.entries(difficulty).map(([k, v]) => (
                   <Checkbox
                     key={k.toString()}
-                    name="difficulty"
-                    value={v}
+                    id={`filter-difficulty-${k}`}
                     setter={props.setter}
-                    isChecked={props.isChecked(v)}
+                    value={v}
+                    checked={props.isChecked(v)}
                   >
                     {k}
                   </Checkbox>
