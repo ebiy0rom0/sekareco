@@ -1,20 +1,21 @@
 export const Checkbox = (props: Props) => (
-  <label className="flex items-center">
+  <div className="flex items-center">
     <input
+      id={props.id}
       type="checkbox"
-      className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
-      name={props.name}
+      className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-red-300"
       value={props.value}
-      checked={props.isChecked}
+      checked={props.checked}
       onChange={(e) => props.setter(e.target.value)}
     />
-    <span className="ml-3 text-sm">{props.children}</span>
-  </label>
+    <label htmlFor={props.id} className="ml-3 text-sm">{props.children}</label>
+  </div>
 );
 
-type Props = JSX.IntrinsicElements["input"] & {
+type Props = {
+  id: string;
   children: string | number;
-  name: string;
-  isChecked: boolean;
+  value: any;
+  checked: boolean;
   setter: (d: string) => void;
 };
