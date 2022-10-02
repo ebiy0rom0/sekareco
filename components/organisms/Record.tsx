@@ -64,7 +64,7 @@ export const Record = (props: Props) => {
                   key={v.toString()}
                   className="h-[20px] min-w-fit grid grid-flow-col -ml-4 justify-center gap-1"
                 >
-                  <div className="w-28 mt-1 mr-4 lg:mr-0">
+                  <div className="w-28 mt-1 mr-0">
                     <Score score={props.score[v]} notes={props.notes[v]} />
                   </div>
                   <Clear status={props.result[v] ?? clearStatus.NOPLAY} />
