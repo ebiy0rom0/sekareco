@@ -2,16 +2,14 @@ import React from "react";
 
 export const Music = React.memo((props: Props) => (
   <div className={["relative", props?.className].join(" ")}>
-    <label className="absolute inset-x-0 bottom-0 bg-white/65 font-semibold text-xs text-slate-800 indent-1.5">
+    <label className="absolute break-all inset-x-0 bottom-0 rounded-bl bg-white/65 font-semibold text-sm text-slate-800 indent-1.5">
       {props.title}
     </label>
     <img
-      height="60"
-      width="60"
-      src={props.url}
-      className="inline-block rounded-l"
+      src={`https://assets.sekareco.jp${props.url}`}
+      className="rounded-l w-[130px] lg:w-[70px]"
       onError={(e) =>
-        (e.target as HTMLImageElement).src = "/assets/logo.svg"}
+        (e.target as HTMLImageElement).src = "assets/logo.svg"}
     />
   </div>
 ));

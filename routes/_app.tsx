@@ -57,7 +57,7 @@ const MyApp: React.FC<Props> = (props) => {
                       >
                         <Navigation />
                       </div>
-                      <div className="2xl:mr-[15rem] 2xl:px-5 px-10 items-center">
+                      <div className="2xl:mr-[15rem] px-2 lg:px-15 2xl:px-8 items-center">
                         <div className="mx-5">
                           {props.children}
                         </div>
