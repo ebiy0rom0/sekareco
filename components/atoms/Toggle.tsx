@@ -1,19 +1,27 @@
 import Icon, {ICON_SUN, ICON_MOON} from "~/components/atoms/Icon.tsx";
+import { ThemeConsumer } from "~/hooks/useTheme.tsx";
 
 export const Toggle = (props: Props) => (
-  <div
-    className={"grid gap-x-3 w-[50px] h-[25px] rounded-full " + (props.mode
-      ? "justify-items-start bg-gray-300"
-      : "justify-items-end bg-gray-600")}
-    onClick={props.role}
-  >
-    <div
-      className={"grid place-items-center rounded-full bg-slate-700 w-[25px] scale-120 ring-1 " +
-        (props.mode ? "bg-white toggle-on" : "bg-slate-900 toggle-off")}
-    >
-      <Selector style={props.style} mode={props.mode} />
-    </div>
-  </div>
+  <ThemeConsumer>
+    {({darkMode}) => (
+      <div
+        className={`grid gap-x-3 w-[50px] h-[25px] rounded-full
+        ${props.mode ? "justify-items-start" : "justify-items-end"}
+        ${darkMode ? "bg-gray-600" : "bg-gray-300"}`
+      }
+        onClick={props.role}
+      >
+        <div
+          className={`grid place-items-center rounded-full bg-slate-700 w-[25px] scale-120 ring-1
+            ${props.mode ? "toggle-on" : "toggle-off"}
+            ${darkMode ? "bg-slate-900" : "bg-white"}`
+          }
+        >
+          <Selector style={props.style} mode={props.mode} />
+        </div>
+      </div>
+    )}
+  </ThemeConsumer>
 );
 
 const Default = () => (<></>);
