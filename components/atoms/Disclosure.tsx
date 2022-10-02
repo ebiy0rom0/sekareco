@@ -6,7 +6,7 @@ export const Disclosure = React.memo(
     const [open, setOpen] = useState(false);
     return (
       <>
-        <button
+        <a
           type="button"
           className="w-full"
           onClick={() => setOpen(!open)}
@@ -15,7 +15,7 @@ export const Disclosure = React.memo(
             {props.children[0]}
             {open ? (<Icon icon={ICON_MINUS} />) : (<Icon icon={ICON_PLUS} />)}
           </div>
-        </button>
+        </a>
         <div className={`overflow-hidden ${open ? "h-auto" : "h-0"}`}>
           {props.children[1]}
         </div>
