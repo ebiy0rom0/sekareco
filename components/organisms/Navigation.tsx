@@ -1,16 +1,20 @@
 import React from "react";
 import { Link, useRouter } from "aleph/react";
-import { ThemeCtx } from "~/hooks/useTheme.tsx";
+import { ThemeConsumer } from "~/hooks/useTheme.tsx";
 
 export const Navigation = React.memo(() => {
   const router = useRouter();
 
   return (
-    <ThemeCtx.Consumer>
+    <ThemeConsumer>
       {({ darkMode }) => (
         <>
           <span className="nav__title text-xl font-bold">機能 一覧</span>
-          <ul className={`list-none grid gap-y-2 text-base ml-2 mt-4 py-3 border-l-2 ${darkMode ? "border-slate-700" : "border-slate-200"}`}>
+          <ul
+            className={`list-none grid gap-y-2 text-base ml-2 mt-4 py-3 border-l-2 ${
+              darkMode ? "border-slate-700" : "border-slate-200"
+            }`}
+          >
             {[
               ["プロフィール", "/profile"],
               ["記録帳", "/records"],
@@ -40,6 +44,6 @@ export const Navigation = React.memo(() => {
           </ul>
         </>
       )}
-    </ThemeCtx.Consumer>
+    </ThemeConsumer>
   );
 });

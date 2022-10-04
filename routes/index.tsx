@@ -1,17 +1,15 @@
-import { useEffect, useState } from "react";
 import { Toggle, ToggleStyle } from "~/components/atoms/Toggle.tsx";
 import { GithubIcon } from "~/components/atoms/GithubIcon.tsx";
 import { SignInForm } from "~/components/organisms/SignInForm.tsx";
 import { SignUpForm } from "~/components/organisms/SignUpForm.tsx";
-import { ThemeCtx } from "~/hooks/useTheme.tsx";
-import { useDelayCallback } from "~/utils/useDelayCallback.ts";
+import { ThemeConsumer } from "~/hooks/useTheme.tsx";
 import { useModal } from "~/hooks/useModal.tsx";
 
 const Index: React.FC = () => {
   const { render, open } = useModal();
 
   return (
-    <ThemeCtx.Consumer>
+    <ThemeConsumer>
       {({ darkMode, switchMode }) => (
         <>
           <div className="grid gap-y-5">
@@ -19,11 +17,8 @@ const Index: React.FC = () => {
               {"プロセカの".split("").map((s, i) => (
                 <span
                   key={i.toString()}
-                  className={"text-6xl font-bold" + (i == 0
-                    ? " text-cyan-400"
-                    : darkMode
-                    ? " text-slate-300"
-                    : " text-slate-600")}
+                  className={`text-6xl font-bold
+                    ${i == 0 ? " text-cyan-400" : darkMode ? " text-slate-300" : " text-slate-600"}`}
                 >
                   {s}
                 </span>
@@ -33,11 +28,8 @@ const Index: React.FC = () => {
               {"記録帳".split("").reverse().map((s, i) => (
                 <span
                   key={i.toString()}
-                  className={"text-6xl font-bold" + (i == 2
-                    ? " text-pink-500/90"
-                    : darkMode
-                    ? " text-slate-300"
-                    : " text-slate-600")}
+                  className={`text-6xl font-bold
+                    ${i == 2 ? " text-pink-500/90" : darkMode ? " text-slate-300" : " text-slate-600"}`}
                 >
                   {s}
                 </span>
@@ -81,7 +73,7 @@ const Index: React.FC = () => {
           )}
         </>
       )}
-    </ThemeCtx.Consumer>
+    </ThemeConsumer>
   );
 };
 

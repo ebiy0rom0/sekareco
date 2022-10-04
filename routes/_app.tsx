@@ -3,7 +3,7 @@ import { Head } from "aleph/react";
 import { Header } from "~/components/organisms/Header.tsx";
 import { Footer } from "~/components/organisms/Footer.tsx";
 import { Navigation } from "~/components/organisms/Navigation.tsx";
-import { ThemeCtx, useTheme } from "~/hooks/useTheme.tsx";
+import { ThemeConsumer, useTheme } from "~/hooks/useTheme.tsx";
 
 const MyApp: React.FC<Props> = (props) => {
   const router = useRouter();
@@ -11,7 +11,7 @@ const MyApp: React.FC<Props> = (props) => {
 
   return (
     <ThemeProvider>
-      <ThemeCtx.Consumer>
+      <ThemeConsumer>
         {({ darkMode }) => (
           <>
             <Head>
@@ -19,9 +19,7 @@ const MyApp: React.FC<Props> = (props) => {
             </Head>
             <div
               className={`${
-                darkMode
-                  ? "bg-slate-800 text-slate-400"
-                  : "bg-slate-100 text-slate-800"
+                darkMode ? "bg-slate-800 text-slate-400" : "bg-slate-100 text-slate-800"
               }`}
             >
               {router.url.pathname !== "/"
@@ -48,11 +46,7 @@ const MyApp: React.FC<Props> = (props) => {
                         justify-center
                         hidden
                         2xl:block
-                        border-l ${
-                          darkMode
-                            ? "border-slate-200/40"
-                            : "border-slate-400/30"
-                        }
+                        border-l ${darkMode ? "border-slate-200/40" : "border-slate-400/30"}
                       `}
                       >
                         <Navigation />
@@ -63,11 +57,7 @@ const MyApp: React.FC<Props> = (props) => {
                         </div>
                         <div
                           className={`
-                          border-t ${
-                            darkMode
-                              ? "border-slate-200/40"
-                              : "border-slate-400/30"
-                          }
+                          border-t ${darkMode ? "border-slate-200/40" : "border-slate-400/30"}
                           mt-10 pt-15 pb-7
                         `}
                         >
@@ -84,9 +74,7 @@ const MyApp: React.FC<Props> = (props) => {
                     </div>
                     <div
                       className={`
-                      border-t ${
-                        darkMode ? "border-slate-200/40" : "border-slate-400/30"
-                      }
+                      border-t ${darkMode ? "border-slate-200/40" : "border-slate-400/30"}
                       mt-6 pt-15 pb-10
                       min-w-full
                     `}
@@ -98,7 +86,7 @@ const MyApp: React.FC<Props> = (props) => {
             </div>
           </>
         )}
-      </ThemeCtx.Consumer>
+      </ThemeConsumer>
     </ThemeProvider>
   );
 };

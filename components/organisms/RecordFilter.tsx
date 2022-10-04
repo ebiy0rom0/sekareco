@@ -1,11 +1,11 @@
 import { difficulty } from "~/types/index.ts";
 import { Checkbox } from "~/components/atoms/Checkbox.tsx";
 import { Disclosure } from "~/components/atoms/Disclosure.tsx";
-import { ThemeCtx } from "~/hooks/useTheme.tsx";
+import { ThemeConsumer } from "~/hooks/useTheme.tsx";
 
 export const RecordFilter = (props: Props) => {
   return (
-    <ThemeCtx.Consumer>
+    <ThemeConsumer>
       {({ darkMode }) => (
         <>
           <div className={`py-6 border-b ${darkMode ? "border-gray-700" : "border-gray-200"}`}>
@@ -28,7 +28,7 @@ export const RecordFilter = (props: Props) => {
           </div>
         </>
       )}
-    </ThemeCtx.Consumer>
+    </ThemeConsumer>
   );
 };
 

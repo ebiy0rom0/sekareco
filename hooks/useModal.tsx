@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { ThemeCtx } from "~/hooks/useTheme.tsx";
+import { ThemeConsumer } from "~/hooks/useTheme.tsx";
 
 export const useModal = () => {
   const [open, setOpen] = useState(false);
 
   const render = (children: React.ReactNode) => (
-    <ThemeCtx.Consumer>
+    <ThemeConsumer>
       {({ darkMode }) => (
         <div
           className={`
@@ -43,7 +43,7 @@ export const useModal = () => {
           />
         </div>
       )}
-    </ThemeCtx.Consumer>
+    </ThemeConsumer>
   );
 
   return {

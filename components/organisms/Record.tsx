@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from "react";
-import { ThemeCtx } from "~/hooks/useTheme.tsx";
+import { ThemeConsumer } from "~/hooks/useTheme.tsx";
 import { ClearStatus, clearStatus, Difficulty } from "~/types/index.ts";
-import { Clear } from "~/components/atoms/Clear.tsx";
+import { Status } from "~/components/atoms/Status.tsx";
 import { Score } from "~/components/atoms/Score.tsx";
 import { Difficulty as DiffComponent } from "~/components/atoms/Difficulty.tsx";
-import { Music } from "~/components/atoms/Music.tsx";
+import { Music } from "~/components/organisms/Music.tsx";
 
 export const Record = (props: Props) => {
   const [view, setView] = useState(true);
@@ -25,12 +25,12 @@ export const Record = (props: Props) => {
   }, []);
 
   return (
-    <ThemeCtx.Consumer>
+    <ThemeConsumer>
       {({ darkMode }) => (
         <div
           ref={recordRef}
           className={`
-            divide-x-3 py-3 lg:py-0
+            h-full divide-x-3 py-3 lg:py-0
             flex rounded items-center
             ${view ? "opacity-100" : "opacity-0 -translate-y-6"}
             transition duration-700 ease-out
@@ -45,7 +45,7 @@ export const Record = (props: Props) => {
           }`}
         >
           <div className="music__master w-[18rem]">
-            <Music title={props.title} url={props.url} />
+            <Music title={props.title} url={props.jacketUrl} />
           </div>
           <div className="music__record w-full h-full content-center grid grid-cols-2 lg:grid-cols-1 px-2 gap-y-1 pl-2">
             <div className="difficulty grid grid-cols-none lg:grid-cols-5 auto-cols-fr gap-y-2">
@@ -67,26 +67,24 @@ export const Record = (props: Props) => {
                   <div className="w-28 mt-1 mr-0">
                     <Score score={props.score[v]} notes={props.notes[v]} diff={props.diff} />
                   </div>
-                  <Clear status={props.result[v] ?? clearStatus.NOPLAY} />
+                  <Status status={props.status[v] ?? clearStatus.NOPLAY} />
                 </div>
               ))}
             </div>
           </div>
         </div>
       )}
-    </ThemeCtx.Consumer>
+    </ThemeConsumer>
   );
 };
 
 type Props = {
   title: string;
-  url: string;
+  jacketUrl: string;
   diff: boolean;
-  result: ClearStatus[];
+  status: ClearStatus[];
   score: number[];
   filter: Difficulty[];
   level: number[];
   notes: number[];
-  increment: (c: ClearStatus) => void;
-  decrement: (c: ClearStatus) => void;
 };

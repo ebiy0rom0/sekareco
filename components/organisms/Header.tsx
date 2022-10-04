@@ -2,10 +2,10 @@ import React from "react";
 import { Button } from "~/components/atoms/Button.tsx";
 import { GithubIcon } from "~/components/atoms/GithubIcon.tsx";
 import { Toggle, ToggleStyle } from "~/components/atoms/Toggle.tsx";
-import { ThemeCtx } from "~/hooks/useTheme.tsx";
+import { ThemeConsumer } from "~/hooks/useTheme.tsx";
 
 export const Header = React.memo(() => (
-  <ThemeCtx.Consumer>
+  <ThemeConsumer>
     {({ darkMode, switchMode }) => (
       <div className="header flex items-center">
         <span className="header__title m-0 text-lg font-bold">プロセカの記録帳</span>
@@ -25,5 +25,5 @@ export const Header = React.memo(() => (
         </div>
       </div>
     )}
-  </ThemeCtx.Consumer>
+  </ThemeConsumer>
 ));

@@ -1,8 +1,8 @@
 import React from "react";
-import { ThemeCtx } from "~/hooks/useTheme.tsx";
+import { ThemeConsumer } from "~/hooks/useTheme.tsx";
 
 export const Input = (props: Props) => (
-  <ThemeCtx.Consumer>
+  <ThemeConsumer>
     {({ darkMode }) => (
       <label htmlFor={props.id} className={props?.className}>
         <strong className="ms-1">{props.labelName}</strong>
@@ -33,7 +33,7 @@ export const Input = (props: Props) => (
         </p>
       </label>
     )}
-  </ThemeCtx.Consumer>
+  </ThemeConsumer>
 );
 
 type Props = {

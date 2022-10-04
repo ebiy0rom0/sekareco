@@ -2,11 +2,11 @@ import React from "react";
 import { difficulty } from "~/types/index.ts";
 import { Range } from "~/components/atoms/Range.tsx";
 import { Selectbox } from "~/components/atoms/Selectbox.tsx";
-import { ThemeCtx } from "~/hooks/useTheme.tsx";
+import { ThemeConsumer } from "~/hooks/useTheme.tsx";
 
 export const MusicFilter = React.memo((props: Props) => {
   return (
-    <ThemeCtx.Consumer>
+    <ThemeConsumer>
       {({ darkMode }) => (
         <div className="flex-col">
           <div className={`py-6 border-b  ${darkMode ? "border-gray-700" : "border-gray-200"}`}>
@@ -44,7 +44,7 @@ export const MusicFilter = React.memo((props: Props) => {
           </div>
         </div>
       )}
-    </ThemeCtx.Consumer>
+    </ThemeConsumer>
   );
 });
 
