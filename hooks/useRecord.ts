@@ -1,107 +1,68 @@
 /// <reference types="~/types/index.d.ts" />
 import { useCallback, useEffect, useState } from "react";
-import {
-  ClearStatus,
-  clearStatus,
-  Difficulty,
-  difficulty,
-} from "~/types/index.ts";
-import { apiFactory } from "../api/apiFactory.ts";
-import { useObjectCompare } from "../utils/useObjectCompare.ts";
-import { useDelayCallback } from "~/utils/useDelayCallback.ts";
+import { ClearStatus, clearStatus, Difficulty, difficulty } from "~/types/index.ts";
+import { apiFactory } from "~/api/apiFactory.ts";
 
 // custom hook
 export const useRecord = (personId: number) => {
-  const [recordList, setRecordList] = useState<P_Record.Record<ClearStatus>>(
+  const [recordList, setRecordList] = useState<P_Record.Records<ClearStatus>>(
     {},
   );
-  const [compareList, setCompareList] = useState<typeof recordList>({});
-  const { difference } = useObjectCompare(recordList, compareList);
 
-  const changeCompareList = (musicId: number, status: ClearStatus[]) => {
-    const copyList = { ...compareList };
-    copyList[musicId]["status"] = status;
-    setCompareList(copyList);
-  };
-
-  // auto saving 30 sec after at first record update
-  const autoSaving = async () => {
-    await apiFactory.get("record").registRecord(personId, 1, []);
-    changeCompareList(1, []);
-  };
-  const { start, stop } = useDelayCallback(
-    DELAY_AUTO_SAVE,
-    async () => await autoSaving(),
-  );
-
-  // [first time]
   useEffect(() => {
-    // transaction data fetch only client side
-    if (typeof window === "undefined") return;
-
     (async () => {
       const list = await apiFactory.get("record").getMyRecord(personId);
-      if (typeof list === "undefined") return;
-
       setRecordList(list);
-      setCompareList(list);
     })();
   }, []);
 
-  // auto saving
-  useEffect(() => difference() ? start() : stop(), [difference]);
+  // initial Record value
+  // Used when not set or initialized.
+  const initialRecord: P_Record.Record<ClearStatus> = {
+    status: new Array(Object.keys(difficulty).length).fill(clearStatus.NOPLAY),
+    score: new Array(Object.keys(difficulty).length).fill(0),
+  }
 
-  // select one music record
-  const getStatus = useCallback(
-    (musicId: number) => recordList[musicId] ? recordList[musicId].status : [],
+  // getter that retrieves the record with the specified musicID.
+  const getRecord = useCallback(
+    (musicId: number) => recordList[musicId] ?? initialRecord,
     [recordList],
   );
-  // select one music record
-  const getScore = useCallback(
-    (musicId: number) => recordList[musicId] ? recordList[musicId].score : [],
-    [recordList],
-  );
 
-  //
-  const increment = (musicId: number, diff: Difficulty) => {
-    const copyList = { ...recordList };
-    if (copyList[musicId] === undefined) {
-      copyList[musicId]["status"] = Array(Object.keys(difficulty).length).fill(
-        clearStatus.NOPLAY,
-      );
-    }
-    copyList[musicId]["status"][diff] = next(copyList[musicId]["status"][diff]) as ClearStatus;
-    setRecordList(copyList);
-  };
-  const decrement = (musicId: number, diff: Difficulty) => {
-    const copyList = { ...recordList };
-    if (copyList[musicId] === undefined) {
-      copyList[musicId]["status"] = new Array(Object.keys(difficulty).length).fill(
-        clearStatus.NOPLAY,
-      );
-    }
-    copyList[musicId]["status"][diff] = prev(copyList[musicId]["status"][diff]) as ClearStatus;
-    setRecordList(copyList);
-  };
-
-  const getIndex = (status: number) => {
-    const keyList = Object.keys(clearStatus);
-    const findKey = Object.entries(clearStatus).find(([_, v]) => v === status)
-      ?.[0];
-    return keyList.findIndex((k) => k === findKey);
-  };
+  // Drum roll operation.
   const length = Object.keys(clearStatus).length;
-  const next = (status: number) =>
-    (length + getIndex(status) + 1) % length as ClearStatus;
-  const prev = (status: number) =>
-    (length + getIndex(status) - 1) % length as ClearStatus;
+  const next = (status: ClearStatus) => (length + getIndex(status) + 1) % length as ClearStatus;
+  const prev = (status: ClearStatus) => (length + getIndex(status) - 1) % length as ClearStatus;
+
+  // Drum roll type addition of clear status.
+  const rollNext = useCallback((musicID: number, target: Difficulty) => {
+    const copyList = { ...recordList };
+    if (copyList[musicID] === undefined) {
+      copyList[musicID] = initialRecord;
+    }
+
+    copyList[musicID].status[target] = next(copyList[musicID].status[target]);
+    setRecordList(copyList);
+  }, [recordList]);
+
+  // Drum roll type subtraction of clear status.
+  const rollPrev = useCallback((musicID: number, target: Difficulty) => {
+    const copyList = { ...recordList };
+    if (copyList[musicID] === undefined) copyList[musicID] = initialRecord;
+
+    copyList[musicID].status[target] = prev(copyList[musicID].status[target]);
+    setRecordList(copyList);
+  }, [recordList]);
+
+  const getIndex = (status: ClearStatus) => {
+    const keys = Object.keys(clearStatus);
+    const findKey = Object.entries(clearStatus).find(([_, v]) => v === status)?.[0];
+    return keys.findIndex((k) => k === findKey);
+  };
 
   return {
-    getStatus,
-    getScore,
-    increment,
-    decrement,
+    getRecord,
+    rollNext,
+    rollPrev,
   };
 };
-
-const DELAY_AUTO_SAVE = 10 * 1000;
