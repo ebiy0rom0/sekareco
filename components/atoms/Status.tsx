@@ -1,7 +1,7 @@
 import React from "react";
 import { ClearStatus, clearStatus } from "~/types/index.ts";
 
-export const Clear = React.memo((props: Props) => (
+export const Status = React.memo((props: Props) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="20"
