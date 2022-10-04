@@ -15,6 +15,5 @@ const repo: Repositories = {
 };
 
 export const apiFactory = {
-  get: <T extends keyof Repositories>(target: T): Repositories[T] =>
-    repo[target],
+  get: <T extends keyof Repositories>(target: T): Repositories[T] => repo[target],
 };

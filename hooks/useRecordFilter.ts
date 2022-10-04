@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 
 // custom hook
 export const useRecordFilter = <
@@ -13,21 +13,17 @@ export const useRecordFilter = <
   // for use input element
   const changeWhiteList = (input: string) => {
     const inputNum = rounding(parseInt(input));
-    const newFilter = isFiltered(inputNum)
-      ? whiteList.filter((d) => d !== inputNum)
-      : [...whiteList, inputNum];
+    const newFilter = isFiltered(inputNum) ? whiteList.filter((d) => d !== inputNum) : [...whiteList, inputNum];
     setWhiteList(newFilter.sort() as U[]);
   };
 
   // rounding within list value range
-  const rounding = (val: number) =>
-    val < min() ? min() : val > max() ? max() : val;
-  const min = () => Math.min(...Object.values(filteredList));
-  const max = () => Math.max(...Object.values(filteredList));
+  const rounding = (val: number) => val < min() ? min() : val > max() ? max() : val;
+  const min = useCallback(() => Math.min(...Object.values(filteredList)), [filteredList]);
+  const max = useCallback(() => Math.max(...Object.values(filteredList)), [filteredList]);
 
   // check already filtered
-  const isFiltered = (checkVal: number) =>
-    whiteList.some((d) => d === checkVal);
+  const isFiltered = (checkVal: number) => whiteList.some((d) => d === checkVal);
 
   return {
     whiteList: () => whiteList,

@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React from "react";
 import { useInput } from "~/hooks/useInput.ts";
 import { useWaitAction } from "~/utils/useWaitAction.ts";
 import { Input } from "~/components/atoms/Input.tsx";

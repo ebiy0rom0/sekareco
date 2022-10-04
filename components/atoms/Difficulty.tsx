@@ -40,8 +40,7 @@ export const Difficulty = React.memo((props: Props) => (
 ));
 
 // draw html
-const drawName = (diff: Type) =>
-  Object.entries(difficulty).filter(([_, v]) => v === diff)[0][0];
+const drawName = (diff: Type) => Object.entries(difficulty).filter(([_, v]) => v === diff)[0][0];
 
 type Props = {
   class?: string;

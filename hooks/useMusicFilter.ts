@@ -35,12 +35,10 @@ export const useMusicFilter = (
     changeUpper(parseInt(val), lowerFilter(), levelUpper(filterDifficulty));
 
   // check within filter range
-  const isLevelWithinRange = (level: number) =>
-    lowerFilter() <= level && level <= upperFilter();
+  const isLevelWithinRange = (level: number) => lowerFilter() <= level && level <= upperFilter();
 
   // level filter
-  const getFilteredMusic = () =>
-    music.filter((m) => isLevelWithinRange(m.level[filterDifficulty]));
+  const getFilteredMusic = () => music.filter((m) => isLevelWithinRange(m.level[filterDifficulty]));
 
   useEffect(() => {
     changeLower(

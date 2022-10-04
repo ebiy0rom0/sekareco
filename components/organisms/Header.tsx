@@ -1,6 +1,6 @@
 import React from "react";
 import { Button } from "~/components/atoms/Button.tsx";
-import { GithubIcon } from "~/components/atoms/GithubIcon.tsx";
+import { Icon, ICON_GITHUB } from "~/components/atoms/Icon.tsx";
 import { Toggle, ToggleStyle } from "~/components/atoms/Toggle.tsx";
 import { ThemeConsumer } from "~/hooks/useTheme.tsx";
 
@@ -10,7 +10,9 @@ export const Header = React.memo(() => (
       <div className="header flex items-center">
         <span className="header__title m-0 text-lg font-bold">プロセカの記録帳</span>
         <div className="flex items-center gap-x-5 ml-auto">
-          <GithubIcon />
+          <a href="https://github.com/ebiy0rom0/sekareco" className="hover:opacity-70">
+            <Icon icon={ICON_GITHUB} title="github" />
+          </a>
           <Toggle
             mode={!darkMode}
             style={ToggleStyle.THEME}

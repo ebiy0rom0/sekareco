@@ -34,7 +34,7 @@ export const SignInForm = () => {
   return (
     <form
       className="flex flex-col gap-y-7"
-      onSubmit={async e => await waitSignIn(e)}
+      onSubmit={async (e) => await waitSignIn(e)}
     >
       {renderAlert()}
       <Input

@@ -26,5 +26,5 @@ type Props = JSX.IntrinsicElements["input"] & {
   group: string;
   options: { [s: string]: string | number };
   setter: (input: string) => void;
-  width: number
+  width: number;
 };

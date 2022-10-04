@@ -7,13 +7,10 @@ export const useMusic = () => {
   const [music, setMusic] = useState<M_Music.Music[]>([]);
 
   useEffect(() => {
-    // master data fetch only server musicID
-    if (typeof window === "undefined") return
-
     (async () => {
-      const list = await apiFactory.get("music").getMusicList()
-      setMusic(list)
-    })()
+      const list = await apiFactory.get("music").getMusicList();
+      setMusic(list);
+    })();
   }, []);
 
   // all music level array

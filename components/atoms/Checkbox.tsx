@@ -1,6 +1,6 @@
 import React from "react";
 
-export const Checkbox = <T extends string | number,>(props: Props<T>) => (
+export const Checkbox = <T extends string | number>(props: Props<T>) => (
   <div className="flex items-center">
     <input
       id={props.id}

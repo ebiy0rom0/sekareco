@@ -10,9 +10,7 @@ export const Range = (props: Props) => {
         {...inputProps}
       />
       <datalist id="marks">
-        {[...Array(inputProps?.max).keys()].map((n) => (
-          <option key={n.toString()} value={n} />
-        ))}
+        {[...Array(inputProps?.max).keys()].map((n) => <option key={n.toString()} value={n} />)}
       </datalist>
     </label>
   );

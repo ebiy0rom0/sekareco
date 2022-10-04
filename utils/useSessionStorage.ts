@@ -10,9 +10,9 @@ export const useSessionStorage = <T>(
     JSON.parse,
   ];
 
-  const [storedValue, setValue] = useState<T>(defaultValue)
+  const [storedValue, setValue] = useState<T>(defaultValue);
   useEffect(() => {
-    const storage = window.sessionStorage
+    const storage = window.sessionStorage;
     try {
       const item = storage.getItem(key);
       setValue(item ? parser(item) : defaultValue);
@@ -24,7 +24,7 @@ export const useSessionStorage = <T>(
   // reload hook
   // when changed reload key, get storage again by key
   useEffect(() => {
-    const storage = window.sessionStorage
+    const storage = window.sessionStorage;
     try {
       const item = storage.getItem(key);
       setValue(item ? parser(item) : storedValue);
@@ -34,7 +34,7 @@ export const useSessionStorage = <T>(
   }, [reloadKey]);
 
   useEffect(() => {
-    const storage = window.sessionStorage
+    const storage = window.sessionStorage;
     try {
       if (typeof storedValue === "boolean" || storedValue) {
         storage.setItem(key, serializer(storedValue));

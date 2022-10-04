@@ -10,11 +10,10 @@ export const musicRepository = {
     //   .catch<M_Music.Music[]>((_) => []);
 
     // return json;
-    console.log("get music list")
-    return await testdata
+    console.log("get music list");
+    return await testdata;
   },
 };
-
 
 const testdata = [
   {
@@ -273,4 +272,4 @@ const testdata = [
     level: [9, 14, 19, 27, 32],
     notes: [250, 564, 823, 1234, 1502],
   },
-]
+];

@@ -13,7 +13,7 @@ export const Disclosure = React.memo(
         >
           <div className="flex justify-between">
             {props.children[0]}
-            {open ? (<Icon icon={ICON_MINUS} />) : (<Icon icon={ICON_PLUS} />)}
+            <Icon icon={open ? ICON_MINUS : ICON_PLUS} />
           </div>
         </a>
         <div className={`overflow-hidden ${open ? "h-auto" : "h-0"}`}>

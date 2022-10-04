@@ -15,13 +15,9 @@ export const Tab = React.memo((props: Props) => {
             <a
               className={[
                 tab.key === selectKey ? "text-violet-500" : "text-slate-400",
-                tab.key === selectKey
-                  ? "hover:text-violet-400"
-                  : "hover:text-slate-300",
+                tab.key === selectKey ? "hover:text-violet-400" : "hover:text-slate-300",
                 tab.key === selectKey && "border-b-2",
-                tab.key === selectKey
-                  ? "border-violet-500"
-                  : "border-slate-400",
+                tab.key === selectKey ? "border-violet-500" : "border-slate-400",
                 "tab__title",
                 "inline-block",
                 "text-center",
@@ -31,8 +27,7 @@ export const Tab = React.memo((props: Props) => {
                 "py-2",
                 "bg-slate-800",
               ].join(" ")}
-              onClick={(_: React.MouseEvent<HTMLAnchorElement>) =>
-                setSelectKey(tab.key)}
+              onClick={(_: React.MouseEvent<HTMLAnchorElement>) => setSelectKey(tab.key)}
             >
               {tab.title}
             </a>
