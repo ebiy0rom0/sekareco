@@ -1,10 +1,11 @@
 import type { UserConfig } from "@unocss/core";
 import presetUno from "@unocss/preset-uno";
 import { presetForms } from "@unocss/preset-forms";
+import { presetExtra } from "@unocss/preset-extra";
 
 // @ref https://github.com/unocss/unocss#configurations
 export default <UserConfig> {
-  presets: [presetUno(), presetForms()],
+  presets: [presetUno(), presetForms(), presetExtra()],
   theme: {
     breakpoints: {
       "sm": "640px",
