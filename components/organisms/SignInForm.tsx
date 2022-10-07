@@ -21,14 +21,14 @@ export const SignInForm = () => {
     if (typeof window === "undefined") return;
 
     // wait for prevent consecutive at click
-    await new Promise((resolve) => setTimeout(resolve, 500));
+    await new Promise((resolve) => setTimeout(resolve, 1000));
 
-    if (await tryLogin(loginID(), password())) {
-      // redirect("/records");
-    } else {
-      // redirect("/records");
-      // setMessage("login failed.")
-    }
+    redirect("/records");
+    // if (await tryLogin(loginID(), password())) {
+    //   redirect("/records");
+    // } else {
+    //   setMessage("login failed.")
+    // }
   });
 
   return (
