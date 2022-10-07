@@ -9,9 +9,6 @@ import { useEffect } from "react"
 const Index: React.FC = () => {
   const { render, open } = useModal();
 
-  useEffect(() => {
-    throw new Promise((resolve) => setTimeout(resolve, 500))
-  }, [])
   return (
     <ThemeConsumer>
       {({ darkMode, switchMode }) => (

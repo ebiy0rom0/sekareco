@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import { difficulty } from "~/types/index.ts";
 import { Icon, ICON_FILTER, ICON_SORT } from "~/components/atoms/Icon.tsx";
 import { Checkbox } from "~/components/atoms/Checkbox.tsx";
 import { Record } from "~/components/organisms/Record.tsx";
+import { List } from "~/components/atoms/List.tsx";
 import { MusicFilter } from "~/components/organisms/MusicFilter.tsx";
 import { RecordFilter } from "~/components/organisms/RecordFilter.tsx";
 import { RecordEditor } from "~/components/organisms/RecordEditor.tsx";
@@ -12,6 +13,7 @@ import { useMusicFilter } from "~/hooks/useMusicFilter.ts";
 import { useRecordFilter } from "~/hooks/useRecordFilter.ts";
 import { useModal } from "~/hooks/useModal.tsx";
 import { ThemeConsumer } from "~/hooks/useTheme.tsx";
+import { useOnClickOutside } from "~/utils/useOnClickOutside.ts";
 
 const Records: React.FC = () => {
   const { levelUpper, levelLower, music } = useMusic();
@@ -34,10 +36,18 @@ const Records: React.FC = () => {
   const { render: modal, open } = useModal();
 
   const editorOpen = (music: M_Music.Music) => {
-    alert(music.musicID);
-    open();
-  };
-  const [diff, setDiff] = useState(false);
+    alert(music.musicID)
+    open()
+  }
+  const [diff, setDiff] = useState(false)
+  const [showSort, setShowSort] = useState(false)
+
+  const sortListRef = useRef<HTMLDivElement>(null)
+  useOnClickOutside(sortListRef, () => setShowSort(false))
+
+  const [showFilter, setShowFilter] = useState(false)
+  const filterListRef = useRef<HTMLDivElement>(null)
+  useOnClickOutside(filterListRef, () => setShowFilter(false))
 
   return (
     <ThemeConsumer>
@@ -62,12 +72,43 @@ const Records: React.FC = () => {
                   -MAX
                 </Checkbox>
               </div>
-              <div className="flex font-semibold gap-x-1">
-                sort <Icon icon={ICON_SORT} />
+              <div className="relative" onClick={() => setShowSort(!showSort)}>
+                <div className="flex font-semibold items-center gap-x-1">sort <Icon icon={ICON_SORT} /></div>
+                <div className="absolute w-50 mt-2 right-0">
+                  <List show={showSort} ref={sortListRef}>
+                    <div>too long long hoge</div>
+                    <div>hoge</div>
+                    <div>hoge</div>
+                  </List>
+                </div>
               </div>
-              <div className="flex font-semibold lg:hidden">
-                filter<Icon icon={ICON_FILTER} />
-              </div>
+              <a type="button" className="relative lg:hidden" onClick={() => setShowFilter(!showFilter)}>
+                <div className="flex font-semibold items-center gap-x-1">filter<Icon icon={ICON_FILTER} /></div>
+                <div className="absolute w-50 mt-2 right-0">
+                  <List show={showFilter} ref={filterListRef}>
+                    <MusicFilter
+                      levelLower={levelLower(filterDifficulty())}
+                      levelUpper={levelUpper(filterDifficulty())}
+                      target={{
+                        value: filterDifficulty(),
+                        setter: changeDifficulty,
+                      }}
+                      lower={{
+                        value: lowerFilter(),
+                        setter: changeLowerFilter,
+                      }}
+                      upper={{
+                        value: upperFilter(),
+                        setter: changeUpperFilter,
+                      }}
+                    />
+                    <RecordFilter
+                      handler={changeRecordDifficulty}
+                      isChecked={isFiltered}
+                    />
+                  </List>
+                </div>
+              </a>
             </div>
           </div>
           <div className="flex flex-col">
@@ -94,7 +135,7 @@ const Records: React.FC = () => {
                   isChecked={isFiltered}
                 />
               </form>
-              <div className="w-full xl:col-span-4 place-self-start grid grid-cols-1 md:grid-cols-2 lg:grid-cols-none gap-y-3 gap-x-5">
+              <div className="w-full xl:col-span-4 place-self-start grid grid-cols-1 md:grid-cols-2 lg:grid-cols-none gap-y-3 gap-x-5  animated animated-fade-in animated-delay-200">
                 {filteredMusic().map((m) => (
                   <a
                     type="button"

@@ -45,7 +45,7 @@ export const Record = React.memo((props: Props) => {
               shadow-lg divide-zinc-300/60"
           }`}
         >
-          <div className="music__master w-[18rem]">
+          <div className="music__master w-[15rem]">
             <Music title={props.title} url={props.jacketUrl} />
           </div>
           <div className="music__record w-full h-full content-center grid grid-cols-2 lg:grid-cols-1 px-2 gap-y-1 pl-2">
