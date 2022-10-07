@@ -1,76 +1,74 @@
 import { Toggle, ToggleStyle } from "~/components/atoms/Toggle.tsx";
-import { GithubIcon } from "~/components/atoms/GithubIcon.tsx";
+import { Icon, ICON_GITHUB } from "~/components/atoms/Icon.tsx";
 import { SignInForm } from "~/components/organisms/SignInForm.tsx";
 import { SignUpForm } from "~/components/organisms/SignUpForm.tsx";
 import { ThemeConsumer } from "~/hooks/useTheme.tsx";
 import { useModal } from "~/hooks/useModal.tsx";
+import { useEffect } from "react"
 
 const Index: React.FC = () => {
   const { render, open } = useModal();
 
+  useEffect(() => {
+    throw new Promise((resolve) => setTimeout(resolve, 500))
+  }, [])
   return (
     <ThemeConsumer>
       {({ darkMode, switchMode }) => (
         <>
-          <div className="grid gap-y-5">
+          <div className="grid gap-y-5 mx-auto">
             <div className="flex gap-x-5">
               {"プロセカの".split("").map((s, i) => (
                 <span
                   key={i.toString()}
-                  className={`text-6xl font-bold
+                  className={`text-5xl font-bold
                     ${i == 0 ? " text-cyan-400" : darkMode ? " text-slate-300" : " text-slate-600"}`}
                 >
                   {s}
                 </span>
               ))}
             </div>
-            <div className="flex gap-x-5 flex-row-reverse mt-5">
+            <div className="flex gap-x-5 flex-row-reverse mt-5 -mr-5">
               {"記録帳".split("").reverse().map((s, i) => (
                 <span
                   key={i.toString()}
-                  className={`text-6xl font-bold
+                  className={`text-5xl font-bold
                     ${i == 2 ? " text-pink-500/90" : darkMode ? " text-slate-300" : " text-slate-600"}`}
                 >
                   {s}
                 </span>
               ))}
             </div>
-            <div className="flex items-center overflow-hidden bg-slate-400 w-[384px] h-[256px] rounded-lg">
-              <img
-                className="w-[120%] fade"
-                key={Math.random()}
-              />
+            <div className="min-w-[25.0rem]">
+              <SignInForm />
+              <button
+                type="button"
+                className="
+                  mt-7
+                  border-none
+                  bg-transparent
+                  text-lg text-slate-400
+                  justify-self-end
+                "
+                onClick={open}
+              >
+                click here to sign up.
+              </button>
+              <div className="flex flex-row-reverse mt-5 gap-x-9">
+                <Icon icon={ICON_GITHUB} />
+                <Toggle
+                  mode={!darkMode}
+                  style={ToggleStyle.THEME}
+                  role={switchMode}
+                />
+              </div>
             </div>
-            <div className="flex flex-row-reverse mt-5 gap-x-9">
-              <GithubIcon />
-              <Toggle
-                mode={!darkMode}
-                style={ToggleStyle.THEME}
-                role={switchMode}
-              />
-            </div>
+            {render(
+              <div className="min-w-[23.0rem]">
+                <SignUpForm />
+              </div>,
+            )}
           </div>
-          <div className="grid p-7 ml-[10em] mr-5 rounded-2xl min-w-[23.0rem]">
-            <SignInForm />
-            <button
-              type="button"
-              className="
-                mt-7
-                border-none
-                bg-transparent
-                text-lg text-slate-400
-                justify-self-end
-              "
-              onClick={open}
-            >
-              click here to sign up.
-            </button>
-          </div>
-          {render(
-            <div className="min-w-[23.0rem]">
-              <SignUpForm />
-            </div>,
-          )}
         </>
       )}
     </ThemeConsumer>
