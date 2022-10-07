@@ -11,6 +11,7 @@ export const useMusicFilter = (
   const [filterDifficulty, setFilterDifficulty] = useState<Difficulty>(
     difficulty.MASTER,
   );
+
   const {
     range: lowerFilter,
     changeRange: changeLower,
@@ -19,6 +20,12 @@ export const useMusicFilter = (
     range: upperFilter,
     changeRange: changeUpper,
   } = useRange(0);
+
+  const [filteredMusic, setFilteredMusic] = useState(music)
+  useEffect(() => {
+    const filtered = filtering()
+    setFilteredMusic(filtered)
+  }, [lowerFilter(), upperFilter()])
 
   // setter wrap
   const changeDifficulty = (input: string) => {
@@ -29,16 +36,14 @@ export const useMusicFilter = (
       : difficulty.MASTER;
     setFilterDifficulty(newVal);
   };
-  const changeLowerFilter = (val: string) =>
-    changeLower(parseInt(val), levelLower(filterDifficulty), upperFilter());
-  const changeUpperFilter = (val: string) =>
-    changeUpper(parseInt(val), lowerFilter(), levelUpper(filterDifficulty));
+  const changeLowerFilter = (val: string) => changeLower(parseInt(val), levelLower(filterDifficulty), upperFilter());
+  const changeUpperFilter = (val: string) => changeUpper(parseInt(val), lowerFilter(), levelUpper(filterDifficulty));
 
   // check within filter range
   const isLevelWithinRange = (level: number) => lowerFilter() <= level && level <= upperFilter();
 
   // level filter
-  const getFilteredMusic = () => music.filter((m) => isLevelWithinRange(m.level[filterDifficulty]));
+  const filtering = () => music.filter((m) => isLevelWithinRange(m.level[filterDifficulty]));
 
   useEffect(() => {
     changeLower(
@@ -60,6 +65,6 @@ export const useMusicFilter = (
     changeDifficulty,
     changeUpperFilter,
     changeLowerFilter,
-    getFilteredMusic,
+    filteredMusic: () => filteredMusic,
   };
 };

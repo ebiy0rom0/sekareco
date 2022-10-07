@@ -4,27 +4,23 @@ import { setAuth } from "~/api/handler/apiHandler.ts";
 import { useSessionStorage } from "~/utils/useSessionStorage.ts";
 
 export const useLogin = (reloadKey = 0) => {
-  const key = "token";
-  const [token, setToken] = useSessionStorage(key, "", reloadKey);
   const [isLogin, setLogin] = useState<boolean>(false);
 
   const tryLogin = async (loginId: string, password: string) => {
-    const newToken = await apiFactory.get("person").login(loginId, password);
-    if (newToken.length > 0) {
-      setToken(newToken);
-      setAuth(newToken);
+    const token = await apiFactory.get("person").login(loginId, password);
+    if (token.length > 0) {
+      setAuth(token);
       return true;
     }
 
     return false;
   };
 
-  useEffect(() => {
-    setLogin(token.length > 0);
-  }, [token]);
+  // useEffect(() => {
+  //   setLogin(token.length > 0);
+  // }, [token]);
 
   return {
-    token,
     tryLogin,
     isLogin,
   };

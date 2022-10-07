@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import Icon, { ICON_MINUS, ICON_PLUS } from "~/components/atoms/Icon.tsx";
+import { Icon, ICON_MINUS, ICON_PLUS } from "~/components/atoms/Icon.tsx";
 
 export const Disclosure = React.memo(
   (props: { children: React.ReactNode[] }) => {
     const [open, setOpen] = useState(false);
     return (
       <>
-        <a
+        <button
           type="button"
           className="w-full"
           onClick={() => setOpen(!open)}
@@ -15,7 +15,7 @@ export const Disclosure = React.memo(
             {props.children[0]}
             <Icon icon={open ? ICON_MINUS : ICON_PLUS} />
           </div>
-        </a>
+        </button>
         <div className={`overflow-hidden ${open ? "h-auto" : "h-0"}`}>
           {props.children[1]}
         </div>

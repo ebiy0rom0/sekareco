@@ -1,4 +1,4 @@
-import Icon, { ICON_MOON, ICON_SUN } from "~/components/atoms/Icon.tsx";
+import { Icon, ICON_MOON, ICON_SUN } from "~/components/atoms/Icon.tsx";
 import { ThemeConsumer } from "~/hooks/useTheme.tsx";
 
 export const Toggle = (props: Props) => (

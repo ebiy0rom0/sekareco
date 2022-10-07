@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { difficulty } from "~/types/index.ts";
 import { Icon, ICON_FILTER, ICON_SORT } from "~/components/atoms/Icon.tsx";
 import { Checkbox } from "~/components/atoms/Checkbox.tsx";
@@ -23,7 +23,7 @@ const Records: React.FC = () => {
     changeDifficulty,
     changeLowerFilter,
     changeUpperFilter,
-    getFilteredMusic,
+    filteredMusic,
   } = useMusicFilter(music(), levelLower, levelUpper);
   const {
     whiteList: recordDifficulty,
@@ -95,7 +95,7 @@ const Records: React.FC = () => {
                 />
               </form>
               <div className="w-full xl:col-span-4 place-self-start grid grid-cols-1 md:grid-cols-2 lg:grid-cols-none gap-y-3 gap-x-5">
-                {getFilteredMusic().map((m) => (
+                {filteredMusic().map((m) => (
                   <a
                     type="button"
                     key={m.musicID.toString()}

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { ThemeConsumer } from "~/hooks/useTheme.tsx";
 import { ClearStatus, clearStatus, Difficulty } from "~/types/index.ts";
 import { Status } from "~/components/atoms/Status.tsx";
@@ -6,7 +6,8 @@ import { Score } from "~/components/atoms/Score.tsx";
 import { Difficulty as DiffComponent } from "~/components/atoms/Difficulty.tsx";
 import { Music } from "~/components/organisms/Music.tsx";
 
-export const Record = (props: Props) => {
+export const Record = React.memo((props: Props) => {
+  console.log("render me")
   const [view, setView] = useState(true);
   const recordRef = useRef<HTMLDivElement>(null);
 
@@ -16,10 +17,10 @@ export const Record = (props: Props) => {
 
       if (typeof clientRect === "undefined") return;
 
-      const check = view
-        ? clientRect.top <= (window.innerHeight * 1.05)
-        : clientRect.top <= (window.innerHeight * 0.95);
-      setView(check);
+      // const check = view
+      //   ? clientRect.top <= (window.innerHeight * 1.05)
+      //   : clientRect.top <= (window.innerHeight * 0.95);
+      // setView(check);
     }, 100);
     return () => clearInterval(interval);
   }, []);
@@ -76,7 +77,7 @@ export const Record = (props: Props) => {
       )}
     </ThemeConsumer>
   );
-};
+});
 
 type Props = {
   title: string;

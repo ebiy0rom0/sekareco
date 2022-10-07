@@ -48,7 +48,9 @@ export const useRecord = (personId: number) => {
   // Drum roll type subtraction of clear status.
   const rollPrev = useCallback((musicID: number, target: Difficulty) => {
     const copyList = { ...recordList };
-    if (copyList[musicID] === undefined) copyList[musicID] = initialRecord;
+    if (copyList[musicID] === undefined) {
+      copyList[musicID] = initialRecord;
+    }
 
     copyList[musicID].status[target] = prev(copyList[musicID].status[target]);
     setRecordList(copyList);
