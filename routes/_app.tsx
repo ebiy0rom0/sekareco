@@ -10,14 +10,14 @@ const MyApp: React.FC<Props> = ({ children }) => {
   const router = useRouter();
   const ThemeProvider = useTheme();
 
-  const screenRef = useRef<HTMLDivElement>(null)
+  // const screenRef = useRef<HTMLDivElement>(null)
 
-  const overRay = () => {
-    screenRef.current?.classList.toggle("-translate-x-full")
-  }
+  // const overRay = () => {
+  //   screenRef.current?.classList.toggle("-translate-x-full")
+  // }
 
   return (
-    <React.Suspense fallback={<div className={`static w-full h-full place-content-center`}>Loading...</div>}>
+    <React.Suspense fallback={<div className={`grid w-full h-full place-content-center`}>Loading...</div>}>
       <ThemeProvider>
         <ThemeConsumer>
           {({ darkMode }) => (
@@ -77,7 +77,7 @@ const MyApp: React.FC<Props> = ({ children }) => {
                   )
                   : (
                     <div className="relative mx-auto w-full h-[100vh] items-center overflow-hidden">
-                      <div className={`relative flex flex-col w-2/5 items-center z-10 bg-slate-100 h-full`} onClick={()=>overRay()}>
+                      <div className={`relative flex flex-col w-2/5 bg-slate-100 items-center z-10 h-full`}>
                         <div className="flex flex-col justify-end min-h-[77vh] animated animated-fade-in">
                           {children}
                         </div>
@@ -94,11 +94,6 @@ const MyApp: React.FC<Props> = ({ children }) => {
                         </svg>
                       </div>
                       <div className="lg:absolute lg:inset-y-0 lg:right-0 lg:w-2/3 bg-slate-300">
-                      </div>
-                      <div className={`absolute -translate-x-full top-0 w-full z-10 bg-slate-100 h-full transition ease-in-out duration-700`} ref={screenRef} onClick={()=>overRay()}>
-                        <svg className="absolute inset-y-0 -right-0 hidden h-full w-60 fill-slate-100 translate-x-1/2 transform lg:block" fill="currentColor" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-                          <polygon points="50,0 100,0 50,100 0,100"></polygon>
-                        </svg>
                       </div>
                     </div>
                   )}
