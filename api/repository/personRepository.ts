@@ -1,14 +1,12 @@
-import { getApiHandler } from "~/api/handler/apiHandler.ts";
+import { apiClient } from "~/api/handler/apiHandler.ts";
 
 export const personRepository = {
   login: async (loginID: string, password: string) => {
     // when successfully sign in, returns access token
-    const json = await getApiHandler()
+    const json = await apiClient
       .post("signin", {
-        json: {
-          login_id: loginID,
-          password: password,
-        },
+        login_id: loginID,
+        password: password,
       })
       .json<string>()
       .catch<string>((_) => "");
@@ -18,13 +16,11 @@ export const personRepository = {
 
   registPerson: async (loginID: string, name: string, password: string) => {
     // when successfully regist, returns status 201 and not returns response body
-    await getApiHandler()
+    await apiClient
       .post("signup", {
-        json: {
-          login_id: loginID,
-          password: password,
-          person_name: name,
-        },
+        login_id: loginID,
+        password: password,
+        person_name: name,
       })
       .json()
       .catch();
@@ -36,12 +32,10 @@ export const personRepository = {
     password?: string,
   ) => {
     // when successfully modify, returns status 201 and not returns response body
-    await getApiHandler()
+    await apiClient
       .put(`persons/${personID}`, {
-        json: {
-          person_name: name,
-          password: password,
-        },
+        person_name: name,
+        password: password,
       })
       .json()
       .catch();

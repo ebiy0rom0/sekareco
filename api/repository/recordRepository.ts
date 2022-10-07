@@ -1,6 +1,6 @@
 /// <reference types="~/types/index.d.ts" />
 // import { ClearStatus } from "~/types/index.ts";
-import { getApiHandler } from "~/api/handler/apiHandler.ts";
+import { apiClient } from "~/api/handler/apiHandler.ts";
 import { ClearStatus } from "~/types/index.ts";
 
 export const recordRepository = {
@@ -18,13 +18,10 @@ export const recordRepository = {
 
   registRecord: async (personId: number, musicId: number, record: number[]) => {
     // when successfully regist, returns status 201 and not returns response body
-    await getApiHandler()
+    await apiClient
       .post(`records/${personId}/${musicId}`, {
-        json: {
-          record: record[0],
-        },
+        record: record[0],
       })
-      .json()
       .catch();
   },
 };
