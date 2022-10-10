@@ -10,8 +10,8 @@ const Records: React.FC = () => {
               darkMode ? "border-gray-700" : "border-gray-200"
             }`}
           >
-            <h2 className="text-3xl font-semibold tracking-widest first-letter:text-4xl">
-            プロフィール
+            <h2 className="text-3xl font-semibold tracking-widest">
+            vs. フレンド
             </h2>
           </div>
           <div className="flex items-center self-center h-50vh">
