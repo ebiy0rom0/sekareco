@@ -16,3 +16,10 @@ export const difficulty = {
 } as const;
 
 export type Difficulty = typeof difficulty[keyof typeof difficulty];
+
+// initial Record value
+// Used when not set or initialized.
+export const initialRecord: P_Record.Record<ClearStatus> = {
+  status: new Array(Object.keys(difficulty).length).fill(clearStatus.NOPLAY),
+  score: new Array(Object.keys(difficulty).length).fill(0),
+}
