@@ -1,8 +1,13 @@
 import React, { useState } from "react";
 import { ThemeConsumer } from "~/hooks/useTheme.tsx";
 
-export const useModal = () => {
+export const useModal = (callback: () => void) => {
   const [open, setOpen] = useState(false);
+
+  const closeCallback = () => {
+    callback();
+    setOpen(false);
+  }
 
   const render = (children: React.ReactNode) => (
     <ThemeConsumer>
@@ -18,7 +23,7 @@ export const useModal = () => {
         >
           <div
             className={`
-              flex place-self-center p-7 z-10
+              flex place-self-center p-7 z-100
               w-fit h-fit
               shadow-lg rounded-lg
               ${open ? "opacity-100" : "pointer-events-none opacity-0"}
@@ -39,7 +44,7 @@ export const useModal = () => {
               ease-in-out
               duration-300
             `}
-            onClick={() => setOpen(!open)}
+            onClick={() => closeCallback()}
           />
         </div>
       )}
@@ -48,6 +53,6 @@ export const useModal = () => {
 
   return {
     render,
-    open: () => setOpen(!open),
+    open: () => setOpen(true),
   };
 };
