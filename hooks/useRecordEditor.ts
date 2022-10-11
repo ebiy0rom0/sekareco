@@ -1,7 +1,7 @@
 import React, { useReducer } from "react";
 import { ClearStatus, clearStatus, initialRecord } from "~/types/index.ts";
 
-export const useRecordEditor = (): [P_Record.Record<ClearStatus>, React.Dispatch<Actions>] => {
+export const useRecordEditor = (): [P_Record.Record<ClearStatus>, React.Dispatch<EditActions>] => {
   const getIndex = (status: ClearStatus) => {
     const keys = Object.keys(clearStatus);
     const findKey = Object.entries(clearStatus).find(([_, v]) => v === status)?.[0];
@@ -13,7 +13,7 @@ export const useRecordEditor = (): [P_Record.Record<ClearStatus>, React.Dispatch
   const next = (status: ClearStatus) => (length + getIndex(status) + 1) % length as ClearStatus;
   const prev = (status: ClearStatus) => (length + getIndex(status) - 1) % length as ClearStatus;
 
-  const reducer = (state: P_Record.Record<ClearStatus>, action: Actions) => {
+  const reducer = (state: P_Record.Record<ClearStatus>, action: EditActions) => {
     switch (action.type) {
       case "initialize":
         return action.payload.record
@@ -40,7 +40,7 @@ export const useRecordEditor = (): [P_Record.Record<ClearStatus>, React.Dispatch
   return [ editRecord, dispatcher ]
 }
 
-export type Actions =
+export type EditActions =
   { type: "initialize", payload: { record: P_Record.Record<ClearStatus> } }
 | { type: "increment",  payload: { d: number } }
 | { type: "decrement",  payload: { d: number } }

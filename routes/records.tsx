@@ -1,6 +1,8 @@
+/// <reference types="~/types/index.d.ts" />
 import React, { useState, useRef } from "react";
-import { difficulty } from "~/types/index.ts";
+import { ClearStatus, difficulty } from "~/types/index.ts";
 import { Icon, ICON_FILTER, ICON_SORT } from "~/components/atoms/Icon.tsx";
+import { apiFactory } from "~/api/apiFactory.ts";
 import { Checkbox } from "~/components/atoms/Checkbox.tsx";
 import { Record } from "~/components/organisms/Record.tsx";
 import { List } from "~/components/atoms/List.tsx";
@@ -11,13 +13,19 @@ import { useMusic } from "~/hooks/useMusic.ts";
 import { useRecord } from "~/hooks/useRecord.ts";
 import { useMusicFilter } from "~/hooks/useMusicFilter.ts";
 import { useRecordFilter } from "~/hooks/useRecordFilter.ts";
+import { useRecordEditor } from "~/hooks/useRecordEditor.ts";
+import { useMusicSort } from "~/hooks/useMusicSort.ts";
 import { useModal } from "~/hooks/useModal.tsx";
 import { ThemeConsumer } from "~/hooks/useTheme.tsx";
 import { useOnClickOutside } from "~/utils/useOnClickOutside.ts";
+import { useObjectCompare } from "~/utils/useObjectCompare.ts";
 
 const Records: React.FC = () => {
   const { levelUpper, levelLower, music } = useMusic();
-  const { getRecord, rollNext, rollPrev } = useRecord(1);
+  const { getRecord, setRecord } = useRecord(1);
+
+  // music filtering
+  // TODO: change method conversion to dispatcher
   const {
     filterDifficulty,
     lowerFilter,
@@ -27,27 +35,66 @@ const Records: React.FC = () => {
     changeUpperFilter,
     filteredMusic,
   } = useMusicFilter(music(), levelLower, levelUpper);
+
+  // sort
+  const {
+    sortedMusic
+  } = useMusicSort(filteredMusic())
+
+  // record filtering
   const {
     whiteList: recordDifficulty,
     changeWhiteList: changeRecordDifficulty,
     isFiltered,
   } = useRecordFilter(difficulty);
 
-  const { render: modal, open } = useModal();
+  // score display in difference mode
+  const [diffMode, setDiffMode] = useState(false)
 
-  const editorOpen = (music: M_Music.Music) => {
-    alert(music.musicID)
-    open()
-  }
-  const [diff, setDiff] = useState(false)
+  // sort list display flag
   const [showSort, setShowSort] = useState(false)
 
+  // reservation to hide when click or tap outside the list
   const sortListRef = useRef<HTMLDivElement>(null)
   useOnClickOutside(sortListRef, () => setShowSort(false))
 
+  // filter list display flag when screen less than or equal to `sm`
   const [showFilter, setShowFilter] = useState(false)
+
+  // reservation to hide when click or tap outside the list
   const filterListRef = useRef<HTMLDivElement>(null)
   useOnClickOutside(filterListRef, () => setShowFilter(false))
+
+  // editor
+  const [ editMusic, setEditMusic ] = useState({
+    musicID: 0,
+    level: [0,0,0,0,0],
+    notes: [0,0,0,0,0]
+  } as M_Music.Music)
+  const [ editRecord, dispatch ] = useRecordEditor()
+  const { difference } = useObjectCompare(editRecord, getRecord(editMusic.musicID))
+
+  // editor modal
+  const { render: modal, open } = useModal(() => {
+    if (!difference()) return
+
+    apiFactory.get("record")
+      .registRecord(editMusic.musicID, editRecord)
+      .then(() => setRecord(editMusic.musicID, editRecord))
+  });
+
+  const openEditor = (music: M_Music.Music) => {
+    const editor = JSON.parse(JSON.stringify(getRecord(music.musicID))) as P_Record.Record<ClearStatus>
+
+    setEditMusic(music)
+    dispatch({
+      type: "initialize",
+      payload: {
+        record: editor,
+      },
+    })
+    open()
+  }
 
   return (
     <ThemeConsumer>
@@ -58,16 +105,16 @@ const Records: React.FC = () => {
               darkMode ? "border-gray-700" : "border-gray-200"
             }`}
           >
-            <span className="text-3xl font-semibold tracking-widest first-letter:text-4xl">
+            <h2 className="text-3xl font-semibold tracking-widest first-letter:text-4xl">
               記録帳
-            </span>
+            </h2>
             <div className="flex items-end gap-x-8 mr-4">
               <div className="flex font-semibold">
                 <Checkbox
                   id="diffToggle"
-                  checked={diff}
-                  handler={(_: string) => setDiff(!diff)}
-                  value={"1"}
+                  checked={diffMode}
+                  handler={(_: string) => setDiffMode(!diffMode)}
+                  value={""}
                 >
                   -MAX
                 </Checkbox>
@@ -135,17 +182,17 @@ const Records: React.FC = () => {
                   isChecked={isFiltered}
                 />
               </form>
-              <div className="w-full xl:col-span-4 place-self-start grid grid-cols-1 md:grid-cols-2 lg:grid-cols-none gap-y-3 gap-x-5  animated animated-fade-in animated-delay-200">
-                {filteredMusic().map((m) => (
+              <div className="w-full xl:col-span-4 place-self-start grid grid-cols-1 md:grid-cols-2 lg:grid-cols-none gap-y-3 gap-x-5">
+                {sortedMusic(4).map((m) => (
                   <a
                     type="button"
                     key={m.musicID.toString()}
-                    onClick={() => editorOpen(m)}
+                    onClick={() => openEditor(m)}
                   >
                     <Record
                       title={m.musicName}
                       jacketUrl={m.jacketUrl}
-                      diff={diff}
+                      diff={diffMode}
                       status={getRecord(m.musicID).status}
                       score={getRecord(m.musicID).score}
                       filter={recordDifficulty()}
@@ -157,7 +204,11 @@ const Records: React.FC = () => {
               </div>
             </div>
           </div>
-          {modal(<RecordEditor />)}
+          {modal(
+            <div className="max-w-[50em]">
+              <RecordEditor music={editMusic} record={editRecord} dispatch={dispatch} />
+            </div>
+          )}
         </>
       )}
     </ThemeConsumer>

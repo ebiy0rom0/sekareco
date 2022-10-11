@@ -16,13 +16,14 @@ export const recordRepository = {
     return await testdata as P_Record.Records<ClearStatus>;
   },
 
-  registRecord: async (personId: number, musicId: number, record: number[]) => {
+  registRecord: async (musicID: number, record: P_Record.Record<ClearStatus>) => {
     // when successfully regist, returns status 201 and not returns response body
-    await apiClient
-      .post(`records/${personId}/${musicId}`, {
-        record: record[0],
-      })
-      .catch();
+    // await apiClient
+    //   .post(`records/${musicID}`, {
+    //     record: record,
+    //   })
+    //   .catch();
+    return await true
   },
 };
 
