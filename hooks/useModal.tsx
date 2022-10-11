@@ -23,7 +23,7 @@ export const useModal = (callback: () => void) => {
         >
           <div
             className={`
-              flex place-self-center p-7 z-100
+              flex place-self-center p-7 mx-15 z-100
               w-fit h-fit
               shadow-lg rounded-lg
               ${open ? "opacity-100" : "pointer-events-none opacity-0"}
