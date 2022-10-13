@@ -4,6 +4,12 @@ import { ThemeConsumer } from "~/hooks/useTheme.tsx";
 
 export const Navigation = React.memo(() => {
   const router = useRouter();
+  const menu = [
+    ["プロフィール", "/profile"],
+    ["記録帳", "/records"],
+    ["vs.フレンド", "/versus"],
+    ["スクリム", "/scrim"],
+  ];
 
   return (
     <ThemeConsumer>
@@ -15,13 +21,9 @@ export const Navigation = React.memo(() => {
               darkMode ? "border-slate-700" : "border-slate-200"
             }`}
           >
-            {[
-              ["プロフィール", "/profile"],
-              ["記録帳", "/records"],
-              ["vs. フレンド", "/versus"],
-            ].map(([title, url]) => (
+            {menu.map(([title, url]) => (
               <li
-                className={`indent-5 -ml-2px py-1 border-l-2 ${
+                className={`indent-5 -ml-2px py-2 border-l-2 ${
                   router.url.pathname === url
                     ? darkMode ? "text-sky-400 border-sky-400" : "text-sky-500 border-sky-500"
                     : darkMode
