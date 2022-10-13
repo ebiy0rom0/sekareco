@@ -1,6 +1,5 @@
-import { KyInstance } from "https://esm.sh/v91/ky@0.31.1/distribution/types/ky.d.ts";
-import { redirect } from "aleph/runtime/core/redirect.ts";
 import ky from "ky";
+import { redirect } from "aleph/runtime/core/redirect.ts";
 
 const defaultTTL = 3600
 const timestamp = () => Math.floor(Date.now() / 1000)
@@ -11,7 +10,7 @@ type CacheData = {
 }
 class ApiClient {
   // api client instance by ky
-  private client: KyInstance
+  private client: typeof ky
   // session token that needs by each api
   private token = ''
   // data cache
@@ -71,6 +70,7 @@ console.log(`cache hit: ${uri}`)
     }
 
     const data = await this.client.get(uri).json<T>()
+    this.setCache<T>(uri, data)
     return data
   }
   post = <T extends {[s: string]: unknown}>(uri: string, params: T) => this.client.post(uri, {json: {...params}})
