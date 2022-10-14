@@ -1,24 +1,19 @@
-// named rule:
-//   master_data -> namespace add prefix "M_"
-//   person_data -> namespace add prefix "P_"
+declare type Music = {
+  musicID: number;
+  artistID: number;
+  musicName: string;
+  jacketUrl: string;
+  level: number[];
+  notes: number[];
+};
 
-declare namespace M_Music {
-  type Music = {
-    musicID: number;
-    artistID: number;
-    musicName: string;
-    jacketUrl: string;
-    level: number[];
-    notes: number[];
-  };
-}
+declare type MyRecord<T> = {
+  status: T[];
+  score: number[];
+};
+ declare type MyRecords<T> = {
+  [n: number]: MyRecord<T>;
+};
 
-declare namespace P_Record {
-  type Record<T> = {
-    status: T[];
-    score: number[];
-  };
-  type Records<T> = {
-    [n: number]: Record<T>;
-  };
-}
+declare type Keys<T> = keyof T;
+declare type Values<T> = T[Keys<T>];
