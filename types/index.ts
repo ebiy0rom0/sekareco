@@ -1,4 +1,3 @@
-
 export type StatusKeys = Keys<typeof STATUS>;
 export type StatusValues = Values<typeof STATUS>;
 export const STATUS = {
@@ -23,4 +22,4 @@ export const DIFFICULTY = {
 export const initialRecord: MyRecord<StatusValues> = {
   status: new Array(Object.keys(DIFFICULTY).length).fill(STATUS.NOPLAY),
   score: new Array(Object.keys(DIFFICULTY).length).fill(0),
-}
+};

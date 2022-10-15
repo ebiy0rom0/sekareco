@@ -11,7 +11,7 @@ declare type MyRecord<T> = {
   status: T[];
   score: number[];
 };
- declare type MyRecords<T> = {
+declare type MyRecords<T> = {
   [n: number]: MyRecord<T>;
 };
 
