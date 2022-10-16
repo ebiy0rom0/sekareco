@@ -1,14 +1,13 @@
 import React, { useRef, useState } from "react";
 import { DIFFICULTY, StatusValues } from "~/types/index.ts";
 import { apiFactory } from "~/api/apiFactory.ts";
-import { Icon, ICON_FILTER } from "~/components/atoms/Icon.tsx";
 import { Checkbox } from "~/components/atoms/Checkbox.tsx";
 import { Record } from "~/components/organisms/Record.tsx";
-import { List } from "~/components/atoms/List.tsx";
 import { MusicFilter } from "~/components/organisms/MusicFilter.tsx";
 import { RecordFilter } from "~/components/organisms/RecordFilter.tsx";
 import { RecordEditor } from "~/components/organisms/RecordEditor.tsx";
 import { SortButton } from "~/components/organisms/SortButton.tsx";
+import { FilterButton } from "~/components/organisms/FilterButton.tsx";
 import { useMusic } from "~/hooks/useMusic.ts";
 import { useRecord } from "~/hooks/useRecord.ts";
 import { useMusicFilter } from "~/hooks/useMusicFilter.ts";
@@ -20,12 +19,56 @@ import { ThemeConsumer } from "~/hooks/useTheme.tsx";
 import { useOnClickOutside } from "~/utils/useOnClickOutside.ts";
 import { useObjectCompare } from "~/utils/useObjectCompare.ts";
 
+// testdata
+const artists = {
+  1: {
+    artistID: 1,
+    artistName: "VIRTUAL SINGER",
+    logoUrl: "hoge.png"
+  },
+  2: {
+    artistID: 2,
+    artistName: "Leo/need",
+    logoUrl: "hoge.png"
+  },
+  3: {
+    artistID: 3,
+    artistName: "MORE MORE JUMP!",
+    logoUrl: "hoge.png"
+  },
+  4: {
+    artistID: 4,
+    artistName: "Vivid BAD SQUAD",
+    logoUrl: "hoge.png"
+  },
+  5: {
+    artistID: 5,
+    artistName: "ワンダーランズ×ショータイム",
+    logoUrl: "hoge.png"
+  },
+  6: {
+    artistID: 6,
+    artistName: "25時、ナイトコードで。",
+    logoUrl: "hoge.png"
+  },
+  7: {
+    artistID: 7,
+    artistName: "その他",
+    logoUrl: "hoge.png"
+  },
+  8: {
+    artistID: 8,
+    artistName: "特殊カテゴリ",
+    logoUrl: "hoge.png"
+  },
+}
+
 const Records: React.FC = () => {
   const [music, levelRange] = useMusic();
   const { getRecord, setRecord } = useRecord(1);
 
   // music filtering
-  const [filter, filterDispatch, filteredMusic] = useMusicFilter(music, levelRange);
+  const [filter, filterDispatch, filteredMusic] = useMusicFilter(music, levelRange, artists);
 
   // sort
   const {
@@ -114,83 +157,22 @@ const Records: React.FC = () => {
                 </Checkbox>
               </div>
               <SortButton />
-              <a
-                type="button"
-                className="relative lg:hidden"
-                onClick={() => setShowFilter(!showFilter)}
-              >
-                <div className="flex font-semibold items-center gap-x-1">
-                  filter<Icon icon={ICON_FILTER} />
-                </div>
-                <div className="absolute w-50 mt-2 right-0">
-                  <List show={showFilter} ref={filterListRef}>
-                    <MusicFilter
-                      levelLower={levelRange(filter.difficulty).lower}
-                      levelUpper={levelRange(filter.difficulty).upper}
-                      target={{
-                        value: filter.difficulty,
-                        setter: (s: string) =>
-                          filterDispatch({
-                            type: "changeDifficulty",
-                            payload: { d: parseInt(s) },
-                          }),
-                      }}
-                      lower={{
-                        value: filter.levelLower,
-                        setter: (s: string) =>
-                          filterDispatch({
-                            type: "changeLower",
-                            payload: { l: parseInt(s) },
-                          }),
-                      }}
-                      upper={{
-                        value: filter.levelUpper,
-                        setter: (s: string) =>
-                          filterDispatch({
-                            type: "changeUpper",
-                            payload: { u: parseInt(s) },
-                          }),
-                      }}
-                    />
-                    <RecordFilter
-                      handler={changeRecordDifficulty}
-                      isChecked={isFiltered}
-                    />
-                  </List>
-                </div>
-              </a>
+              <FilterButton musicFilterProps={{
+                levelRange: levelRange(filter.difficulty),
+                artists: artists,
+                filter: filter,
+                dispatch: filterDispatch
+              }} />
             </div>
           </div>
           <div className="flex flex-col">
             <div className="grid grid-cols-1 xl:grid-cols-5 gap-x-15 py-5">
               <form className="hidden lg:block">
                 <MusicFilter
-                  levelLower={levelRange(filter.difficulty).lower}
-                  levelUpper={levelRange(filter.difficulty).upper}
-                  target={{
-                    value: filter.difficulty,
-                    setter: (s: string) =>
-                      filterDispatch({
-                        type: "changeDifficulty",
-                        payload: { d: parseInt(s) },
-                      }),
-                  }}
-                  lower={{
-                    value: filter.levelLower,
-                    setter: (s: string) =>
-                      filterDispatch({
-                        type: "changeLower",
-                        payload: { l: parseInt(s) },
-                      }),
-                  }}
-                  upper={{
-                    value: filter.levelUpper,
-                    setter: (s: string) =>
-                      filterDispatch({
-                        type: "changeUpper",
-                        payload: { u: parseInt(s) },
-                      }),
-                  }}
+                  levelRange={levelRange(filter.difficulty)}
+                  artists={artists}
+                  filter={filter}
+                  dispatch={filterDispatch}
                 />
                 <RecordFilter
                   handler={changeRecordDifficulty}
@@ -219,11 +201,13 @@ const Records: React.FC = () => {
               </div>
             </div>
           </div>
-          {modal(
-            <div className="max-w-[50em]">
-              <RecordEditor music={editMusic} record={editRecord} dispatch={dispatch} />
-            </div>,
-          )}
+          <div className="relative z-10">
+            {modal(
+              <div className="max-w-[50em]">
+                <RecordEditor music={editMusic} record={editRecord} dispatch={dispatch} />
+              </div>,
+            )}
+          </div>
         </>
       )}
     </ThemeConsumer>
