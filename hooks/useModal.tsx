@@ -14,7 +14,7 @@ export const useModal = (callback: () => void) => {
       {({ darkMode }) => (
         <div
           className={`
-            items-center fixed grid inset-0 max-h-[80vh]
+            items-center fixed grid inset-0 my-auto max-h-[80vh] overflow-auto
             ${open ? "opacity-100" : "pointer-events-none opacity-0"}
             transition-opacity
             ease-in-out
