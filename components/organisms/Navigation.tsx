@@ -2,14 +2,15 @@ import React from "react";
 import { Link, useRouter } from "aleph/react";
 import { ThemeConsumer } from "~/hooks/useTheme.tsx";
 
+export const menu = [
+  {title: "プロフィール", url: "/profile"},
+  {title: "記録帳", url: "/records"},
+  {title: "vs.フレンド", url: "/versus"},
+  {title: "スクリム", url: "/scrim"},
+];
+
 export const Navigation = React.memo(() => {
   const router = useRouter();
-  const menu = [
-    ["プロフィール", "/profile"],
-    ["記録帳", "/records"],
-    ["vs.フレンド", "/versus"],
-    ["スクリム", "/scrim"],
-  ];
 
   return (
     <ThemeConsumer>
@@ -21,7 +22,7 @@ export const Navigation = React.memo(() => {
               darkMode ? "border-slate-700" : "border-slate-200"
             }`}
           >
-            {menu.map(([title, url]) => (
+            {menu.map(({title, url}) => (
               <li
                 className={`indent-5 -ml-2px py-2 border-l-2 ${
                   router.url.pathname === url
