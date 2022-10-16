@@ -20,7 +20,7 @@ export const Footer = React.memo(() => (
         </div>
         <a href="https://github.com/ebiy0rom0/sekareco" className="hover:opacity-70 flex items-end">
           <Icon icon={ICON_GITHUB} title="github" />
-          <p className="ml-2">check to code →</p>
+          <p className="ml-2 hidden md:block">check to code →</p>
         </a>
       </div>
     )}

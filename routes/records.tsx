@@ -142,11 +142,11 @@ const Records: React.FC = () => {
               darkMode ? "border-gray-700" : "border-gray-200"
             }`}
           >
-            <h2 className="text-3xl font-semibold tracking-widest first-letter:text-4xl">
+            <h2 className={`text-3xl font-semibold tracking-widest first-letter:text-4xl ${darkMode ? "first-letter:text-pink-500/90" : "first-letter:text-cyan-400"}`}>
               記録帳
             </h2>
             <div className="flex items-end gap-x-8 mr-4 z-10">
-              <div className="flex font-semibold">
+              <div className="sm:flex font-semibold hidden">
                 <Checkbox
                   id="diffToggle"
                   checked={diffMode}
@@ -167,7 +167,7 @@ const Records: React.FC = () => {
           </div>
           <div className="flex flex-col">
             <div className="grid grid-cols-1 xl:grid-cols-5 gap-x-15 py-5">
-              <form className="hidden lg:block">
+              <form className="hidden lg:block divide-y">
                 <MusicFilter
                   levelRange={levelRange(filter.difficulty)}
                   artists={artists}

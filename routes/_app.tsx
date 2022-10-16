@@ -37,7 +37,7 @@ const MyApp: React.FC<Props> = ({ children }) => {
                         darkMode ? "border-slate-200/40" : "border-slate-400/30"
                       } backdrop-blur-md`}
                     >
-                      <div className="max-w-[110rem] px-10 py-2 mx-auto">
+                      <div className="max-w-[110rem] px-4 sm:px-10 py-2 mx-auto">
                         <Header />
                       </div>
                     </div>
@@ -72,7 +72,7 @@ const MyApp: React.FC<Props> = ({ children }) => {
                           <div
                             className={`
                               border-t ${darkMode ? "border-slate-200/40" : "border-slate-400/30"}
-                              mt-10 pt-15 pb-7 mx-30
+                              mt-10 pt-10 mx-5 pb-5 md:px-10
                             `}
                           >
                             <Footer />

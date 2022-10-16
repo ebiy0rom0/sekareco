@@ -29,7 +29,7 @@ export const Header = React.memo(() => {
                 sign out
               </Button>
             </div>
-            <Button className="2xl:hidden" onClick={()=>setOpen({open: true})}><Icon icon={ICON_MENU} /></Button>
+            <Button className="2xl:hidden -mr-3" onClick={()=>setOpen({open: true})}><Icon icon={ICON_MENU} /></Button>
           </div>
           <Transition.Root show={open.open} as={Fragment}>
             <Dialog as="div" className="relative z-40 2xl:hidden" onClose={() => setOpen({open: false})}>
