@@ -3,14 +3,12 @@ import { Button } from "~/components/atoms/Button.tsx";
 import { Input } from "~/components/atoms/Input.tsx";
 import { useInput } from "~/hooks/useInput.ts";
 import { useAlert } from "~/hooks/useAlert.tsx";
-import { useLogin } from "~/hooks/useLogin.ts";
 import { useWaitAction } from "~/utils/useWaitAction.ts";
 
 export const SignInForm = () => {
   const [loginID, setLoginID] = useInput("");
   const [password, setPassword] = useInput("");
   const { renderAlert } = useAlert();
-  const { tryLogin } = useLogin();
 
   const {
     waiting,
