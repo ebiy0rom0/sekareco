@@ -1,14 +1,14 @@
-/// <reference types="~/types/index.d.ts" />
-import React, { useState, useRef } from "react";
-import { ClearStatus, difficulty } from "~/types/index.ts";
-import { Icon, ICON_FILTER, ICON_SORT } from "~/components/atoms/Icon.tsx";
+import React, { useRef, useState } from "react";
+import { DIFFICULTY, StatusValues } from "~/types/index.ts";
 import { apiFactory } from "~/api/apiFactory.ts";
+import { Icon, ICON_FILTER } from "~/components/atoms/Icon.tsx";
 import { Checkbox } from "~/components/atoms/Checkbox.tsx";
 import { Record } from "~/components/organisms/Record.tsx";
 import { List } from "~/components/atoms/List.tsx";
 import { MusicFilter } from "~/components/organisms/MusicFilter.tsx";
 import { RecordFilter } from "~/components/organisms/RecordFilter.tsx";
 import { RecordEditor } from "~/components/organisms/RecordEditor.tsx";
+import { SortButton } from "~/components/organisms/SortButton.tsx";
 import { useMusic } from "~/hooks/useMusic.ts";
 import { useRecord } from "~/hooks/useRecord.ts";
 import { useMusicFilter } from "~/hooks/useMusicFilter.ts";
@@ -21,80 +21,74 @@ import { useOnClickOutside } from "~/utils/useOnClickOutside.ts";
 import { useObjectCompare } from "~/utils/useObjectCompare.ts";
 
 const Records: React.FC = () => {
-  const { levelUpper, levelLower, music } = useMusic();
+  const [music, levelRange] = useMusic();
   const { getRecord, setRecord } = useRecord(1);
 
   // music filtering
-  // TODO: change method conversion to dispatcher
-  const {
-    filterDifficulty,
-    lowerFilter,
-    upperFilter,
-    changeDifficulty,
-    changeLowerFilter,
-    changeUpperFilter,
-    filteredMusic,
-  } = useMusicFilter(music(), levelLower, levelUpper);
+  const [filter, filterDispatch, filteredMusic] = useMusicFilter(music, levelRange);
 
   // sort
   const {
-    sortedMusic
-  } = useMusicSort(filteredMusic())
+    sortedMusic,
+  } = useMusicSort(filteredMusic);
 
   // record filtering
   const {
     whiteList: recordDifficulty,
     changeWhiteList: changeRecordDifficulty,
     isFiltered,
-  } = useRecordFilter(difficulty);
+  } = useRecordFilter(DIFFICULTY);
 
   // score display in difference mode
-  const [diffMode, setDiffMode] = useState(false)
+  const [diffMode, setDiffMode] = useState(false);
 
   // sort list display flag
-  const [showSort, setShowSort] = useState(false)
+  const [showSort, setShowSort] = useState(false);
 
   // reservation to hide when click or tap outside the list
-  const sortListRef = useRef<HTMLDivElement>(null)
-  useOnClickOutside(sortListRef, () => setShowSort(false))
+  const sortListRef = useRef<HTMLDivElement>(null);
+  useOnClickOutside(sortListRef, () => setShowSort(false));
 
   // filter list display flag when screen less than or equal to `sm`
-  const [showFilter, setShowFilter] = useState(false)
+  const [showFilter, setShowFilter] = useState(false);
 
   // reservation to hide when click or tap outside the list
-  const filterListRef = useRef<HTMLDivElement>(null)
-  useOnClickOutside(filterListRef, () => setShowFilter(false))
+  const filterListRef = useRef<HTMLDivElement>(null);
+  useOnClickOutside(filterListRef, () => setShowFilter(false));
 
   // editor
-  const [ editMusic, setEditMusic ] = useState({
+  const [editMusic, setEditMusic] = useState<Music>({
     musicID: 0,
-    level: [0,0,0,0,0],
-    notes: [0,0,0,0,0]
-  } as M_Music.Music)
-  const [ editRecord, dispatch ] = useRecordEditor()
-  const { difference } = useObjectCompare(editRecord, getRecord(editMusic.musicID))
+    musicName: "",
+    artistID: 0,
+    jacketUrl: "",
+    level: [0, 0, 0, 0, 0],
+    notes: [0, 0, 0, 0, 0],
+  });
+  const [editRecord, dispatch] = useRecordEditor();
+  const { difference } = useObjectCompare(editRecord, getRecord(editMusic.musicID));
 
   // editor modal
   const { render: modal, open } = useModal(() => {
-    if (!difference()) return
+    if (!difference()) return;
 
     apiFactory.get("record")
       .registRecord(editMusic.musicID, editRecord)
-      .then(() => setRecord(editMusic.musicID, editRecord))
+      .then(() => setRecord(editMusic.musicID, editRecord));
   });
 
-  const openEditor = (music: M_Music.Music) => {
-    const editor = JSON.parse(JSON.stringify(getRecord(music.musicID))) as P_Record.Record<ClearStatus>
+  const openEditor = (music: Music) => {
+    const editor = JSON.parse(JSON.stringify(getRecord(music.musicID))) as MyRecord<StatusValues>;
 
-    setEditMusic(music)
+    setEditMusic(music);
     dispatch({
       type: "initialize",
       payload: {
         record: editor,
       },
-    })
-    open()
-  }
+    });
+    open();
+  };
 
   return (
     <ThemeConsumer>
@@ -108,7 +102,7 @@ const Records: React.FC = () => {
             <h2 className="text-3xl font-semibold tracking-widest first-letter:text-4xl">
               記録帳
             </h2>
-            <div className="flex items-end gap-x-8 mr-4">
+            <div className="flex items-end gap-x-8 mr-4 z-10">
               <div className="flex font-semibold">
                 <Checkbox
                   id="diffToggle"
@@ -119,34 +113,43 @@ const Records: React.FC = () => {
                   -MAX
                 </Checkbox>
               </div>
-              <div className="relative" onClick={() => setShowSort(!showSort)}>
-                <div className="flex font-semibold items-center gap-x-1">sort <Icon icon={ICON_SORT} /></div>
-                <div className="absolute w-50 mt-2 right-0">
-                  <List show={showSort} ref={sortListRef}>
-                    <div>too long long hoge</div>
-                    <div>hoge</div>
-                    <div>hoge</div>
-                  </List>
+              <SortButton />
+              <a
+                type="button"
+                className="relative lg:hidden"
+                onClick={() => setShowFilter(!showFilter)}
+              >
+                <div className="flex font-semibold items-center gap-x-1">
+                  filter<Icon icon={ICON_FILTER} />
                 </div>
-              </div>
-              <a type="button" className="relative lg:hidden" onClick={() => setShowFilter(!showFilter)}>
-                <div className="flex font-semibold items-center gap-x-1">filter<Icon icon={ICON_FILTER} /></div>
                 <div className="absolute w-50 mt-2 right-0">
                   <List show={showFilter} ref={filterListRef}>
                     <MusicFilter
-                      levelLower={levelLower(filterDifficulty())}
-                      levelUpper={levelUpper(filterDifficulty())}
+                      levelLower={levelRange(filter.difficulty).lower}
+                      levelUpper={levelRange(filter.difficulty).upper}
                       target={{
-                        value: filterDifficulty(),
-                        setter: changeDifficulty,
+                        value: filter.difficulty,
+                        setter: (s: string) =>
+                          filterDispatch({
+                            type: "changeDifficulty",
+                            payload: { d: parseInt(s) },
+                          }),
                       }}
                       lower={{
-                        value: lowerFilter(),
-                        setter: changeLowerFilter,
+                        value: filter.levelLower,
+                        setter: (s: string) =>
+                          filterDispatch({
+                            type: "changeLower",
+                            payload: { l: parseInt(s) },
+                          }),
                       }}
                       upper={{
-                        value: upperFilter(),
-                        setter: changeUpperFilter,
+                        value: filter.levelUpper,
+                        setter: (s: string) =>
+                          filterDispatch({
+                            type: "changeUpper",
+                            payload: { u: parseInt(s) },
+                          }),
                       }}
                     />
                     <RecordFilter
@@ -162,19 +165,31 @@ const Records: React.FC = () => {
             <div className="grid grid-cols-1 xl:grid-cols-5 gap-x-15 py-5">
               <form className="hidden lg:block">
                 <MusicFilter
-                  levelLower={levelLower(filterDifficulty())}
-                  levelUpper={levelUpper(filterDifficulty())}
+                  levelLower={levelRange(filter.difficulty).lower}
+                  levelUpper={levelRange(filter.difficulty).upper}
                   target={{
-                    value: filterDifficulty(),
-                    setter: changeDifficulty,
+                    value: filter.difficulty,
+                    setter: (s: string) =>
+                      filterDispatch({
+                        type: "changeDifficulty",
+                        payload: { d: parseInt(s) },
+                      }),
                   }}
                   lower={{
-                    value: lowerFilter(),
-                    setter: changeLowerFilter,
+                    value: filter.levelLower,
+                    setter: (s: string) =>
+                      filterDispatch({
+                        type: "changeLower",
+                        payload: { l: parseInt(s) },
+                      }),
                   }}
                   upper={{
-                    value: upperFilter(),
-                    setter: changeUpperFilter,
+                    value: filter.levelUpper,
+                    setter: (s: string) =>
+                      filterDispatch({
+                        type: "changeUpper",
+                        payload: { u: parseInt(s) },
+                      }),
                   }}
                 />
                 <RecordFilter
@@ -183,21 +198,21 @@ const Records: React.FC = () => {
                 />
               </form>
               <div className="w-full xl:col-span-4 place-self-start grid grid-cols-1 md:grid-cols-2 lg:grid-cols-none gap-y-3 gap-x-5">
-                {sortedMusic(4).map((m) => (
+                {sortedMusic(4).map((music) => (
                   <a
                     type="button"
-                    key={m.musicID.toString()}
-                    onClick={() => openEditor(m)}
+                    key={music.musicID.toString()}
+                    onClick={() => openEditor(music)}
                   >
                     <Record
-                      title={m.musicName}
-                      jacketUrl={m.jacketUrl}
+                      title={music.musicName}
+                      jacketUrl={music.jacketUrl}
                       diff={diffMode}
-                      status={getRecord(m.musicID).status}
-                      score={getRecord(m.musicID).score}
+                      status={getRecord(music.musicID).status}
+                      score={getRecord(music.musicID).score}
                       filter={recordDifficulty()}
-                      level={m.level}
-                      notes={m.notes}
+                      level={music.level}
+                      notes={music.notes}
                     />
                   </a>
                 ))}
@@ -207,7 +222,7 @@ const Records: React.FC = () => {
           {modal(
             <div className="max-w-[50em]">
               <RecordEditor music={editMusic} record={editRecord} dispatch={dispatch} />
-            </div>
+            </div>,
           )}
         </>
       )}

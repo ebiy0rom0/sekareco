@@ -1,70 +1,92 @@
-/// <reference types="~/types/index.d.ts" />
-import { useEffect, useState } from "react";
-import { Difficulty, difficulty } from "~/types/index.ts";
-import { useRange } from "~/hooks/useRange.ts";
+import React, { useCallback, useEffect, useReducer } from "react";
+import { DIFFICULTY, DifficultyValues } from "~/types/index.ts";
 
 export const useMusicFilter = (
-  music: M_Music.Music[],
-  levelLower: (n: Difficulty) => number,
-  levelUpper: (n: Difficulty) => number,
-) => {
-  const [filterDifficulty, setFilterDifficulty] = useState<Difficulty>(
-    difficulty.MASTER,
-  );
+  music: Music[],
+  levelRange: (n: DifficultyValues) => { lower: number; upper: number },
+): [
+  FilterState,
+  React.Dispatch<MusicFilterActions>,
+  Music[],
+] => {
+  const changeLevel = (val: number, lower: number, upper: number) =>
+    val < lower ? lower : val > upper ? upper : val;
 
-  const {
-    range: lowerFilter,
-    changeRange: changeLower,
-  } = useRange(0);
-  const {
-    range: upperFilter,
-    changeRange: changeUpper,
-  } = useRange(0);
+  // select "master", if out of range
+  const changeDifficulty = (input: number) =>
+    Object.values(DIFFICULTY).some((d) => d === input)
+      ? (input as DifficultyValues)
+      : DIFFICULTY.MASTER;
 
-  const [filteredMusic, setFilteredMusic] = useState(music)
-  useEffect(() => {
-    const filtered = filtering()
-    setFilteredMusic(filtered)
-  }, [lowerFilter(), upperFilter()])
-
-  // setter wrap
-  const changeDifficulty = (input: string) => {
-    const inputNum = parseInt(input);
-    // select "master", if out of range
-    const newVal = Object.values(difficulty).some((d) => d === inputNum)
-      ? (inputNum as Difficulty)
-      : difficulty.MASTER;
-    setFilterDifficulty(newVal);
+  const reducer = (state: FilterState, action: MusicFilterActions): FilterState => {
+    const copy = JSON.parse(JSON.stringify(state)) as typeof state;
+    switch (action.type) {
+      case "changeDifficulty":
+        copy.difficulty = changeDifficulty(action.payload.d);
+        break;
+      case "changeLower":
+        copy.levelLower = changeLevel(
+          action.payload.l,
+          levelRange(state.difficulty).lower,
+          state.levelUpper,
+        );
+        break;
+      case "changeUpper":
+        copy.levelUpper = changeLevel(
+          action.payload.u,
+          state.levelLower,
+          levelRange(state.difficulty).upper,
+        );
+        break;
+    }
+    return copy;
   };
-  const changeLowerFilter = (val: string) => changeLower(parseInt(val), levelLower(filterDifficulty), upperFilter());
-  const changeUpperFilter = (val: string) => changeUpper(parseInt(val), lowerFilter(), levelUpper(filterDifficulty));
+
+  const [filter, dispatcher] = useReducer(reducer, {
+    difficulty: DIFFICULTY.MASTER,
+    levelLower: 0,
+    levelUpper: 100,
+    artistIDs: [],
+  });
+
+  useEffect(() => {
+    dispatcher({
+      type: "changeUpper",
+      payload: {
+        u: levelRange(filter.difficulty).upper,
+      },
+    });
+    dispatcher({
+      type: "changeLower",
+      payload: {
+        l: levelRange(filter.difficulty).lower,
+      },
+    });
+  }, [music, filter.difficulty]);
 
   // check within filter range
-  const isLevelWithinRange = (level: number) => lowerFilter() <= level && level <= upperFilter();
+  const isLevelWithinRange = useCallback(
+    (level: number) => filter.levelLower <= level && level <= filter.levelUpper,
+    [filter.levelLower, filter.levelUpper],
+  );
 
   // level filter
-  const filtering = () => music.filter((m) => isLevelWithinRange(m.level[filterDifficulty]));
+  const filteredMusic = useCallback(
+    () => music.filter((m) => isLevelWithinRange(m.level[filter.difficulty])),
+    [music, filter],
+  );
 
-  useEffect(() => {
-    changeLower(
-      levelLower(filterDifficulty),
-      levelLower(filterDifficulty),
-      levelUpper(filterDifficulty),
-    );
-    changeUpper(
-      levelUpper(filterDifficulty),
-      levelLower(filterDifficulty),
-      levelUpper(filterDifficulty),
-    );
-  }, [music, filterDifficulty]);
-
-  return {
-    filterDifficulty: () => filterDifficulty,
-    lowerFilter,
-    upperFilter,
-    changeDifficulty,
-    changeUpperFilter,
-    changeLowerFilter,
-    filteredMusic: () => filteredMusic,
-  };
+  return [filter, dispatcher, filteredMusic()];
 };
+
+type FilterState = {
+  difficulty: DifficultyValues;
+  levelUpper: number;
+  levelLower: number;
+  artistIDs: number[];
+};
+
+export type MusicFilterActions =
+  | { type: "changeDifficulty"; payload: { d: number } }
+  | { type: "changeLower"; payload: { l: number } }
+  | { type: "changeUpper"; payload: { u: number } };
