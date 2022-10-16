@@ -5,7 +5,7 @@ export const Input = (props: Props) => (
   <ThemeConsumer>
     {({ darkMode }) => (
       <label htmlFor={props.id} className={props?.className}>
-        <strong className="ms-1">{props.labelName}</strong>
+        {/* <strong className="ms-1">{props.labelName}</strong> */}
         <input
           id={props.id}
           className={`
