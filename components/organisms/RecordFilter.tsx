@@ -15,7 +15,7 @@ export const RecordFilter = (props: Props) => {
               {({ open }) => (
                 <>
                   <Disclosure.Button className="w-full pr-3">
-                    <div className="flex justify-between">
+                    <div className="flex justify-between items-center">
                       <span className="font-semibold tracking-widest">難易度</span>
                       <Icon icon={open ? ICON_MINUS : ICON_PLUS} />
                     </div>
