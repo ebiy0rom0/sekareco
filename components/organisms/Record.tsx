@@ -1,13 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import { ThemeConsumer } from "~/hooks/useTheme.tsx";
-import { ClearStatus, clearStatus, Difficulty } from "~/types/index.ts";
+import { DifficultyValues, STATUS, StatusValues } from "~/types/index.ts";
 import { Status } from "~/components/atoms/Status.tsx";
 import { Score } from "~/components/atoms/Score.tsx";
 import { Difficulty as DiffComponent } from "~/components/atoms/Difficulty.tsx";
 import { Music } from "~/components/organisms/Music.tsx";
 
 export const Record = React.memo((props: Props) => {
-  console.log("render me")
   const [view, setView] = useState(true);
   const recordRef = useRef<HTMLDivElement>(null);
 
@@ -17,10 +16,10 @@ export const Record = React.memo((props: Props) => {
 
       if (typeof clientRect === "undefined") return;
 
-      // const check = view
-      //   ? clientRect.top <= (window.innerHeight * 1.05)
-      //   : clientRect.top <= (window.innerHeight * 0.95);
-      // setView(check);
+      const check = view
+        ? clientRect.top <= (window.innerHeight * 1.05)
+        : clientRect.top <= (window.innerHeight * 0.95);
+      setView(check);
     }, 100);
     return () => clearInterval(interval);
   }, []);
@@ -31,18 +30,19 @@ export const Record = React.memo((props: Props) => {
         <div
           ref={recordRef}
           className={`
+            hidden
             h-full divide-x-3 py-3 lg:py-0
             flex rounded items-center
             ${view ? "opacity-100" : "opacity-0 -translate-y-6"}
-            transition duration-700 ease-out
+            transition duration-700 ease-out shadow-lg
             ${
             darkMode
               ? "bg-slate-700/80 \
               hover:bg-slate-600/80 \
-              shadow-slate-400/30 shadow-lg divide-stone-200/10"
+              shadow-slate-400/30 divide-stone-200/10"
               : "bg-slate-300/60 \
               hover:bg-slate-400/40 \
-              shadow-lg divide-zinc-300/60"
+              divide-zinc-300/60"
           }`}
         >
           <div className="music__master w-[15rem]">
@@ -65,10 +65,10 @@ export const Record = React.memo((props: Props) => {
                   key={v.toString()}
                   className="h-[20px] min-w-fit grid grid-flow-col -ml-4 justify-center gap-1"
                 >
-                  <div className="w-28 mt-1 mr-0">
+                  <div className="w-28 mt-1 mr-1">
                     <Score score={props.score[v]} notes={props.notes[v]} diff={props.diff} />
                   </div>
-                  <Status status={props.status[v] ?? clearStatus.NOPLAY} />
+                  <Status status={props.status[v] ?? STATUS.NOPLAY} />
                 </div>
               ))}
             </div>
@@ -83,9 +83,9 @@ type Props = {
   title: string;
   jacketUrl: string;
   diff: boolean;
-  status: ClearStatus[];
+  status: StatusValues[];
   score: number[];
-  filter: Difficulty[];
+  filter: DifficultyValues[];
   level: number[];
   notes: number[];
 };

@@ -1,12 +1,11 @@
-/// <reference types="~/types/index.d.ts" />
 import { initialRecord } from "~/types/index.ts";
 import { useCallback, useEffect, useState } from "react";
-import { ClearStatus } from "~/types/index.ts";
+import { StatusValues } from "~/types/index.ts";
 import { apiFactory } from "~/api/apiFactory.ts";
 
 // custom hook
 export const useRecord = (personId: number) => {
-  const [recordList, setRecordList] = useState<P_Record.Records<ClearStatus>>(
+  const [recordList, setRecordList] = useState<MyRecords<StatusValues>>(
     {},
   );
 
@@ -23,11 +22,11 @@ export const useRecord = (personId: number) => {
     [recordList],
   );
 
-  const setRecord = (musicID: number, record: P_Record.Record<ClearStatus>) => {
-    const copy = JSON.parse(JSON.stringify(recordList)) as typeof recordList
-    copy[musicID] = record
-    setRecordList(copy)
-  }
+  const setRecord = (musicID: number, record: MyRecord<StatusValues>) => {
+    const copy = JSON.parse(JSON.stringify(recordList)) as typeof recordList;
+    copy[musicID] = record;
+    setRecordList(copy);
+  };
 
   return {
     getRecord,

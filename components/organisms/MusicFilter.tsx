@@ -1,5 +1,5 @@
 import React from "react";
-import { difficulty } from "~/types/index.ts";
+import { DIFFICULTY } from "~/types/index.ts";
 import { Range } from "~/components/atoms/Range.tsx";
 import { Selectbox } from "~/components/atoms/Selectbox.tsx";
 import { ThemeConsumer } from "~/hooks/useTheme.tsx";
@@ -12,7 +12,7 @@ export const MusicFilter = React.memo((props: Props) => {
           <div className={`py-6 border-b  ${darkMode ? "border-gray-700" : "border-gray-200"}`}>
             <Selectbox
               group="range-diff"
-              options={difficulty}
+              options={DIFFICULTY}
               value={props.target.value}
               setter={props.target.setter}
               width={24}

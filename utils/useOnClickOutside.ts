@@ -1,8 +1,8 @@
-import React, { useEffect } from "react"
+import React, { useEffect } from "react";
 
 export const useOnClickOutside = (
   ref: React.RefObject<HTMLElement>,
-  handler: (e: Event) => void
+  handler: (e: Event) => void,
 ) => {
   useEffect(() => {
     const listener = (event: MouseEvent | TouchEvent) => {
@@ -18,4 +18,4 @@ export const useOnClickOutside = (
       document.removeEventListener("touchstart", listener);
     };
   }, [ref, handler]);
-}
+};

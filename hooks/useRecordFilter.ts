@@ -1,9 +1,9 @@
-import { useState, useCallback } from "react";
+import { useCallback, useState } from "react";
 
 // custom hook
 export const useRecordFilter = <
   T extends { [s: string]: number },
-  U extends T[keyof T],
+  U extends Values<T>,
 >(filteredList: T) => {
   const [whiteList, setWhiteList] = useState<U[]>(
     Object.values(filteredList) as U[],
@@ -13,7 +13,9 @@ export const useRecordFilter = <
   // for use input element
   const changeWhiteList = (input: string) => {
     const inputNum = rounding(parseInt(input));
-    const newFilter = isFiltered(inputNum) ? whiteList.filter((d) => d !== inputNum) : [...whiteList, inputNum];
+    const newFilter = isFiltered(inputNum)
+      ? whiteList.filter((d) => d !== inputNum)
+      : [...whiteList, inputNum];
     setWhiteList(newFilter.sort() as U[]);
   };
 

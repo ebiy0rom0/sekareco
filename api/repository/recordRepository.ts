@@ -1,10 +1,8 @@
-/// <reference types="~/types/index.d.ts" />
-// import { ClearStatus } from "~/types/index.ts";
-import { apiClient } from "~/api/handler/apiHandler.ts";
-import { ClearStatus } from "~/types/index.ts";
+// import { apiClient } from "~/api/handler/apiHandler.ts";
+import { StatusValues } from "~/types/index.ts";
 
 export const recordRepository = {
-  getMyRecord: async (personID?: number) => {
+  getMyRecord: async (personID: number) => {
     // when successfully get, returns score and clear status by parameter person's
     // const json = await getApiHandler()
     //   .get(`records/${personId}`)
@@ -12,18 +10,19 @@ export const recordRepository = {
     //   .catch<P_Record.Record<ClearStatus>>(() => ({}));
 
     // return json ?? {};
-    console.log("get record");
-    return await testdata as P_Record.Records<ClearStatus>;
+    console.log(`get record. personID is ${personID}`);
+    return await testdata as MyRecords<StatusValues>;
   },
 
-  registRecord: async (musicID: number, record: P_Record.Record<ClearStatus>) => {
+  registRecord: async (musicID: number, record: MyRecord<StatusValues>) => {
     // when successfully regist, returns status 201 and not returns response body
     // await apiClient
     //   .post(`records/${musicID}`, {
     //     record: record,
     //   })
     //   .catch();
-    return await true
+    console.log(`regist record. musicID: ${musicID}, record: ${record}`);
+    return await true;
   },
 };
 

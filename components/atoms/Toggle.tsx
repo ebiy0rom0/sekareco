@@ -36,10 +36,10 @@ const Selector = (props: {
     {(() => {
       switch (props.style) {
         case ToggleStyle.THEME:
-          return (<Theme mode={props.mode} />);
+          return <Theme mode={props.mode} />;
         case ToggleStyle.DEFAULT:
         default:
-          return (<Default />);
+          return <Default />;
       }
     })()}
   </button>

@@ -1,4 +1,3 @@
-
 export const Spinner = () => (
   <svg
     className="align-middle animate-spin mr-3 h-5 w-5 text-white"
@@ -22,4 +21,4 @@ export const Spinner = () => (
     >
     </path>
   </svg>
-)
+);
