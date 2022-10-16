@@ -6,6 +6,7 @@
     "@unocss/preset-uno": "https://esm.sh/@unocss/preset-uno@0.45.14",
     "@unocss/preset-forms": "https://esm.sh/@julr/unocss-preset-forms@0.0.2",
     "@unocss/preset-extra": "https://esm.sh/unocss-preset-extra@0.4.3",
+    "@headlessui/react": "https://esm.sh/@headlessui/react@1.7.3",
     "aleph/": "https://deno.land/x/aleph@1.0.0-beta.16/",
     "aleph/server": "https://deno.land/x/aleph@1.0.0-beta.16/server/mod.ts",
     "aleph/dev": "https://deno.land/x/aleph@1.0.0-beta.16/server/dev.ts",
