@@ -23,7 +23,7 @@ export const SortButton = () => (
   <ThemeConsumer>
     {({ darkMode }) => (
       <Popover className="relative">
-        <Popover.Button className="flex gap-1 outline-0">
+        <Popover.Button className="flex gap-1 outline-0 font-bold">
           sort <Icon icon={ICON_SORT} />
         </Popover.Button>
         <Transition
@@ -36,7 +36,7 @@ export const SortButton = () => (
           leaveTo="transform opacity-0 scale-85"
         >
           <Popover.Panel
-            className={`absolute rounded-lg border w-40 mt-2 px-3 left-0 shadow-2xl divide-y ${
+            className={`absolute rounded-lg border-2 w-40 mt-1 px-3 right-0 shadow-2xl divide-y ${
               darkMode
                 ? "bg-slate-800 shadow-slate-400/30 border-gray-700 divide-gray-700"
                 : "bg-slate-100"
