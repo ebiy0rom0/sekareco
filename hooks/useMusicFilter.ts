@@ -4,8 +4,9 @@ import { DIFFICULTY, DifficultyValues } from "~/types/index.ts";
 export const useMusicFilter = (
   music: Music[],
   levelRange: (n: DifficultyValues) => { lower: number; upper: number },
+  _artists: Artists
 ): [
-  FilterState,
+  MusicFilterState,
   React.Dispatch<MusicFilterActions>,
   Music[],
 ] => {
@@ -18,7 +19,7 @@ export const useMusicFilter = (
       ? (input as DifficultyValues)
       : DIFFICULTY.MASTER;
 
-  const reducer = (state: FilterState, action: MusicFilterActions): FilterState => {
+  const reducer = (state: MusicFilterState, action: MusicFilterActions): MusicFilterState => {
     const copy = JSON.parse(JSON.stringify(state)) as typeof state;
     switch (action.type) {
       case "changeDifficulty":
@@ -79,11 +80,11 @@ export const useMusicFilter = (
   return [filter, dispatcher, filteredMusic()];
 };
 
-type FilterState = {
+export type MusicFilterState = {
   difficulty: DifficultyValues;
   levelUpper: number;
   levelLower: number;
-  artistIDs: number[];
+  artistIDs: Values<Artists>[];
 };
 
 export type MusicFilterActions =
