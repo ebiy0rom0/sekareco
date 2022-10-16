@@ -10,9 +10,6 @@ export const Header = React.memo(() => (
       <div className="header flex items-center">
         <span className="header__title m-0 text-lg font-bold">プロセカの記録帳</span>
         <div className="flex items-center gap-x-5 ml-auto">
-          <a href="https://github.com/ebiy0rom0/sekareco" className="hover:opacity-70">
-            <Icon icon={ICON_GITHUB} title="github" />
-          </a>
           <Toggle
             mode={!darkMode}
             style={ToggleStyle.THEME}
