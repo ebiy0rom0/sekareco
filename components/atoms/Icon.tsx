@@ -34,6 +34,7 @@ export const ICON_MOON = "moon";
 export const ICON_PLUS = "plus";
 export const ICON_SORT = "sort";
 export const ICON_SUN = "sun";
+export const ICON_CHECK = "check";
 
 const Icons = [
   ICON_CLOSE,
@@ -46,4 +47,5 @@ const Icons = [
   ICON_PLUS,
   ICON_SORT,
   ICON_SUN,
+  ICON_CHECK,
 ] as const;
