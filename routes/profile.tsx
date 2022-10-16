@@ -1,9 +1,9 @@
 import { ThemeConsumer } from "~/hooks/useTheme.tsx";
 
-const Records: React.FC = () => {
+const Profile: React.FC = () => {
   return (
     <ThemeConsumer>
-      {({darkMode}) => (
+      {({ darkMode }) => (
         <div className="flex flex-col">
           <div
             className={`flex justify-between pb-4 pt-4 border-b ${
@@ -11,7 +11,7 @@ const Records: React.FC = () => {
             }`}
           >
             <h2 className="text-3xl font-semibold tracking-widest first-letter:text-4xl">
-            プロフィール
+              プロフィール
             </h2>
           </div>
           <div className="flex items-center self-center h-50vh">
@@ -23,4 +23,4 @@ const Records: React.FC = () => {
   );
 };
 
-export default Records;
+export default Profile;

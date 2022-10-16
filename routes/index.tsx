@@ -4,10 +4,10 @@ import { SignInForm } from "~/components/organisms/SignInForm.tsx";
 import { SignUpForm } from "~/components/organisms/SignUpForm.tsx";
 import { ThemeConsumer } from "~/hooks/useTheme.tsx";
 import { useModal } from "~/hooks/useModal.tsx";
-import { useEffect } from "react"
+import React, { Suspense, useEffect, useRef } from "react";
 
 const Index: React.FC = () => {
-  const { render, open } = useModal();
+  const { render, open } = useModal(() => {});
 
   return (
     <ThemeConsumer>
@@ -19,7 +19,9 @@ const Index: React.FC = () => {
                 <span
                   key={i.toString()}
                   className={`text-5xl font-bold
-                    ${i == 0 ? " text-cyan-400" : darkMode ? " text-slate-300" : " text-slate-600"}`}
+                    ${
+                    i == 0 ? " text-cyan-400" : darkMode ? " text-slate-300" : " text-slate-600"
+                  }`}
                 >
                   {s}
                 </span>
@@ -30,7 +32,9 @@ const Index: React.FC = () => {
                 <span
                   key={i.toString()}
                   className={`text-5xl font-bold
-                    ${i == 2 ? " text-pink-500/90" : darkMode ? " text-slate-300" : " text-slate-600"}`}
+                    ${
+                    i == 2 ? " text-pink-500/90" : darkMode ? " text-slate-300" : " text-slate-600"
+                  }`}
                 >
                   {s}
                 </span>
