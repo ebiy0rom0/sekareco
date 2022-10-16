@@ -1,4 +1,6 @@
-export const Range = (props: Props) => {
+import React from "react";
+
+export const Range = React.memo((props: Props) => {
   const { children, setter, ...inputProps } = props;
   return (
     <label className="range-wrap">
@@ -14,7 +16,7 @@ export const Range = (props: Props) => {
       </datalist>
     </label>
   );
-};
+});
 
 type Props = JSX.IntrinsicElements["input"] & {
   children: string;
