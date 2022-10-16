@@ -10,7 +10,7 @@ export const Footer = React.memo(() => (
         <div className="flex">
           <p>Copyright © 2022 ebiy0rom0. All Rights Reserved.</p>
           <Link
-            to="policy"
+            to="/policy"
             className={`ml-4 pl-4 border-l-2 ${
               darkMode ? "border-slate-200/40" : "border-slate-400/30"
             }`}
