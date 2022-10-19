@@ -10,16 +10,18 @@ export const useSessionStorage = <T>(
     JSON.parse,
   ];
 
-  const [storedValue, setValue] = useState<T>(defaultValue);
-  useEffect(() => {
+  const [storedValue, setValue] = useState<T>(() => {
+    if (typeof window === "undefined") return defaultValue
+
     const storage = window.sessionStorage;
     try {
       const item = storage.getItem(key);
-      setValue(item ? parser(item) : defaultValue);
+      return item ? parser(item) : defaultValue;
     } catch (_) {
       console.log(errorMsg);
+      return defaultValue;
     }
-  }, []);
+  });
 
   // reload hook
   // when changed reload key, get storage again by key
