@@ -16,14 +16,14 @@ declare type MyRecords<T> = {
 };
 
 declare type Artist = {
-  artistID: number
-  artistName: string
-  logoUrl: string
-}
+  artistID: number;
+  artistName: string;
+  logoUrl: string;
+};
 
 declare type Artists = {
-  [n: number]: Artist
-}
+  [n: number]: Artist;
+};
 
 declare type Keys<T> = keyof T;
 declare type Values<T> = T[Keys<T>];

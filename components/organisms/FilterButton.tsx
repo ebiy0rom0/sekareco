@@ -6,7 +6,7 @@ import { RecordFilter } from "~/components/organisms/RecordFilter.tsx";
 // import { MusicFilterState, MusicFilterActions } from "~/hooks/useMusicFilter.tsx";
 import { ThemeConsumer } from "~/hooks/useTheme.tsx";
 
-export const FilterButton: React.FC<Props> = ({musicFilterProps}) => (
+export const FilterButton: React.FC<Props> = ({ musicFilterProps }) => (
   <ThemeConsumer>
     {({ darkMode }) => (
       <Popover className="relative lg:hidden">
@@ -35,14 +35,14 @@ export const FilterButton: React.FC<Props> = ({musicFilterProps}) => (
               filter={musicFilterProps.filter}
               dispatch={musicFilterProps.dispatch}
             />
-            <RecordFilter handler={(s: string)=>undefined} isChecked={(n: number)=> true} />
+            <RecordFilter handler={(s: string) => undefined} isChecked={(n: number) => true} />
           </Popover.Panel>
         </Transition>
       </Popover>
     )}
   </ThemeConsumer>
-)
+);
 
 type Props = {
-  musicFilterProps: MusicFilterProps
-}
+  musicFilterProps: MusicFilterProps;
+};

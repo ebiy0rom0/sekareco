@@ -4,7 +4,7 @@ import { DIFFICULTY, DifficultyValues } from "~/types/index.ts";
 export const useMusicFilter = (
   music: Music[],
   levelRange: (n: DifficultyValues) => { lower: number; upper: number },
-  _artists: Artists
+  _artists: Artists,
 ): [
   MusicFilterState,
   React.Dispatch<MusicFilterActions>,

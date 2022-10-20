@@ -11,7 +11,7 @@ export const useSessionStorage = <T>(
   ];
 
   const [storedValue, setValue] = useState<T>(() => {
-    if (typeof window === "undefined") return defaultValue
+    if (typeof window === "undefined") return defaultValue;
 
     const storage = window.sessionStorage;
     try {

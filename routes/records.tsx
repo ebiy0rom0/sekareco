@@ -24,51 +24,55 @@ const artists = {
   1: {
     artistID: 1,
     artistName: "VIRTUAL SINGER",
-    logoUrl: "hoge.png"
+    logoUrl: "hoge.png",
   },
   2: {
     artistID: 2,
     artistName: "Leo/need",
-    logoUrl: "hoge.png"
+    logoUrl: "hoge.png",
   },
   3: {
     artistID: 3,
     artistName: "MORE MORE JUMP!",
-    logoUrl: "hoge.png"
+    logoUrl: "hoge.png",
   },
   4: {
     artistID: 4,
     artistName: "Vivid BAD SQUAD",
-    logoUrl: "hoge.png"
+    logoUrl: "hoge.png",
   },
   5: {
     artistID: 5,
     artistName: "ワンダーランズ×ショータイム",
-    logoUrl: "hoge.png"
+    logoUrl: "hoge.png",
   },
   6: {
     artistID: 6,
     artistName: "25時、ナイトコードで。",
-    logoUrl: "hoge.png"
+    logoUrl: "hoge.png",
   },
   7: {
     artistID: 7,
     artistName: "その他",
-    logoUrl: "hoge.png"
+    logoUrl: "hoge.png",
   },
   8: {
     artistID: 8,
     artistName: "特殊カテゴリ",
-    logoUrl: "hoge.png"
+    logoUrl: "hoge.png",
   },
-}
+};
 
 const Records: React.FC = () => {
   const [music, levelRange] = useMusic();
   const { getRecord, setRecord } = useRecord(1);
 
   // music filtering
-  const [filter, filterDispatch, filteredMusic] = useMusicFilter(music, levelRange, artists);
+  const [
+    musicFilter,
+    musicFilterDispatch,
+    filteredMusic,
+  ] = useMusicFilter(music, levelRange, artists);
 
   // sort
   const {
@@ -142,7 +146,11 @@ const Records: React.FC = () => {
               darkMode ? "border-gray-700" : "border-gray-200"
             }`}
           >
-            <h2 className={`text-3xl font-semibold tracking-widest first-letter:text-4xl ${darkMode ? "first-letter:text-pink-500/90" : "first-letter:text-cyan-400"}`}>
+            <h2
+              className={`text-3xl font-semibold tracking-widest first-letter:text-4xl ${
+                darkMode ? "first-letter:text-pink-500/90" : "first-letter:text-cyan-400"
+              }`}
+            >
               記録帳
             </h2>
             <div className="flex items-end gap-x-8 mr-4 z-10">
@@ -157,22 +165,24 @@ const Records: React.FC = () => {
                 </Checkbox>
               </div>
               <SortButton />
-              <FilterButton musicFilterProps={{
-                levelRange: levelRange(filter.difficulty),
-                artists: artists,
-                filter: filter,
-                dispatch: filterDispatch
-              }} />
+              <FilterButton
+                musicFilterProps={{
+                  levelRange: levelRange(musicFilter.difficulty),
+                  artists: artists,
+                  filter: musicFilter,
+                  dispatch: musicFilterDispatch,
+                }}
+              />
             </div>
           </div>
           <div className="flex flex-col">
             <div className="grid grid-cols-1 xl:grid-cols-5 gap-x-15 py-5">
-              <form className="hidden lg:block divide-y">
+              <form className="hidden lg:block h-auto divide-y">
                 <MusicFilter
-                  levelRange={levelRange(filter.difficulty)}
+                  levelRange={levelRange(musicFilter.difficulty)}
                   artists={artists}
-                  filter={filter}
-                  dispatch={filterDispatch}
+                  filter={musicFilter}
+                  dispatch={musicFilterDispatch}
                 />
                 <RecordFilter
                   handler={changeRecordDifficulty}
