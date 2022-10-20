@@ -1,5 +1,6 @@
 import React, { Fragment, useState } from "react";
-import { Menu, Transition, Dialog } from "@headlessui/react";
+import { useRouter } from "aleph/react";
+import { Dialog, Menu, Transition } from "@headlessui/react";
 import { Button } from "~/components/atoms/Button.tsx";
 import { Icon, ICON_MENU } from "~/components/atoms/Icon.tsx";
 import { Toggle, ToggleStyle } from "~/components/atoms/Toggle.tsx";
@@ -8,7 +9,7 @@ import { ThemeConsumer } from "~/hooks/useTheme.tsx";
 import { useSessionStorage } from "~/utils/useSessionStorage.ts";
 
 export const Header = React.memo(() => {
-  const [open, setOpen] = useSessionStorage<{open: boolean}>("menu", {open: true})
+  const [open, setOpen] = useSessionStorage("menu", false);
 
   return (
     <ThemeConsumer>
@@ -29,10 +30,12 @@ export const Header = React.memo(() => {
                 sign out
               </Button>
             </div>
-            <Button className="2xl:hidden -mr-3" onClick={()=>setOpen({open: true})}><Icon icon={ICON_MENU} /></Button>
+            <Button className="2xl:hidden -mr-3" onClick={() => setOpen(true)}>
+              <Icon icon={ICON_MENU} />
+            </Button>
           </div>
-          <Transition.Root show={open.open} as={Fragment}>
-            <Dialog as="div" className="relative z-40 2xl:hidden" onClose={() => setOpen({open: false})}>
+          <Transition.Root show={open} as={Fragment}>
+            <Dialog as="div" className="relative z-40 2xl:hidden" onClose={() => setOpen(false)}>
               <Transition.Child
                 as={Fragment}
                 enter="transition-opacity ease-linear duration-300"
@@ -42,7 +45,11 @@ export const Header = React.memo(() => {
                 leaveFrom="opacity-100"
                 leaveTo="opacity-0"
               >
-                <div className={`fixed inset-0 bg-opacity-40 ${darkMode ? "bg-slate-200" : "bg-slate-700"}`} />
+                <div
+                  className={`fixed inset-0 bg-opacity-40 ${
+                    darkMode ? "bg-slate-200" : "bg-slate-700"
+                  }`}
+                />
               </Transition.Child>
               <div className="fixed inset-0 z-40 flex">
                 <Transition.Child
@@ -58,20 +65,23 @@ export const Header = React.memo(() => {
                     className={`relative flex flex-col h-full w-full ml-auto jusitfy-center max-w-xs overflow-y-auto py-12 px-8 divide-y space-y-10
                     ${darkMode ? "bg-slate-800 text-slate-400" : "bg-slate-100 text-slate-800"}`}
                   >
-                    <div><Navigation /></div>
+                    <div>
+                      <Navigation />
+                    </div>
                     <div className="flex pt-10">
-                    <Toggle
-                      mode={!darkMode}
-                      style={ToggleStyle.THEME}
-                      role={switchMode}
-                    /></div>
+                      <Toggle
+                        mode={!darkMode}
+                        style={ToggleStyle.THEME}
+                        role={switchMode}
+                      />
+                    </div>
                     <div className="flex w-full py-10">
-                    <Button
-                      className="bg-rose-600 text-slate-100 text-sm py-1 px-2 w-full"
-                      onClick={() => alert("wip")}
-                    >
-                      sign out
-                    </Button>
+                      <Button
+                        className="bg-rose-600 text-slate-100 text-sm py-1 px-2 w-full"
+                        onClick={() => alert("wip")}
+                      >
+                        sign out
+                      </Button>
                     </div>
                   </Dialog.Panel>
                 </Transition.Child>
@@ -81,7 +91,5 @@ export const Header = React.memo(() => {
         </div>
       )}
     </ThemeConsumer>
-  )
+  );
 });
-
-
