@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import { Listbox, Transition } from "@headlessui/react";
-import { Icon, ICON_SELECTOR } from "~/components/atoms/Icon.tsx";
+import { Icon, ICON_SELECTOR, ICON_CHECK } from "~/components/atoms/Icon.tsx";
 import { ThemeConsumer } from "~/hooks/useTheme.tsx";
 
 export const Selectbox = React.memo((props: Props) => (
@@ -74,7 +74,7 @@ export const Selectbox = React.memo((props: Props) => (
                       {selected
                         ? (
                           <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-amber-600">
-                            {/* <CheckIcon className="h-5 w-5" aria-hidden="true" /> */}
+                            <Icon size={20} icon={ICON_CHECK}></Icon>
                           </span>
                         )
                         : null}
