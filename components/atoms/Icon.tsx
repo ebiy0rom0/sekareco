@@ -8,7 +8,7 @@ export const Icon = (props: Props) => (
         height={props?.size ?? 25}
         width={props?.size ?? 25}
         title={props?.title}
-        className={darkMode ? "invert" : ""}
+        className={darkMode ? "invert-85" : ""}
       />
     )}
   </ThemeConsumer>
