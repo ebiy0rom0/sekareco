@@ -35,6 +35,7 @@ export const ICON_PLUS = "plus";
 export const ICON_SORT = "sort";
 export const ICON_SUN = "sun";
 export const ICON_CHECK = "check";
+export const ICON_SELECTOR = "selector";
 
 const Icons = [
   ICON_CLOSE,
@@ -48,4 +49,5 @@ const Icons = [
   ICON_SORT,
   ICON_SUN,
   ICON_CHECK,
+  ICON_SELECTOR,
 ] as const;
