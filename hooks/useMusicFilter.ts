@@ -1,12 +1,15 @@
 import React, { useCallback, useEffect, useReducer } from "react";
 import { DIFFICULTY, DifficultyValues } from "~/types/index.ts";
 
-export const useMusicFilter = (
+export const useMusicFilter = <
+  T extends Artists,
+  U extends T extends { artistIDs: infer U } ? Values<U> : never
+>(
   music: Music[],
   levelRange: (n: DifficultyValues) => { lower: number; upper: number },
-  _artists: Artists,
+  _artists: T,
 ): [
-  MusicFilterState,
+  MusicFilterState<U>,
   React.Dispatch<MusicFilterActions>,
   Music[],
 ] => {
@@ -19,7 +22,7 @@ export const useMusicFilter = (
       ? (input as DifficultyValues)
       : DIFFICULTY.MASTER;
 
-  const reducer = (state: MusicFilterState, action: MusicFilterActions): MusicFilterState => {
+  const reducer = (state: MusicFilterState<U>, action: MusicFilterActions): MusicFilterState<U> => {
     const copy = JSON.parse(JSON.stringify(state)) as typeof state;
     switch (action.type) {
       case "changeDifficulty":
@@ -39,24 +42,40 @@ export const useMusicFilter = (
           levelRange(state.difficulty).upper,
         );
         break;
+      case "changeArtists": {
+        const _input = parseInt(action.payload.s);
+        // const newFilter = isFilter
+      }
+
     }
     return copy;
   };
 
-  const [filter, dispatcher] = useReducer(reducer, {
+  const initialState: MusicFilterState<U> = {
     difficulty: DIFFICULTY.MASTER,
     levelLower: 0,
     levelUpper: 100,
-    artistIDs: [],
-  });
+    artistIDs: [...Object.values(_artists).map(artist => artist.artistID)] as U,
+  }
+  const [filter, dispatcher] = useReducer(reducer, initialState);
+
+  const _filtered = (check: number) => filter.artistIDs.some(id => id === check)
 
   useEffect(() => {
+    dispatcher({
+      type: "changeLower",
+      payload: {
+        l: levelRange(filter.difficulty).lower,
+      },
+    });
     dispatcher({
       type: "changeUpper",
       payload: {
         u: levelRange(filter.difficulty).upper,
       },
     });
+    // when the upper limit is below the lower limit,
+    // the lower limit is not updated and is updated again.
     dispatcher({
       type: "changeLower",
       payload: {
@@ -80,14 +99,18 @@ export const useMusicFilter = (
   return [filter, dispatcher, filteredMusic()];
 };
 
-export type MusicFilterState = {
+export type MusicFilterState<T> = {
   difficulty: DifficultyValues;
   levelUpper: number;
   levelLower: number;
-  artistIDs: Values<Artists>[];
+  artistIDs: T[];
 };
 
 export type MusicFilterActions =
-  | { type: "changeDifficulty"; payload: { d: number } }
-  | { type: "changeLower"; payload: { l: number } }
-  | { type: "changeUpper"; payload: { u: number } };
+  | { type: "changeDifficulty", payload: { d: number } }
+  | { type: "changeLower", payload: { l: number } }
+  | { type: "changeUpper", payload: { u: number } }
+  | { type: "changeArtists", payload: { s: string } };
+
+  export type HogeActions = { type: "changeLower", payload: { l: number } }
+  | { type: "changeUpper", payload: { u: number } };
