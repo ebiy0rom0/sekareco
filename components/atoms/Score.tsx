@@ -5,7 +5,7 @@ export const Score = React.memo((props: Props) => {
   const score = props.score ?? 0;
 
   return (
-    <div className="font-semibold tracking-wide flex flex-row gap-1 text-[0.95em]">
+    <div className="font-semibold tracking-wide flex flex-row gap-1 text-[0.85em] xs:text-[0.95em]">
       <span
         className={`w-full text-end ${score < max ? "text-rose-500" : "text-emerald-500"}`}
       >
