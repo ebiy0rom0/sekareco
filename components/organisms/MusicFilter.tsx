@@ -14,19 +14,22 @@ export const MusicFilter: React.FC<Props> = React.memo(
       <ThemeConsumer>
         {({ darkMode }) => (
           <div className="flex-col divide-y">
-            <div className={`grid gap-y-6 px-2 py-6 pb-15 ${darkMode ? "border-gray-700" : "border-gray-200"}`}>
-              <Selectbox
-                group="range-diff"
-                options={DIFFICULTY}
-                selected={filter.difficulty}
-                setSelected={(input: string) =>
-                  dispatch({
-                    type: "changeDifficulty",
-                    payload: {
-                      d: parseInt(input),
-                    },
-                  })}
-              />
+            <div className={`grid gap-y-5 px-2 pt-6 lg:pt-4 pb-15 ${darkMode ? "border-gray-700" : "border-gray-200"}`}>
+              <div className="grid">
+                <span className="font-semibold tracking-widest mb-1.5">レベル</span>
+                <Selectbox
+                  group="range-diff"
+                  options={DIFFICULTY}
+                  selected={filter.difficulty}
+                  setSelected={(input: string) =>
+                    dispatch({
+                      type: "changeDifficulty",
+                      payload: {
+                        d: parseInt(input),
+                      },
+                    })}
+                />
+              </div>
               <MultiRange
                 min={levelRange.lower}
                 max={levelRange.upper}
