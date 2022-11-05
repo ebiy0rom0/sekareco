@@ -1,7 +1,7 @@
 import { createContext, useState } from "react";
 import { useSessionStorage } from "~/utils/useSessionStorage.ts";
 
-export const ThemeCtx = createContext<Theme>({
+const ThemeCtx = createContext<Theme>({
   darkMode: false,
   switchMode: () => undefined,
 });
