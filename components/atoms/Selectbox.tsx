@@ -54,6 +54,7 @@ export const Selectbox = React.memo((props: Props) => (
               ring-1 ${darkMode ? "ring-gray-600" : ""} ring-opacity-5
               focus:outline-none
               sm:text-sm
+              z-10
             `}>
               {Object.entries(props.options).map(([key, value], personIdx) => (
                 <Listbox.Option
