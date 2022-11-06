@@ -172,12 +172,16 @@ const Records: React.FC = () => {
                   filter: musicFilter,
                   dispatch: musicFilterDispatch,
                 }}
+                recordFilterProps={{
+                  handler: changeRecordDifficulty,
+                  isChecked: isFiltered
+                }}
               />
             </div>
           </div>
           <div className="flex flex-col">
             <div className="grid grid-cols-1 xl:grid-cols-5 gap-x-15 py-5">
-              <form className="hidden lg:block h-auto divide-y">
+              <form className="hidden lg:block divide-y">
                 <MusicFilter
                   levelRange={levelRange(musicFilter.difficulty)}
                   artists={artists}

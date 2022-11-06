@@ -2,11 +2,10 @@ import { Fragment } from "react";
 import { Popover, Transition } from "@headlessui/react";
 import { Icon, ICON_FILTER } from "~/components/atoms/Icon.tsx";
 import { MusicFilter, Props as MusicFilterProps } from "~/components/organisms/MusicFilter.tsx";
-import { RecordFilter } from "~/components/organisms/RecordFilter.tsx";
-// import { MusicFilterState, MusicFilterActions } from "~/hooks/useMusicFilter.tsx";
+import { RecordFilter, Props as RecordFilterProps } from "~/components/organisms/RecordFilter.tsx";
 import { ThemeConsumer } from "~/hooks/useTheme.tsx";
 
-export const FilterButton: React.FC<Props> = ({ musicFilterProps }) => (
+export const FilterButton: React.FC<Props> = ({ musicFilterProps, recordFilterProps }) => (
   <ThemeConsumer>
     {({ darkMode }) => (
       <Popover className="relative lg:hidden">
@@ -35,7 +34,10 @@ export const FilterButton: React.FC<Props> = ({ musicFilterProps }) => (
               filter={musicFilterProps.filter}
               dispatch={musicFilterProps.dispatch}
             />
-            <RecordFilter handler={(s: string) => undefined} isChecked={(n: number) => true} />
+            <RecordFilter
+              handler={recordFilterProps.handler}
+              isChecked={recordFilterProps.isChecked}
+            />
           </Popover.Panel>
         </Transition>
       </Popover>
@@ -45,4 +47,5 @@ export const FilterButton: React.FC<Props> = ({ musicFilterProps }) => (
 
 type Props = {
   musicFilterProps: MusicFilterProps;
+  recordFilterProps: RecordFilterProps;
 };

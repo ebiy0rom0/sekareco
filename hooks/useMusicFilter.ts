@@ -3,7 +3,7 @@ import { DIFFICULTY, DifficultyValues } from "~/types/index.ts";
 
 export const useMusicFilter = <
   T extends Artists,
-  U extends T extends { artistIDs: infer U } ? Values<U> : never
+  U extends T extends { artistIDs: infer U } ? Values<U> : never,
 >(
   music: Music[],
   levelRange: (n: DifficultyValues) => { lower: number; upper: number },
@@ -43,10 +43,9 @@ export const useMusicFilter = <
         );
         break;
       case "changeArtists": {
-        const _input = parseInt(action.payload.s);
+        const _input = +action.payload.s;
         // const newFilter = isFilter
       }
-
     }
     return copy;
   };
@@ -55,11 +54,11 @@ export const useMusicFilter = <
     difficulty: DIFFICULTY.MASTER,
     levelLower: 0,
     levelUpper: 100,
-    artistIDs: [...Object.values(_artists).map(artist => artist.artistID)] as U,
-  }
+    artistIDs: [...Object.values(_artists).map((artist) => artist.artistID)] as U,
+  };
   const [filter, dispatcher] = useReducer(reducer, initialState);
 
-  const _filtered = (check: number) => filter.artistIDs.some(id => id === check)
+  const _filtered = (check: number) => filter.artistIDs.some((id) => id === check);
 
   useEffect(() => {
     dispatcher({
@@ -107,10 +106,11 @@ export type MusicFilterState<T> = {
 };
 
 export type MusicFilterActions =
-  | { type: "changeDifficulty", payload: { d: number } }
-  | { type: "changeLower", payload: { l: number } }
-  | { type: "changeUpper", payload: { u: number } }
-  | { type: "changeArtists", payload: { s: string } };
+  | { type: "changeDifficulty"; payload: { d: number } }
+  | { type: "changeLower"; payload: { l: number } }
+  | { type: "changeUpper"; payload: { u: number } }
+  | { type: "changeArtists"; payload: { s: string } };
 
-  export type HogeActions = { type: "changeLower", payload: { l: number } }
-  | { type: "changeUpper", payload: { u: number } };
+export type HogeActions =
+  | { type: "changeLower"; payload: { l: number } }
+  | { type: "changeUpper"; payload: { u: number } };
