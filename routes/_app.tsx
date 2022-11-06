@@ -6,17 +6,12 @@ import { Footer } from "~/components/organisms/Footer.tsx";
 import { Navigation } from "~/components/organisms/Navigation.tsx";
 import { SideNavigation } from "~/components/organisms/SideNavigation.tsx";
 import { ThemeConsumer, useTheme } from "~/hooks/useTheme.tsx";
-import { LoadConsumer, useLoading } from "~/hooks/useLoading.tsx";
 import Policy from "~/routes/policy.tsx";
 
 const MyApp: React.FC<Props> = ({ children }) => {
   const router = useRouter();
   const ThemeProvider = useTheme();
-  const { render, LoadProvider, setLoaded } = useLoading({ children });
 
-  useEffect(() => {
-    setLoaded(true);
-  }, []);
   // const screenRef = useRef<HTMLDivElement>(null)
 
   // const overRay = () => {
@@ -67,7 +62,7 @@ const MyApp: React.FC<Props> = ({ children }) => {
                       </div>
                       <div className="2xl:mr-[15rem] px-2 lg:px-15 2xl:px-8 items-center">
                         <div className="mx-5">
-                          {render()}
+                          {children}
                         </div>
                         <div
                           className={`
@@ -89,7 +84,7 @@ const MyApp: React.FC<Props> = ({ children }) => {
                       }`}
                     >
                       <div className="flex items-end min-h-[77vh] animated animated-fade-in">
-                        {render()}
+                        {children}
                       </div>
                       <div
                         className={`
