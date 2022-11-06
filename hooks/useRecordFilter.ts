@@ -12,7 +12,7 @@ export const useRecordFilter = <
   // setter wrap
   // for use input element
   const changeWhiteList = (input: string) => {
-    const inputNum = rounding(parseInt(input));
+    const inputNum = rounding(+input);
     const newFilter = isFiltered(inputNum)
       ? whiteList.filter((d) => d !== inputNum)
       : [...whiteList, inputNum];
@@ -32,4 +32,8 @@ export const useRecordFilter = <
     changeWhiteList,
     isFiltered,
   };
+};
+
+export type RecordFilterState<U> = {
+  difficultyWhiteList: U[];
 };

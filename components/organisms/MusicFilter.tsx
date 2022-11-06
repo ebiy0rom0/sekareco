@@ -14,7 +14,11 @@ export const MusicFilter: React.FC<Props> = React.memo(
       <ThemeConsumer>
         {({ darkMode }) => (
           <div className="flex-col divide-y">
-            <div className={`grid gap-y-5 px-2 pt-6 lg:pt-4 pb-15 ${darkMode ? "border-gray-700" : "border-gray-200"}`}>
+            <div
+              className={`grid gap-y-5 px-2 pt-6 lg:pt-4 pb-15 ${
+                darkMode ? "border-gray-700" : "border-gray-200"
+              }`}
+            >
               <div className="grid">
                 <span className="font-semibold tracking-widest mb-1.5">レベル</span>
                 <Selectbox
@@ -25,7 +29,7 @@ export const MusicFilter: React.FC<Props> = React.memo(
                     dispatch({
                       type: "changeDifficulty",
                       payload: {
-                        d: parseInt(input),
+                        d: +input,
                       },
                     })}
                 />
@@ -35,7 +39,7 @@ export const MusicFilter: React.FC<Props> = React.memo(
                 max={levelRange.upper}
                 minVal={filter.levelLower}
                 maxVal={filter.levelUpper}
-                dispatch={ dispatch }
+                dispatch={dispatch}
               />
             </div>
             <div className={`py-6 ${darkMode ? "border-gray-700" : "border-gray-200"}`}>

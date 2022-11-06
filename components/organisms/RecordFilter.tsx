@@ -2,7 +2,6 @@ import { DIFFICULTY } from "~/types/index.ts";
 import { Disclosure } from "@headlessui/react";
 import { Checkbox } from "~/components/atoms/Checkbox.tsx";
 import { Icon, ICON_MINUS, ICON_PLUS } from "~/components/atoms/Icon.tsx";
-// import { Disclosure } from "~/components/atoms/Disclosure.tsx";
 import { ThemeConsumer } from "~/hooks/useTheme.tsx";
 
 export const RecordFilter = (props: Props) => {
@@ -43,7 +42,7 @@ export const RecordFilter = (props: Props) => {
   );
 };
 
-type Props = {
+export type Props = {
   handler: (n: string) => void;
   isChecked: (n: number) => boolean;
 };

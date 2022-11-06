@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import { Listbox, Transition } from "@headlessui/react";
-import { Icon, ICON_SELECTOR, ICON_CHECK } from "~/components/atoms/Icon.tsx";
+import { Icon, ICON_CHECK, ICON_SELECTOR } from "~/components/atoms/Icon.tsx";
 import { ThemeConsumer } from "~/hooks/useTheme.tsx";
 
 export const Selectbox = React.memo((props: Props) => (
@@ -23,7 +23,11 @@ export const Selectbox = React.memo((props: Props) => (
               ${darkMode ? "focus-visible:ring-black" : "focus-visible:ring-white"}
               focus-visible:ring-opacity-75
               focus-visible:ring-offset-2
-              ${darkMode ? "focus-visible:ring-offset-violet-300" : "focus-visible:ring-offset-violet-600"}
+              ${
+              darkMode
+                ? "focus-visible:ring-offset-violet-300"
+                : "focus-visible:ring-offset-violet-600"
+            }
               sm:text-sm
             `}
           >
@@ -43,7 +47,8 @@ export const Selectbox = React.memo((props: Props) => (
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <Listbox.Options className={`
+            <Listbox.Options
+              className={`
               absolute
               overflow-auto
               w-full max-h-60 mt-2 py-1
@@ -55,7 +60,8 @@ export const Selectbox = React.memo((props: Props) => (
               focus:outline-none
               sm:text-sm
               z-10
-            `}>
+            `}
+            >
               {Object.entries(props.options).map(([key, value], personIdx) => (
                 <Listbox.Option
                   key={personIdx}

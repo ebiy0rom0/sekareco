@@ -35,7 +35,7 @@ export const RecordEditor: React.FC<Props> = (props) => {
                     type: "setScore",
                     payload: {
                       d: i,
-                      score: isNaN(parseInt(e.target.value)) ? 0 : parseInt(e.target.value),
+                      score: isNaN(+e.target.value) ? 0 : +e.target.value,
                     },
                   })}
               />

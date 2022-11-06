@@ -3,10 +3,10 @@ import { Link, useRouter } from "aleph/react";
 import { ThemeConsumer } from "~/hooks/useTheme.tsx";
 
 export const menu = [
-  {title: "プロフィール", url: "/profile"},
-  {title: "記録帳", url: "/records"},
-  {title: "vs.フレンド", url: "/versus"},
-  {title: "スクリム", url: "/scrim"},
+  { title: "プロフィール", url: "/profile" },
+  { title: "記録帳", url: "/records" },
+  { title: "vs.フレンド", url: "/versus" },
+  { title: "スクリム", url: "/scrim" },
 ];
 
 export const Navigation = React.memo(() => {
@@ -22,11 +22,13 @@ export const Navigation = React.memo(() => {
               darkMode ? "border-slate-700" : "border-slate-200"
             }`}
           >
-            {menu.map(({title, url}) => (
+            {menu.map(({ title, url }) => (
               <li
                 className={`indent-5 -ml-2px py-2 border-l-2 ${
                   router.url.pathname === url
-                    ? darkMode ? "text-sky-400 border-sky-400" : "text-sky-500 border-sky-500"
+                    ? darkMode
+                      ? "text-pink-500/90 border-pink-500/90"
+                      : "text-sky-500 border-sky-500"
                     : darkMode
                     ? "border-slate-700 hover:border-slate-300/80 hover:text-slate-300/90"
                     : "border-slate-200 hover:border-slate-500 hover:opacity-70"
