@@ -5,9 +5,15 @@ import { Toggle, ToggleStyle } from "~/components/atoms/Toggle.tsx";
 import { Navigation } from "~/components/organisms/Navigation.tsx";
 import { ThemeConsumer } from "~/hooks/useTheme.tsx";
 import { useSessionStorage } from "~/utils/useSessionStorage.ts";
+import { apiFactory } from "~/api/apiFactory.ts";
+import { redirect } from "aleph/runtime/core/redirect.ts";
 
 export const SideNavigation: React.FC = () => {
   const [open, setOpen] = useSessionStorage("menu", false)
+  const logout = () => {
+    apiFactory.get("person").logout()
+    redirect("/")
+  }
   return (
   <ThemeConsumer>
     { ({ darkMode, switchMode }) => (
@@ -64,7 +70,7 @@ export const SideNavigation: React.FC = () => {
                   <div className="flex w-full py-10">
                     <Button
                       className="bg-rose-600 text-slate-100 text-sm py-1 px-2 w-full"
-                      onClick={() => alert("wip")}
+                      onClick={logout}
                     >
                       sign out
                     </Button>

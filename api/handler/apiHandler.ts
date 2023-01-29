@@ -78,6 +78,8 @@ class ApiClient {
     this.client.post(uri, { json: { ...params } });
   put = <T extends { [s: string]: unknown }>(uri: string, params: T) =>
     this.client.put(uri, { json: { ...params } });
+  delete = <T extends { [s: string]: unknown }>(uri: string, params: T) =>
+    this.client.delete(uri, { json: { ...params } });
 
   setAuth = (token: string) => this.token = token;
   revokeAuth = () => this.token = "";

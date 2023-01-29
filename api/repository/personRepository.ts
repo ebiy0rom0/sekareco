@@ -14,6 +14,10 @@ export const personRepository = {
     return json;
   },
 
+  logout: async () => {
+    await apiClient.delete("signout", {}).json<string>().catch<string>((_) => "");
+  },
+
   registPerson: async (loginID: string, name: string, password: string) => {
     // when successfully regist, returns status 201 and not returns response body
     await apiClient
