@@ -43,7 +43,7 @@ export const CheckList = (props: Props) => {
 
 export type Props = {
   title: string;
-  items: {string: number};
+  items: {[s: string]: number};
   handler: (n: string) => void;
   isChecked: (n: number) => boolean;
 };
