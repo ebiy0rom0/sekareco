@@ -1,5 +1,5 @@
 import ky from "ky";
-import { redirect } from "aleph/runtime/core/redirect.ts";
+import { useRouter } from "aleph/react";
 
 const defaultTTL = 3600;
 const timestamp = () => Math.floor(Date.now() / 1000);
@@ -32,6 +32,7 @@ class ApiClient {
         afterResponse: [
           (_request, _options, response) => {
             console.log(response);
+            const { redirect } = useRouter();
 
             switch (response.status) {
               case 503:

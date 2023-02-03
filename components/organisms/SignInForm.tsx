@@ -1,4 +1,4 @@
-import { redirect } from "aleph/runtime/core/redirect.ts";
+import { useRouter } from "aleph/react";
 import { Button } from "~/components/atoms/Button.tsx";
 import { Input } from "~/components/atoms/Input.tsx";
 import { useInput } from "~/hooks/useInput.ts";
@@ -21,6 +21,7 @@ export const SignInForm = () => {
     // wait for prevent consecutive at click
     await new Promise((resolve) => setTimeout(resolve, 1000));
 
+    const { redirect } = useRouter()
     redirect("/records");
     // if (await tryLogin(loginID(), password())) {
     //   redirect("/records");

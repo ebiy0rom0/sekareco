@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import { useRouter } from "aleph/react";
 import { Dialog, Transition } from "@headlessui/react";
 import { Button } from "~/components/atoms/Button.tsx";
 import { Toggle, ToggleStyle } from "~/components/atoms/Toggle.tsx";
@@ -6,11 +7,11 @@ import { Navigation } from "~/components/organisms/Navigation.tsx";
 import { ThemeConsumer } from "~/hooks/useTheme.tsx";
 import { useSessionStorage } from "~/utils/useSessionStorage.ts";
 import { apiFactory } from "~/api/apiFactory.ts";
-import { redirect } from "aleph/runtime/core/redirect.ts";
 
 export const SideNavigation: React.FC = () => {
   const [open, setOpen] = useSessionStorage("menu", false)
   const logout = () => {
+    const { redirect } = useRouter()
     apiFactory.get("person").logout()
     redirect("/")
   }
