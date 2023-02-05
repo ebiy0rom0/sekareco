@@ -1,6 +1,6 @@
 export default {
   // application infomation
-  TITLE: "プロセカの記録長",
+  TITLE: "プロセカの記録帳",
   // page title
   FEATURES: "機能 一覧",
   PROFILE: "プロフィール",
