@@ -1,13 +1,12 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { DIFFICULTY, StatusValues } from "~/types/index.ts";
 import { apiFactory } from "~/api/apiFactory.ts";
 import { Checkbox } from "~/components/atoms/Checkbox.tsx";
 import { Record } from "~/components/organisms/Record.tsx";
 import { MusicFilter } from "~/components/organisms/MusicFilter.tsx";
-import { RecordFilter } from "~/components/organisms/RecordFilter.tsx";
 import { RecordEditor } from "~/components/organisms/RecordEditor.tsx";
-import { SortButton } from "~/components/organisms/SortButton.tsx";
-import { FilterButton } from "~/components/organisms/FilterButton.tsx";
+import { Popover } from "~/components/organisms/Popover.tsx";
+import { Disclosure } from "~/components/organisms/Disclosure.tsx";
 import { useMusic } from "~/hooks/useMusic.ts";
 import { useRecord } from "~/hooks/useRecord.ts";
 import { useMusicFilter } from "~/hooks/useMusicFilter.ts";
@@ -16,8 +15,9 @@ import { useRecordEditor } from "~/hooks/useRecordEditor.ts";
 import { useMusicSort } from "~/hooks/useMusicSort.ts";
 import { useModal } from "~/hooks/useModal.tsx";
 import { ThemeConsumer } from "~/hooks/useTheme.tsx";
-import { useOnClickOutside } from "~/utils/useOnClickOutside.ts";
 import { useObjectCompare } from "~/utils/useObjectCompare.ts";
+import { ICON_FILTER, ICON_SORT } from "../components/atoms/Icon.tsx";
+import { useI18n } from "../hooks/useI18n.ts";
 
 // testdata
 const artists = {
@@ -63,7 +63,14 @@ const artists = {
   },
 };
 
+const artistss = () => {
+  const m: {[s: string]: number} = {} as {string: number};
+  Object.entries(artists).map(([_, v]) => { m[v.artistName] = v.artistID })
+  return m
+}
+
 const Records: React.FC = () => {
+  const { t } = useI18n();
   const [music, levelRange] = useMusic();
   const { getRecord, setRecord } = useRecord(1);
 
@@ -88,20 +95,6 @@ const Records: React.FC = () => {
 
   // score display in difference mode
   const [diffMode, setDiffMode] = useState(false);
-
-  // sort list display flag
-  const [showSort, setShowSort] = useState(false);
-
-  // reservation to hide when click or tap outside the list
-  const sortListRef = useRef<HTMLDivElement>(null);
-  useOnClickOutside(sortListRef, () => setShowSort(false));
-
-  // filter list display flag when screen less than or equal to `sm`
-  const [showFilter, setShowFilter] = useState(false);
-
-  // reservation to hide when click or tap outside the list
-  const filterListRef = useRef<HTMLDivElement>(null);
-  useOnClickOutside(filterListRef, () => setShowFilter(false));
 
   // editor
   const [editMusic, setEditMusic] = useState<Music>({
@@ -151,7 +144,7 @@ const Records: React.FC = () => {
                 darkMode ? "first-letter:text-pink-500/90" : "first-letter:text-cyan-400"
               }`}
             >
-              記録帳
+              { t.SCORE_BOOK }
             </h2>
             <div className="flex items-end gap-x-8 mr-4 z-10">
               <div className="sm:flex font-semibold hidden">
@@ -164,19 +157,12 @@ const Records: React.FC = () => {
                   -MAX
                 </Checkbox>
               </div>
-              <SortButton />
-              <FilterButton
-                musicFilterProps={{
-                  levelRange: levelRange(musicFilter.difficulty),
-                  artists: artists,
-                  filter: musicFilter,
-                  dispatch: musicFilterDispatch,
-                }}
-                recordFilterProps={{
-                  handler: changeRecordDifficulty,
-                  isChecked: isFiltered
-                }}
-              />
+              <Popover icon={ICON_SORT}>
+                <></>
+              </Popover>
+              <Popover icon={ICON_FILTER}>
+                <></>
+              </Popover>
             </div>
           </div>
           <div className="flex flex-col">
@@ -184,14 +170,39 @@ const Records: React.FC = () => {
               <form className="hidden lg:block divide-y">
                 <MusicFilter
                   levelRange={levelRange(musicFilter.difficulty)}
-                  artists={artists}
                   filter={musicFilter}
                   dispatch={musicFilterDispatch}
                 />
-                <RecordFilter
-                  handler={changeRecordDifficulty}
-                  isChecked={isFiltered}
-                />
+                <Disclosure
+                  title={t.UNIT}
+                >
+                  {Object.entries(artistss()).map(([k, v]) => (
+                    <Checkbox
+                      key={k.toString()}
+                      id={`checklist-${k}`}
+                      handler={() => {}}
+                      value={v}
+                      checked={true}
+                    >
+                      { k }
+                    </Checkbox>
+                  ))}
+                </Disclosure>
+                <Disclosure
+                  title={t.DIFFICULTY}
+                >
+                  {Object.entries(DIFFICULTY).map(([k, v]) => (
+                    <Checkbox
+                      key={k.toString()}
+                      id={`checklist-${k}`}
+                      handler={()=>{}}
+                      value={v}
+                      checked={true}
+                    >
+                      { k }
+                    </Checkbox>
+                  ))}
+                </Disclosure>
               </form>
               <div className="w-full xl:col-span-4 place-self-start grid grid-cols-1 md:grid-cols-2 lg:grid-cols-none gap-y-3 gap-x-5">
                 {sortedMusic(4).map((music) => (

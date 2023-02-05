@@ -4,9 +4,9 @@ import { SignInForm } from "~/components/organisms/SignInForm.tsx";
 import { SignUpForm } from "~/components/organisms/SignUpForm.tsx";
 import { ThemeConsumer } from "~/hooks/useTheme.tsx";
 import { useModal } from "~/hooks/useModal.tsx";
-import React, { Suspense, useEffect, useRef } from "react";
+import { FC } from "react";
 
-const Index: React.FC = () => {
+const Index: FC = () => {
   const { render, open } = useModal(() => {});
 
   return (

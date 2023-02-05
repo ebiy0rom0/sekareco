@@ -1,6 +1,10 @@
+import { FC } from "react";
+import { useI18n } from "~/hooks/useI18n.ts";
 import { ThemeConsumer } from "~/hooks/useTheme.tsx";
 
-const Versus: React.FC = () => {
+const Versus: FC = () => {
+  const { t } = useI18n();
+
   return (
     <ThemeConsumer>
       {({ darkMode }) => (
@@ -11,7 +15,7 @@ const Versus: React.FC = () => {
             }`}
           >
             <h2 className="text-3xl font-semibold tracking-widest">
-              vs. フレンド
+              { t.VERSUS }
             </h2>
           </div>
           <div className="flex items-center place-self-center h-50vh">

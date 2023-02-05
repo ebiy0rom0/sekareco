@@ -1,6 +1,10 @@
+import { FC } from "react";
+import { useI18n } from "~/hooks/useI18n.ts";
 import { ThemeConsumer } from "~/hooks/useTheme.tsx";
 
-const Policy: React.FC = () => {
+const Policy: FC = () => {
+  const { t } = useI18n();
+
   return (
     <ThemeConsumer>
       {({ darkMode }) => (
@@ -9,7 +13,7 @@ const Policy: React.FC = () => {
             className={`pb-4 pt-4 border-b ${darkMode ? "border-gray-700" : "border-gray-200"}`}
           >
             <h2 className="text-3xl font-semibold tracking-widest first-letter:text-4xl">
-              プライバシーポリシー
+              { t.POLICY }
             </h2>
           </div>
           <div className="flex items-center place-self-center h-50vh">
