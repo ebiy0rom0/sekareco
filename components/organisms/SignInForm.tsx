@@ -1,4 +1,4 @@
-import { useRouter } from "aleph/react";
+import { redirect } from "aleph/runtime/core/redirect.ts";
 import { Button } from "~/components/atoms/Button.tsx";
 import { Input } from "~/components/atoms/Input.tsx";
 import { useInput } from "~/hooks/useInput.ts";
@@ -11,7 +11,6 @@ export const SignInForm = () => {
   const [loginID, setLoginID] = useInput("");
   const [password, setPassword] = useInput("");
   const { renderAlert } = useAlert();
-  const { redirect } = useRouter();
 
   const {
     waiting,

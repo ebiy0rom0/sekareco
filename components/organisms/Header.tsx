@@ -1,5 +1,5 @@
 import { FC, memo } from "react";
-import { useRouter } from "aleph/react";
+import { redirect } from "aleph/runtime/core/redirect.ts";
 import { Button } from "~/components/atoms/Button.tsx";
 import { Toggle, ToggleStyle } from "~/components/atoms/Toggle.tsx";
 import { ThemeConsumer } from "~/hooks/useTheme.tsx";
@@ -11,8 +11,6 @@ export const Header: FC = memo(() => {
 
   const logout = () => {
     apiFactory.get("person").logout()
-
-    const { redirect } = useRouter()
     redirect("/")
   }
 
