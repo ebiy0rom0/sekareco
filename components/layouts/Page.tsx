@@ -5,7 +5,7 @@ import { Navigation } from "~/components/organisms/Navigation.tsx";
 import { SideNavigation } from "~/components/organisms/SideNavigation.tsx";
 import { ThemeConsumer } from "~/hooks/useTheme.tsx";
 
-export const PageLayout: FC<Props> = ({ children }) => (
+export const Page: FC<Props> = ({ children }) => (
   <ThemeConsumer>
     {({ darkMode }) => (
       <>

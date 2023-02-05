@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useRouter } from "aleph/react";
 import { Head } from "aleph/react";
-import { PageLayout } from "~/components/layouts/Page.tsx";
+import { Page } from "~/components/layouts/Page.tsx";
 import { Hero } from "~/components/layouts/Hero.tsx";
 import { ThemeConsumer, useTheme } from "~/hooks/useTheme.tsx";
 import Policy from "~/routes/policy.tsx";
@@ -28,7 +28,7 @@ const MyApp: React.FC<Props> = ({ children }) => {
                 darkMode ? "bg-slate-800 text-slate-400" : "bg-slate-100 text-slate-800"
               }`}
             >
-              {router.url.pathname !== "/" ? (<PageLayout>{ children }</PageLayout>) : (<Hero>{ children }</Hero>)}
+              {router.url.pathname !== "/" ? (<Page>{ children }</Page>) : (<Hero>{ children }</Hero>)}
             </div>
           </>
         )}
