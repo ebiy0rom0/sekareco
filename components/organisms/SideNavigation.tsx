@@ -1,14 +1,16 @@
-import React, { Fragment } from "react";
+import { FC, Fragment } from "react";
 import { useRouter } from "aleph/react";
 import { Dialog, Transition } from "@headlessui/react";
 import { Button } from "~/components/atoms/Button.tsx";
 import { Toggle, ToggleStyle } from "~/components/atoms/Toggle.tsx";
 import { Navigation } from "~/components/organisms/Navigation.tsx";
 import { ThemeConsumer } from "~/hooks/useTheme.tsx";
+import { useI18n } from "~/hooks/useI18n.ts";
 import { useSessionStorage } from "~/utils/useSessionStorage.ts";
 import { apiFactory } from "~/api/apiFactory.ts";
 
-export const SideNavigation: React.FC = () => {
+export const SideNavigation: FC = () => {
+  const { t } = useI18n();
   const [open, setOpen] = useSessionStorage("menu", false)
   const logout = () => {
     const { redirect } = useRouter()
@@ -73,7 +75,7 @@ export const SideNavigation: React.FC = () => {
                       className="bg-rose-600 text-slate-100 text-sm py-1 px-2 w-full"
                       onClick={logout}
                     >
-                      sign out
+                      { t.SIGN_OUT }
                     </Button>
                   </div>
                 </Dialog.Panel>

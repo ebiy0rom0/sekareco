@@ -3,12 +3,15 @@ import { Button } from "~/components/atoms/Button.tsx";
 import { Input } from "~/components/atoms/Input.tsx";
 import { useInput } from "~/hooks/useInput.ts";
 import { useAlert } from "~/hooks/useAlert.tsx";
+import { useI18n } from "~/hooks/useI18n.ts";
 import { useWaitAction } from "~/utils/useWaitAction.ts";
 
 export const SignInForm = () => {
+  const { t } = useI18n();
   const [loginID, setLoginID] = useInput("");
   const [password, setPassword] = useInput("");
   const { renderAlert } = useAlert();
+  const { redirect } = useRouter();
 
   const {
     waiting,
@@ -21,7 +24,6 @@ export const SignInForm = () => {
     // wait for prevent consecutive at click
     await new Promise((resolve) => setTimeout(resolve, 1000));
 
-    const { redirect } = useRouter()
     redirect("/records");
     // if (await tryLogin(loginID(), password())) {
     //   redirect("/records");
@@ -63,7 +65,7 @@ export const SignInForm = () => {
           "
         wait={waiting()}
       >
-        {waiting() ? "please wait..." : "sign in"}
+        {waiting() ? "please wait..." : t.SIGN_IN}
       </Button>
     </form>
   );

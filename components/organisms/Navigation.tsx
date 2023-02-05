@@ -1,22 +1,24 @@
 import React from "react";
 import { Link, useRouter } from "aleph/react";
 import { ThemeConsumer } from "~/hooks/useTheme.tsx";
-
-export const menu = [
-  { title: "プロフィール", url: "/profile" },
-  { title: "記録帳", url: "/records" },
-  { title: "vs.フレンド", url: "/versus" },
-  { title: "スクリム", url: "/scrim" },
-];
+import { useI18n } from "~/hooks/useI18n.ts";
 
 export const Navigation = React.memo(() => {
   const router = useRouter();
+  const { t } = useI18n();
+
+  const menu = [
+    { title: t.PROFILE, url: "/profile" },
+    { title: t.SCORE_BOOK, url: "/records" },
+    { title: t.VERSUS, url: "/versus" },
+    { title: t.SCRIM, url: "/scrim" },
+  ];
 
   return (
     <ThemeConsumer>
       {({ darkMode }) => (
         <>
-          <span className="nav__title text-xl font-bold">機能 一覧</span>
+          <span className="nav__title text-xl font-bold">{ t.FEATURES }</span>
           <ul
             className={`list-none grid gap-y-2 text-base ml-2 mt-4 py-3 border-l-2 ${
               darkMode ? "border-slate-700" : "border-slate-200"
