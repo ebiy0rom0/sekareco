@@ -7,24 +7,31 @@ export const Difficulty = React.memo((props: Props) => (
     {({ darkMode }) => (
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        width="100"
         height="20"
         viewBox="0 0 100 20"
+        className="w-[80px] xs:w-[100px]"
       >
         <polygon
           points="10,10 90,10 100,20 20,20"
-          className={`stroke-2 ${
+          className={`stroke-2 hidden xs:block ${
             darkMode ? "stroke-slate-500 fill-slate-500" : "stroke-slate-400/50 fill-slate-400/80"
           }`}
           fillOpacity="0.9"
         />
         <polygon
           points="0,5 70,5 80,15 10,15"
-          className={`stroke-1 ${darkMode ? "stroke-slate-400" : "stroke-slate-200"} ${
-            colorSet[props.difficulty]
-          }`}
+          className={`stroke-1 hidden xs:block ${
+            darkMode ? "stroke-slate-400" : "stroke-slate-200"
+          } ${colorSet[props.difficulty]}`}
           fillOpacity="0.9"
         />
+        <circle
+          cx="30"
+          cy="10"
+          r="14"
+          className={`block xs:hidden stroke-4 stroke-slate-100 ${colorSet[props.difficulty]}`}
+        >
+        </circle>
         <text
           x="10"
           y="11"
