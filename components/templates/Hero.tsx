@@ -5,7 +5,7 @@ import { ThemeConsumer } from "~/hooks/useTheme.tsx";
 export const Hero: FC<Props> = ({ children }) => (
   <ThemeConsumer>
     {({ darkMode }) => (
-      <div className="relative mx-auto w-full h-[100vh] items-center overflow-hidden">
+      <div className="relative mx-auto px-5 md:px-0 w-full h-[100vh] items-center overflow-hidden">
         <div
           className={`relative flex flex-col lg:w-1/2 items-center h-full z-10 ${
             darkMode ? "bg-slate-800" : "bg-slate-100"
@@ -27,7 +27,7 @@ export const Hero: FC<Props> = ({ children }) => (
           </svg>
         </div>
         <div className="lg:absolute lg:inset-y-0 lg:right-0 lg:w-2/3 bg-slate-500 animated animated-fast animated-slide-in-up animated-delay-500ms" />
-        <div
+        {/* <div
           className={`absolute flex items-center flex-wrap animated animated-slide-in-right animated-delay-2s ${
             darkMode ? "bg-slate-900" : "bg-slate-200"
           } inset-y-0 lg:-right-0 xl:-right-30 py-auto px-10 w-full lg:w-[50%] xl:w-[55%] z-10`}
@@ -47,7 +47,7 @@ export const Hero: FC<Props> = ({ children }) => (
           <div className="w-full z-10">
             <Policy />
           </div>
-        </div>
+        </div> */}
       </div>
     )}
   </ThemeConsumer>
