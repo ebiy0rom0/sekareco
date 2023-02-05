@@ -3,6 +3,8 @@ import en from "~/i18n/en.ts";
 
 export const useI18n = () => {
   const { navigator } = globalThis
-  const t = navigator.language === "en" ? en : ja
-  return { t }
+  return {
+    lang: navigator.language,
+    t: navigator.language === "en" ? en : ja,
+  }
 }
