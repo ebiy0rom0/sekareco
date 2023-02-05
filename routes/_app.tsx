@@ -1,20 +1,13 @@
-import { useEffect } from "react";
 import { useRouter } from "aleph/react";
 import { Head } from "aleph/react";
-import { Page } from "~/components/layouts/Page.tsx";
-import { Hero } from "~/components/layouts/Hero.tsx";
+import { Page } from "~/components/templates/Page.tsx";
+import { Hero } from "~/components/templates/Hero.tsx";
 import { ThemeConsumer, useTheme } from "~/hooks/useTheme.tsx";
-import Policy from "~/routes/policy.tsx";
 
 const MyApp: React.FC<Props> = ({ children }) => {
   const router = useRouter();
   const ThemeProvider = useTheme();
 
-  // const screenRef = useRef<HTMLDivElement>(null)
-
-  // const overRay = () => {
-  //   screenRef.current?.classList.toggle("-translate-x-full")
-  // }
   return (
     <ThemeProvider>
       <ThemeConsumer>
