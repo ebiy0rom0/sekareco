@@ -18,6 +18,9 @@ import { ThemeConsumer } from "~/hooks/useTheme.tsx";
 import { useObjectCompare } from "~/utils/useObjectCompare.ts";
 import { ICON_FILTER, ICON_SORT } from "../components/atoms/Icon.tsx";
 import { useI18n } from "../hooks/useI18n.ts";
+import { RadioGroup } from "~/components/organisms/RadioGroup.tsx";
+import { useFilter } from "~/hooks/useFilter.ts";
+import { useSort } from "~/hooks/useSort.ts";
 
 // testdata
 const artists = {
@@ -73,6 +76,20 @@ const Records: React.FC = () => {
   const { t } = useI18n();
   const [music, levelRange] = useMusic();
   const { getRecord, setRecord } = useRecord(1);
+
+  const sortTarget = [t.TARGET_DEFAULT, t.TARGET_LEVEL, t.TARGET_UNIT]
+  const sortOrder = [t.ORDER_ASC, t.ORDER_DESC]
+  const [target, setTarget] = useState(sortTarget[0])
+  const [order, setOrder] = useState(sortOrder[0])
+
+  const l = levelRange(4).upper - levelRange(4).lower > 0? levelRange(4).upper - levelRange(4).lower : 0
+  const a = [...Array(l)].map((_, i) => i + levelRange(4).lower)
+  console.log(a)
+  const [ filtered ] = useFilter(music, {artistID: [5], level: {4: a}})
+  console.log(filtered)
+
+  const [ sorted ] = useSort(filtered, {level: {4: true}})
+  console.log(sorted)
 
   // music filtering
   const [
@@ -158,10 +175,45 @@ const Records: React.FC = () => {
                 </Checkbox>
               </div>
               <Popover icon={ICON_SORT}>
-                <></>
+                <RadioGroup label={t.SORT_TARGET} items={sortTarget} value={target} onChange={setTarget} />
+                <RadioGroup label={t.SORT_ORDER} items={sortOrder} value={order} onChange={setOrder} />
               </Popover>
               <Popover icon={ICON_FILTER}>
-                <></>
+                <MusicFilter
+                  levelRange={levelRange(musicFilter.difficulty)}
+                  filter={musicFilter}
+                  dispatch={musicFilterDispatch}
+                />
+                <Disclosure
+                  title={t.UNIT}
+                >
+                  {Object.entries(artistss()).map(([k, v]) => (
+                    <Checkbox
+                      key={k.toString()}
+                      id={`checklist-${k}`}
+                      handler={() => {}}
+                      value={v}
+                      checked={true}
+                    >
+                      { k }
+                    </Checkbox>
+                  ))}
+                </Disclosure>
+                <Disclosure
+                  title={t.DIFFICULTY}
+                >
+                  {Object.entries(DIFFICULTY).map(([k, v]) => (
+                    <Checkbox
+                      key={k.toString()}
+                      id={`checklist-${k}`}
+                      handler={()=>{}}
+                      value={v}
+                      checked={true}
+                    >
+                      { k }
+                    </Checkbox>
+                  ))}
+                </Disclosure>
               </Popover>
             </div>
           </div>
