@@ -9,7 +9,7 @@ export const Navigation = React.memo(() => {
 
   const menu = [
     { title: t.PROFILE, url: "/profile" },
-    { title: t.SCORE_BOOK, url: "/records" },
+    { title: t.SCORE_BOOK, url: "/scorebook" },
     { title: t.VERSUS, url: "/versus" },
     { title: t.SCRIM, url: "/scrim" },
   ];
