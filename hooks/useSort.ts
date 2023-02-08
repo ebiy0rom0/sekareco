@@ -1,9 +1,8 @@
 import { useMemo } from "react";
 
-export const useSort = <T, U extends Keys<T>>(list: T[], opt: {[n in U]: boolean | {[m: string]: boolean}}) => {
+export const useSort = <T, U extends Keys<T>>(list: T[], opt: [U, boolean | {[m: string]: boolean}][]) => {
   const sortedList = useMemo(() => {
-    const opts = Object.entries(opt)
-    return list.sort((t1, t2) => depthSort(t1, t2, opts as [U, unknown][], 0))
+    return list.sort((t1, t2) => depthSort(t1, t2, opt, 0))
   }, [list, opt]);
 
   return [ sortedList ]
