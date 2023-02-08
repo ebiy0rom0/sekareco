@@ -5,7 +5,7 @@ import * as $0 from "./_app.tsx";
 import * as $1 from "./index.tsx";
 import * as $2 from "./policy.tsx";
 import * as $3 from "./profile.tsx";
-import * as $4 from "./records.tsx";
+import * as $4 from "./scorebook.tsx";
 import * as $5 from "./scrim.tsx";
 import * as $6 from "./versus.tsx";
 
@@ -14,7 +14,7 @@ export default {
   "/": $1,
   "/policy": $2,
   "/profile": $3,
-  "/records": $4,
+  "/scorebook": $4,
   "/scrim": $5,
   "/versus": $6,
 };

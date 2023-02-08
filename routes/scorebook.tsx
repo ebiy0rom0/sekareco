@@ -72,7 +72,7 @@ const artistss = () => {
   return m
 }
 
-const Records: React.FC = () => {
+const ScoreBook: React.FC = () => {
   const { t } = useI18n();
   const [music, levelRange] = useMusic();
   const { getRecord, setRecord } = useRecord(1);
@@ -291,4 +291,4 @@ const Records: React.FC = () => {
   );
 };
 
-export default Records;
+export default ScoreBook;
