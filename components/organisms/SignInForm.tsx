@@ -23,7 +23,7 @@ export const SignInForm = () => {
     // wait for prevent consecutive at click
     await new Promise((resolve) => setTimeout(resolve, 1000));
 
-    redirect("/records");
+    redirect("/scorebook");
     // if (await tryLogin(loginID(), password())) {
     //   redirect("/records");
     // } else {
