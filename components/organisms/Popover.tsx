@@ -6,7 +6,7 @@ import { ThemeConsumer } from "~/hooks/useTheme.tsx";
 export const Popover: FC<Props> = ({ label, icon, children }) => (
   <ThemeConsumer>
     {({ darkMode }) => (
-      <Pop className="relative lg:hidden">
+      <Pop className="relative">
         <Pop.Button className="flex gap-1 outline-0 font-bold">
           <Icon icon={icon} />{ label }
         </Pop.Button>
@@ -20,7 +20,7 @@ export const Popover: FC<Props> = ({ label, icon, children }) => (
           leaveTo="transform opacity-0 scale-85"
         >
           <Pop.Panel
-            className={`absolute rounded-lg border-2 w-60 mt-1 px-3 right-0 shadow-2xl divide-y ${
+            className={`absolute rounded-lg border-2 mt-1 px-3 right-0 shadow-2xl divide-y ${
               darkMode
                 ? "bg-slate-800 shadow-slate-400/30 border-gray-700 divide-gray-700"
                 : "bg-slate-100"
