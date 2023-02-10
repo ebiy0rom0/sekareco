@@ -4,9 +4,9 @@ import { DifficultyValues, STATUS, StatusValues } from "~/types/index.ts";
 import { Status } from "~/components/atoms/Status.tsx";
 import { Score } from "~/components/atoms/Score.tsx";
 import { Difficulty as DiffComponent } from "~/components/atoms/Difficulty.tsx";
-import { Music } from "~/components/organisms/Music.tsx";
+import { Image } from "~/components/atoms/Image.tsx";
 
-export const Record = React.memo((props: Props) => {
+export const ScoreCard = React.memo((props: Props) => {
   const [view, setView] = useState(true);
   const recordRef = useRef<HTMLDivElement>(null);
 
@@ -14,7 +14,7 @@ export const Record = React.memo((props: Props) => {
     const interval = setInterval(() => {
       const clientRect = recordRef.current?.getBoundingClientRect();
 
-      if (typeof clientRect === "undefined") return;
+      if (clientRect === undefined) return;
 
       const check = view
         ? clientRect.top <= (window.innerHeight * 1.05)
@@ -31,9 +31,10 @@ export const Record = React.memo((props: Props) => {
           ref={recordRef}
           className={`
             hidden
-            h-full divide-x-3 py-3 lg:py-0
-            flex rounded items-center
-            ${view ? "opacity-100" : "opacity-0 -translate-y-6"}
+            relative
+            h-full divide-x-3
+            flex rounded
+            ${view ? "opacity-100" : "opacity-0 -translate-y-3"}
             transition duration-700 ease-out shadow-lg
             ${
             darkMode
@@ -45,11 +46,14 @@ export const Record = React.memo((props: Props) => {
               divide-zinc-300/60"
           }`}
         >
-          <div className="music__master w-[15rem]">
-            <Music title={props.title} url={props.jacketUrl} />
+          <div className="music__master w-70 lg:w-25">
+            <Image url={props.jacketUrl} alt={props.title} />
           </div>
-          <div className="music__record w-full h-full content-center grid grid-cols-2 lg:grid-cols-1 px-2 gap-y-1 pl-2">
-            <div className="difficulty grid grid-cols-none lg:grid-cols-5 auto-cols-fr gap-y-2">
+          <div className="music__record relative w-full h-full content-end grid grid-cols-2 lg:grid-cols-1 px-2 py-3 gap-y-1">
+            <label className="absolute break-all inset-x-0 top-0 rounded-tr bg-slate-500/55 font-bold text-sm text-slate-300 indent-1.5 px-1">
+              {props.title}
+            </label>
+            <div className="difficulty grid grid-cols-none lg:grid-cols-5 auto-cols-fr gap-y-2 mt-5">
               {Object.values(props.filter).map((v) => (
                 <div key={v.toString()}>
                   <DiffComponent
@@ -59,11 +63,11 @@ export const Record = React.memo((props: Props) => {
                 </div>
               ))}
             </div>
-            <div className="record grid grid-cols-none lg:grid-cols-5 auto-cols-fr gap-y-2">
+            <div className="record grid grid-cols-none lg:grid-cols-5 auto-cols-fr gap-y-2 mt-4">
               {Object.values(props.filter).map((v) => (
                 <div
                   key={v.toString()}
-                  className="h-[20px] min-w-fit grid grid-flow-col -ml-4 justify-center gap-1"
+                  className="h-[20px] min-w-fit grid grid-flow-col -ml-4 justify-center content-bottom gap-1"
                 >
                   <div className="w-28 mt-1 mr-1">
                     <Score score={props.score[v]} notes={props.notes[v]} diff={props.diff} />

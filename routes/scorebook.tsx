@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { DIFFICULTY, StatusValues } from "~/types/index.ts";
 import { apiFactory } from "~/api/apiFactory.ts";
 import { Checkbox } from "~/components/atoms/Checkbox.tsx";
-import { Record } from "~/components/organisms/Record.tsx";
+import { ScoreCard } from "~/components/organisms/ScoreCard.tsx";
 import { MusicFilter } from "~/components/organisms/MusicFilter.tsx";
 import { RecordEditor } from "~/components/organisms/RecordEditor.tsx";
 import { Popover } from "~/components/organisms/Popover.tsx";
@@ -263,7 +263,7 @@ const ScoreBook: React.FC = () => {
                     key={music.musicID.toString()}
                     onClick={() => openEditor(music)}
                   >
-                    <Record
+                    <ScoreCard
                       title={music.musicName}
                       jacketUrl={music.jacketUrl}
                       diff={diffMode}
