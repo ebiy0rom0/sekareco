@@ -1,5 +1,4 @@
 import { FC, useCallback, useEffect, useRef } from "react";
-import { HogeActions } from "~/hooks/useMusicFilter.ts";
 
 export const MultiRange: FC<Props> = ({ min, max, low, high, onChangeLow, onChangeHigh }) => {
   const minValRef = useRef<HTMLInputElement>(null);
