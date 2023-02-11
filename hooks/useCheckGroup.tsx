@@ -1,8 +1,13 @@
-import { useCallback, useState } from "react";
+import { useState, useEffect } from "react";
 import { Checkbox } from "~/components/atoms/Checkbox.tsx";
 
 export const useCheckGroup = <T extends string | number>(lists: {[label: string]: T}): [T[], () => JSX.Element] => {
   const [checkList, setCheckList] = useState(() => Object.keys(lists).map(() => true))
+
+  useEffect(() => {
+    const hoge = Object.keys(lists).map(() => true)
+    setCheckList(hoge)
+  }, [lists])
 
   const handler = (index: number) => setCheckList((prev) => prev.map((c, i) => (i === index ? !c : c)))
 
