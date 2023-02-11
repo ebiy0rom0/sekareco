@@ -17,7 +17,6 @@ class ApiClient {
   private dataMap: Map<string, CacheData> = new Map();
 
   constructor() {
-    console.log("api client new constructor");
     this.client = ky.create({
       prefixUrl: "http://localhost:8000/api/v1/",
       hooks: {
