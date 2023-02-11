@@ -3,14 +3,14 @@ import { DifficultyValues, StatusValues } from "~/types/index.ts";
 import { Difficulty } from "~/components/atoms/Difficulty.tsx";
 import { Drumroll } from "~/components/atoms/DrumRoll.tsx";
 import { Status } from "~/components/atoms/Status.tsx";
-import { Music } from "~/components/organisms/Music.tsx";
+import { MusicCard } from "~/components/organisms/MusicCard.tsx";
 import { Input } from "~/components/atoms/Input.tsx";
 import { EditActions } from "~/hooks/useRecordEditor.ts";
 
 export const RecordEditor: React.FC<Props> = (props) => {
   return (
     <div className="grid gap-3 justify-items-center">
-      <Music title={props.music.musicName} url={props.music.jacketUrl} />
+      <MusicCard title={props.music.title} url={props.music.jacketUrl} />
       <div className="flex flex-col md:flex-row gap-5">
         {props.record.status.map((s, i) => (
           <div

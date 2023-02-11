@@ -1,7 +1,7 @@
 declare type Music = {
   musicID: number;
-  artistID: number;
-  musicName: string;
+  groupID: number;
+  title: string;
   jacketUrl: string;
   level: number[];
   notes: number[];
@@ -15,9 +15,9 @@ declare type MyRecords<T> = {
   [n: number]: MyRecord<T>;
 };
 
-declare type Artist = {
-  artistID: number;
-  artistName: string;
+declare type Group = {
+  groupID: number;
+  groupName: string;
   logoUrl: string;
 };
 
