@@ -46,7 +46,7 @@ export const ScoreCard = memo<Props>(({ music, diff, status, score, filter }) =>
               divide-zinc-300/60"
           }`}
         >
-          <div className="music__master w-70 xl:w-20">
+          <div className="music__master w-70 lg:w-20">
             <Image url={music.jacketUrl} alt={music.title} />
           </div>
           <div className="music__record relative w-full h-full content-end grid grid-cols-2 lg:grid-cols-1 px-2 py-3 gap-y-1">
@@ -63,7 +63,7 @@ export const ScoreCard = memo<Props>(({ music, diff, status, score, filter }) =>
                 </div>
               ))}
             </div>
-            <div className="record grid grid-cols-none lg:grid-cols-5 auto-cols-fr gap-y-2">
+            <div className="record grid grid-cols-none lg:grid-cols-5 auto-cols-fr gap-y-2 mt-5 lg:mt-0">
               {Object.values(filter).map((v) => (
                 <div
                   key={v.toString()}
