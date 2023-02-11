@@ -22,5 +22,5 @@ export default {
   ORDER_DESC: "降順",
   LEVEL: "レベル",
   DIFFICULTY: "難易度",
-  UNIT: "ユニット"
+  GROUP: "グループ"
 }

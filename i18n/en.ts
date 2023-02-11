@@ -22,5 +22,5 @@ export default {
   ORDER_DESC: "Desc",
   LEVEL: "Level",
   DIFFICULTY: "Difficulty",
-  UNIT: "Unit",
+  GROUP: "Group",
 }
