@@ -50,7 +50,11 @@ export const ScoreCard = memo<Props>(({ music, diff, status, score, filter }) =>
             <Image url={music.jacketUrl} alt={music.title} />
           </div>
           <div className="music__record relative w-full h-full content-end grid grid-cols-2 lg:grid-cols-1 px-2 py-3 gap-y-1">
-            <label className="absolute break-all inset-x-0 top-0 rounded-tr bg-slate-500/55 font-bold text-sm text-slate-300 indent-1.5 px-1">
+            <label
+              className={`absolute break-all inset-x-0 top-0  rounded-tr font-bold text-sm indent-1.5 px-1 ${
+                darkMode ? "bg-slate-500/55 text-slate-300" : "bg-slate-400/25 text-slate-700"
+              }`}
+            >
               {music.title}
             </label>
             <div className="difficulty grid grid-cols-none lg:grid-cols-5 auto-cols-fr gap-y-2 mt-5">
