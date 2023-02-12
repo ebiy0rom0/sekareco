@@ -11,20 +11,20 @@ export const Footer = React.memo(() => {
     <ThemeConsumer>
       {({ darkMode }) => (
         <div className="text-sm md:flex grid justify-between items-end">
-          <div className="md:flex grid gap-y-2">
-            <p>© 2022-2023 ebiy0rom0.</p>
+          <div className="md:flex grid gap-y-2 gap-x-6 divide-x-2">
+            <p>© 2022-2023 K.</p>
             <Link
               to="/policy"
-              className={`md:ml-4 md:pl-4 md:border-l-2 ${
-                darkMode ? "border-slate-200/40" : "border-slate-400/30"
+              className={`md:pl-6 md:border-l-2 font-bold ${
+                darkMode ? "border-slate-200/40 text-amber-400" : "border-slate-400/30 text-amber-600"
               }`}
             >
               {t.POLICY}
             </Link>
             <Link
               to="/terms"
-              className={`md:ml-4 md:pl-4 md:border-l-2 ${
-                darkMode ? "border-slate-200/40" : "border-slate-400/30"
+              className={`md:pl-6 md:border-l-2 font-bold ${
+                darkMode ? "border-slate-200/40 text-amber-400" : "border-slate-400/30 text-amber-600"
               }`}
             >
               {t.TERMS}
