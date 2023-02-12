@@ -12,7 +12,7 @@ export const Footer = React.memo(() => {
       {({ darkMode }) => (
         <div className="text-sm md:flex grid justify-between items-end">
           <div className="md:flex grid gap-y-2">
-            <p>Copyright © 2022 ebiy0rom0. All Rights Reserved.</p>
+            <p>© 2022-2023 ebiy0rom0.</p>
             <Link
               to="/policy"
               className={`md:ml-4 md:pl-4 md:border-l-2 ${
@@ -20,6 +20,14 @@ export const Footer = React.memo(() => {
               }`}
             >
               {t.POLICY}
+            </Link>
+            <Link
+              to="/terms"
+              className={`md:ml-4 md:pl-4 md:border-l-2 ${
+                darkMode ? "border-slate-200/40" : "border-slate-400/30"
+              }`}
+            >
+              {t.TERMS}
             </Link>
           </div>
           <a

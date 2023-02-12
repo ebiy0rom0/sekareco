@@ -7,7 +7,8 @@ export default {
   SCORE_BOOK: "ScoreBook",
   VERSUS: "vs.Friends",
   SCRIM: "Scrim",
-  POLICY: "Policy",
+  POLICY: "Privacy Policy",
+  TERMS: "Teams",
   // contents name
   SIGN_IN: "Sign In",
   SIGN_OUT: "Sign Out",

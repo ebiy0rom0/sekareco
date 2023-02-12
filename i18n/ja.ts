@@ -7,7 +7,8 @@ export default {
   SCORE_BOOK: "記録帳",
   VERSUS: "vs.フレンド",
   SCRIM: "スクリム",
-  POLICY: "ポリシー",
+  POLICY: "プライバシーポリシー",
+  TERMS: "利用規約",
   // ui label
   SIGN_IN: "サインイン",
   SIGN_OUT: "サインアウト",
