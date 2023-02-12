@@ -11,7 +11,7 @@ export const Footer = React.memo(() => {
     <ThemeConsumer>
       {({ darkMode }) => (
         <div className="text-sm md:flex grid justify-between items-end">
-          <div className="md:flex grid gap-y-2 gap-x-6 divide-x-2">
+          <div className="md:flex grid gap-y-4 md:gap-x-6 md:divide-x-2">
             <p>© 2022-2023 K.</p>
             <Link
               to="/policy"
