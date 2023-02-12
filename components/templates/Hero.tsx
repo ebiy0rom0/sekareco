@@ -1,5 +1,5 @@
 import { FC, ReactNode } from "react";
-import  Policy from "~/routes/policy.tsx";
+import Policy from "~/routes/policy.tsx";
 import { ThemeConsumer } from "~/hooks/useTheme.tsx";
 
 export const Hero: FC<Props> = ({ children }) => (
@@ -12,7 +12,7 @@ export const Hero: FC<Props> = ({ children }) => (
           }`}
         >
           <div className="flex items-end min-h-[77vh] animated animated-fade-in">
-            { children }
+            {children}
           </div>
           <svg
             className={`absolute inset-y-0 -right-0 hidden h-full w-60 translate-x-1/2 transform hidden xl:block ${
@@ -27,7 +27,8 @@ export const Hero: FC<Props> = ({ children }) => (
           </svg>
         </div>
         <div className="lg:absolute lg:inset-y-0 lg:right-0 lg:w-2/3 bg-slate-500 animated animated-fast animated-slide-in-up animated-delay-500ms" />
-        {/* <div
+        {
+          /* <div
           className={`absolute flex items-center flex-wrap animated animated-slide-in-right animated-delay-2s ${
             darkMode ? "bg-slate-900" : "bg-slate-200"
           } inset-y-0 lg:-right-0 xl:-right-30 py-auto px-10 w-full lg:w-[50%] xl:w-[55%] z-10`}
@@ -47,12 +48,13 @@ export const Hero: FC<Props> = ({ children }) => (
           <div className="w-full z-10">
             <Policy />
           </div>
-        </div> */}
+        </div> */
+        }
       </div>
     )}
   </ThemeConsumer>
-)
+);
 
 type Props = {
   children: ReactNode;
-}
+};

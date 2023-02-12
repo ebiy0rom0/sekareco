@@ -53,8 +53,8 @@ export const Page: FC<Props> = ({ children }) => (
       </>
     )}
   </ThemeConsumer>
-)
+);
 
 type Props = {
   children: ReactNode;
-}
+};

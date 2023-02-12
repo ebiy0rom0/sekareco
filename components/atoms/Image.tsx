@@ -9,7 +9,7 @@ export const Image: FC<Props> = ({ url, alt }) => {
       <img
         src={`C:/Users/user/Documents/wk/sekareco/sekareco_assets${url}`}
         className={`rounded lg:rounded-l object-fill h-full w-full ${preload ? "" : "hidden"}`}
-        onError={(e) => (e.target as HTMLImageElement).src = "assets/goooooooooooooooo.png"}
+        onError={(e) => (e.target as HTMLImageElement).src = "assets/logo.svg"}
         onLoad={() => setPreload(true)}
         alt={alt}
       />
@@ -19,10 +19,10 @@ export const Image: FC<Props> = ({ url, alt }) => {
         </div>
       )}
     </>
-  )
-}
+  );
+};
 
 type Props = {
   url: string;
   alt: string;
-}
+};

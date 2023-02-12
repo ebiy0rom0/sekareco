@@ -1,8 +1,8 @@
-import { useState, useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { apiFactory } from "~/api/apiFactory.ts";
 
-export const useGroup = (): [Group[], {[s: string]: number}] => {
-  const [ group, setGroup ] = useState<Group[]>([])
+export const useGroup = (): [Group[], { [s: string]: number }] => {
+  const [group, setGroup] = useState<Group[]>([]);
 
   useEffect(() => {
     (async () => {
@@ -11,9 +11,10 @@ export const useGroup = (): [Group[], {[s: string]: number}] => {
     })();
   }, []);
 
-  const groupkv = useMemo(() => group.reduce((prev, g) => {
-    return { ...prev, [g.groupName]: g.groupID }
-  }, {}), [group])
+  const groupkv = useMemo(() =>
+    group.reduce((prev, g) => {
+      return { ...prev, [g.groupName]: g.groupID };
+    }, {}), [group]);
 
   return [group, groupkv];
-}
+};

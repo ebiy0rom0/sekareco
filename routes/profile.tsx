@@ -3,7 +3,7 @@ import { useI18n } from "~/hooks/useI18n.ts";
 import { ThemeConsumer } from "~/hooks/useTheme.tsx";
 
 const Profile: FC = () => {
-  const { t } = useI18n()
+  const { t } = useI18n();
 
   return (
     <ThemeConsumer>
@@ -15,7 +15,7 @@ const Profile: FC = () => {
             }`}
           >
             <h2 className="text-3xl font-semibold tracking-widest first-letter:text-4xl">
-              { t.PROFILE }
+              {t.PROFILE}
             </h2>
           </div>
           <div className="flex items-center place-self-center h-50vh">

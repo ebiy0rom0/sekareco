@@ -52,4 +52,4 @@ const Icons = [
   ICON_SELECTOR,
 ] as const;
 
-export type Icons = typeof Icons[number]
+export type Icons = typeof Icons[number];

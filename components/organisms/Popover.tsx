@@ -1,4 +1,4 @@
-import { FC, ReactNode, Fragment } from "react";
+import { FC, Fragment, ReactNode } from "react";
 import { Popover as Pop, Transition } from "@headlessui/react";
 import { Icon, Icons } from "~/components/atoms/Icon.tsx";
 import { ThemeConsumer } from "~/hooks/useTheme.tsx";
@@ -8,7 +8,8 @@ export const Popover: FC<Props> = ({ label, icon, children }) => (
     {({ darkMode }) => (
       <Pop className="relative">
         <Pop.Button className="flex gap-1 outline-0 font-bold">
-          <Icon icon={icon} />{ label }
+          <Icon icon={icon} />
+          {label}
         </Pop.Button>
         <Transition
           as={Fragment}
@@ -26,7 +27,7 @@ export const Popover: FC<Props> = ({ label, icon, children }) => (
                 : "bg-slate-100"
             }`}
           >
-            { children }
+            {children}
           </Pop.Panel>
         </Transition>
       </Pop>

@@ -15,7 +15,7 @@ const Versus: FC = () => {
             }`}
           >
             <h2 className="text-3xl font-semibold tracking-widest">
-              { t.VERSUS }
+              {t.VERSUS}
             </h2>
           </div>
           <div className="flex items-center place-self-center h-50vh">

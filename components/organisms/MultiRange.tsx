@@ -46,7 +46,9 @@ export const MultiRange: FC<Props> = ({ min, max, low, high, onChangeLow, onChan
           value={low}
           ref={minValRef}
           onChange={(event) => onChangeLow(+event.target.value)}
-          className={`thumb ${ low === max ? "z-5" : "z-3" } pointer-events-none absolute h-0 w-full outline-0`}
+          className={`thumb ${
+            low === max ? "z-5" : "z-3"
+          } pointer-events-none absolute h-0 w-full outline-0`}
         />
         <input
           type="range"
@@ -59,8 +61,8 @@ export const MultiRange: FC<Props> = ({ min, max, low, high, onChangeLow, onChan
         />
         <div className="absolute w-full bg-gray-300 rounded-full h-2 z-1" />
         <div ref={range} className="absolute bg-sky-400 h-2 z-2" />
-        <div className="absolute left-0 text-sm mt-5">{ low }</div>
-        <div className="absolute -right-1 text-sm mt-5">{ high }</div>
+        <div className="absolute left-0 text-sm mt-5">{low}</div>
+        <div className="absolute -right-1 text-sm mt-5">{high}</div>
       </div>
     </div>
   );

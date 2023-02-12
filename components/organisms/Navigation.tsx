@@ -18,7 +18,7 @@ export const Navigation = React.memo(() => {
     <ThemeConsumer>
       {({ darkMode }) => (
         <>
-          <span className="nav__title text-xl font-bold">{ t.FEATURES }</span>
+          <span className="nav__title text-xl font-bold">{t.FEATURES}</span>
           <ul
             className={`list-none grid gap-y-2 text-base ml-2 mt-4 py-3 border-l-2 ${
               darkMode ? "border-slate-700" : "border-slate-200"

@@ -23,4 +23,4 @@ export default {
   LEVEL: "Level",
   DIFFICULTY: "Difficulty",
   GROUP: "Group",
-}
+};

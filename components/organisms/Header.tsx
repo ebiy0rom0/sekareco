@@ -10,15 +10,15 @@ export const Header: FC = memo(() => {
   const { t } = useI18n();
 
   const logout = () => {
-    apiFactory.get("person").logout()
-    redirect("/")
-  }
+    apiFactory.get("person").logout();
+    redirect("/");
+  };
 
   return (
     <ThemeConsumer>
       {({ darkMode, switchMode }) => (
         <div className="header flex items-center">
-          <span className="header__title m-0 text-lg font-bold">{ t.TITLE }</span>
+          <span className="header__title m-0 text-lg font-bold">{t.TITLE}</span>
           <div className="flex items-center ml-auto">
             <div className="hidden items-center gap-x-5 2xl:flex">
               <Toggle
@@ -30,12 +30,12 @@ export const Header: FC = memo(() => {
                 className="bg-rose-600 text-slate-100 text-sm py-1 px-2"
                 onClick={logout}
               >
-                { t.SIGN_OUT }
+                {t.SIGN_OUT}
               </Button>
             </div>
           </div>
         </div>
       )}
     </ThemeConsumer>
-  )
+  );
 });

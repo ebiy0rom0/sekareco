@@ -17,7 +17,8 @@ export const useMusic = (): [
   }, []);
 
   // all music level array
-  const levelRange = (difficulty: number) => music.length === 0 ? [0] : [...new Set(music.map((m) => m.level[difficulty]))]
+  const levelRange = (difficulty: number) =>
+    music.length === 0 ? [0] : [...new Set(music.map((m) => m.level[difficulty]))];
 
   // exist level min & max
   const levelLower = (difficulty: number) => Math.min(...levelRange(difficulty));

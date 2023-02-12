@@ -19,7 +19,7 @@ export const Footer = React.memo(() => {
                 darkMode ? "border-slate-200/40" : "border-slate-400/30"
               }`}
             >
-              { t.POLICY }
+              {t.POLICY}
             </Link>
           </div>
           <a
@@ -31,5 +31,5 @@ export const Footer = React.memo(() => {
         </div>
       )}
     </ThemeConsumer>
-  )
+  );
 });

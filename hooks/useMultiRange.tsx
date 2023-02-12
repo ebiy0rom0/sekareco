@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { MultiRange } from "~/components/organisms/MultiRange.tsx";
 
 export const useMultiRange = (min: number, max: number): [number, number, () => JSX.Element] => {
@@ -19,7 +19,7 @@ export const useMultiRange = (min: number, max: number): [number, number, () => 
       onChangeLow={(n: number) => setLow(n < min ? min : n > high ? high : n)}
       onChangeHigh={(n: number) => setHigh(n > max ? max : n < low ? low : n)}
     />
-  )
+  );
 
-  return [low, high, render]
-}
+  return [low, high, render];
+};

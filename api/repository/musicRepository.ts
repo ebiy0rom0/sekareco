@@ -1,5 +1,3 @@
-
-
 export const musicRepository = {
   getMusicList: async () => {
     // when successfully get, returns music master data
@@ -21,7 +19,7 @@ export const musicRepository = {
     // return json;
     console.log("get group list");
     return await grouptest;
-  }
+  },
 };
 
 const musictest: Music[] = [

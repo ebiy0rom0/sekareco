@@ -13,7 +13,7 @@ export const Input = (props: Props) => (
             text-base tracking-widest
             ${darkMode ? "text-slate-300/80" : "text-slate-700/80"}
             w-full
-            mt-2 py-1 px-3
+            py-1 px-3
             rounded-lg shadow-sm border-none
             ${darkMode ? "bg-slate-700" : "bg-slate-300/70"}
             placeholder-gray-900/40

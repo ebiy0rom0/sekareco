@@ -14,12 +14,12 @@ export const Disclosure: FC<Props> = ({ title, children }) => (
               <>
                 <D.Button className="w-full pr-3">
                   <div className="flex justify-between items-center">
-                    <span className="font-semibold tracking-widest">{ title }</span>
+                    <span className="font-semibold tracking-widest">{title}</span>
                     <Icon icon={open ? ICON_MINUS : ICON_PLUS} />
                   </div>
                 </D.Button>
                 <D.Panel className="space-y-4 pt-6">
-                  { children }
+                  {children}
                 </D.Panel>
               </>
             )}
