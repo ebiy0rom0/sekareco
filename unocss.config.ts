@@ -8,6 +8,7 @@ export default <UserConfig> {
   presets: [presetUno(), presetForms(), presetExtra()],
   theme: {
     breakpoints: {
+      "xs": "450px",
       "sm": "640px",
       "md": "768px",
       "lg": "1080px",
