@@ -3,10 +3,10 @@ import { Listbox, Transition } from "@headlessui/react";
 import { Icon, ICON_CHECK, ICON_SELECTOR } from "~/components/atoms/Icon.tsx";
 import { ThemeConsumer } from "~/hooks/useTheme.tsx";
 
-export const Selectbox = React.memo((props: Props) => (
+export const Selectbox = React.memo<Props>(({ options, selected, onChange }) => (
   <ThemeConsumer>
     {({ darkMode }) => (
-      <Listbox value={props.selected} onChange={props.setSelected}>
+      <Listbox value={selected} onChange={onChange}>
         <div className="relative">
           <Listbox.Button
             className={`
@@ -32,7 +32,7 @@ export const Selectbox = React.memo((props: Props) => (
             `}
           >
             <span className="block truncate">
-              {Object.entries(props.options).find(([_, value]) => value == props.selected)?.[0]}
+              {Object.entries(options).find(([_, value]) => value == selected)?.[0]}
             </span>
             <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
               <Icon icon={ICON_SELECTOR}></Icon>
@@ -62,7 +62,7 @@ export const Selectbox = React.memo((props: Props) => (
               z-10
             `}
             >
-              {Object.entries(props.options).map(([key, value], personIdx) => (
+              {Object.entries(options).map(([key, value], personIdx) => (
                 <Listbox.Option
                   key={personIdx}
                   className={({ active }) =>
@@ -98,8 +98,7 @@ export const Selectbox = React.memo((props: Props) => (
 ));
 
 type Props = {
-  group: string;
   options: { [s: string]: string | number };
   selected: string | number;
-  setSelected: (input: string) => void;
+  onChange: (input: string) => void;
 };
