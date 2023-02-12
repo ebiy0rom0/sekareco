@@ -46,7 +46,7 @@ export const MultiRange: FC<Props> = ({ min, max, low, high, onChangeLow, onChan
           value={low}
           ref={minValRef}
           onChange={(event) => onChangeLow(+event.target.value)}
-          className="thumb z-3 pointer-events-none absolute h-0 w-full outline-0"
+          className={`thumb ${ low === max ? "z-5" : "z-3" } pointer-events-none absolute h-0 w-full outline-0`}
         />
         <input
           type="range"
