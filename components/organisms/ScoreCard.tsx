@@ -46,7 +46,7 @@ export const ScoreCard = memo<Props>(({ music, diff, status, score, filter }) =>
               divide-zinc-300/60"
           }`}
         >
-          <div className="music__master w-70 lg:w-20">
+          <div className="music__master w-70 lg:w-24">
             <Image url={music.jacketUrl} alt={music.title} />
           </div>
           <div className="music__record relative w-full h-full content-end grid grid-cols-2 lg:grid-cols-1 px-2 py-3 gap-y-1">
