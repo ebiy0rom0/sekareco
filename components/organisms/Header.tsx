@@ -17,8 +17,9 @@ export const Header: FC = memo(() => {
   return (
     <ThemeConsumer>
       {({ darkMode, switchMode }) => (
-        <div className="header flex items-center">
-          <span className="header__title m-0 text-lg font-bold">{t.TITLE}</span>
+        <div className="header flex items-center pt-3 pb-0.5">
+          <img className="w-10" src="assets/sitelogo.svg" />
+          <span className="ml-3 text-lg font-bold">{t.TITLE}</span>
           <div className="flex items-center ml-auto">
             <div className="hidden items-center gap-x-5 2xl:flex">
               <Toggle
@@ -27,7 +28,7 @@ export const Header: FC = memo(() => {
                 role={switchMode}
               />
               <Button
-                className="bg-rose-600 text-slate-100 text-sm py-1 px-2"
+                className="bg-rose-600 text-slate-100 text-sm py-2 px-6"
                 onClick={logout}
               >
                 {t.SIGN_OUT}
