@@ -15,7 +15,7 @@ export const Page: FC<Props> = ({ children }) => (
             darkMode ? "border-slate-200/40" : "border-slate-400/30"
           } backdrop-blur-md`}
         >
-          <div className="max-w-[110rem] px-4 sm:px-10 py-2 mx-auto">
+          <div className="max-w-[110rem] px-5 sm:px-10 py-2 mx-auto">
             <Header />
           </div>
         </div>
