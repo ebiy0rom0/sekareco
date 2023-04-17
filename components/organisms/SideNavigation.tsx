@@ -20,24 +20,24 @@ export const SideNavigation: FC = () => {
     <ThemeConsumer>
       {({ darkMode, switchMode }) => (
         <>
-          <div className="2xl:hidden fixed z-30 w-8 h-8 right-4 top-1.5">
+          <div className="2xl:hidden fixed z-30 w-8 h-8 right-8 top-1.5 mt-4">
             <Button className="absolute inset-0" onClick={() => setOpen(!open)}>
               <span
                 className={`absolute transition-transform duration-500 ${
                   open ? "rotate-135" : "-translate-y-2"
-                } border w-full`}
+                } border w-full ${darkMode ? "border-slate-300" : "border-slate-700"}`}
               >
               </span>
               <span
                 className={`absolute transition-opacity duration-700 ${
                   open ? "opacity-0" : "opacity-100"
-                } border w-full`}
+                } border w-full ${darkMode ? "border-slate-300" : "border-slate-700"}`}
               >
               </span>
               <span
                 className={`absolute transition-transform duration-500 ${
                   open ? "-rotate-135" : "translate-y-2"
-                } border w-full`}
+                } border w-full ${darkMode ? "border-slate-300" : "border-slate-700"}`}
               >
               </span>
             </Button>
