@@ -1,33 +1,37 @@
-import { createContext, useState } from "react";
+import { createContext, useContext } from "react";
 import { useSessionStorage } from "~/utils/useSessionStorage.ts";
 
-const ThemeCtx = createContext<Theme>({
-  darkMode: false,
-  switchMode: () => undefined,
-});
-export const ThemeConsumer = ThemeCtx.Consumer;
+const ThemeCtx = createContext<Theme | null>(null);
 
-export const useTheme = () => {
+const ThemeProvider: React.FC<Props> = ({ children }) => {
   const [dark, setDark] = useSessionStorage("theme", false);
   const context: Theme = {
-    darkMode: dark,
-    switchMode: () => setDark(!dark),
+    dark,
+    switchTheme: () => setDark(!dark),
   };
 
-  const ThemeProvider: React.FC<Props> = ({ children }) => (
+  return (
     <ThemeCtx.Provider value={context}>
       {children}
     </ThemeCtx.Provider>
   );
-
-  return ThemeProvider;
 };
+
+const useTheme = () => {
+  const ctx = useContext(ThemeCtx);
+  if (!ctx) {
+    throw new Error("useTheme has to be used within <AuthContext.Provider>")
+  }
+  return ctx
+};
+
+export { useTheme, ThemeProvider }
 
 type Props = {
   children: React.ReactNode;
 };
 
 type Theme = {
-  darkMode: boolean;
-  switchMode: () => void;
+  dark: boolean;
+  switchTheme: () => void;
 };

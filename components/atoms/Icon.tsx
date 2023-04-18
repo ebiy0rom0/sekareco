@@ -1,18 +1,18 @@
-import { ThemeConsumer } from "~/hooks/useTheme.tsx";
+import { useTheme } from "~/hooks/useTheme.tsx";
 
-export const Icon = (props: Props) => (
-  <ThemeConsumer>
-    {({ darkMode }) => (
-      <img
-        src={`${assetPath}${props.icon}${fileExtension}`}
-        height={props?.size ?? 25}
-        width={props?.size ?? 25}
-        title={props?.title}
-        className={darkMode ? "invert-85" : ""}
-      />
-    )}
-  </ThemeConsumer>
-);
+export const Icon = (props: Props) => {
+  const { dark } = useTheme();
+
+  return (
+    <img
+      src={`${assetPath}${props.icon}${fileExtension}`}
+      height={props?.size ?? 25}
+      width={props?.size ?? 25}
+      title={props?.title}
+      className={dark ? "invert-85" : ""}
+    />
+  );
+}
 
 type Props = {
   size?: number;
